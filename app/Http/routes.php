@@ -36,11 +36,16 @@ $app->get('/', function() use ($app) {
 // 管理员后台
 $app->group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', 'middleware' => ['auth.login', 'auth.admin']], function($app){
     $app->get('/', 'UserController@userlist');
+
+    // 用户管理
     $app->get('/user', 'UserController@userlist');
     $app->get('/user/add', 'UserController@useradd');
     $app->post('/user/add', 'UserController@useradd');
     $app->get('/user/edit/{id}', 'UserController@useredit');
     $app->post('/user/edit/{id}', 'UserController@useredit');
+
+    // 课程管理
+    $app->get('/courses', 'CoursesController@list');
 });
 
 // 用户后台

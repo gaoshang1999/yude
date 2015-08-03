@@ -15,6 +15,7 @@
                 @if(Auth::user()->role === 'admin')
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/admin/user') }}">用户管理</a></li>
+                    <li><a href="{{ url('/admin/courses') }}">课程管理</a></li>
                 </ul>
                 @endif
             @endif
