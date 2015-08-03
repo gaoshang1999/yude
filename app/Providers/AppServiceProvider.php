@@ -15,6 +15,8 @@ class AppServiceProvider extends ServiceProvider
         Validator::extend('phone', function($attribute, $value, $parameters) {
             return strlen($value) === 11;
         });
+
+        
     }
 
     /**

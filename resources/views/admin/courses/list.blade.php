@@ -4,33 +4,37 @@
 @section('content')
 <div class="col-sm-12 main">
   @include('errors.list')
-  <h2 class="sub-header">课程列表<a class="btn btn-primary pull-right" href="{{ url('/admin/user/add') }}">创建新课程</a></h2>
+  <h2 class="sub-header">课程列表<a class="btn btn-primary pull-right" href="{{ url('/admin/courses/add') }}">创建新课程</a></h2>
   <div class="table-responsive">
     <table class="table table-striped">
       <thead>
         <tr>
           <th>#</th>
-          <th>姓名</th>
-          <th>手机号</th>
-          <th>邮箱</th>
-          <th>类型</th>
+          <th>课程名称</th>
+          <th>级别</th>
+          <th>类别</th>
+          <th>总价格</th>
           <th>创建时间</th>
+          <th>更新时间</th>
+          <th>状态</th>
         </tr>
       </thead>
       <tbody>
-        @foreach ($users->all() as $user)
+        @foreach ($courses->all() as $v)
         <tr>
-          <td>{{ $user->id }}</td>
-          <td><a href="{{ url("/admin/user/edit/{$user->id}") }}">{{ $user->name }}</a></td>
-          <td>{{ $user->phone }}</td>
-          <td>{{ $user->email }}</td>
-          <td>{{ $user->role === 'admin' ? '管理员' : '学员' }}</td>
-          <td>{{ $user->created_at }}</td>
+          <td>{{ $v->id }}</td>
+          <td><a href="{{ url("/admin/courses/edit/{$v->id}") }}">{{ $v->name }}</a></td>
+          <td>{{ $v->level }}</td>
+          <td>{{ $v->kind }}</td>
+          <td>{{ $v->totalprice }}</td>
+          <td>{{ $v->created_at }}</td>
+          <td>{{ $v->updated_at }}</td>
+          <td>{{ $v->enable ? '上架' : '下架' }}</td>
         </tr>
         @endforeach
       </tbody>
     </table>
-    <div>{{{ $users->render() }}}</div>
+    <div>{{{ $courses->render() }}}</div>
   </div>
 </div>
 @endsection

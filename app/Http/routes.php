@@ -45,7 +45,11 @@ $app->group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', '
     $app->post('/user/edit/{id}', 'UserController@useredit');
 
     // 课程管理
-    $app->get('/courses', 'CoursesController@list');
+    $app->get('/courses', 'CoursesController@courses');
+    $app->get('/courses/add', 'CoursesController@coursesadd');
+    $app->post('/courses/add', 'CoursesController@coursesadd');
+    $app->get('/courses/edit/{id}', 'CoursesController@coursesedit');
+    $app->post('/courses/edit/{id}', 'CoursesController@coursesedit');
 });
 
 // 用户后台
