@@ -32,6 +32,8 @@ return [
 
     'locale' => env('APP_LOCALE', 'en'),
 
+    'timezone' => 'Asia/Shanghai',
+
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale
