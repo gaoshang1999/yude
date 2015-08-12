@@ -50,6 +50,13 @@ $app->group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', '
     $app->post('/courses/add', 'CoursesController@coursesadd');
     $app->get('/courses/edit/{id}', 'CoursesController@coursesedit');
     $app->post('/courses/edit/{id}', 'CoursesController@coursesedit');
+    
+    // 教材管理
+    $app->get('/books', 'BooksController@books');
+    $app->get('/books/add', 'BooksController@booksadd');
+    $app->post('/books/add', 'BooksController@booksadd');
+    $app->get('/books/edit/{id}', 'BooksController@booksedit');
+    $app->post('/books/edit/{id}', 'BooksController@booksedit');
 });
 
 // 用户后台
