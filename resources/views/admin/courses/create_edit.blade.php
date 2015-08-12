@@ -54,7 +54,7 @@
     <div class="form-group">
       <label for="totalprice" class="col-sm-2 control-label">总价格</label>
       <div class="col-sm-9">
-        <input type="number" class="form-control" name="totalprice" placeholder="总价格" min="0" value="{{ old('totalprice', $courses ? $courses->totalprice : 0) }}">
+        <input type="number" class="form-control" name="totalprice" placeholder="总价格" min="0" step="0.01" value="{{ old('totalprice', $courses ? $courses->totalprice : 0) }}">
       </div>
     </div>
     <div class="form-group">
@@ -64,19 +64,19 @@
         <label class="control-label" id="subnamelabel">教育知识与能力</label>
       </div>
       <div class="col-sm-6">
-        <input type="number" class="form-control" name="subprice" placeholder="子科价格" min="0" value="{{ old('subprice', $courses ? $courses->subprice : 0) }}">
+        <input type="number" class="form-control" name="subprice" placeholder="子科价格" min="0" step="0.01" value="{{ old('subprice', $courses ? $courses->subprice : 0) }}">
       </div>
     </div>
     <div class="form-group">
       <label for="zongheprice" class="col-sm-2 control-label">综合素质价格</label>
       <div class="col-sm-9">
-        <input type="number" class="form-control" name="zongheprice" placeholder="综合素质价格" min="0" value="{{ old('zongheprice', $courses ? $courses->zongheprice : 0) }}">
+        <input type="number" class="form-control" name="zongheprice" placeholder="综合素质价格" min="0" step="0.01" value="{{ old('zongheprice', $courses ? $courses->zongheprice : 0) }}">
       </div>
     </div>
     <div class="form-group" id="nengli">
       <label for="nengliprice" class="col-sm-2 control-label">学科知识与能力价格</label>
       <div class="col-sm-9">
-        <input type="number" class="form-control" name="nengliprice" placeholder="学科知识与能力价格" min="0" value="{{ old('nengliprice', $courses ? $courses->nengliprice : 0) }}">
+        <input type="number" class="form-control" name="nengliprice" placeholder="学科知识与能力价格" min="0" step="0.01" value="{{ old('nengliprice', $courses ? $courses->nengliprice : 0) }}">
       </div>
     </div>
     <div class="form-group">

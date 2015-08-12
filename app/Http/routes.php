@@ -61,6 +61,23 @@ $app->group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', '
 
 // 用户后台
 $app->group(['namespace' => 'App\Http\Controllers\My', 'prefix' => 'my', 'middleware' => 'auth.login'], function($app){
-    $app->get('/', 'MyController@dashboard');
-    $app->get('/profile', 'MyController@dashboard');
+    $app->get('/', 'MyController@order');
+});
+
+// 订单
+$app->group(['namespace' => 'App\Http\Controllers', 'prefix' => 'order', 'middleware' => 'auth.login'], function($app){
+    $app->get('/', 'OrderController@step1');
+    $app->get('/step1', 'OrderController@step1');
+    $app->get('/step2', 'OrderController@step2');
+    $app->post('/step3', 'OrderController@step3');
+    $app->get('/payonline/{orderno}', 'OrderController@payonline');
+    $app->get('/topay/{orderno}', 'OrderController@topay');
+    $app->get('/step4', 'OrderController@step4');
+});
+
+// 支付宝
+$app->group(['namespace' => 'App\Http\Controllers\Alipay', 'prefix' => 'alipay'], function($app){
+    $app->get('/test', 'AlipayController@ali_test');
+    $app->get('/return', 'AlipayController@ali_return');
+    $app->post('/notify', 'AlipayController@ali_notify');
 });

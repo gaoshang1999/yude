@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Courses;
 
 class MyController extends Controller
 {
@@ -17,9 +18,10 @@ class MyController extends Controller
         
     }
 
-    public function dashboard()
+    public function order()
     {
-        return view('admin.dashboard');
+        $data = ['course'=>Courses::where('id', 1)->first()];
+        return view('my.orderit', $data);
     }
 
 }

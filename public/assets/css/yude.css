@@ -1,0 +1,93 @@
+body {
+    background-color: #eeeff1;
+}
+
+#footer {
+    width: 100%;
+    background-color: #353535;
+    color: #8c8c8c;
+    font-size: 10px;
+    padding: 30px 30px;
+    margin-top: 50px;
+}
+#footer .leftborder {
+    border-left: 1px solid #8c8c8c;
+    min-height: 120px;
+}
+#footer .big {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.stepbar { 
+    margin-bottom: 40px;
+}
+.stepbar .col-sm-3 {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+.stepbar .bar {
+    padding: 14px 2px;
+    text-align: center;
+    height: 30px;
+    border-bottom: 3px solid #d9d9d9;
+}
+
+.stepbar .bar.active {
+    border-bottom: 3px solid #3b82c4;
+}
+
+.stepbar .bar span {
+    border-radius: 15px;
+    background-color: #d9d9d9;
+    color: white;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    display: inline-block;
+}
+.stepbar .bar.active span {
+    background-color: #3b82c4;
+}
+
+.orderblock {
+    padding: 15px;
+    background-color: white;
+}
+.orderblock .steplabel {
+    color: #808080;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.orderblock tr.choose {
+    background-color: #fffcf4;
+}
+.orderblock tr td {
+    vertical-align: middle;
+}
+.orderblock tr.headerbar {
+    background-color: #f6f6f6;
+}
+.orderblock tr.footerbar {
+    background-color: #f6f6f6;
+}
+.orderblock tr.footerbar .orange-btn {
+    background-color: #fb8800;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    margin-left: 15px;
+}
+.orderblock .price {
+    color: #fb8800;
+    font-size: 15px;
+}
+.orderblock img {
+    display: inline-block;
+    max-width: 150px;
+    max-height: 150px;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    vertical-align: middle;
+}

@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set('Asia/Shanghai');
+
 require_once __DIR__.'/../vendor/autoload.php';
 
 // Dotenv::load(__DIR__.'/../');
@@ -23,7 +25,9 @@ $app->withFacades();
 
 $app->withEloquent();
 
-config(['debug' => true]);
+
+$app->configure('alipay');
+config(['app.debug' => true]);
 
 /*
 |--------------------------------------------------------------------------

@@ -29,7 +29,7 @@
           <td>{{ $v->totalprice }}</td>
           <td>{{ $v->created_at }}</td>
           <td>{{ $v->updated_at }}</td>
-          <td>{{ $v->enable ? '上架' : '下架' }}</td>
+          <td>{{ $v->enable ? '上架' : '下架' }}<br/><a href="/order/step1?cid={{ $v->id }}">购买该课程</a></td>
         </tr>
         @endforeach
       </tbody>

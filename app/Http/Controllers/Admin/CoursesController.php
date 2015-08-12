@@ -42,6 +42,9 @@ class CoursesController extends Controller
             $file = array_get($input,'cover');
 
             $destinationPath = 'appfiles/courses';
+            if (!is_dir(base_path('public/' . $destinationPath))) {
+                mkdir(base_path('public/' . $destinationPath));
+            }
             $extension = $file->getClientOriginalExtension();
             $fileName = $courses->id . '.' . $extension;
             $upload_success = $file->move($destinationPath, $fileName);
@@ -90,6 +93,9 @@ class CoursesController extends Controller
             $file = array_get($input,'cover');
             if ($file) {
                 $destinationPath = 'appfiles/courses';
+                if (!is_dir(base_path('public/' . $destinationPath))) {
+                    mkdir(base_path('public/' . $destinationPath));
+                }
                 $extension = $file->getClientOriginalExtension();
                 $fileName = $courses->id . '.' . $extension;
                 $upload_success = $file->move($destinationPath, $fileName);

@@ -17,6 +17,7 @@
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="/assets/css/dashboard.css" rel="stylesheet">
+    <link href="/assets/css/yude.css" rel="stylesheet">
 
     @yield('styles')
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -34,6 +35,7 @@
 <div class="container">
 @yield('content')
 </div>
+@include('partials.footer')
 <script src="/assets/js/jquery-2.1.4.min.js"></script>
 <script src="/assets/js/bootstrap.min.js"></script>
 <!-- Scripts -->
