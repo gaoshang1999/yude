@@ -11,6 +11,16 @@ class BooksController extends Controller
         $data = ['books' => Books::simplePaginate(20) ];
         return view('admin.books.list', $data);
     }
+    
+    public function search(Request $request)
+    {
+        $input = $request['q'];
+        $books = Books::where('name', 'like', '%'.$input.'%')->simplePaginate(20) ;
+        $books ->appends(['q' => $input]);
+    
+        $data = ['books' => $books, 'q' => $input];
+        return view('admin.books.list', $data);
+    }
 
     public function booksadd(Request $request)
     {

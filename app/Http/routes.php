@@ -57,6 +57,7 @@ $app->group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', '
     $app->post('/books/add', 'BooksController@booksadd');
     $app->get('/books/edit/{id}', 'BooksController@booksedit');
     $app->post('/books/edit/{id}', 'BooksController@booksedit');
+    $app->get('/books/search', 'BooksController@search');
 });
 
 // 用户后台
