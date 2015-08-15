@@ -106,9 +106,10 @@ body {
 
 .search_form{
 	margin: 0px 10px;
-	line-height: 30px;
+	line-height: 32px;
 }
 .search_form input{
+	height: 32px;
 	width:300px;
 	font-size:14px;
 }
