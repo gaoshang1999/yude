@@ -4,7 +4,14 @@
 @section('content')
 <div class="col-sm-12 main">
   @include('errors.list')
-  <h2 class="sub-header">课程列表<a class="btn btn-primary pull-right" href="{{ url('/admin/courses/add') }}">创建新课程</a></h2>
+  <h2 class="sub-header">课程列表
+   <a class="btn btn-primary pull-right" href="{{ url('/admin/courses/add') }}">创建新课程</a> 
+     
+   <form class="search_form pull-right" role="form" method="get" action="{{ url('/admin/courses/search') }}" >    
+    <button class="btn btn-primary pull-right" type="submit">搜索</button>
+    <input class="pull-right" type="text" placeholder="课程名称" name ="q" value="{{ isset($q) ? $q : "" }}"/>    
+  </form>
+  </h2>
   <div class="table-responsive">
     <table class="table table-striped">
       <thead>
@@ -34,7 +41,7 @@
         @endforeach
       </tbody>
     </table>
-    <div>{{{ $courses->render() }}}</div>
+    <div>{!! $courses->render() !!}</div>
   </div>
 </div>
 @endsection

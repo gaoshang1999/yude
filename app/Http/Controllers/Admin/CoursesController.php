@@ -11,6 +11,16 @@ class CoursesController extends Controller
         $data = ['courses' => Courses::simplePaginate(20) ];
         return view('admin.courses.list', $data);
     }
+    
+    public function search(Request $request)
+    {
+        $input = $request['q'];
+        $courses = Courses::where('name', 'like', '%'.$input.'%')->simplePaginate(20) ;
+        $courses ->appends(['q' => $input]);
+    
+        $data = ['courses' => $courses, 'q' => $input];
+        return view('admin.courses.list', $data);
+    }
 
     public function coursesadd(Request $request)
     {

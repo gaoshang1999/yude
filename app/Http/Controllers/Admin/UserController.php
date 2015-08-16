@@ -27,6 +27,16 @@ class UserController extends Controller
         $data = ['users' => User::simplePaginate(20) ];
         return view('admin.user.list', $data);
     }
+    
+    public function search(Request $request)
+    {
+        $input = $request['q'];
+        $users = User::where('name', 'like', '%'.$input.'%')->simplePaginate(20) ;
+        $users ->appends(['q' => $input]);
+    
+        $data = ['users' => $users, 'q' => $input];
+        return view('admin.user.list', $data);
+    }
 
     public function useradd(Request $request)
     {
