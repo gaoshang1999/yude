@@ -31,8 +31,8 @@
         <tr>
           <td>{{ $v->id }}</td>
           <td><a href="{{ url("/admin/courses/edit/{$v->id}") }}">{{ $v->name }}</a></td>
-          <td>{{ $v->level }}</td>
-          <td>{{ $v->kind }}</td>
+          <td>@if($v->level == "zhongxue") 中学  @elseif($v->level == "xiaoxue") 小学 @elseif($v->level == "youer") 幼儿  @endif</td>
+          <td>@if($v->kind == "bishi") 笔试  @elseif($v->kind == "mianshi") 面试  @endif</td>
           <td>{{ $v->totalprice }}</td>
           <td>{{ $v->created_at }}</td>
           <td>{{ $v->updated_at }}</td>
