@@ -30,7 +30,7 @@ $app->post('auth/register', 'Auth\AuthController@postRegister');
 // $app->post('password/reset', 'Auth\PasswordController@postReset');
 
 $app->get('/', function() use ($app) {
-    return view('welcome');
+    return view('front.wx');
 });
 
 // 管理员后台
@@ -43,13 +43,15 @@ $app->group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', '
     $app->post('/user/add', 'UserController@useradd');
     $app->get('/user/edit/{id}', 'UserController@useredit');
     $app->post('/user/edit/{id}', 'UserController@useredit');
-
+    $app->get('/user/search', 'UserController@search');
+    
     // 课程管理
     $app->get('/courses', 'CoursesController@courses');
     $app->get('/courses/add', 'CoursesController@coursesadd');
     $app->post('/courses/add', 'CoursesController@coursesadd');
     $app->get('/courses/edit/{id}', 'CoursesController@coursesedit');
     $app->post('/courses/edit/{id}', 'CoursesController@coursesedit');
+    $app->get('/courses/search', 'CoursesController@search');
     
     // 教材管理
     $app->get('/books', 'BooksController@books');
@@ -57,6 +59,7 @@ $app->group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', '
     $app->post('/books/add', 'BooksController@booksadd');
     $app->get('/books/edit/{id}', 'BooksController@booksedit');
     $app->post('/books/edit/{id}', 'BooksController@booksedit');
+    $app->get('/books/search', 'BooksController@search');
 });
 
 // 用户后台

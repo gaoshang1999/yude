@@ -4,7 +4,15 @@
 @section('content')
 <div class="col-sm-12 main">
   @include('errors.list')
-  <h2 class="sub-header">教材列表<a class="btn btn-primary pull-right" href="{{ url('/admin/books/add') }}">创建新教材</a></h2>
+  
+  <h2 class="sub-header">教材列表 
+   <a class="btn btn-primary pull-right" href="{{ url('/admin/books/add') }}">创建新教材</a>
+   
+   <form class="search_form pull-right" role="form" method="get" action="{{ url('/admin/books/search') }}" >    
+    <button class="btn btn-primary pull-right" type="submit">搜索</button>
+    <input class="pull-right" type="text" placeholder="教材名称" name ="q" value="{{ isset($q) ? $q : "" }}"/>    
+  </form>
+ </h2>
   <div class="table-responsive">
     <table class="table table-striped">
       <thead>

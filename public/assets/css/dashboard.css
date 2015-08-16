@@ -103,3 +103,13 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+.search_form{
+	margin: 0px 10px;
+	line-height: 32px;
+}
+.search_form input{
+	height: 32px;
+	width:300px;
+	font-size:14px;
+}

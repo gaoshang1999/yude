@@ -4,7 +4,14 @@
 @section('content')
 <div class="col-sm-12 main">
   @include('errors.list')
-  <h2 class="sub-header">用户列表<a class="btn btn-primary pull-right" href="{{ url('/admin/user/add') }}">创建新用户</a></h2>
+  <h2 class="sub-header">用户列表
+   <a class="btn btn-primary pull-right" href="{{ url('/admin/user/add') }}">创建新用户</a>
+     
+   <form class="search_form pull-right" role="form" method="get" action="{{ url('/admin/user/search') }}" >    
+    <button class="btn btn-primary pull-right" type="submit">搜索</button>
+    <input class="pull-right" type="text" placeholder="姓名" name ="q" value="{{ isset($q) ? $q : "" }}"/>    
+  </form>
+  </h2>
   <div class="table-responsive">
     <table class="table table-striped">
       <thead>
@@ -30,7 +37,7 @@
         @endforeach
       </tbody>
     </table>
-    <div>{{{ $users->render() }}}</div>
+    <div>{!! $users->render() !!}</div>
   </div>
 </div>
 @endsection
