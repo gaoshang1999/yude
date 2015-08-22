@@ -17,6 +17,7 @@
                     <li><a href="{{ url('/admin/user') }}">用户管理</a></li>
                     <li><a href="{{ url('/admin/courses') }}">课程管理</a></li>
                     <li><a href="{{ url('/admin/books') }}">教材管理</a></li>
+                    <li><a href="{{ url('/admin/orders') }}">订单管理</a></li>
                 </ul>
                 @endif
             @endif
