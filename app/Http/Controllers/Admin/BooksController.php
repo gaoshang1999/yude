@@ -28,7 +28,7 @@ class BooksController extends Controller
             $this->validate($request, [
                 'level' => 'required|in:zhongxue,xiaoxue,youer',
                 'kind' => 'required|in:bishi,mianshi',
-                'name' => 'required|unique:courses|max:255',
+                'name' => 'required|unique:books|max:255',
                 'price' => 'required|numeric|min:0',
                 'discount' => 'required|numeric|min:0',
                 'discount_price' => 'required|numeric|min:0',
@@ -48,6 +48,9 @@ class BooksController extends Controller
             $file = array_get($input,'cover');
 
             $destinationPath = 'appfiles/books';
+            if (!is_dir(base_path('public/' . $destinationPath))) {
+                mkdir(base_path('public/' . $destinationPath));
+            }
             $extension = $file->getClientOriginalExtension();
             $fileName = $books->id . '.' . $extension;
             $upload_success = $file->move($destinationPath, $fileName);
@@ -78,7 +81,7 @@ class BooksController extends Controller
                 'inventory' => 'required|numeric|min:0',
                 'buytimes' => 'required|numeric|min:0', 
                 'author' => 'required',
-                'cover' => 'required|image',
+                //'cover' => 'required|image',
                 'summary' => 'required',
                 'pagetitle' => 'required',
                 'pagekeyword' => 'required',
@@ -93,6 +96,9 @@ class BooksController extends Controller
             $file = array_get($input,'cover');
             if ($file) {
                 $destinationPath = 'appfiles/books';
+                if (!is_dir(base_path('public/' . $destinationPath))) {
+                    mkdir(base_path('public/' . $destinationPath));
+                }
                 $extension = $file->getClientOriginalExtension();
                 $fileName = $books->id . '.' . $extension;
                 $upload_success = $file->move($destinationPath, $fileName);
@@ -106,8 +112,17 @@ class BooksController extends Controller
             return redirect('/admin/books');
         }
         else {
-            $books['discount_price'] = $books['price'] * $books['discount'];
+            $books['discount_price'] = $books['price'] * $books['discount']/100.0;
             return view('admin.books.create_edit', ['books' => $books]);
         }
+    }
+    
+    public function lists(Request $request)
+    {       
+        $books_1 = Books::where('level', 'zhongxue') ->get();    
+        $books_2 = Books::where('level', 'xiaoxue') ->get() ;        
+        $books_3 = Books::where('level', 'youer') ->get();        
+        $data = ['books_1' => $books_1, 'books_2' => $books_2, 'books_3' => $books_3];
+        return view('front.books_lists', $data);
     }
 }

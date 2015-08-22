@@ -29,9 +29,14 @@ $app->post('auth/register', 'Auth\AuthController@postRegister');
 // $app->get('password/reset/{token}', 'Auth\PasswordController@getReset');
 // $app->post('password/reset', 'Auth\PasswordController@postReset');
 
-$app->get('/', function() use ($app) {
-    return view('front.wx');
-});
+$app->get('/', 'Admin\BooksController@lists');
+$app->get('/books/lists', 'Admin\BooksController@lists');
+$app->get('/courses/lists', 'Admin\CoursesController@lists');
+$app->get('/courses/{id}', 'Admin\CoursesController@detail');
+// $app->get('/', function() use ($app) {
+//     return view('front.wxjz');
+// });
+
 
 // 管理员后台
 $app->group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', 'middleware' => ['auth.login', 'auth.admin']], function($app){
@@ -84,3 +89,4 @@ $app->group(['namespace' => 'App\Http\Controllers\Alipay', 'prefix' => 'alipay']
     $app->get('/return', 'AlipayController@ali_return');
     $app->post('/notify', 'AlipayController@ali_notify');
 });
+

@@ -41,7 +41,7 @@
     <div class="form-group">
       <label for="discount" class="col-sm-2 control-label">折扣</label>
       <div class="col-sm-9">
-        <input type="number" class="form-control" name="discount" id="discount" placeholder="折扣" value="{{ old('discount', $books ? $books->discount : 0) }}"  >
+        <input type="number" step="1" min="0" max="100" class="form-control" name="discount" id="discount" placeholder="折扣" value="{{ old('discount', $books ? $books->discount : 0) }}"  >
       </div>
     </div>
     <div class="form-group">
@@ -118,13 +118,13 @@ $(function(){
       var v1 = $('#price').val();
       var v2 = $('#discount').val();
 //       alert(parseFloat(v1)); alert(parseFloat(v2));
-      $('#discount_price').val(parseFloat(v1)*parseFloat(v2));
+      $('#discount_price').val(parseFloat(v1)*parseFloat(v2)/100.0);
     });
     
     $('#discount').change(function(){
         var v1 = $('#price').val();
         var v2 = $('#discount').val();
-        $('#discount_price').val(parseFloat(v1)*parseFloat(v2));
+        $('#discount_price').val(parseFloat(v1)*parseFloat(v2)/100.0);
       });
 
     $('#price').change();

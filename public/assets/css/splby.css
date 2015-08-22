@@ -1,0 +1,62 @@
+.blue{color:#229aff;}
+.gray{color:#999999;}
+.orange{color:#fe591e;}
+.fs12{font-size:12px;}
+.fs21{font-size:21px;}
+.mr30{margin-right:30px;}
+.dn{display:none;}
+body{background-color:f0f2f5;}
+.clear{clear:both;}
+#banner{height:200px;background-color:#e53e56;}
+#banner div{width:1200px;height:200px;margin:0 auto;position:relative;} 
+#banner div #splby_button_1{width:169px;height:24px;position:absolute;bottom:5px;right:0px;background:url("/assets/img/splby_button_1.png") 0 0;} 
+#banner div #splby_button_1 div:first-child{width:84px;height:24px;float:left;cursor:pointer;}
+#banner div #splby_button_1 div:last-child{width:84px;height:24px;float:right;cursor:pointer;}
+
+#content{width:1200px;height:auto;margin:0 auto 75px;overflow:hidden;}
+#content .kelei{width:378px;border:1px solid #e4e5e7;margin-top:28px;float:left;}
+#content .kelei_1{width:378px;height:144px;}
+#content .kelei_1 img{border:0;width:248px;height:143px;float:left;}
+#content .kelei_1 div{width:130px;height:143px;float:left;}
+#content .kelei_1 h2{width:130px;height:55px;font-size:14px;background-color:#229aff;color:#fff;line-height:25px;padding-top:5px;font-family:"宋体";font-weight:100%;}
+#content .kelei_1 p{width:131px;font-size:12.6px;letter-spacing:0.1px;margin-top:6px;font-family:"宋体";}
+#content .kelei_2{width:378px;height:38px;line-height:38px;text-align:center;}
+#content .kelei_2 .button{border:0;background-color:#229aff;color:#fff;cursor:pointer;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;width:38px;height:18px;font-size:12px;}
+#content .radio{display:none;}
+#content .radio + label{background:url(/assets/img/ico_radio.png) no-repeat center left;display:inline-block;width:50px;}
+#content .radio + label:active,#content .radio:checked + label{background:url(/assets/img/ico_radio2.png) no-repeat center left;}
+
+#content2{width:1198px;height:auto;margin:30px auto 113px;border:1px solid #d6d6d6;}
+#content2 .jibie_title{height:52px;width:1200px;border-bottom:1px solid #e7e7e7;position:relative;}
+#content2 .jibie_title img{float:left;margin-top:22px;position:relative;left:-1px;}
+#content2 .jibie_title ul{float:left;margin-top:22px;margin-left:36px;}
+#content2 .jibie_title li{float:left;width:56px;line-height:28px;position:relative;bottom:-1px;}
+.bb{border-bottom:none;}
+.hbb{border-bottom:2px solid #fc6533;}
+#content2 .jibie_title a{text-decoration:none;color:#434343;}
+
+#content2 .jb_zx{width:1190px;overflow:hidden;padding-bottom:22px;}
+#content2 .jibie{position:relative;width:275px;height:238px;margin-left:15px;margin-top:20px;float:left;}
+#content2 .jibie .jibie_1{width:275px;height:238px;}
+#content2 .jibie .jibie_1 .jibie_1_1{width:275px;height:160px;position:relative;}
+#content2 .jibie .jibie_1 .jibie_1_1 div{width:285px;height:32px;background:url(/assets/img/splby_bar_bskc.png);position:absolute;bottom:-6px;right:0;color:#fff;font-size:14px;font-family:"微软雅黑";line-height:24px;}
+#content2 .jibie .jibie_1 .jibie_1_1 div span:first-child{margin-right:70px;}
+#content2 .jibie .jibie_1 .jibie_1_1 div span:last-child{margin-right:20px;}
+#content2 .jibie .jibie_1 .jibie_1_2{width:273px;height:77px;border-left:1px solid #eaeaea;border-right:1px solid #eaeaea;border-bottom:1px solid #eaeaea;border-top:0;}
+#content2 .jibie .jibie_1 p{text-align:center;font-size:14px;line-height:30px;padding-top:5px;width:275px;font-family:"微软雅黑";color:#3f3333;}
+#content2 .jibie .button{border:0;background-color:#00cc99;color:#fff;cursor:pointer;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;width:38px;height:18px;font-size:12px;}
+
+
+#content2 .jibie .jibie_2{width:275px;height:160px;background-color:#424242;background-color:rgba(0,0,0,0.6);position:absolute;top:0;left:0;display:none;}
+#content2 .jibie .jibie_2 p{width:250px;height:106px;color:#fff;font-size:12px;font-family:"宋体";letter-spacing:1.8px;padding-top:10px;line-height:16px;opacity:1;border:none;}
+#content2 .jibie .jibie_2 a{display:inline-block;width:192px;height:28px;background-color:#3b82c4;color:#fff;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;line-height:26px;font-family:"微软雅黑";font-size:18px;opacity:1;}
+
+#content2 .jibie_xx{overflow:hidden;padding-bottom:22px;}
+#content2 .jibie_xx .jibie .jibie_2{width:275px;height:160px;background-color:#e7eeec;background-color:rgba(255,255,255,0.8);position:absolute;top:0;left:0;display:none;}
+#content2 .jibie_xx .jibie .jibie_2 p{width:250px;height:106px;color:#000;font-size:12px;font-family:"宋体";letter-spacing:1.8px;padding-top:10px;line-height:16px;opacity:1;border:none;}
+#content2 .jibie_ye{overflow:hidden;padding-bottom:22px;}
+#content2 .jibie_ye .jibie .jibie_2{width:275px;height:160px;background-color:#e7eeec;background-color:rgba(255,255,255,0.8);position:absolute;top:0;left:0;display:none;}
+#content2 .jibie_ye .jibie .jibie_2 p{width:250px;height:106px;color:#000;font-size:12px;font-family:"宋体";letter-spacing:1.8px;padding-top:10px;line-height:16px;opacity:1;border:none;}
+#content2 .jibie_ye .jibie .jibie_1 .jibie_1_1 div{width:285px;height:32px;background:url(/assets/img/splby_bar_bskc1.png);position:absolute;bottom:-6px;right:0;color:#fff;font-size:14px;font-family:"微软雅黑";line-height:24px;}
+
+
