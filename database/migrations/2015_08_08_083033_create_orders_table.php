@@ -15,7 +15,6 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
             $table->string('orderno');              // 订单号
-            $table->json('items');                  // 购买项目，json格式
             $table->float('totalprice')->default(0);// 总价
             $table->string('receiver');             // 收件人
             $table->string('phone');                // 电话
