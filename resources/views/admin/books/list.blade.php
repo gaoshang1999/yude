@@ -39,7 +39,7 @@
           <td>@if($v->kind == "bishi") 笔试  @elseif($v->kind == "mianshi") 面试  @endif</td>
           <td>{{ $v->price }}</td>          
           <td>{{ $v->discount }}</td>          
-          <td>{{ $v->price * $v->discount }}</td>
+          <td>{{ $v->discount_price }}</td>
           <td>{{ $v->inventory }}</td>
           <td>{{ $v->buytimes }}</td>
           <td>{{ $v->created_at }}</td>

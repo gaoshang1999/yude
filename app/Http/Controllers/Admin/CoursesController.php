@@ -122,4 +122,20 @@ class CoursesController extends Controller
             return view('admin.courses.create_edit', ['courses' => $courses]);
         }
     }
+    
+    public function lists(Request $request)
+    {
+        $courses = Courses::get();
+        $courses_1 = Courses::where('level', 'zhongxue') ->get();
+        $courses_2 = Courses::where('level', 'xiaoxue') ->get() ;
+        $courses_3 = Courses::where('level', 'youer') ->get();
+        $data = ['courses' => $courses, 'courses_1' => $courses_1, 'courses_2' => $courses_2, 'courses_3' => $courses_3];
+        return view('front.courses_lists', $data);
+    }
+    
+    public function detail(Request $request, $id)
+    {
+        $courses = Courses::where('id', $id)->first();
+        return view('front.courses_detail', ['v' => $courses]);
+    }
 }
