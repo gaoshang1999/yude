@@ -44,11 +44,11 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($orders->all() as $v) <?php $rows = $v->orderItems(); ?>
+        @foreach ($orders->all() as $v) <?php $rows = count($v->orderItems); ?>
         <tr>
-          <td rowspan="{{ $rows }}">{{ $v->id }}</td>
+          <td rowspan="{{ $rows }}">{{ $v->orderno }}</td>
           <td rowspan="{{ $rows }}">{{ $v->created_at }}</td>
-          @foreach ($v->orderItems() as $item)
+          @foreach ($v->orderItems as $item)
           <td>{{ $item->title }}</td>
           <td>{{ $item->price }}</td>
           @endforeach

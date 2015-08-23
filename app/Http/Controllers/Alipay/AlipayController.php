@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Alipay;
 
+use Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Order;
 
 class AlipayController extends Controller
 {
@@ -19,16 +21,17 @@ class AlipayController extends Controller
     // 页面跳转同步通知页面路径。
     public function ali_return(Request $request)
     {
+        $order = Order::where('orderno', $request->get('out_trade_no'))->first();
         // 验证请求。
         if (! app('AlipayWeb')->verify()) {
             Log::notice('Alipay return query data verification fail.', [
                 'data' => $request->getQueryString()
             ]);
-            return view('alipay.fail');
+            return view('order.payfail', ['order'=>$order]);
         }
 
         // 判断通知类型。
-        switch (Input::get('trade_status')) {
+        switch ($request->get('trade_status')) {
             case 'TRADE_SUCCESS':
             case 'TRADE_FINISHED':
                 // TODO: 支付成功，取得订单号进行其它相关操作。
@@ -36,6 +39,10 @@ class AlipayController extends Controller
                     'out_trade_no' => $request->input('out_trade_no'),
                     'trade_no' => $request->input('trade_no')
                 ]);
+                $order->paytime = date('Y-m-d H:i:s');
+                $order->paymode = 'alipay';
+                $order->payload = json_encode($request->all());
+                $order->save();
                 break;
         }
 
@@ -54,7 +61,7 @@ class AlipayController extends Controller
         }
 
         // 判断通知类型。
-        switch (Input::get('trade_status')) {
+        switch ($request->get('trade_status')) {
             case 'TRADE_SUCCESS':
             case 'TRADE_FINISHED':
                 // TODO: 支付成功，取得订单号进行其它相关操作。

@@ -15,7 +15,7 @@ class OrdersController extends Controller
     public function orders(Request $request)
     {
         $input = $request->all();
-        if (isset($input['stype'])) {
+        if (isset($input['stype']) && (!empty($input['stext']) || !empty($input['svalue']))) {
             switch ($input['stype']) {
                 case 'phone':
                 case 'orderno':
