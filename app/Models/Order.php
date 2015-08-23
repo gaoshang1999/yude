@@ -13,5 +13,10 @@ class Order extends Model
      */
     protected $table = 'orders';
 
-    protected $fillable = ['items', 'orderno', 'totalprice', 'receiver', 'phone', 'postcode', 'address', 'paymode', 'paytime'];
+    protected $fillable = ['orderno', 'totalprice', 'receiver', 'phone', 'postcode', 'address', 'paymode', 'paytime', 'payload'];
+
+    public function orderItems()
+    {
+        return $this->hasMany('App\Models\OrderItem');
+    }
 }

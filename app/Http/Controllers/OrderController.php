@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Courses;
 use App\Models\Order;
+use App\Models\OrderItem;
 
 class OrderController extends Controller
 {
@@ -56,17 +57,26 @@ class OrderController extends Controller
 
         $total = 0;
         $items = json_decode($data['items'], true);
+        $itemData = array();
         $courses = Courses::whereIn('id', array_keys($items))->get();
         foreach ($courses as $c) {
+            $item['snapshot'] = json_encode($c);
             $c->count = $items[''.$c->id];
             $total += $c->count * $c->totalprice;
+            $item['count'] = $c->count;
+            $item['price'] = $c->totalprice;
+            $item['title'] = $c->name;
+            $itemData[] = $item;
         }
 
         $data['totalprice'] = $total;
-        $data['items'] = json_encode($courses);
 
-        Order::create($data);
-        
+        $order = Order::create($data);
+
+        foreach ($itemData as $item) {
+            $item['order_id'] = $order->id;
+            OrderItem::create($item);
+        }
         return redirect('/order/payonline/'.$data['orderno']);
     }
 
