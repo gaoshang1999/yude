@@ -1,4 +1,4 @@
-@extends('app')
+@extends('front.app')
 
 {{-- Web site Title --}}
 @section('title') 登录 :: @parent @stop
@@ -33,7 +33,7 @@
                         <input type="password" class="form-control" name="password">
                     </div>
                 </div>
-
+                <input type="hidden" class="form-control" name="url" value="{{ isset($url) ? $url : "" }}">
                 <div class="form-group">
                     <div class="col-md-6 col-md-offset-4">
                         <button type="submit" class="btn btn-primary" style="margin-right: 15px;">

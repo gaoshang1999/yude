@@ -13,7 +13,7 @@ class OrderItem extends Model
      */
     protected $table = 'orderitems';
 
-    protected $fillable = ['count', 'price', 'title', 'snapshot', 'order_id'];
+    protected $fillable = ['count', 'price', 'title', 'snapshot', 'order_id', 'type'];
 
     public function order()
     {
