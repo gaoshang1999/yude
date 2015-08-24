@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Courses;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Books;
 
 class OrderController extends Controller
 {
@@ -21,33 +22,55 @@ class OrderController extends Controller
 
     public function step1(Request $request)
     {
-        $courseid = 1;
-        if (($cid = $request->input('cid'))) {
-            $courseid = $cid;
+        $course_ids = $request->session()->get('cart.coureses');
+        $book_ids = $request->session()->get('cart.books');
+        $courses = Courses::whereIn('id', $course_ids)->get();
+        $books = Books::whereIn('id', $book_ids)->get();
+        
+        $total = 0;
+        foreach ($courses as $c) {            
+            $total +=  $c->totalprice;
         }
-        $data = ['course'=>Courses::where('id', $courseid)->first()];
+        foreach ($books as $c) {
+            $total +=  $c->discount_price;
+        }
+
+        $data = ['courses'=>$courses, 'books'=>$books, 'total'=>$total];
         return view('order.step1', $data);
     }
 
     public function step2(Request $request)
     {
-        $courseIds = array();
+        $course_ids = array();
+        $book_ids = array();
+
         foreach ($request->all() as $key => $value) {
-            if (starts_with($key, 'check')) {
-                $num = substr($key, strlen('check_'));
-                $courseIds[] = $num;
+            if (starts_with($key, 'check_c')) {
+                $num = substr($key, strlen('check_c_'));
+                $course_ids[] = $num;
+            }else if (starts_with($key, 'check_b')) {
+                $num = substr($key, strlen('check_b_'));
+                $book_ids[] = $num;
             }
         }
 
-        $items = array();
-        $total = 0;
-        $courses = Courses::whereIn('id', $courseIds)->get();
+        $items_c = array(); $items_b = array();
+        $total = 0;  $count = 0;
+        $courses = Courses::whereIn('id', $course_ids)->get();
+        $books = Books::whereIn('id', $book_ids)->get();
         foreach ($courses as $c) {
-            $c->count = intval($request->input('count_' . $c->id));
+            $c->count = intval($request->input('count_c_' . $c->id));
             $total += $c->count * $c->totalprice;
-            $items[''. $c->id] = $c->count;
+            $items_c[''. $c->id] = $c->count;
+            $count += $c->count;
         }
-        return view('order.step2', ['courses'=>$courses, 'total'=>$total, 'items'=>json_encode($items)]);
+        foreach ($books as $c) {
+            $c->count = intval($request->input('count_b_' . $c->id));
+            $total += $c->count * $c->discount_price;
+            $items_b[''. $c->id] = $c->count;
+            $count += $c->count;
+        }
+        return view('order.step2', ['courses'=>$courses, 'books'=> $books, 'total'=>$total, 'count'=> $count, 'items_c'=>json_encode($items_c), 'items_b'=>json_encode($items_b)]);
     }
 
     public function step3(Request $request)
@@ -56,16 +79,30 @@ class OrderController extends Controller
         $data['orderno'] = '' . date('YmdHis') . (time()%1000);
 
         $total = 0;
-        $items = json_decode($data['items'], true);
         $itemData = array();
-        $courses = Courses::whereIn('id', array_keys($items))->get();
+        
+        $items_c = json_decode($data['items_c'], true);        
+        $courses = Courses::whereIn('id', array_keys($items_c))->get();
         foreach ($courses as $c) {
             $item['snapshot'] = json_encode($c);
-            $c->count = $items[''.$c->id];
+            $c->count = $items_c[''.$c->id];
             $total += $c->count * $c->totalprice;
             $item['count'] = $c->count;
             $item['price'] = $c->totalprice;
             $item['title'] = $c->name;
+            $item['type'] = "course";
+            $itemData[] = $item;
+        }
+        $items_b = json_decode($data['items_b'], true);
+        $books = Books::whereIn('id', array_keys($items_b))->get();
+        foreach ($books as $c) {
+            $item['snapshot'] = json_encode($c);
+            $c->count = $items_b[''.$c->id];
+            $total += $c->count * $c->discount_price;
+            $item['count'] = $c->count;
+            $item['price'] = $c->discount_price;
+            $item['title'] = $c->name;
+            $item['type'] = "book";
             $itemData[] = $item;
         }
 

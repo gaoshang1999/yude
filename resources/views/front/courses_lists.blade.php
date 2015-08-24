@@ -1,23 +1,20 @@
-<!DOCTYPE HTML>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>园师课堂-课程列表页</title>
-        <link href="/assets/css/header.css" rel="stylesheet" type="text/css" />
+@extends('front.app')
+
+{{-- Web site Title --}}
+@section('title') 园师课堂-课程列表页 @stop
+
+@section('styles') 
         <link href="/assets/css/splby.css" rel="stylesheet" type="text/css" /> 
-		<script src="/assets/js/jquery-2.1.4.min.js"></script>
-    </head>
-            
-    <body>
-        <!---------------------------------------头部公共 引用开始--------------------------------------->
-        @include('front.header')
-        <!---------------------------------------头部公共 引用结束--------------------------------------->
-				<div class="clear"></div>
+@stop
+
+{{-- Content --}}
+@section('content')
+		<div class="clear"></div>
         <!--------------------------------------顶部banner开始------------------------------------------>		
 		<div id="banner">
 			<div>
 				<a href="#"><img src="/assets/img/splby_banner1.jpg" /></a>
-				<div id="splby_button_1"><div></div><div></div></div>
+				<div id="splby_button_1"><div id="splby_button_11"></div><div id="splby_button_12"></div></div>
 			</div>
 		</div>
         <!--------------------------------------顶部banner结束------------------------------------------>
@@ -34,7 +31,7 @@
 									<p class="gray">{{ $v->summary }}</p>
 							</div>
 					</div>
-					<form action="{{ url("order") }}" method="get">
+					<form action="{{ url("cart/courses/add/$v->id") }}" method="get">
 							<p class="kelei_2 fs12">
 									<input type="radio" name="class" value="zx" class="radio" id="class_1_1" /><label for="class_1_1" class="gray">&nbsp;&nbsp;中学</label>&nbsp;
 									<input type="radio" name="class" value="xx" class="radio" id="class_1_2" /><label for="class_1_2" class="gray">&nbsp;&nbsp;小学</label>&nbsp;
@@ -72,7 +69,7 @@
 												<div><span>@if($v->kind == "bishi")笔试@elseif($v->kind == "mianshi")面试@endif课程</span><span>共计{{ $v->hours }}课时</span></div>
 										</div>
 										<div class="jibie_1_2">
-												<form action="{{ url("order") }}" method="get">
+												<form action="{{url("cart/courses/add/$v->id") }}" method="get">
 												<p>中学考前冲刺预测班</p>
 												<p><span class="orange">{{ $v->totalprice }}</span>&nbsp;|&nbsp;<del>￥{{ $v->totalprice }}</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												<a href="#" class="gray fs12"><img src="/assets/img/splby_ico1.jpg" />&nbsp;试听</a>&nbsp;
@@ -99,7 +96,7 @@
 												<div><span>@if($v->kind == "bishi")笔试@elseif($v->kind == "mianshi")面试@endif课程</span><span>共计{{ $v->hours }}课时</span></div>
 										</div>
 										<div class="jibie_1_2">
-												<form action="{{ url("order") }}" method="get">
+												<form action="{{url("cart/courses/add/$v->id") }}" method="get">
 												<p>小学考前冲刺预测班</p>
 												<p><span class="orange">{{ $v->totalprice }}</span>&nbsp;|&nbsp;<del>￥{{ $v->totalprice }}</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												<a href="#" class="gray fs12"><img src="/assets/img/splby_ico1.jpg" />&nbsp;试听</a>&nbsp;
@@ -125,7 +122,7 @@
 												<div><span>@if($v->kind == "bishi")笔试@elseif($v->kind == "mianshi")面试@endif课程</span><span>共计{{ $v->hours }}课时</span></div>
 										</div>
 										<div class="jibie_1_2">
-												<form action="{{ url("order") }}" method="get">
+												<form action="{{url("cart/courses/add/$v->id") }}" method="get">
 												<p>幼儿考前冲刺预测班</p>
 												<p><span class="orange">{{ $v->totalprice }}</span>&nbsp;|&nbsp;<del>￥{{ $v->totalprice }}</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												<a href="#" class="gray fs12"><img src="/assets/img/splby_ico1.jpg" />&nbsp;试听</a>&nbsp;
@@ -142,16 +139,8 @@
 				</div>				
 		</div>	
 
-		
-		
-		
-		
-		
-		
-		
-		<!--按级别分类 结束-->		
-		@include('front.footer')
-        <!---------------------------------------尾部公共 引用结束--------------------------------------->
-    </body>
-	<script src="/assets/js/splby.js"></script>
-</html>
+@endsection
+
+@section('scripts')
+	<script type="text/javascript" src="/assets/js/splby.js"></script>
+@endsection

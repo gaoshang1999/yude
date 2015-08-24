@@ -16,13 +16,13 @@ trait AuthenticatesUsers
      *
      * @return \Illuminate\Http\Response
      */
-    public function getLogin()
+    public function getLogin(Request $request)
     {
         if (view()->exists('auth.authenticate')) {
             return view('auth.authenticate');
         }
-
-        return view('auth.login');
+        $url = $request->input('url');
+        return view('auth.login', ['url'=> $url]);
     }
 
     /**

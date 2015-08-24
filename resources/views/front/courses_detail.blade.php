@@ -1,18 +1,14 @@
-<!DOCTYPE HTML>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>园师课堂-课程详情页</title>
-        <link href="/assets/css/header.css" rel="stylesheet" type="text/css" />
+@extends('front.app')
+
+{{-- Web site Title --}}
+@section('title') 园师课堂-课程详情页 @stop
+
+@section('styles') 
         <link href="/assets/css/spxqy.css" rel="stylesheet" type="text/css" /> 
-		<script src="/assets/js/jquery-2.1.4.min.js"></script>
-		<script src="/assets/js/spxqy.js"></script>
-    </head>
-            
-    <body>
-        <!--头部公共 引用开始-->
-        @include('front.header')
-        <!--头部公共 引用结束-->
+@stop
+
+{{-- Content --}}
+@section('content')
 		
 		<!--视频简介-->
 		<div id="content_jianjie">
@@ -24,7 +20,7 @@
 						<div class="wenzi">
 								<h1>{{ $v->name }}</h1>
 								<p>{{ $v->summary }}</p>
-								<form action="{{ url("order") }}" method="get">
+								<form action="{{ url("cart/courses/add/$v->id") }}" method="get">
 								<p><input type="submit" title="立即购买" value="立即购买 ￥{{ $v->totalprice }}"  class="button"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<span class="fz24 gray">原价&nbsp;<del>￥{{ $v->totalprice }}</del></span> </p>
 								<p class="p3">可选单科&nbsp;&nbsp;&nbsp;&nbsp;
@@ -188,17 +184,10 @@
 						<a href="#"><img src="/assets/img/spxqy_right3_banner.png" alt="" /></a>
 				</div>
 		</div>
+@endsection		
+	
 		
 		
-		
-		
-		
-		
-		
-		
-        <!--尾部公共 引用开始-->
-		@include('front.footer')
-        <!--尾部公共 引用结束-->
-    </body>
-
-</html>
+@section('scripts') 
+        <script src="/assets/js/spxqy.js"></script>
+@stop

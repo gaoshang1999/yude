@@ -51,7 +51,7 @@
     <hr/>
     <div>
       <div class="checkbutton checked" data-value="online">在线支付</div>
-      <div class="checkbutton" data-value="back">银行汇款</div>
+      <div class="checkbutton" data-value="bank">银行汇款</div>
       <input type="hidden" id="paymode" name="paymode" value="online">
     </div>
     <div class="steplabel" style="margin-top: 50px">教材邮寄地址</div>
@@ -65,7 +65,8 @@
         <div>地&nbsp;&nbsp;&nbsp;址：<input name="address"></div>
       </div>
     </div>
-    <input type="hidden" name="items" value="{{ $items }}">
+    <input type="hidden" name="items_c" value="{{ $items_c }}"> 
+    <input type="hidden" name="items_b" value="{{ $items_b }}">
   </div>
   <div class="orderblock" style="margin-top: 10px;">
     <div class="steplabel">购课清单</div>
@@ -92,10 +93,20 @@
             <td></td>
           </tr>
           @endforeach
+          @foreach ($books as $i=>$v)
+          <tr>
+            <td>{{ $i }}</td>
+            <td>{{ $v->name }}</td>
+            <td>教材</td>
+            <td>{{ $v->count }}</td>
+            <td>{{ $v->count * $v->discount_price }}</td>
+            <td></td>
+          </tr>
+          @endforeach
         </tbody>
       </table>
       <div class="priceblock">
-        <div>共一件商品，商品总金额：<label>￥{{ number_format($total, 2) }}</label></div>
+        <div>共{{$count}}件商品，商品总金额：<label>￥{{ number_format($total, 2) }}</label></div>
         <div>运费：<label>￥20</label></div>
         <div>应付总额：<label>￥{{ number_format($total+20, 2) }}</label></div>
         <input style="background-color: #f35a01; padding: 10px 20px; border:none; color: white; font-size:16px; margin: 20px auto;" type="submit" value="提交订单">

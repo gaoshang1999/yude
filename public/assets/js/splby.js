@@ -1,11 +1,11 @@
 /* written by CC on 2015-08-18*/
-//视频按课类查看效果
-$("#splby_button_1 div:eq(0)").click(function(){
+
+$("#splby_button_11").click(function(){
 	$("#splby_button_1").css("background-position","0px 0px");
 	$("#content").removeClass('dn');
 	$("#content2").addClass('dn');
 	});
-$("#splby_button_1 div:eq(1)").click(function(){
+$("#splby_button_12").click(function(){
 	$("#splby_button_1").css("background-position","0px 24px");
 	$("#content2").removeClass('dn');
 	$("#content").addClass('dn');
@@ -13,7 +13,7 @@ $("#splby_button_1 div:eq(1)").click(function(){
 
 
 
-//视频按级别分类效果
+//
 
 $("#content2 .jibie").hover(
 		function(){

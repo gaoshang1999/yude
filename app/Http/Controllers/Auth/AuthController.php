@@ -78,6 +78,10 @@ class AuthController extends Controller
 
     protected function authenticated($request, $user)
     {
+        $url = $request->input('url');
+        if($url){
+            return redirect($url);
+        }
         if ($user->role === 'admin') {
             return redirect('/admin');
         }

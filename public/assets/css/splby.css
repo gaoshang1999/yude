@@ -18,10 +18,10 @@ body{background-color:f0f2f5;}
 #content .kelei_1{width:378px;height:144px;}
 #content .kelei_1 img{border:0;width:248px;height:143px;float:left;}
 #content .kelei_1 div{width:130px;height:143px;float:left;}
-#content .kelei_1 h2{width:130px;height:55px;font-size:14px;background-color:#229aff;color:#fff;line-height:25px;padding-top:5px;font-family:"宋体";font-weight:100%;}
+#content .kelei_1 h2{width:130px;height:55px;font-size:14px;background-color:#229aff;color:#fff;line-height:25px;padding-top:5px;font-family:"宋体";font-weight:100%;margin-top:0px;}
 #content .kelei_1 p{width:131px;font-size:12.6px;letter-spacing:0.1px;margin-top:6px;font-family:"宋体";}
 #content .kelei_2{width:378px;height:38px;line-height:38px;text-align:center;}
-#content .kelei_2 .button{border:0;background-color:#229aff;color:#fff;cursor:pointer;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;width:38px;height:18px;font-size:12px;}
+#content .kelei_2 .button{border:0;background-color:#229aff;color:#fff;cursor:pointer;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;width:38px;height:18px;font-size:12px;padding-top:0px;line-height:18px;}
 #content .radio{display:none;}
 #content .radio + label{background:url(/assets/img/ico_radio.png) no-repeat center left;display:inline-block;width:50px;}
 #content .radio + label:active,#content .radio:checked + label{background:url(/assets/img/ico_radio2.png) no-repeat center left;}
@@ -44,7 +44,7 @@ body{background-color:f0f2f5;}
 #content2 .jibie .jibie_1 .jibie_1_1 div span:last-child{margin-right:20px;}
 #content2 .jibie .jibie_1 .jibie_1_2{width:273px;height:77px;border-left:1px solid #eaeaea;border-right:1px solid #eaeaea;border-bottom:1px solid #eaeaea;border-top:0;}
 #content2 .jibie .jibie_1 p{text-align:center;font-size:14px;line-height:30px;padding-top:5px;width:275px;font-family:"微软雅黑";color:#3f3333;}
-#content2 .jibie .button{border:0;background-color:#00cc99;color:#fff;cursor:pointer;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;width:38px;height:18px;font-size:12px;}
+#content2 .jibie .button{border:0;background-color:#00cc99;color:#fff;cursor:pointer;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;width:38px;height:18px;font-size:12px;padding-top:0px;line-height:18px;}
 
 
 #content2 .jibie .jibie_2{width:275px;height:160px;background-color:#424242;background-color:rgba(0,0,0,0.6);position:absolute;top:0;left:0;display:none;}
