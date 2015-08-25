@@ -31,6 +31,7 @@ $app->post('auth/register', 'Auth\AuthController@postRegister');
 
 $app->get('/', 'Admin\CoursesController@lists');
 $app->get('/books/lists', 'Admin\BooksController@lists');
+$app->get('/books/{id}', 'Admin\BooksController@detail');
 $app->get('/courses/lists', 'Admin\CoursesController@lists');
 $app->get('/courses/{id}', 'Admin\CoursesController@detail');
 $app->get('/cart/courses/add/{id}', 'My\MyController@courses_add');
