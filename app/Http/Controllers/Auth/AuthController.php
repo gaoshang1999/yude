@@ -52,7 +52,7 @@ class AuthController extends Controller
 
         return Validator::make($data, [
             'name' => 'required|max:255|unique:users,name',
-            'phone' => 'required|phone|max:255|unique:users,phone',
+            'phone' => 'required|phone|size:11|unique:users,phone',
             'email' => 'required|email|max:255|unique:users,email',
             'phonecode' => 'required|regex:/' . $vcode['verifycode'] . '/',
             'password' => 'required|confirmed|min:6|max:20',
@@ -104,6 +104,10 @@ class AuthController extends Controller
         $user = $this->create($request->all());
         $request->session()->forget('p' . $user->phone);
 
+        if ($request->ajax() || $request->wantsJson()) {
+            return json_encode(['success'=>true]);
+        }
+        
         return redirect($this->loginPath());
     }
 
@@ -127,5 +131,32 @@ class AuthController extends Controller
 
         echo json_encode(['deadline'=>60]);
         // echo json_encode($request->session()->all());
+    }
+    
+    public function postValidate(Request $request)
+    {
+        $key = $request->input('key');
+        $value = $request->input('value');
+        
+        if($key == 'phone'){
+            $validator = Validator::make( [$key => $value], [       
+            'phone' => 'required|phone|size:11|unique:users,phone']);            
+
+        }elseif ($key == 'name'){
+            $validator = Validator::make( [$key => $value], [       
+            'name' => 'required|max:255|unique:users,name']);
+            
+        }elseif ($key == 'email'){
+            $validator = Validator::make( [$key => $value], [       
+            'email' => 'required|email|max:255|unique:users,email']);
+        }
+        
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }else{
+            echo json_encode(['success'=>true]);
+        }
     }
 }
