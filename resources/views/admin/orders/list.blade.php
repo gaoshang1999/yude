@@ -4,6 +4,12 @@
 <style type="text/css">
   .main { padding: 20px; }
   #svalue { margin-left: 10px; margin-right: 10px; }
+  .table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: inherit;
+  }
+  .table-striped>tbody>tr.odd, .table-striped>thead>tr.odd {
+    background-color: #f9f9f9;
+  }
 </style>
 @endsection
 
@@ -29,7 +35,7 @@
   <div class="table-responsive">
     <table class="table table-striped">
       <thead>
-        <tr>
+        <tr class="odd">
           <th>订单编号</th>
           <th>购买时间</th>
           <th>产品名称</th>
@@ -44,14 +50,12 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($orders->all() as $v) <?php $rows = count($v->orderItems); ?>
-        <tr>
+        @foreach ($orders->all() as $rowIndex=>$v) <?php $rows = count($v->orderItems); ?>
+        <tr class="{{ $rowIndex%2 == 0 ? '' : 'odd' }}">
           <td rowspan="{{ $rows }}">{{ $v->orderno }}</td>
           <td rowspan="{{ $rows }}">{{ $v->created_at }}</td>
-          @foreach ($v->orderItems as $item)
-          <td>{{ $item->title }}</td>
-          <td>{{ $item->price }}</td>
-          @endforeach
+          <td>{{ $v->orderItems[0]->title }}</td>
+          <td>{{ $v->orderItems[0]->price }}</td>
           <td rowspan="{{ $rows }}">{{ $v->totalprice }}</td>          
           <td rowspan="{{ $rows }}">{{ $v->paymode }}</td>          
           <td rowspan="{{ $rows }}">{{ $v->paytime ? '已支付' : '未支付' }}</td>
@@ -60,6 +64,12 @@
           <td rowspan="{{ $rows }}"></td>
           <td rowspan="{{ $rows }}"></td>
         </tr>
+        @for($i=1; $i<$rows; $i++)
+        <tr class="{{ $rowIndex%2 == 0 ? '' : 'odd' }}">
+          <td>{{ $v->orderItems[$i]->title }}</td>
+          <td>{{ $v->orderItems[$i]->price }}</td>
+        </tr>
+        @endfor
         @endforeach
       </tbody>
     </table>
