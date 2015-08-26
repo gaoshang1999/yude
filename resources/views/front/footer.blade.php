@@ -30,5 +30,4 @@
         </div>
         <!--尾部公共 引用结束-->
  
-<script type="text/javascript" src="/assets/js/footer.js"></script>
 

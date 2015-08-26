@@ -22,8 +22,8 @@
         <!--------------------------------------视频正文开始---------------------------------------------->		
 		<div id="content">
 			<!--按类型分 课程1-->
-			@foreach ($courses ->all() as $v)
-			<div class="kelei mr30">
+			@foreach ($courses ->all() as $k => $v)
+			<div class="kelei @if($k%3 != 2 ) mr30 @endif">
 					<div class="kelei_1">
 							<a href="{{ url("courses/$v->id") }}"><img src="{{ url("$v->cover") }} " alt="课程图片"/></a>
 							<div>

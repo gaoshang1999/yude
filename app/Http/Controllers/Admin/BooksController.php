@@ -125,4 +125,10 @@ class BooksController extends Controller
         $data = ['books_1' => $books_1, 'books_2' => $books_2, 'books_3' => $books_3];
         return view('front.books_lists', $data);
     }
+    
+    public function detail(Request $request, $id)
+    {
+        $books = Books::where('id', $id)->first();
+        return view('front.books_detail', ['v' => $books]);
+    }
 }

@@ -15,6 +15,7 @@
 $app->get('auth/login', ['as'=>'userlogin', 'uses'=>'Auth\AuthController@getLogin']);
 $app->post('auth/login', 'Auth\AuthController@postLogin');
 $app->get('auth/logout', 'Auth\AuthController@getLogout');
+$app->post('auth/validate', 'Auth\AuthController@postValidate');
 
 // Registration routes...
 $app->post('auth/sendverifycode', 'Auth\AuthController@sendCode');
@@ -31,6 +32,7 @@ $app->post('auth/register', 'Auth\AuthController@postRegister');
 
 $app->get('/', 'Admin\CoursesController@lists');
 $app->get('/books/lists', 'Admin\BooksController@lists');
+$app->get('/books/{id}', 'Admin\BooksController@detail');
 $app->get('/courses/lists', 'Admin\CoursesController@lists');
 $app->get('/courses/{id}', 'Admin\CoursesController@detail');
 $app->get('/cart/courses/add/{id}', 'My\MyController@courses_add');
@@ -77,6 +79,9 @@ $app->group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', '
 // 用户后台
 $app->group(['namespace' => 'App\Http\Controllers\My', 'prefix' => 'my', 'middleware' => 'auth.login'], function($app){
     $app->get('/', 'MyController@order');
+    $app->get('/profile', function() use ($app) {
+        return view('welcome');
+    });
 });
 
 // 订单

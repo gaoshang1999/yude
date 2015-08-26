@@ -13,11 +13,8 @@
     @show @section('meta_description')
     <meta name="description" content="Lorem ipsum dolor sit amet, nihil fabulas et sea, nam posse menandri scripserit no, mei."/>
     @show
-	<!-- Bootstrap core CSS -->
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="/assets/css/dashboard.css" rel="stylesheet">
     <link href="/assets/css/header.css" rel="stylesheet">
+    <link href="/assets/css/login.css" rel="stylesheet" type="text/css" /> 
     @yield('styles')
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -43,11 +40,66 @@
 <script src="/assets/js/jquery-2.1.4.min.js"></script>
 <script src="/assets/js/bootstrap.min.js"></script>
 <!-- Scripts -->
-<script>
-    $('#flash-overlay-modal').modal();
-    $('div.alert').not('.alert-danger').delay(3000).slideUp(300);
-</script>
+<script type="text/javascript" src="/assets/js/footer.js"></script>
+<script type="text/javascript" src="/assets/js/login.js"></script>
+<script type="text/javascript">
+    var fun = function(){
+    	var span = $(this).parent().find('span');
+        var value = $(this).val();  
+        var key = ($(this).prop('id'));
+        var array = {'_token': '{{ csrf_token() }}', key: key, value: value};
 
+		$.post('/auth/validate', array, function(data, textStatus){
+            console.log(data);
+            //timer($('#btnSendCode'), data.deadline, $('#btnSendCode').val());
+            var ret = eval(data);
+
+            if(!ret['success'] ){
+                span.removeClass("dn");
+             }
+        }, 'json');
+	};
+    $('#phone').blur(fun);
+    $('#name').blur(fun);
+    $('#email').blur(fun);
+
+	 function sendverifycode(){
+            $.post('/auth/sendverifycode', {_token: '{{ csrf_token() }}', mobile: $('#phone').val()}, function(data, textStatus){
+                console.log(data);
+                //timer($('#btnSendCode'), data.deadline, $('#btnSendCode').val());
+            }, 'json');
+     }
+
+	var frm = $('#register_form');
+    frm.submit(function (ev) {
+        $.ajax({
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+            data: frm.serialize(),
+            success: function (data) {
+            	var ret = eval(data);
+            	
+                if(ret['success'] ){
+                	alert('注册成功');
+                }else{
+                    alert(ret);
+                }
+            }
+        });
+
+        ev.preventDefault();
+    });
+
+//     $('#iagree').click(function () {
+//     	var value = $(this).val();  
+//     	var btn = $('#register_submit'); 
+//     	if(value){
+//     		btn.disabled = false;
+//     	}else{    	
+//     		btn.prop('disabled', false);
+//     	}
+//     });
+</script>					
 @yield('scripts')
 
 </body>

@@ -1,4 +1,4 @@
-@extends('front.app')
+@extends('app')
 
 {{-- Web site Title --}}
 @section('title') 登录 :: @parent @stop
