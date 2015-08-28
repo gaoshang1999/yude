@@ -1,4 +1,4 @@
-@extends('app')
+@extends('front.app')
 
 @section('styles')
 <style type="text/css">
@@ -22,6 +22,12 @@
     background-repeat: no-repeat;
     background-size: 25%;
     background-position: right bottom;
+  }
+  label {
+      display: inline-block;
+      max-width: 100%;
+      margin-bottom: 5px;
+      font-weight: 700;
   }
 </style>
 @endsection

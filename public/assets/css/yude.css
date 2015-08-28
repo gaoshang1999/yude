@@ -1,5 +1,68 @@
+* { box-sizing: border-box; }
 body {
     background-color: #eeeff1;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    .col-sm-3 {
+        width: 25%;
+        float: left;
+        position: relative;
+        min-height: 1px;
+    }
+    .col-sm-12 {
+        width: 100%;
+        position: relative;
+        float: left;
+        min-height: 1px;
+    }
+    .main {
+        padding-right: 40px;
+        padding-left: 40px;
+    }
+}
+a {
+    color: #337ab7;
+    text-decoration: none;
+}
+a {
+    background-color: transparent;
+}
+
+.orderblock div {
+    text-align: left;
+}
+
+.clearfix:after, .clearfix:before {
+    display: table;
+    content: " ";
+}
+
+.table-responsive {
+    min-height: .01%;
+    overflow-x: auto;
+    text-align: left;
+}
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    border-spacing: 0;
+    border-collapse: collapse;
+    background-color: transparent;
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: middle;
+    border-top: 1px solid #ddd;
+}
+.pull-right {
+    float: right!important;
 }
 
 #footer {
@@ -21,6 +84,7 @@ body {
 
 .stepbar { 
     margin-bottom: 40px;
+    text-align: left;
 }
 .stepbar .col-sm-3 {
     padding-left: 2px;
@@ -58,6 +122,7 @@ body {
     color: #808080;
     font-size: 20px;
     margin-bottom: 10px;
+    text-align: left;
 }
 
 .orderblock tr.choose {
@@ -68,6 +133,7 @@ body {
 }
 .orderblock tr.headerbar {
     background-color: #f6f6f6;
+    border-bottom: 1px solid gray;
 }
 .orderblock tr.footerbar {
     background-color: #f6f6f6;

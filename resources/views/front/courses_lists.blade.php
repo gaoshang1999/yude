@@ -27,7 +27,7 @@
 					<div class="kelei_1">
 							<a href="{{ url("courses/$v->id") }}"><img src="{{ url("$v->cover") }} " alt="课程图片"/></a>
 							<div>
-									<h2>{{ $v->name }}<br/>@if($v->kind == "bishi")笔试@elseif($v->kind == "mianshi")面试@endif课程</h2>
+									<h2>{{ $v->name }}<br/>@if($v->kind == "bishi") 笔试 @elseif($v->kind == "mianshi") 面试 @endif 课程</h2>
 									<p class="gray">{{ $v->summary }}</p>
 							</div>
 					</div>
@@ -66,7 +66,7 @@
 								<div class="jibie_1">
 										<div class="jibie_1_1">
 												<img src="{{ url("$v->cover") }} " alt="中学课程" width="275" height="160"/>
-												<div><span>@if($v->kind == "bishi")笔试@elseif($v->kind == "mianshi")面试@endif课程</span><span>共计{{ $v->hours }}课时</span></div>
+												<div><span>@if($v->kind == "bishi") 笔试 @elseif($v->kind == "mianshi") 面试 @endif 课程</span><span>共计{{ $v->hours }}课时</span></div>
 										</div>
 										<div class="jibie_1_2">
 												<form action="{{url("cart/courses/add/$v->id") }}" method="get">
@@ -93,7 +93,7 @@
 								<div class="jibie_1">
 										<div class="jibie_1_1">
 												<img src="{{ url("$v->cover") }} " alt="小学课程" width="275" height="160"/>
-												<div><span>@if($v->kind == "bishi")笔试@elseif($v->kind == "mianshi")面试@endif课程</span><span>共计{{ $v->hours }}课时</span></div>
+												<div><span>@if($v->kind == "bishi") 笔试 @elseif($v->kind == "mianshi") 面试 @endif 课程</span><span>共计{{ $v->hours }}课时</span></div>
 										</div>
 										<div class="jibie_1_2">
 												<form action="{{url("cart/courses/add/$v->id") }}" method="get">
@@ -119,7 +119,7 @@
 								<div class="jibie_1">
 										<div class="jibie_1_1">
 												<img src="{{ url("$v->cover") }}" alt="幼儿课程" width="275" height="160"/>
-												<div><span>@if($v->kind == "bishi")笔试@elseif($v->kind == "mianshi")面试@endif课程</span><span>共计{{ $v->hours }}课时</span></div>
+												<div><span>@if($v->kind == "bishi") 笔试 @elseif($v->kind == "mianshi") 面试 @endif 课程</span><span>共计{{ $v->hours }}课时</span></div>
 										</div>
 										<div class="jibie_1_2">
 												<form action="{{url("cart/courses/add/$v->id") }}" method="get">
