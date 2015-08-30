@@ -54,7 +54,11 @@ $app->group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', '
     $app->post('/user/add', 'UserController@useradd');
     $app->get('/user/edit/{id}', 'UserController@useredit');
     $app->post('/user/edit/{id}', 'UserController@useredit');
+    $app->post('/user/delete/{id}', 'UserController@delete');
+    $app->get('/user/reset/{id}', 'UserController@reset');
+    $app->post('/user/reset/{id}', 'UserController@reset');
     $app->get('/user/search', 'UserController@search');
+    
     
     // 课程管理
     $app->get('/courses', 'CoursesController@courses');
@@ -62,6 +66,7 @@ $app->group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', '
     $app->post('/courses/add', 'CoursesController@coursesadd');
     $app->get('/courses/edit/{id}', 'CoursesController@coursesedit');
     $app->post('/courses/edit/{id}', 'CoursesController@coursesedit');
+    $app->post('/courses/delete/{id}', 'CoursesController@delete');
     $app->get('/courses/search', 'CoursesController@search');
     
     // 教材管理
@@ -70,6 +75,7 @@ $app->group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', '
     $app->post('/books/add', 'BooksController@booksadd');
     $app->get('/books/edit/{id}', 'BooksController@booksedit');
     $app->post('/books/edit/{id}', 'BooksController@booksedit');
+    $app->post('/books/delete/{id}', 'BooksController@delete');
     $app->get('/books/search', 'BooksController@search');
 
     // 订单管理

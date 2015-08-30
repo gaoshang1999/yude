@@ -8,24 +8,40 @@ class CoursesController extends Controller
 {
     public function courses()
     {
-        $data = ['courses' => Courses::simplePaginate(20) ];
+        $data = ['courses' => Courses::orderBy('created_at', 'desc')->simplePaginate(20) ];
         return view('admin.courses.list', $data);
     }
     
     public function search(Request $request)
     {
-        $input = $request['q'];
-        $courses = Courses::where('name', 'like', '%'.$input.'%')->simplePaginate(20) ;
-        $courses ->appends(['q' => $input]);
+        $q = $request['q'];
+        $field = $request['field'];
     
-        $data = ['courses' => $courses, 'q' => $input];
+        if($field == 'level'){
+            if($q == '中学') { $q = 'zhongxue';}
+            else if($q == '小学') { $q = 'exiaoxue';}
+            else if($q == '幼儿') { $q = 'youer';}
+        }else if($field == 'kind'){
+            if($q == '笔试') { $q = 'bishi';}
+            else if($q == '面试') { $q = 'mianshi';}
+        }else if($field == 'enable'){
+            if($q == '上架') { $q = 1;}
+            else if($q == '下架') { $q = 0;}
+        }        
+    
+        $courses = Courses::where($field, 'like', '%'.$q.'%')->simplePaginate(20) ;
+        $courses ->appends(['q' => $request['q']]);    
+
+        $data = ['courses' => $courses, 'q' => $request['q'], 'field' => $field];
         return view('admin.courses.list', $data);
     }
+
 
     public function coursesadd(Request $request)
     {
         if ($request->isMethod('post')) {
             $this->validate($request, [
+                'ablesky_category'=> 'required',
                 'level' => 'required|in:zhongxue,xiaoxue,youer',
                 'kind' => 'required|in:bishi,mianshi',
                 'name' => 'required|unique:courses|max:255',
@@ -33,35 +49,41 @@ class CoursesController extends Controller
                 'buytimes' => 'required|numeric|min:0',
                 'hours' => 'required|numeric|min:0',
                 'totalprice' => 'required|numeric|min:0',
+                'discount_price' => 'required|numeric|min:0',
                 'subname' => 'required',
                 'subprice' => 'required|numeric|min:0',
                 'zongheprice' => 'required|numeric|min:0',
-                'nengliprice' => 'numeric|min:0',
+                'nengliprice' => 'numeric|min:0',                
                 'cover' => 'required|image',
-                'video' => 'required',
-                'trialvideo' => 'required|url',
+                'image' => 'required|image',
                 'summary' => 'required',
-                'pagetitle' => 'required',
-                'pagekeyword' => 'required',
-                'pagedescription' => 'required',
+                'description' => 'required',
+                'hours_description' => 'required',
+                'teacher' => 'required',
+                'video' => 'required',
+                'trialvideo' => 'required|url',      
             ]);
 
             $input = $request->all();
             $courses = Courses::create($input);
 
-            $file = array_get($input,'cover');
-
-            $destinationPath = 'appfiles/courses';
-            if (!is_dir(base_path('public/' . $destinationPath))) {
-                mkdir(base_path('public/' . $destinationPath));
+            $imgs = ['cover', 'image'];
+            foreach ($imgs as $c) {
+                $file = array_get($input, $c);
+                if ($file) {
+                    $destinationPath = 'appfiles/courses';
+                    if (!is_dir(base_path('public/' . $destinationPath))) {
+                        mkdir(base_path('public/' . $destinationPath));
+                    }
+                    $extension = $file->getClientOriginalExtension();
+                    $fileName = $courses->id.'-'.$c  . '.' . $extension;
+                    $upload_success = $file->move($destinationPath, $fileName);
+                    if ($upload_success) {
+                        $courses[$c] = '/appfiles/courses/' . $fileName;
+                    }
+                }
             }
-            $extension = $file->getClientOriginalExtension();
-            $fileName = $courses->id . '.' . $extension;
-            $upload_success = $file->move($destinationPath, $fileName);
-            if ($upload_success) {
-                $courses->cover = '/appfiles/courses/' . $fileName;
-                $courses->save();
-            }
+            $courses->save();                    
 
             return redirect('/admin/courses');
         }
@@ -76,6 +98,7 @@ class CoursesController extends Controller
         $courses = Courses::where('id', $id)->first();
         if ($request->isMethod('post')) {
             $this->validate($request, [
+                'ablesky_category'=> 'required',
                 'level' => 'required|in:zhongxue,xiaoxue,youer',
                 'kind' => 'required|in:bishi,mianshi',
                 'name' => 'required|max:255|unique:courses,name,'.$courses->id,
@@ -83,44 +106,55 @@ class CoursesController extends Controller
                 'buytimes' => 'required|numeric|min:0',
                 'hours' => 'required|numeric|min:0',
                 'totalprice' => 'required|numeric|min:0',
+                'discount_price' => 'required|numeric|min:0',
                 'subname' => 'required',
                 'subprice' => 'required|numeric|min:0',
                 'zongheprice' => 'required|numeric|min:0',
-                'nengliprice' => 'numeric|min:0',
-                'video' => 'required',
-                'trialvideo' => 'required|url',
+                'nengliprice' => 'numeric|min:0',                
+//                 'cover' => 'required|image',
+//                 'image' => 'required|image',
                 'summary' => 'required',
-                'pagetitle' => 'required',
-                'pagekeyword' => 'required',
-                'pagedescription' => 'required',
+                'description' => 'required',
+                'hours_description' => 'required',
+                'teacher' => 'required',
+                'video' => 'required',
+                'trialvideo' => 'required|url',      
             ]);
 
             $input = $request->all();
-            unset($input['_token']);
-            foreach ($input as $key => $value) {
-                $courses[$key] = $value;
-            }
-            $file = array_get($input,'cover');
-            if ($file) {
-                $destinationPath = 'appfiles/courses';
-                if (!is_dir(base_path('public/' . $destinationPath))) {
-                    mkdir(base_path('public/' . $destinationPath));
-                }
-                $extension = $file->getClientOriginalExtension();
-                $fileName = $courses->id . '.' . $extension;
-                $upload_success = $file->move($destinationPath, $fileName);
-                if ($upload_success) {
-                    $courses->cover = '/appfiles/courses/' . $fileName;
+            $courses->fill($input);
+            
+            $imgs = ['cover', 'image'];
+            foreach ($imgs as $c) {
+                $file = array_get($input, $c);
+                if ($file) {
+                    $destinationPath = 'appfiles/courses';
+                    if (!is_dir(base_path('public/' . $destinationPath))) {
+                        mkdir(base_path('public/' . $destinationPath));
+                    }
+                    $extension = $file->getClientOriginalExtension();
+                    $fileName = $courses->id.'-'.$c  . '.' . $extension;
+                    $upload_success = $file->move($destinationPath, $fileName);
+                    if ($upload_success) {
+                        $courses[$c] = '/appfiles/courses/' . $fileName;
+                    }
                 }
             }
 
             $courses->save();
 
-            return redirect('/admin/courses');
+            $referer = $input['referer'];
+            return redirect(empty($referer)?'/admin/courses':$referer);
         }
         else {
             return view('admin.courses.create_edit', ['courses' => $courses]);
         }
+    }
+    
+    public function delete(Request $request, $id)
+    {
+        Courses::where('id', $id)->delete();
+        return redirect('/admin/courses');
     }
     
     public function lists(Request $request)

@@ -15,5 +15,8 @@ class Books extends Model
 
     protected $fillable = ['level', 'kind', 'name', 'price', 'discount', 'discount_price', 
                             'inventory', 'buytimes', 'author', 'cover', 'summary', 
-                            'pagetitle', 'pagekeyword', 'pagedescription'];
+                            'pagetitle', 'pagekeyword', 'pagedescription',
+                            'press', 'publish_date', 'description', 'cover2','cover3','cover4', 'image'
+        
+    ];
 }

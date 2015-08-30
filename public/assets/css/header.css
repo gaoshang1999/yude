@@ -10,7 +10,7 @@ a{text-decoration:none;}
 #header ul{height:56px;color:#fff;width:630px;margin:0 auto;line-height:56px;display:inline-block;}
 #header li{height:56px;float:left;margin-left:15px;}
 #header a{color:#fff;font-size:14px;font-family:"ËÎÌו";}
-#header #reg{float:right;width:100px;height:56px;line-height:56px;}
+#header #reg{float:right;width:auto;height:56px;line-height:56px;}
 #header2{height:56px;}
 
 #footer{height:211px;background-color:#353535;}

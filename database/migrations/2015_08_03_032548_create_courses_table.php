@@ -28,7 +28,7 @@ class CreateCoursesTable extends Migration
             $table->string('cover');            // 课程封面图片
             $table->string('video');            // 课程视频接入链接, 可多个视频链接，一个回车算一个视频
             $table->string('trialvideo');       // 试听视频接入链接
-            $table->string('summary');          // 课程介绍
+            $table->string('summary');          // 课程简介
             $table->string('pagetitle');        // 页面title
             $table->string('pagekeyword');      // 页面keyword
             $table->string('pagedescription');  // 页面description

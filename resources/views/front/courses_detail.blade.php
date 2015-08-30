@@ -14,7 +14,7 @@
 		<div id="content_jianjie">
 				<!--图片简介-->
 				<div class="spjj">
-						<div class="pic"><img src="{{ url("$v->cover") }}" /></div>
+						<div class="pic"><img src="{{ url("$v->cover") }}" width="440px" height="256px"/></div>
 				
 						<!--文字简介-->
 						<div class="wenzi">
@@ -54,69 +54,23 @@
 							</ul>
 						</div>
 				<script>
-					$("#content_xiangqing .title1").mouseover(function(){
-							$(this).addClass("active").siblings().removeClass("active");
-				   	  	    $("#content_xiangqing .content_kcys").removeClass("dn");
-							$("#content_xiangqing .content_mfst").addClass("dn");
-							$("#content_xiangqing .content_kcjj").addClass("dn");
-							$("#content_xiangqing .content_xgtj").addClass("dn");
-					});
-					$("#content_xiangqing .title2").mouseover(function(){
-							$(this).addClass("active").siblings().removeClass("active");
-							$("#content_xiangqing .content_kcys").addClass("dn");
-							$("#content_xiangqing .content_mfst").removeClass("dn");
-							$("#content_xiangqing .content_kcjj").addClass("dn");
-							$("#content_xiangqing .content_xgtj").addClass("dn");
-					});
-					$("#content_xiangqing .title3").mouseover(function(){
-							$(this).addClass("active").siblings().removeClass("active");
-							$("#content_xiangqing .content_kcys").addClass("dn");
-							$("#content_xiangqing .content_mfst").addClass("dn");
-							$("#content_xiangqing .content_kcjj").removeClass("dn");
-							$("#content_xiangqing .content_xgtj").addClass("dn");					
-					});
-					$("#content_xiangqing .title4").mouseover(function(){
-							$(this).addClass("active").siblings().removeClass("active");
-							$("#content_xiangqing .content_kcys").addClass("dn");
-							$("#content_xiangqing .content_mfst").addClass("dn");
-							$("#content_xiangqing .content_kcjj").addClass("dn");
-							$("#content_xiangqing .content_xgtj").removeClass("dn");					
-					});	
+					
 				</script>
 						<!--课程优势  内容部分-->
 						<div class="content_kcys">
-								<img src="/assets/img/spxqy_kcys.jpg" alt="课程优势" />
+								<img src="{{ $v->image }}" alt="课程优势" width="780px" height="500px"/>
 						</div>
 
 						<!--免费试听  内容部分-->
 						<div class="content_mfst dn">
 								<div>
 										<h3>中学协议金牌保过班</h3>
-										<img src="/assets/img/spxqy_kechengshiting.jpg" alt="课程试听" />
+										<video src="{{ $v->trialvideo }}" alt="课程试听" ></video>
 								</div>
 						</div>
 						<!--课程简介  内容部分-->
 						<div class="content_kcjj dn">
-								<p><span class="red"><b>开课时间</b></span><br/>
-每月周末新班<br/>
-<span class="red"><b>课程属性</b></span><br/>
-此课程面授、远程均有；学员在购买远程课程后立刻可在线观看学习；此课程支持购买单科<br/>
-<span class="red">(一)学习课程</span><br/>
-《教育学》或《教育心理学》，赠送试讲理论班<br/>
-<span class="red">(一)学习课程</span><br/>
-《教育学》或《教育心理学》，赠送试讲理论班<br/>
-<span class="red"><b>课程说明</b></span><br/>
-育德独家的课程体系，专业教学服务，赠送同步网校课程<br/>
-注：签过关协议，面授不过退1200元，单科不过退600元；远程不过退500元，单科不过退300元或下期免费学<br/>
-<span class="red"><b>赠送教材</b></span><br/>
-育德教师资格考点解析+考试大纲+考试指定教材+教材习题答案+历年真题+考试独家密押卷+考题预测保密资料+海量模拟卷+课堂讲义+教学能<br/>
-力测试提高班全套资料<br/>
-<span class="red"><b>课程说明</b></span><br/>
-育德独家的课程体系，专业教学服务，赠送同步网校课程<br/>
-注：签过关协议，面授不过退1200元，单科不过退600元；远程不过退500元，单科不过退300元或下期免费学<br/>
-<span class="red"><b>赠送教材</b></span><br/>
-育德教师资格考点解析+考试大纲+考试指定教材+教材习题答案+历年真题+考试独家密押卷+考题预测保密资料+海量模拟卷+课堂讲义+教学<br/>
-能力测试提高班全套资料</p>
+								{!! $v->description !!}
 						</div>
 						<!--相关推荐  内容部分-->
 						<div class="content_xgtj dn">
@@ -170,15 +124,10 @@
 				</div>
 
 				<div class="right1">
-							<h3>中学协议金牌保过班金牌</h3>
-							<p><b>总课时：</b>103课时<br/>
-<b>内  容：</b>免费赠送配套教材、讲义、考试大纲、真题模
-考试卷、冲刺讲义、面试讲义全套资料</p>
+						{!! $v->hours_description !!}
 				</div>
 				<div class="right2">
-						<div><img src="/assets/img/spxqy_teacher.png" alt="老师" /></div>
-						<h3 class="orange fontyh">主讲老师：董老师</h3>
-						<p>育德独家金牌讲师,某高校教师,主讲教育学和试讲,教师资格证考试培训国内首批资深专家,熟知国家考试政策,丰富的实战培训经验考试政策,丰富的实战培训经验</p>
+				        {!! $v->teacher !!}
 				</div>
 				<div class="right3">
 						<a href="#"><img src="/assets/img/spxqy_right3_banner.png" alt="" /></a>

@@ -15,13 +15,13 @@
 				<div class="jcjj">
 						<div class="left">
 								<div class="pic">
-										<img src="{{ url("$v->cover") }}" width="182px" height="283"/>
+										<img src="{{ url("$v->cover") }}" width="182px" height="283px"/>
 								</div>
 								<p>
-										<a class="active"><img src="/assets/img/jcxqy_book1.png" /></a>
-										<a><img src="/assets/img/jcxqy_book2.png" /></a>
-										<a><img src="/assets/img/jcxqy_book3.png" /></a>
-										<a><img src="/assets/img/jcxqy_book4.png" /></a>
+										<a class="active"><img src="{{ url("$v->cover") }}"  /></a>
+										<a><img src="{{ url("$v->cover2") }}" /></a>
+										<a><img src="{{ url("$v->cover3") }}" /></a>
+										<a><img src="{{ url("$v->cover4") }}" /></a>
 								</p>
 						</div>
 						<div class="right">
@@ -44,47 +44,14 @@
 		<!--教材详情-->
 		<div id="content_xiangqing">
 				<div class="part_one">
-						<img src="/assets/img/jcxqy_jcts.jpg" alt="教材特色" />
+						<img src="{{ $v->image }}" alt="教材特色" width="1186px" height="607px"/>
 				</div>
 				<div class="part_two">
 						<div class="left">
 								<h3>章节目录</h3>
 								<div class="neirong">
 										<p>
-										模块一 教育基础知识和基本原理<br/>
-考试目标<br/>
-内容详解<br/>
-第一章 教育学与教育研究<br/>
-第一节 教育学的研究对象和任务<br/>
-第二节 教育学的发展<br/>
-第三节 中学教育研究的基本方法<br/>
-第二章 教育的本质与基本规律<br/>
-第一节 教育的本质<br/>
-第二节 教育的起源与发展<br/>
-第三节 教育与社会发展<br/>
-第四节 教育与人的发展<br/>
-第三章 教育制度<br/>
-第二章 教育的本质与基本规律<br/>
-第一节 教育的本质<br/>
-第二节 教育的起源与发展<br/>
-第三节 教育与社会发展<br/>
-第四节 教育与人的发展<br/>
-第三章 教育制度<br/>
-第二章 教育的本质与基本规律<br/>
-第一节 教育的本质<br/>
-第二节 教育的起源与发展<br/>
-第三节 教育与社会发展<br/>
-第四节 教育与人的发展<br/>
-第三章 教育制度<br/>
-第二章 教育的本质与基本规律<br/>
-第一节 教育的本质<br/>
-第二节 教育的起源与发展<br/>
-第三节 教育与社会发展<br/>
-第四节 教育与人的发展<br/>
-第三章 教育制度<br/>
-第二章 教育的本质与基本规律<br/>
-第一节 教育的本质<br/>
-第二节 教育的起源与发展<br/>
+                                            {!! $v->description !!}
 										</p>
 										<div class="button dn">
 											显示全部信息&nbsp;<img src="/assets/img/jcxqy_ico_2.png"/>
