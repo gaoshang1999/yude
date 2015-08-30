@@ -64,7 +64,7 @@
 
 
 
-#register .login{width:600px;height:325px;border:1px solid #a3a3a3;background-color:#fff;text-align:center;position:fixed;left:50%;top:50%;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;-moz-box-shadow:2px 3px 1px #e0e2e3;-webkit-box-shadow:2px 3px 1px #e0e2e3;box-shadow:2px 3px 1px #e0e2e3;z-index:150;margin-left:-300px;margin-top:-153px;}
+#register .login{width:610px;height:325px;border:1px solid #a3a3a3;background-color:#fff;text-align:center;position:fixed;left:50%;top:50%;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;-moz-box-shadow:2px 3px 1px #e0e2e3;-webkit-box-shadow:2px 3px 1px #e0e2e3;box-shadow:2px 3px 1px #e0e2e3;z-index:150;margin-left:-300px;margin-top:-153px;}
 #register .login .banner{width:370px;height:325px;text-align:center;background:url(/assets/img/login_banner.png) center no-repeat;float:left;}
 #register .login .message{width:230px;height:325px;float:left;}
 #register .login .message h3{font-size:18px;font-family:"微软雅黑";margin-top:50px;line-height:18px;width:230px;text-align:center;color:#858593;font-weight:normal;margin-bottom:30px;}
