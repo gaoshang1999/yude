@@ -16,5 +16,8 @@ class Courses extends Model
     protected $fillable = ['level', 'kind', 'name', 'enable', 'buytimes', 'hours', 
                             'totalprice', 'subname', 'subprice', 'zongheprice', 
                             'nengliprice', 'cover', 'video', 'trialvideo', 'summary', 
-                            'pagetitle', 'pagekeyword', 'pagedescription'];
+                            'pagetitle', 'pagekeyword', 'pagedescription', 
+                            'ablesky_category' , 'discount_price' , 'image',
+                            'description', 'hours_description', 'teacher'
+    ];
 }

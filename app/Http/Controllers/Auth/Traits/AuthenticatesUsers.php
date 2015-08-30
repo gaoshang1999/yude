@@ -58,6 +58,10 @@ trait AuthenticatesUsers
         if ($throttles) {
             $this->incrementLoginAttempts($request);
         }
+        
+        if ($request->ajax() || $request->wantsJson()) {
+            return json_encode(['success'=>false,  $this->loginUsername() => $this->getFailedLoginMessage()]);
+        }
 
         return redirect($this->loginPath())
             ->withInput($request->only($this->loginUsername(), 'remember'))

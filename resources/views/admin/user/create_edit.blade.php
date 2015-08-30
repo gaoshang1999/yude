@@ -50,9 +50,10 @@
     @endif
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-primary">保存</button>
+        <button type="submit" class="btn btn-primary">保存</button> <button type="button" class="btn btn-primary" onclick="javascript :history.back(-1)">返回</button>
       </div>
     </div>
+    <input type="hidden"  name="referer" value="{{ Request::header('referer') }}" />
   </form>
 </div>
 @endsection

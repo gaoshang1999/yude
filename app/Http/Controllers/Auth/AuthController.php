@@ -79,6 +79,11 @@ class AuthController extends Controller
     protected function authenticated($request, $user)
     {
         $url = $request->input('url');
+        
+        if ($request->ajax() || $request->wantsJson()) {
+            return json_encode(['success'=>true]);
+        }
+        
         if($url){
             return redirect($url);
         }

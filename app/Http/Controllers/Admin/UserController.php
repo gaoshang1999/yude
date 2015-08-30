@@ -30,11 +30,12 @@ class UserController extends Controller
     
     public function search(Request $request)
     {
-        $input = $request['q'];
-        $users = User::where('name', 'like', '%'.$input.'%')->simplePaginate(20) ;
-        $users ->appends(['q' => $input]);
+        $q = $request['q'];
+        $field = $request['field'];
+        $users = User::where($field, 'like', '%'.$q.'%')->simplePaginate(20) ;
+        $users ->appends(['q' => $q]);
     
-        $data = ['users' => $users, 'q' => $input];
+        $data = ['users' => $users, 'q' => $q, 'field' => $field];
         return view('admin.user.list', $data);
     }
 
@@ -81,10 +82,33 @@ class UserController extends Controller
             $user->role = $request->input('userrole');
 
             $user->save();
-            return redirect('/admin/user');
+            
+            $referer = $request->input('referer');
+            return redirect(empty($referer)?'/admin/user':$referer);
         }
         else {
             return view('admin.user.create_edit', ['user' => $user]);
         }
+    }
+    
+    public function delete(Request $request, $id)
+    {
+        User::where('id', $id)->delete();
+        return redirect('/admin/user');
+    }
+    
+    public function reset(Request $request, $id)
+    {
+        $user = User::where('id', $id)->first();
+        if ($request->isMethod('post')) {
+            $user->password = bcrypt($request->input('password'));
+            $user->save();
+            
+            $referer = $request->input('referer');
+            return redirect(empty($referer)?'/admin/user':$referer);
+        }else {
+            return view('admin.user.reset', ['user' => $user]);
+        }
+        
     }
 }
