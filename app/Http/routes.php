@@ -80,6 +80,7 @@ $app->group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', '
 
     // 订单管理
     $app->get('/orders', 'OrdersController@orders');
+    $app->post('/orders/new', 'OrdersController@neworder');
 });
 
 // 用户后台
