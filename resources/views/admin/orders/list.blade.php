@@ -10,6 +10,9 @@
   .table-striped>tbody>tr.odd, .table-striped>thead>tr.odd {
     background-color: #f9f9f9;
   }
+
+  #btnnew { width: auto; margin-left: 20px; }
+  .nav>li>a { padding: 5px 15px; }
 </style>
 @endsection
 
@@ -19,7 +22,8 @@
   @include('errors.list')
   
   <h2 class="sub-header">订单列表 
-   <form class="search_form pull-right form-inline" role="form" method="get" action="{{ url('/admin/orders') }}" >    
+   <form class="search_form pull-right form-inline" role="form" method="get" action="{{ url('/admin/orders') }}" >
+    <input type="button" class="btn btn-primary pull-right" id="btnnew" data-toggle="modal" data-target="#myModal" value="新建"/>
     <button class="btn btn-primary pull-right" type="submit">搜索</button>
     <input class="pull-right form-control" type="text" placeholder="搜索" name="stext" id="stext" value="{{ isset($stext) ? $stext : "" }}"/>
     <select class="form-control pull-right" name="svalue" id="svalue"></select>
@@ -75,6 +79,87 @@
     </table>
     <div>{!! $orders->render() !!}</div>
   </div>
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">选择产品&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label id="selectedLabel"></label></h4>
+        </div>
+        <div class="modal-body">
+          <form id="productsForm" action="{{ url('/admin/orders/new') }}" method="post">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="active"><a href="#courses" aria-controls="home" role="tab" data-toggle="tab">课程</a></li>
+              <li role="presentation"><a href="#books" aria-controls="profile" role="tab" data-toggle="tab">教材</a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane active" id="courses">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>课程名称</th>
+                      <th>级别</th>
+                      <th>类别</th>
+                      <th>总价格</th>
+                      <th>折扣价</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach ($courses as $v)
+                    <tr>
+                      <td><label><input type="checkbox" name="courses[]" value="{{ $v->id }}"/>{{ $v->id }}</label></td>
+                      <td>{{ $v->name }}</td>
+                      <td>@if($v->level == "zhongxue") 中学  @elseif($v->level == "xiaoxue") 小学 @elseif($v->level == "youer") 幼儿  @endif</td>
+                      <td>@if($v->kind == "bishi") 笔试  @elseif($v->kind == "mianshi") 面试  @endif</td>
+                      <td>{{ $v->totalprice }}</td>
+                      <td>{{ $v->discount_price }}</td>
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="books">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>教材名称</th>
+                      <th>级别</th>
+                      <th>类别</th>
+                      <th>定价</th>
+                      <th>折扣价</th>
+                      <th>库存</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach ($books as $v)
+                    <tr>
+                      <td><label><input type="checkbox" name="books[]" value="{{ $v->id }}"/>{{ $v->id }}</label></td>
+                      <td>{{ $v->name }}</td>
+                      <td>@if($v->level == "zhongxue") 中学  @elseif($v->level == "xiaoxue") 小学 @elseif($v->level == "youer") 幼儿  @endif</td>
+                      <td>@if($v->kind == "bishi") 笔试  @elseif($v->kind == "mianshi") 面试  @endif</td>
+                      <td>{{ $v->price }}</td>
+                      <td>{{ $v->discount_price }}</td>
+                      <td>{{ $v->inventory }}</td>
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary" id="btnCreateNew">确定</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 @endsection
 
@@ -95,6 +180,17 @@
       $('#svalue').val(cbsvalue);
     });
     $('#stype').change();
+
+    $('#btnCreateNew').click(function(){
+      var data = $('#productsForm').serialize();
+      console.log('data : ', data);
+      if (!data || data.length < 1) {
+        alert('请至少选择一门课程或一套教材');
+      }
+      else {
+        $('#productsForm').submit();
+      }
+    });
   });
 </script>
 @endsection

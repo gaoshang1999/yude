@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\Courses;
+use App\Models\Books;
 
 class OrdersController extends Controller
 {
@@ -41,6 +43,24 @@ class OrdersController extends Controller
             $input['orders'] = Order::simplePaginate(20);
         }
 
+        $input['courses'] = Courses::where('enable', true)->get();
+        $input['books'] = Books::all();
+
         return view('admin.orders.list', $input);
+    }
+
+    public function neworder(Request $request)
+    {
+        $courses = $request->input('courses');
+        $books = $request->input('books');
+
+        if ($courses) {
+            $request->session()->put('cart.coureses', $courses);
+        }
+        if ($books) {
+            $request->session()->put('cart.books', $books);
+        }
+
+        return redirect('/order');
     }
 }
