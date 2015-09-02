@@ -48,7 +48,7 @@
 
                 <input type="hidden" class="form-control" style="width:40px; top:1px;" name="count_c_{{ $v->id }}" readonly value="1" data-key="c_{{ $v->id }}" data-value="{{ $v->totalprice }}"/>
      
-                <a href="{{ url("cart/courses/remove/$v->id") }}">移入收藏</a>
+                1
               </div>
             </td>
              <td><label class="price" id="c_{{ $v->id }}">{{ number_format($v->totalprice, 2) }}</label></td>

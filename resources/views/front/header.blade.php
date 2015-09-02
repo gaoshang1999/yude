@@ -2,7 +2,7 @@
         <!--头部公共 引用开始-->
         <div id="header">
             <div class="head"> 
-                <div><a href="{{ url("") }} "><img src="/assets/img/logo.png"></a></div>
+                <div><a href="{{ url("") }} "><img src="/assets/img/logo.png"  id="logo"></a></div>
                 <ul>
                     <li><a href="{{ url("") }} ">首页</a></li>
                     <li>|</li>
@@ -20,15 +20,16 @@
                     <li>|</li>
                     <li><a href="{{ url("books/lists") }}">师资</a></li>
                     <li>|</li>
-                    <li><a href="#">移动端</a></li>
+                    <li><a onmouseover="ydd()" onmouseout="ydd_out()" class="hand">移动端</a></li>
                 </ul>
+                <img src="/assets/img/header_pic_smxz.png" id="smxz" alt="扫码下载" class="dn"/>
                 <!--  <div id="reg"><a href="{{ url("auth/login") }}">登陆</a><span style="color:#fff;"> &nbsp;|&nbsp; </span><a href="{{ url("auth/register") }}">注册</a></div> -->
                 <div id="reg">
                  @if (Auth::guest())
                     <a class="hand" onclick="login()">登录</a><span style="color:#fff;"> &nbsp;|&nbsp; </span><a class="hand" onclick="reg()">注册</a>
                   @else
-                    <a class="hand" href="{{ url('/my/profile') }}">{{ Auth::user()->name }}</a><span style="color:#fff;"> &nbsp;|&nbsp; </span><a class="hand" href="{{ url('') }}">去听课</a><span style="color:#fff;"> &nbsp;|&nbsp; </span><a class="hand" href="{{ url('order') }}">购物车</a><span style="color:#fff;"> &nbsp;|&nbsp; </span><a class="hand" href="{{ url('auth/logout') }}">退出</a>
-       
+                    
+				    <div id="online"><span> &nbsp;&nbsp; </span><a class="hand" href="{{ url('/my/profile') }}">{{ Auth::user()->name }}</a><span style="color:#fff;"> &nbsp;|&nbsp; </span><a href="{{ url('') }}">学习课程</a><span style="color:#fff;"> &nbsp;|&nbsp; </span><a href="{{ url('order') }}">购物车</a><span style="color:#fff;"> &nbsp;|&nbsp; </span><a class="hand" href="{{ url('auth/logout') }}">退出</a></div>
                 @endif
                  </div>
             </div>
@@ -41,20 +42,20 @@
 
 				<div class="reg dn">
 					<div class="left">
-						<form id="register_form" action="{{ url('/auth/register') }}" method="post"> <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
+						<form id="register_form" action="{{ url('/auth/ajax_register') }}" method="post"> <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
 								<ul class="ul_one">
-										<li><b class="ftx04">*</b><span class="c666">手机号</span></li>
-										<li><b class="ftx04">*</b><span class="c666">验证码</span></li>
+										<li><b style="color:red;">*</b><span class="c666">手机号</span></li>
+										<li><b style="color:red;">*</b><span class="c666">验证码</span></li>
 										<li>&nbsp;</li>										
-										<li><b class="ftx04">*</b><span class="c666">用户名</span></li>
-										<li><b class="ftx04">*</b><span class="c666">密码</span></li>
-										<li><b class="ftx04">*</b><span class="c666">确认密码</span></li>
-										<li><b class="ftx04">*</b><span class="c666">邮箱</span></li>
+										<li><b style="color:red;">*</b><span class="c666">用户名</span></li>
+										<li><b style="color:red;">*</b><span class="c666">密码</span></li>
+										<li><b style="color:red;">*</b><span class="c666">确认密码</span></li>
+										<li><b style="color:red;">*</b><span class="c666">邮箱</span></li>
 								</ul>
 								<ul class="ul_two" id="ul_two">
-										<li><input type="text" id="phone" name="phone" placeholder="请输入有效的手机号码" class="input"/><span class="cff3e3e dn">× 已被注册</span></li>
+										<li><input type="text" id="phone" name="phone" placeholder="请输入有效的手机号码" class="input"/><span id="phone_span" class="cff3e3e dn">× 已被注册</span></li>
 										<li><input type="text" id="phonecode" name="phonecode" placeholder="请输入手机验证码" class="input"/><span class="cff3e3e dn">× 验证码输入错误</span></li>
-										<li><a href="javascript:sendverifycode()" id="btnSendCode">免费获取手机验证码</a></li>
+										<li><i type="button" onclick="javascript:sendverifycode()" id="telcode" value="免费获取手机验证码"/></li>
 										<li><input type="text" id="name" name="name" placeholder="请输入6-18位用户名" class="input"/><span class="cff3e3e dn">× 已被注册</span></li>
 										<li><input type="password" id="password" name="password" placeholder="请输入6-20位密码" class="input"/><span class="cff3e3e dn">× 格式错误</span></li>
 										<li><input type="password" id="password_confirmation" name="password_confirmation" placeholder="请再次输入密码" class="input"/><span class="cff3e3e dn">× 两次密码不匹配</span></li>
@@ -62,8 +63,8 @@
 								</ul>
 								<div class="clear"></div>
 								<p><input type="checkbox" name="agree" id="iagree" /><label for="iagree" class="c8c8c8c">&nbsp;我阅读并同意</label><a href="#"><span class="c2693ff">《园师网服务条款》</span></a></p>
-								<p><input type="submit" id="register_submit" value="确认注册" class="submit"/></p>
-								<span id="register_form_hint" class="cff3e3e dn">× 注册失败，请重试</span>
+								<p><input type="submit" id="register_submit" value="确认注册" class="submit"/> <span id="register_form_hint" class="cff3e3e dn">× 注册失败，请重试</span></p>
+								
 						</form>
 					</div>
 					<div class="right">

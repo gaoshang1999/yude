@@ -20,4 +20,10 @@ class Courses extends Model
                             'ablesky_category' , 'discount_price' , 'image',
                             'description', 'hours_description', 'teacher'
     ];
+    
+    
+    public function ablesky_category()
+    {
+        return $this->hasOne('App\Models\AbleskyCategory', 'id', 'ablesky_category');
+    }
 }

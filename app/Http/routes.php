@@ -15,12 +15,14 @@
 $app->get('auth/login', ['as'=>'userlogin', 'uses'=>'Auth\AuthController@getLogin']);
 $app->post('auth/login', 'Auth\AuthController@postLogin');
 $app->get('auth/logout', 'Auth\AuthController@getLogout');
-$app->post('auth/validate', 'Auth\AuthController@postValidate');
+$app->post('auth/phonecheck/{phone}', 'Auth\AuthController@phoneCheck');
 
 // Registration routes...
 $app->post('auth/sendverifycode', 'Auth\AuthController@sendCode');
 $app->get('auth/register', 'Auth\AuthController@getRegister');
 $app->post('auth/register', 'Auth\AuthController@postRegister');
+$app->post('/auth/ajax_register', 'Auth\AuthController@ajaxPostRegister');
+
 
 // // Password reset link request routes...
 // $app->get('password/email', 'Auth\PasswordController@getEmail');
@@ -30,7 +32,7 @@ $app->post('auth/register', 'Auth\AuthController@postRegister');
 // $app->get('password/reset/{token}', 'Auth\PasswordController@getReset');
 // $app->post('password/reset', 'Auth\PasswordController@postReset');
 
-$app->get('/', 'Admin\CoursesController@lists');
+$app->get('/', 'Front\HomeController@home');
 $app->get('/books/lists', 'Admin\BooksController@lists');
 $app->get('/books/{id}', 'Admin\BooksController@detail');
 $app->get('/courses/lists', 'Admin\CoursesController@lists');
@@ -39,6 +41,8 @@ $app->get('/cart/courses/add/{id}', 'My\MyController@courses_add');
 $app->get('/cart/books/add/{id}', 'My\MyController@books_add');
 $app->get('/cart/courses/remove/{id}', 'My\MyController@courses_remove');
 $app->get('/cart/books/remove/{id}', 'My\MyController@books_remove');
+$app->post('/ablesky/usercheck/{username}', 'Ablesky\AbleskyController@checkIfUserNameDuplicated');
+$app->post('/ablesky/emailcheck/{email}', 'Ablesky\AbleskyController@checkIfEmailDuplicated');
 // $app->get('/', function() use ($app) {
 //     return view('front.wxjz');
 // });
@@ -69,6 +73,15 @@ $app->group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', '
     $app->post('/courses/delete/{id}', 'CoursesController@delete');
     $app->get('/courses/search', 'CoursesController@search');
     
+    // 课程组管理
+    $app->get('/groups', 'GroupsController@groups');
+    $app->get('/groups/add', 'GroupsController@groupsadd');
+    $app->post('/groups/add', 'GroupsController@groupsadd');
+    $app->get('/groups/edit/{id}', 'GroupsController@groupsedit');
+    $app->post('/groups/edit/{id}', 'GroupsController@groupsedit');
+    $app->post('/groups/delete/{id}', 'GroupsController@delete');
+    $app->get('/groups/search', 'GroupsController@search');
+    
     // 教材管理
     $app->get('/books', 'BooksController@books');
     $app->get('/books/add', 'BooksController@booksadd');
@@ -78,17 +91,24 @@ $app->group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', '
     $app->post('/books/delete/{id}', 'BooksController@delete');
     $app->get('/books/search', 'BooksController@search');
 
+
     // 订单管理
     $app->get('/orders', 'OrdersController@orders');
     $app->post('/orders/new', 'OrdersController@neworder');
 });
 
+
+$app->group(['namespace' => 'App\Http\Controllers\Ablesky', 'prefix' => 'ablesky', 'middleware' => ['auth.login', 'auth.admin']], function($app){
+
+    //能力天空接口-课程目录树
+    $app->post('/category/update', 'AbleskyController@update_ablesky_category');
+    $app->get('/category/tree', 'AbleskyController@list_ablesky_category');
+});
+
 // 用户后台
 $app->group(['namespace' => 'App\Http\Controllers\My', 'prefix' => 'my', 'middleware' => 'auth.login'], function($app){
     $app->get('/', 'MyController@order');
-    $app->get('/profile', function() use ($app) {
-        return view('welcome');
-    });
+    $app->get('/profile', 'MyController@personal');
 });
 
 // 订单

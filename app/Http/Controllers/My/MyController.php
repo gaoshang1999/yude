@@ -55,4 +55,9 @@ class MyController extends Controller
         $request->session()->put('cart.books', $new_ids);
         return redirect('/order');
     }
+    
+    public function personal()
+    {
+        return view('front.personal');
+    }
 }
