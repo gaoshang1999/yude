@@ -2,6 +2,9 @@
 
 use Validator;
 use Illuminate\Support\ServiceProvider;
+use SebastianBergmann\Environment\Console;
+use DB;
+use Log;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,7 +19,9 @@ class AppServiceProvider extends ServiceProvider
             return strlen($value) === 11;
         });
 
-        
+        DB::listen(function($sql, $bindings, $time) {
+            Log::info  ($sql);
+        });
     }
 
     /**

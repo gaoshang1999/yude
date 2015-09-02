@@ -34,7 +34,8 @@ class UserController extends Controller
         $field = $request['field'];
         $users = User::where($field, 'like', '%'.$q.'%')->simplePaginate(20) ;
         $users ->appends(['q' => $q]);
-    
+        $users ->appends(['field' => $field]);
+        
         $data = ['users' => $users, 'q' => $q, 'field' => $field];
         return view('admin.user.list', $data);
     }

@@ -57,10 +57,14 @@
 						$(".reg").addClass("dn");
 						$(".login").removeClass("dn");
 						$("#background").removeClass("dn");
+					}				
+					
+					
+					function ydd(){
+						$("#header #smxz").removeClass("dn");
 					}
-					
-					
-					
-
+					function ydd_out(){
+						$("#header #smxz").addClass("dn");
+					}
 
 				        

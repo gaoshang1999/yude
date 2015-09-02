@@ -8,10 +8,12 @@
   <form class="form-horizontal" role="form" method="post" action="{{ url('/admin/courses/' . ($courses ? 'edit/'.$courses->id : 'add')) }}" enctype="multipart/form-data">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <div class="form-group">
-      <label for="ablesky_category" class="col-sm-2 control-label"><span style="color: red">*</span>Ablesky目录课程</label>
+      <label for="ablesky_category" class="col-sm-2 control-label"><span style="color: red">*</span>Ablesky课程目录</label>
       <div class="col-sm-9">
-        <input type="text" class="form-control" name="ablesky_category" placeholder="Ablesky目录课程选择" value="{{ old('ablesky_category', $courses ? $courses->ablesky_category : '') }}">
+        <input type="text" class="form-control" name="ablesky_category_name" id="ablesky_category_name" placeholder="Ablesky课程目录选择" value="{{  $courses && $courses->ablesky_category()->first() ? $courses->ablesky_category()->first()->categoryName : '' }}" readonly=true>
+        <input type="hidden" name="ablesky_category" id="ablesky_category" value="{{ old('ablesky_category', $courses ? $courses->ablesky_category : '') }}">
       </div>
+      <a class="btn btn-primary" href="javascript:openCategoryWindow()" style="margin-right: 5px;">选择</a>
     </div>
     <div class="form-group">
       <label for="level" class="col-sm-2 control-label"><span style="color: red">*</span>级别</label>
@@ -171,8 +173,11 @@
       </div>
     </div>
     <input type="hidden"  name="referer" value="{{ Request::header('referer') }}" />
-  </form>
+  </form>  
+
 </div>
+
+
 @endsection
 
 @section('scripts')
@@ -189,6 +194,10 @@
     $('#level').change();
 
   });
+
+  function openCategoryWindow(){
+	  window.open("{{ url('/ablesky/category/tree?selected=true') }}","_blank", 'height=800, width=400, top=100, left=800, toolbar=no, menubar=no, scrollbars=no, resizable=yes,location=no, status=no');
+ }
 </script>
     <script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.config.js"></script>
     <script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.all.min.js"> </script>

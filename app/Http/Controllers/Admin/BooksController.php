@@ -28,6 +28,7 @@ class BooksController extends Controller
         
         $books = Books::where($field, 'like', '%'.$q.'%')->simplePaginate(20) ;
         $books ->appends(['q' => $request['q']]);
+        $books ->appends(['field' => $field]);
     
         $data = ['books' => $books, 'q' => $request['q'], 'field' => $field];
         return view('admin.books.list', $data);

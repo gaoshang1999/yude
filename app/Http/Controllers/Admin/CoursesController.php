@@ -3,12 +3,13 @@
 use App\Http\Controllers\Controller;
 use App\Models\Courses;
 use Illuminate\Http\Request;
+use App\Models\AbleskyCategory;
 
 class CoursesController extends Controller
 {
     public function courses()
-    {
-        $data = ['courses' => Courses::orderBy('created_at', 'desc')->simplePaginate(20) ];
+    {        
+        $data = ['courses' => Courses::orderBy('created_at', 'desc')->simplePaginate(20)];
         return view('admin.courses.list', $data);
     }
     
@@ -31,6 +32,7 @@ class CoursesController extends Controller
     
         $courses = Courses::where($field, 'like', '%'.$q.'%')->simplePaginate(20) ;
         $courses ->appends(['q' => $request['q']]);    
+        $courses ->appends(['field' => $field]);
 
         $data = ['courses' => $courses, 'q' => $request['q'], 'field' => $field];
         return view('admin.courses.list', $data);
@@ -60,7 +62,7 @@ class CoursesController extends Controller
                 'description' => 'required',
                 'hours_description' => 'required',
                 'teacher' => 'required',
-                'video' => 'required',
+//                 'video' => 'required',
                 'trialvideo' => 'required|url',      
             ]);
 
@@ -94,8 +96,8 @@ class CoursesController extends Controller
     }
 
     public function coursesedit(Request $request, $id)
-    {
-        $courses = Courses::where('id', $id)->first();
+    {        
+        $courses = Courses::where('id', $id)->first();     
         if ($request->isMethod('post')) {
             $this->validate($request, [
                 'ablesky_category'=> 'required',
@@ -117,13 +119,13 @@ class CoursesController extends Controller
                 'description' => 'required',
                 'hours_description' => 'required',
                 'teacher' => 'required',
-                'video' => 'required',
+//                 'video' => 'required',
                 'trialvideo' => 'required|url',      
             ]);
 
             $input = $request->all();
             $courses->fill($input);
-            
+           
             $imgs = ['cover', 'image'];
             foreach ($imgs as $c) {
                 $file = array_get($input, $c);
@@ -160,10 +162,10 @@ class CoursesController extends Controller
     public function lists(Request $request)
     {
         $courses = Courses::get();
-        $courses_1 = Courses::where('level', 'zhongxue') ->get();
-        $courses_2 = Courses::where('level', 'xiaoxue') ->get() ;
-        $courses_3 = Courses::where('level', 'youer') ->get();
-        $data = ['courses' => $courses, 'courses_1' => $courses_1, 'courses_2' => $courses_2, 'courses_3' => $courses_3];
+        $courses_zx = Courses::where('level', 'zhongxue')->where('enable', true) ->get();
+        $courses_xx = Courses::where('level', 'xiaoxue')->where('enable', true) ->get() ;
+        $courses_yr = Courses::where('level', 'youer')->where('enable', true) ->get();
+        $data = ['courses' => $courses, 'courses_zx' => $courses_zx, 'courses_xx' => $courses_xx, 'courses_yr' => $courses_yr];
         return view('front.courses_lists', $data);
     }
     

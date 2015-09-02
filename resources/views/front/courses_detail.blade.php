@@ -21,7 +21,7 @@
 								<h1>{{ $v->name }}</h1>
 								<p>{{ $v->summary }}</p>
 								<form action="{{ url("cart/courses/add/$v->id") }}" method="get">
-								<p><input type="submit" title="立即购买" value="立即购买 ￥{{ $v->totalprice }}"  class="button"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<p><input type="submit" title="立即购买" value="立即购买 ￥{{ $v->discount_price }}"  class="button"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<span class="fz24 gray">原价&nbsp;<del>￥{{ $v->totalprice }}</del></span> </p>
 								<p class="p3">可选单科&nbsp;&nbsp;&nbsp;&nbsp;
 								@if($v->level == "zhongxue")

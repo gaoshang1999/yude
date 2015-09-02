@@ -17,6 +17,8 @@
       <option value="kind" {{ $field==='kind' ? 'selected' : '' }}>类别</option>
       <option value="enable" {{ $field==='enable' ? 'selected' : '' }}>状态</option>
     </select>  
+     <a class="btn btn-primary pull-right" href="javascript:updateCategory()" style="margin-right: 5px;">更新Ablesky课程目录</a>
+     <a class="btn btn-primary pull-right" href="javascript:openCategoryWindow()" style="margin-right: 5px;">查看Ablesky课程目录</a>
   </form>
   </h2>
   <div class="table-responsive">
@@ -55,10 +57,12 @@
     <div>{!! $courses->render() !!}</div>
   </div>
 </div>
+
 @endsection
 
 @section('scripts')
-<script type="text/javascript">
+
+<script type="text/javascript">       
 function del() {  
     if(window.confirm('你确定要删除该记录！')){
         //alert("确定");
@@ -69,5 +73,22 @@ function del() {
     }
  }//del end
 
+ function openCategoryWindow(){
+	  window.open("{{ url('/ablesky/category/tree') }}","_blank", 'height=800, width=400, top=100, left=800, toolbar=no, menubar=no, scrollbars=no, resizable=yes,location=no, status=no');
+ }
+ function updateCategory(){
+        var array = {'_token': '{{ csrf_token() }}'};
+
+		$.post('/ablesky/category/update', array, function(data, textStatus){
+         var ret = eval(data);
+         if(ret['success']){
+             alert("Ablesky课程目录更新成功");
+             return true;
+          }else {
+        	 alert("Ablesky课程目录更新失败，请重试");
+             return false;
+          }
+     }, 'json');
+ }
 </script>
 @endsection

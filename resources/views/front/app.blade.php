@@ -44,6 +44,7 @@
 <!-- Scripts -->
 <script type="text/javascript" src="/assets/js/footer.js"></script>
 <script type="text/javascript" src="/assets/js/login.js"></script>
+<script type="text/javascript" src="/assets/js/personal.js"></script>
 <script type="text/javascript">
 
     var login_form = $('#login_form');
@@ -82,6 +83,11 @@
                     span.html("× 用户名或密码错误");
                     span.removeClass("dn");
                 }
+            },
+            error: function(){
+            	$("#login_submit").val("登录");
+            	span.removeClass("dn");
+            	span.html("后台服务忙，请稍后重试");
             }
         });
     
@@ -102,18 +108,15 @@
         	span.removeClass("dn");
         	span.html("× 手机号格式错误");
         	return false;
-        }
-        
-        var key = ($(this).prop('id'));
-        var array = {'_token': '{{ csrf_token() }}', key: key, value: value};
+        }        
 
-		$.post('/auth/validate', array, function(data, textStatus){
+		$.post('auth/phonecheck/'+value, {'_token': '{{ csrf_token() }}'}, function(data, textStatus){
             var ret = eval(data);
-            if(ret['success'] ){
+            if(ret && ret['success'] ){
                 span.addClass("dn");
                 return true;
              }else {
-            	span.html("× 已被注册");
+            	span.html("× "+ret['message']);
                 span.removeClass("dn");
                 return false;
              }
@@ -136,16 +139,13 @@
         	return false;
         }
         
-        var key = ($(this).prop('id'));
-        var array = {'_token': '{{ csrf_token() }}', key: key, value: value};
-
-		$.post('/auth/validate', array, function(data, textStatus){
+		$.post('/ablesky/usercheck/'+value, {'_token': '{{ csrf_token() }}'}, function(data, textStatus){
             var ret = eval(data);
-            if(ret['success'] ){
+            if(ret && ret['success']){
                 span.addClass("dn");
                 return true;
              }else {
-             	span.html("× 已被注册");
+              	span.html("× "+ret['message']);
                 span.removeClass("dn");
                 return false;
              }
@@ -168,16 +168,13 @@
         	return false;
         }
         
-        var key = ($(this).prop('id'));
-        var array = {'_token': '{{ csrf_token() }}', key: key, value: value};
-
-		$.post('/auth/validate', array, function(data, textStatus){
+		$.post('/ablesky/emailcheck/'+value, {'_token': '{{ csrf_token() }}'}, function(data, textStatus){
             var ret = eval(data);
-            if(ret['success'] ){
+            if(ret && ret['success']){
                 span.addClass("dn");
                 return true;
              }else {
-             	span.html("× 已被注册");
+             	span.html("× "+ret['message']);
                 span.removeClass("dn");
                 return false;
              }
@@ -214,6 +211,7 @@
         	return true;
         }       
 
+        if($('#password_confirmation').val().length > 0) { $('#password_confirmation').blur();}
 	};	
     $('#password').blur(fun5);
 
@@ -232,27 +230,62 @@
 	};	
     $('#password_confirmation').blur(fun6);
 
+    function timer(elem, seconds, btnContent){
+        if(seconds >= 0){
+            elem.prop('disabled', true);
+            setTimeout(function(){
+                //显示倒计时
+                elem.val(seconds + ' 秒后再次发送');
+                //递归
+                seconds -= 1;
+                timer(elem, seconds, btnContent);
+            }, 1000);
+        }else{
+            elem.val(btnContent);
+            elem.prop('disabled', false);
+        }
+    }
+    
 	 function sendverifycode(){
+            $('#phone').blur();
+		    if(!$('#phone_span').hasClass("dn")){
+			    return false;
+		    }
+		    timer($('#telcode'), 60, $('#telcode').val());
             $.post('/auth/sendverifycode', {_token: '{{ csrf_token() }}', mobile: $('#phone').val()}, function(data, textStatus){
                 console.log(data);
+//                 alert( data.deadline );
+//                 timer($('#telcode'), data.deadline, $('#telcode').val());
             }, 'json');
      }
 
-	var register_form = $('#register_form');
-    register_form.submit(function (ev) {
-        $('#phone').blur();
-        $('#phonecode').blur();
-        $('#name').blur();
-        $('#password').blur();
-        $('#password_confirmation').blur();
-        $('#email').blur();
 
+
+	var register_form = $('#register_form');
+    register_form.submit( function (ev) {
         var validate = true;
         $("#ul_two").find("span").each(function(){
        	     if(!$(this).hasClass("dn")){
        	    	validate = false;
        	     }
-        });;
+        });
+    	if(!validate){
+            ev.preventDefault();
+            return;
+        }
+//         $('#phone').blur();
+//         $('#phonecode').blur();
+//         $('#name').blur();
+//         $('#password').blur();
+//         $('#password_confirmation').blur();
+//         $('#email').blur();
+
+//         var validate = true;
+//         $("#ul_two").find("span").each(function(){
+//        	     if(!$(this).hasClass("dn")){
+//        	    	validate = false;
+//        	     }
+//         });
     	if(!validate){
             ev.preventDefault();
             return;
@@ -274,22 +307,20 @@
 					$("#background").removeClass("dn");
                 }else{
                 	$("#register_form_hint").removeClass("dn");
+                	$("#register_form_hint").html( ret['message'] );
                 }
+            },
+            error: function(){
+            	$("#register_submit").val("确认注册");
+            	$("#register_form_hint").removeClass("dn");
+            	$("#register_form_hint").html("后台服务忙，请稍后重试");
             }
         });
 
         ev.preventDefault();
     });
 
-//     $('#iagree').click(function () {
-//     	var value = $(this).val();  
-//     	var btn = $('#register_submit'); 
-//     	if(value){
-//     		btn.disabled = false;
-//     	}else{    	
-//     		btn.prop('disabled', false);
-//     	}
-//     });
+
 </script>					
 @yield('scripts')
 

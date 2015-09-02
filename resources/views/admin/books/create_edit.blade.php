@@ -123,7 +123,7 @@
     <div class="form-group">
       <label for="summary" class="col-sm-2 control-label"><span style="color: red">*</span>教材简介</label>
       <div class="col-sm-9">
-        <textarea class="form-control" name="summary" id="summary" placeholder="教材介绍">{{ old('summary', $books ? $books->summary : '') }}</textarea>
+        <textarea class="form-control" name="summary" id="summary" placeholder="教材简介">{{ old('summary', $books ? $books->summary : '') }}</textarea>
       </div>
     </div>
     
