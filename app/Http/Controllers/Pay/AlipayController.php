@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Http\Controllers\Alipay;
+namespace App\Http\Controllers\Pay;
 
 use Log;
 use App\Http\Controllers\Controller;

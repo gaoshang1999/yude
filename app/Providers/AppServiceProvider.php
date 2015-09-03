@@ -47,5 +47,21 @@ class AppServiceProvider extends ServiceProvider
 
             return $alipayWeb;
         });
+
+        $this->app->bind('WxPay', function ($app) {
+            $notify_url = $app->request->root() . '/wxpay/notify';
+            $return_url = $app->request->root() . '/wxpay/return';
+
+            //建立请求
+            $wxpayWeb = new \App\Providers\WxPay\WxPay();
+            $wxpayWeb->setAppid(config('wxpay.appid'))
+                    ->setMchid(config('wxpay.mch_id'))
+                    ->setKey(config('wxpay.key'))
+                    ->setAppsecret(config('wxpay.appsecret'))
+                    ->setNotifyUrl($notify_url)
+                    ->setSpbillCreateIp($app->request->getClientIp());
+
+            return $wxpayWeb;
+        });
     }
 }

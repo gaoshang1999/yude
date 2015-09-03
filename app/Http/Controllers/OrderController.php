@@ -130,9 +130,9 @@ class OrderController extends Controller
 
     public function topay($orderno, Request $request)
     {
-        $order = Order::where('orderno', $orderno)->first();
         $paymode = $request->input('paymode');
         if (strcasecmp($paymode, 'alipay') == 0){
+            $order = Order::where('orderno', $orderno)->first();
             $alipayWeb = app('AlipayWeb');
 
             $alipayWeb->setOutTradeNo($order->orderno)
@@ -141,6 +141,9 @@ class OrderController extends Controller
                     ->setBody('育德园师课程购买');
 
             return redirect($alipayWeb->getPayLink());
+        }
+        else if (strcasecmp($paymode, 'wxpay') == 0){
+            return redirect('/wxpay/pay/' . $orderno);
         }
         else {
             echo 'no support';
