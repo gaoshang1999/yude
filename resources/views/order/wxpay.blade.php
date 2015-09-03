@@ -91,6 +91,8 @@
         });
       }, 1000);
     }
+
+    checkorder();
   });
 </script>
 @endsection
