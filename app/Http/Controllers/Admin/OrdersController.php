@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Courses;
 use App\Models\Books;
+use App\Models\User;
 
 class OrdersController extends Controller
 {
@@ -45,6 +46,7 @@ class OrdersController extends Controller
 
         $input['courses'] = Courses::where('enable', true)->get();
         $input['books'] = Books::all();
+        $input['users'] = User::where('role', 'user')->get();
 
         return view('admin.orders.list', $input);
     }
@@ -60,6 +62,7 @@ class OrdersController extends Controller
         if ($books) {
             $request->session()->put('cart.books', $books);
         }
+        $request->session()->put('buyer.id', $request->input('user'));
 
         return redirect('/order');
     }

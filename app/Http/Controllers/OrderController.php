@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -107,6 +108,7 @@ class OrderController extends Controller
         }
 
         $data['totalprice'] = $total;
+        $data['user_id'] = $request->session()->get('buyer.id', Auth::user()->id);
 
         $order = Order::create($data);
 
