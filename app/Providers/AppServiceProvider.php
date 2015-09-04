@@ -19,9 +19,9 @@ class AppServiceProvider extends ServiceProvider
             return strlen($value) === 11;
         });
 
-        DB::listen(function($sql, $bindings, $time) {
-            Log::info  ($sql);
-        });
+        // DB::listen(function($sql, $bindings, $time) {
+        //     Log::info  ($sql);
+        // });
     }
 
     /**

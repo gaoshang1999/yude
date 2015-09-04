@@ -39,7 +39,9 @@ class YizhifuController extends Controller
                 'data' => $querystr
             ]);
 
-            $order = Order::where('orderno', $request->get('out_trade_no'))->first();
+            $void = explode('-', $data['v_oid']);
+            $orderno = $void[0] . $void[3] . intval($void[2]);
+            $order = Order::where('orderno', $orderno)->first();
             $order->paytime = date('Y-m-d H:i:s');
             $order->paymode = 'Yizhifu';
             $order->payload = json_encode($truedata);
