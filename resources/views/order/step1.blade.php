@@ -233,7 +233,7 @@ button, input, optgroup, select, textarea {
       $('#'+input.data('key')).formatCurrency() 
       
       var total = 0;
-      $('.form-control').each(function(){
+      $('#orderform .form-control').each(function(){
     	 total += $(this).data('value') * $(this).val();
       });
 
