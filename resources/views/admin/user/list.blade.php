@@ -7,10 +7,10 @@
   <h2 class="sub-header">用户列表
    <a class="btn btn-primary pull-right" href="{{ url('/admin/user/add') }}" tabindex="4">创建新用户</a>
      
-   <form class="search_form pull-right" role="form" method="get" action="{{ url('/admin/user/search') }}" >    
+   <form class="search_form pull-right form-inline" role="form" method="get" action="{{ url('/admin/user/search') }}" >    
     <button class="btn btn-primary pull-right" type="submit" tabindex="3">搜索</button>
-    <input class="pull-right" type="text" placeholder="" name ="q" value="{{ isset($q) ? $q : "" }}" tabindex="2"/>  
-    <select class="pull-right" id="field" name="field" style="font-size: 18px;height:32px" tabindex="1"> <?php $field = isset($field) ? $field : ""; ?>
+    <input class="form-control pull-right" type="text" placeholder="" name ="q" value="{{ isset($q) ? $q : "" }}" tabindex="2"/>  
+    <select class="form-control pull-right" id="field" name="field" tabindex="1"> <?php $field = isset($field) ? $field : ""; ?>
       <option value="name" {{ $field==='name' ? 'selected' : '' }}>用户名</option>
       <option value="phone" {{ $field==='phone' ? 'selected' : '' }}>手机号</option>
       <option value="email" {{ $field==='email' ? 'selected' : '' }}>邮箱</option>

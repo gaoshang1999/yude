@@ -12,7 +12,6 @@
   }
 
   #btnnew { width: auto; margin-left: 20px; }
-  .nav>li>a { padding: 5px 15px; }
   .tab-content { max-height: 400px; overflow: scroll; }
 </style>
 @endsection
