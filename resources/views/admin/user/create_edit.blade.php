@@ -8,25 +8,25 @@
   <form class="form-horizontal" role="form" method="post" action="{{ url('/admin/user/' . ($user ? 'edit/'.$user->id : 'add')) }}">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <div class="form-group">
-      <label for="username" class="col-sm-2 control-label">用户名</label>
+      <label for="username" class="col-sm-2 control-label"><span style="color: red">*</span>用户名</label>
       <div class="col-sm-9">
         <input type="input" class="form-control" name="username" placeholder="用户名" value="{{ old('username', $user ? $user->name : '') }}">
       </div>
     </div>
     <div class="form-group">
-      <label for="userphone" class="col-sm-2 control-label">手机号</label>
+      <label for="userphone" class="col-sm-2 control-label"><span style="color: red">*</span>手机号</label>
       <div class="col-sm-9">
         <input type="phone" class="form-control" name="userphone" placeholder="手机号" value="{{ old('userphone', $user ? $user->phone : '') }}">
       </div>
     </div>
     <div class="form-group">
-      <label for="useremail" class="col-sm-2 control-label">邮箱</label>
+      <label for="useremail" class="col-sm-2 control-label"><span style="color: red">*</span>邮箱</label>
       <div class="col-sm-9">
         <input type="email" class="form-control" name="useremail" placeholder="邮箱" value="{{ old('useremail', $user ? $user->email : '') }}">
       </div>
     </div>
     <div class="form-group">
-      <label for="userrole" class="col-sm-2 control-label">权限</label>
+      <label for="userrole" class="col-sm-2 control-label"><span style="color: red">*</span>权限</label>
       <div class="col-sm-9"><?php $role = old('role', $user ? $user->role : 'user'); ?>
         <select class="form-control" id="userrole" name="userrole">
           <option value="user" {{ $role==='user' ? 'selected' : '' }}>学员</option>

@@ -60,7 +60,7 @@ class GroupsController extends Controller
         $groups = Groups::where('id', $id)->first();
         if ($request->isMethod('post')) {
             $this->validate($request, [
-                'name' => 'required|max:255|unique:courses,name,'.$groups->id,
+                'name' => 'required|max:255|unique:groups,name,'.$groups->id,
                 'rank' => 'required|integer|min:0',
                 'zx_course' => 'required|integer',
                 'xx_course' => 'required|integer',
@@ -76,7 +76,12 @@ class GroupsController extends Controller
             return redirect(empty($referer)?'/admin/groups':$referer);
         }
         else {
-            return view('admin.groups.create_edit', ['groups' => $groups]);
+            $courses_zx = Courses::where('level', 'zhongxue')->where('enable', true)->orderBy('buytimes', 'desc') ->get();
+            $courses_xx = Courses::where('level', 'xiaoxue')->where('enable', true)->orderBy('buytimes', 'desc') ->get() ;
+            $courses_yr = Courses::where('level', 'youer')->where('enable', true)->orderBy('buytimes', 'desc') ->get();
+            $data = ['groups' => $groups, 'courses_zx' => $courses_zx, 'courses_xx' => $courses_xx, 'courses_yr' => $courses_yr];
+           
+            return view('admin.groups.create_edit', $data);
         }
     }
     

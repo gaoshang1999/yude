@@ -2,9 +2,9 @@
         <!--头部公共 引用开始-->
         <div id="header">
             <div class="head"> 
-                <div><a href="{{ url("") }} "><img src="/assets/img/logo.png"  id="logo"></a></div>
+                <div><a href="/"><img src="/assets/img/logo.png"  id="logo"></a></div>
                 <ul>
-                    <li><a href="{{ url("") }} ">首页</a></li>
+                    <li><a href="/">首页</a></li>
                     <li>|</li>
                     <li><a href="{{ url("courses/lists") }} ">视频课</a></li>
                     <li>|</li>
@@ -42,7 +42,7 @@
 
 				<div class="reg dn">
 					<div class="left">
-						<form id="register_form" action="{{ url('/auth/ajax_register') }}" method="post"> <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
+						<form id="register_form" action="{{ url('/auth/ajax_register') }}" method="post"> <input type="hidden" name="_token" value="{{ csrf_token() }}"/> 
 								<ul class="ul_one">
 										<li><b style="color:red;">*</b><span class="c666">手机号</span></li>
 										<li><b style="color:red;">*</b><span class="c666">验证码</span></li>
@@ -55,7 +55,7 @@
 								<ul class="ul_two" id="ul_two">
 										<li><input type="text" id="phone" name="phone" placeholder="请输入有效的手机号码" class="input"/><span id="phone_span" class="cff3e3e dn">× 已被注册</span></li>
 										<li><input type="text" id="phonecode" name="phonecode" placeholder="请输入手机验证码" class="input"/><span class="cff3e3e dn">× 验证码输入错误</span></li>
-										<li><i type="button" onclick="javascript:sendverifycode()" id="telcode" value="免费获取手机验证码"/></li>
+										<li><input type="button" onclick="javascript:sendverifycode()" id="telcode" value="免费获取手机验证码"/></li>
 										<li><input type="text" id="name" name="name" placeholder="请输入6-18位用户名" class="input"/><span class="cff3e3e dn">× 已被注册</span></li>
 										<li><input type="password" id="password" name="password" placeholder="请输入6-20位密码" class="input"/><span class="cff3e3e dn">× 格式错误</span></li>
 										<li><input type="password" id="password_confirmation" name="password_confirmation" placeholder="请再次输入密码" class="input"/><span class="cff3e3e dn">× 两次密码不匹配</span></li>
@@ -78,8 +78,8 @@
 						<div class="banner"></div>
 						<div class="message">
 								<form id="login_form" action="{{ url("auth/login") }}" method="post"> 
-								<input type="hidden" name="_token" value="{{ csrf_token() }}"> 
-								<input type="hidden" class="form-control" name="url" value="{{ Request::url() }}">
+								<input type="hidden" name="_token" value="{{ csrf_token() }}"/> 
+								<input type="hidden" class="form-control" name="url" value="{{ Request::url() }}"/>
 										<h3>登录学习精彩课程</h3>
 										<span id="login_form_hint" class="cff3e3e dn">× 用户名/密码错误</span>
 										<p><span class="font_st fs14 c666">账号</span> <input type="text" id="login_phone" placeholder="请输入用户名/手机号" name="phone" alt="请输入用户名/手机号" class="username"/></p>

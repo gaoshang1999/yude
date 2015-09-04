@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Courses;
-
+use App\Models\Order;
 class MyController extends Controller
 {
     /**
@@ -58,6 +58,7 @@ class MyController extends Controller
     
     public function personal()
     {
-        return view('front.personal');
+        $orders = Order::where('phone',  Auth::user()->phone) ->orderBy('created_at', 'desc')-> get();
+        return view('front.personal', ['orders' => $orders]);
     }
 }

@@ -254,8 +254,6 @@
 		    timer($('#telcode'), 60, $('#telcode').val());
             $.post('/auth/sendverifycode', {_token: '{{ csrf_token() }}', mobile: $('#phone').val()}, function(data, textStatus){
                 console.log(data);
-//                 alert( data.deadline );
-//                 timer($('#telcode'), data.deadline, $('#telcode').val());
             }, 'json');
      }
 
@@ -286,10 +284,10 @@
 //        	    	validate = false;
 //        	     }
 //         });
-    	if(!validate){
-            ev.preventDefault();
-            return;
-        }
+//     	if(!validate){
+//             ev.preventDefault();
+//             return;
+//         }
         
     	$("#register_submit").val("正在注册...");
         $.ajax({

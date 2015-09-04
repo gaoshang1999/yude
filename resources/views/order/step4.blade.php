@@ -57,7 +57,7 @@
 您好，你的课程/教材已经购买成功！
         </pre>
       </div>
-      <div style="margin: 20px;"><a href="#" style="margin-right: 30px; color: black;">前往个人中心查看订单</a><a href="/" style=" color: black;">返回首页</a></div>
+      <div style="margin: 20px;"><a href="{{ url('/my/profile') }}" style="margin-right: 30px; color: black;">前往个人中心查看订单</a><a href="/" style=" color: black;">返回首页</a></div>
     </div>
   </div>
 </div>

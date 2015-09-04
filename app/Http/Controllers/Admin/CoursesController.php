@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Courses;
 use Illuminate\Http\Request;
 use App\Models\AbleskyCategory;
+use App\Models\Books;
 
 class CoursesController extends Controller
 {
@@ -161,17 +162,28 @@ class CoursesController extends Controller
     
     public function lists(Request $request)
     {
-        $courses = Courses::get();
-        $courses_zx = Courses::where('level', 'zhongxue')->where('enable', true) ->get();
-        $courses_xx = Courses::where('level', 'xiaoxue')->where('enable', true) ->get() ;
-        $courses_yr = Courses::where('level', 'youer')->where('enable', true) ->get();
+        $courses = Courses::where('enable', true)->orderBy('buytimes', 'desc') ->get();
+        $courses_zx = Courses::where('level', 'zhongxue')->where('enable', true)->orderBy('buytimes', 'desc') ->get();
+        $courses_xx = Courses::where('level', 'xiaoxue')->where('enable', true)->orderBy('buytimes', 'desc') ->get() ;
+        $courses_yr = Courses::where('level', 'youer')->where('enable', true)->orderBy('buytimes', 'desc') ->get();
         $data = ['courses' => $courses, 'courses_zx' => $courses_zx, 'courses_xx' => $courses_xx, 'courses_yr' => $courses_yr];
         return view('front.courses_lists', $data);
     }
     
     public function detail(Request $request, $id)
     {
-        $courses = Courses::where('id', $id)->first();
-        return view('front.courses_detail', ['v' => $courses]);
+        $course = Courses::where('id', $id)->first();
+        
+        //课程推荐，同级别课程中，随机推荐3个
+        $courses_recommend = Courses::where('level', $course->level)->where('enable', true) ->where('id', '<>', $id) -> get()->all();
+        shuffle($courses_recommend);
+        $courses_recommend = array_slice($courses_recommend, 0, 3);
+        
+        //教材推荐，同级别教材中，随机推荐4个
+        $books_recommend = Books::where('level', $course->level) -> get()->all();
+        shuffle($books_recommend);
+        $books_recommend = array_slice($books_recommend, 0, 4);
+        
+        return view('front.courses_detail', ['course' => $course, 'courses_recommend' => $courses_recommend, 'books_recommend'=>$books_recommend]);
     }
 }

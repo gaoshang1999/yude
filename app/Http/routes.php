@@ -21,8 +21,8 @@ $app->post('auth/phonecheck/{phone}', 'Auth\AuthController@phoneCheck');
 $app->post('auth/sendverifycode', 'Auth\AuthController@sendCode');
 $app->get('auth/register', 'Auth\AuthController@getRegister');
 $app->post('auth/register', 'Auth\AuthController@postRegister');
-$app->post('/auth/ajax_register', 'Auth\AuthController@ajaxPostRegister');
-
+$app->post('auth/ajax_register', 'Auth\AuthController@ajaxPostRegister');
+$app->post('auth/reset', 'Auth\AuthController@resetPassword');
 
 // // Password reset link request routes...
 // $app->get('password/email', 'Auth\PasswordController@getEmail');
