@@ -56,31 +56,4 @@ class YizhifuController extends Controller
         }
     }
 
-    public function test()
-    {
-        $order = (object)array(
-            'id'=>3,
-            'orderno' => '' . date('YmdHis') . (time()%1000),
-            'subject' => '商品名称',
-            'summary' => '商品说明',
-            'showurl' => 'http://news.sina.com.cn',
-            'totalfee'=> 0.01,
-            'receiver'=> '收货人',
-            'phone'=> '电话',
-            'postcode'=> '邮编',
-            'address'=> '地址',
-        );
-
-        $yzf = app('Yizhifu');
-        $yzf->v_ymd = date('Ymd');
-        $yzf->v_rcvname = str_pad(substr($order->orderno, -3), 5, '0', STR_PAD_LEFT);
-        $yzf->v_rcvaddr = $order->address;
-        $yzf->v_rcvtel = $order->phone;
-        $yzf->v_rcvpost = $order->postcode;
-        $yzf->v_amount = $order->totalfee;
-        $yzf->v_ordername = $order->receiver;
-        $yzf->v_oid = implode('-', [$yzf->v_ymd, $yzf->v_mid, $yzf->v_rcvname, date('His')]);
-
-        return $yzf->buildRequestForm();
-    }
 }

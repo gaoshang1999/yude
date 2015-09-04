@@ -139,7 +139,6 @@ $app->group(['namespace' => 'App\Http\Controllers\Pay', 'prefix' => 'wxpay'], fu
 
 // 易支付
 $app->group(['namespace' => 'App\Http\Controllers\Pay', 'prefix' => 'yizhifu'], function($app){
-    $app->get('/test', 'YizhifuController@test');
     $app->post('/notify', 'YizhifuController@yzf_notify');
     $app->get('/return', 'YizhifuController@yzf_return');
 });

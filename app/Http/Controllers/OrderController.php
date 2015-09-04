@@ -154,7 +154,7 @@ class OrderController extends Controller
             $yzf->v_rcvaddr = $order->address;
             $yzf->v_rcvtel = $order->phone;
             $yzf->v_rcvpost = $order->postcode;
-            $yzf->v_amount = $order->totalfee;
+            $yzf->v_amount = $order->totalprice;
             $yzf->v_ordername = $order->receiver;
             $yzf->v_oid = implode('-', [$yzf->v_ymd, $yzf->v_mid, $yzf->v_rcvname, date('His')]);
 
