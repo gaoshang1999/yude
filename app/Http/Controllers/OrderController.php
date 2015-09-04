@@ -147,7 +147,7 @@ class OrderController extends Controller
         }
         else if (strcasecmp($paymode, 'bank') == 0){
             $order = Order::where('orderno', $orderno)->first();
-            
+
             $yzf = app('Yizhifu');
             $yzf->v_ymd = date('Ymd');
             $yzf->v_rcvname = str_pad(substr($order->orderno, -3), 5, '0', STR_PAD_LEFT);
@@ -156,7 +156,7 @@ class OrderController extends Controller
             $yzf->v_rcvpost = $order->postcode;
             $yzf->v_amount = $order->totalprice;
             $yzf->v_ordername = $order->receiver;
-            $yzf->v_oid = implode('-', [$yzf->v_ymd, $yzf->v_mid, $yzf->v_rcvname, date('His')]);
+            $yzf->v_oid = implode('-', [$yzf->v_ymd, $yzf->v_mid, $yzf->v_rcvname, substr($order->orderno, -3, 6)]);
 
             return $yzf->buildRequestForm();
         }
