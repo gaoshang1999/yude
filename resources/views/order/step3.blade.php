@@ -75,7 +75,6 @@
         <span>微信支付</span>
         <span class="payfee">支付 {{ number_format($order->totalprice, 2) }}</span>
       </label>
-      <input type="hidden" id="paymode" name="paymode" value="alipay">
     </div>
     <input class="pull-right" style="background-color: #f35a01; padding: 10px 20px; border:none; color: white; font-size:16px; margin: 20px auto;" type="submit" value="去付款">
   </div>
@@ -89,8 +88,6 @@
     $('.payradio').click(function(){
       $('.paymode').removeClass('active');
       $(this).parent().addClass('active');
-
-      $('#paymode').val($(this).val());
     });
   });
 </script>
