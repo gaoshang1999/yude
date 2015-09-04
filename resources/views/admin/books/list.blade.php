@@ -8,10 +8,10 @@
   <h2 class="sub-header">教材列表 
    <a class="btn btn-primary pull-right" href="{{ url('/admin/books/add') }}" tabindex="4">创建新教材</a>
    
-   <form class="search_form pull-right" role="form" method="get" action="{{ url('/admin/books/search') }}" >    
+   <form class="search_form pull-right form-inline" role="form" method="get" action="{{ url('/admin/books/search') }}" >    
     <button class="btn btn-primary pull-right" type="submit" tabindex="3">搜索</button>
-    <input class="pull-right" type="text" placeholder="" name ="q" value="{{ isset($q) ? $q : "" }}" tabindex="2"/>  
-    <select class="pull-right" id="field" name="field" style="font-size: 18px;height:32px" tabindex="1"> <?php $field = isset($field) ? $field : ""; ?>
+    <input class="form-control pull-right" type="text" placeholder="" name ="q" value="{{ isset($q) ? $q : "" }}" tabindex="2"/>  
+    <select class="form-control pull-right" id="field" name="field" tabindex="1"> <?php $field = isset($field) ? $field : ""; ?>
       <option value="name" {{ $field==='name' ? 'selected' : '' }}>名称</option>
       <option value="id" {{ $field==='id' ? 'selected' : '' }}>ID编号</option>
       <option value="level" {{ $field==='level' ? 'selected' : '' }}>级别</option>

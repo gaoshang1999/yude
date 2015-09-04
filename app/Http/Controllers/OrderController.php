@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -107,6 +108,7 @@ class OrderController extends Controller
         }
 
         $data['totalprice'] = $total;
+        $data['user_id'] = $request->session()->get('buyer.id', Auth::user()->id);
 
         $order = Order::create($data);
 
@@ -130,9 +132,9 @@ class OrderController extends Controller
 
     public function topay($orderno, Request $request)
     {
-        $order = Order::where('orderno', $orderno)->first();
         $paymode = $request->input('paymode');
         if (strcasecmp($paymode, 'alipay') == 0){
+            $order = Order::where('orderno', $orderno)->first();
             $alipayWeb = app('AlipayWeb');
 
             $alipayWeb->setOutTradeNo($order->orderno)
@@ -141,6 +143,24 @@ class OrderController extends Controller
                     ->setBody('育德园师课程购买');
 
             return redirect($alipayWeb->getPayLink());
+        }
+        else if (strcasecmp($paymode, 'wxpay') == 0){
+            return redirect('/wxpay/pay/' . $orderno);
+        }
+        else if (strcasecmp($paymode, 'bank') == 0){
+            $order = Order::where('orderno', $orderno)->first();
+
+            $yzf = app('Yizhifu');
+            $yzf->v_ymd = date('Ymd');
+            $yzf->v_rcvname = str_pad(substr($order->orderno, -3), 5, '0', STR_PAD_LEFT);
+            $yzf->v_rcvaddr = $order->address;
+            $yzf->v_rcvtel = $order->phone;
+            $yzf->v_rcvpost = $order->postcode;
+            $yzf->v_amount = $order->totalprice;
+            $yzf->v_ordername = $order->receiver;
+            $yzf->v_oid = implode('-', [$yzf->v_ymd, $yzf->v_mid, $yzf->v_rcvname, substr($order->orderno, -9, 6)]);
+
+            return $yzf->buildRequestForm();
         }
         else {
             echo 'no support';

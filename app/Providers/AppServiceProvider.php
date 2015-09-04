@@ -19,9 +19,9 @@ class AppServiceProvider extends ServiceProvider
             return strlen($value) === 11;
         });
 
-        DB::listen(function($sql, $bindings, $time) {
-            Log::info  ($sql);
-        });
+        // DB::listen(function($sql, $bindings, $time) {
+        //     Log::info  ($sql);
+        // });
     }
 
     /**
@@ -46,6 +46,35 @@ class AppServiceProvider extends ServiceProvider
                     ->setExterInvokeIp($app->request->getClientIp());
 
             return $alipayWeb;
+        });
+
+        $this->app->bind('WxPay', function ($app) {
+            $notify_url = $app->request->root() . '/wxpay/notify';
+            $return_url = $app->request->root() . '/wxpay/return';
+
+            //建立请求
+            $wxpay = new \App\Providers\WxPay\WxPay();
+            $wxpay->setAppid(config('wxpay.appid'))
+                    ->setMchid(config('wxpay.mch_id'))
+                    ->setKey(config('wxpay.key'))
+                    ->setAppsecret(config('wxpay.appsecret'))
+                    ->setNotifyUrl($notify_url)
+                    ->setSpbillCreateIp($app->request->getClientIp());
+
+            return $wxpay;
+        });
+
+
+        $this->app->bind('Yizhifu', function ($app) {
+            $notify_url = $app->request->root() . '/yizhifu/notify';
+            $return_url = $app->request->root() . '/yizhifu/return';
+
+            //建立请求
+            $yizhifu = new \App\Providers\Yizhifu\YzfPay();
+            $yizhifu->setNotifyUrl($notify_url)->setReturnUrl($return_url)->setKey(config('yizhifu.key'));
+            $yizhifu->v_mid = config('yizhifu.mid');
+
+            return $yizhifu;
         });
     }
 }

@@ -8,10 +8,10 @@
   <h2 class="sub-header">课程组列表 
    <a class="btn btn-primary pull-right" href="{{ url('/admin/groups/add') }}" tabindex="4">创建新课程组</a>
    
-   <form class="search_form pull-right" role="form" method="get" action="{{ url('/admin/groups/search') }}" >    
+   <form class="search_form pull-right form-inline" role="form" method="get" action="{{ url('/admin/groups/search') }}" >    
     <button class="btn btn-primary pull-right" type="submit" tabindex="3">搜索</button>
-    <input class="pull-right" type="text" placeholder="" name ="q" value="{{ isset($q) ? $q : "" }}" tabindex="2"/>  
-    <select class="pull-right" id="field" name="field" style="font-size: 18px;height:32px" tabindex="1"> <?php $field = isset($field) ? $field : ""; ?>
+    <input class="form-control pull-right" type="text" placeholder="" name ="q" value="{{ isset($q) ? $q : "" }}" tabindex="2"/>  
+    <select class="form-control pull-right" id="field" name="field" tabindex="1"> <?php $field = isset($field) ? $field : ""; ?>
       <option value="name" {{ $field==='name' ? 'selected' : '' }}>课程组名称</option>
       <option value="rank" {{ $field==='rank' ? 'selected' : '' }}>显示顺序</option>
       <option value="zx_course" {{ $field==='zx_course' ? 'selected' : '' }}>中学课程</option>

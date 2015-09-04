@@ -7,10 +7,10 @@
   <h2 class="sub-header">课程列表
    <a class="btn btn-primary pull-right" href="{{ url('/admin/courses/add') }}" tabindex="4">创建新课程</a> 
      
-   <form class="search_form pull-right" role="form" method="get" action="{{ url('/admin/courses/search') }}" >    
+   <form class="search_form pull-right form-inline" role="form" method="get" action="{{ url('/admin/courses/search') }}" >    
     <button class="btn btn-primary pull-right" type="submit" tabindex="3">搜索</button>
-    <input class="pull-right" type="text" placeholder="" name ="q" value="{{ isset($q) ? $q : "" }}" tabindex="2"/>  
-    <select class="pull-right" id="field" name="field" style="font-size: 18px;height:32px" tabindex="1"> <?php $field = isset($field) ? $field : ""; ?>
+    <input class="form-control pull-right" type="text" placeholder="" name ="q" value="{{ isset($q) ? $q : "" }}" tabindex="2"/>  
+    <select class="form-control pull-right" id="field" name="field" tabindex="1"> <?php $field = isset($field) ? $field : ""; ?>
       <option value="name" {{ $field==='name' ? 'selected' : '' }}>名称</option>
       <option value="id" {{ $field==='id' ? 'selected' : '' }}>ID编号</option>
       <option value="level" {{ $field==='level' ? 'selected' : '' }}>级别</option>
@@ -48,7 +48,7 @@
           <td>{{ $v->discount_price }}</td>
           <td>{{ $v->created_at }}</td>
           <td>{{ $v->updated_at }}</td>
-          <td>{{ $v->enable ? '上架' : '下架' }}<br/><a href="/order/step1?cid={{ $v->id }}">购买该课程</a></td>
+          <td>{{ $v->enable ? '上架' : '下架' }}</td>
           <td><form action="{{ url("/admin/courses/delete/{$v->id}") }}" method="post"> <input type="hidden" name="_token" value="{{ csrf_token() }}" ><button type="submit" onclick="return del();" class="btn btn-primary" >删除</button> </form>  </td>
         </tr>
         @endforeach

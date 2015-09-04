@@ -51,6 +51,13 @@ trait AuthenticatesUsers
         if (Auth::attempt($credentials, $request->has('remember'))) {
             return $this->handleUserWasAuthenticated($request, $throttles);
         }
+        else {
+            $credentials['name'] = $credentials[$this->loginUsername()];
+            unset($credentials[$this->loginUsername()]);
+            if (Auth::attempt($credentials, $request->has('remember'))) {
+                return $this->handleUserWasAuthenticated($request, $throttles);
+            }
+        }
 
         // If the login attempt was unsuccessful we will increment the number of attempts
         // to login and redirect the user back to the login form. Of course, when this

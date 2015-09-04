@@ -12,7 +12,7 @@
   }
 
   #btnnew { width: auto; margin-left: 20px; }
-  .nav>li>a { padding: 5px 15px; }
+  .tab-content { max-height: 400px; overflow: scroll; }
 </style>
 @endsection
 
@@ -91,12 +91,39 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
-              <li role="presentation" class="active"><a href="#courses" aria-controls="home" role="tab" data-toggle="tab">课程</a></li>
-              <li role="presentation"><a href="#books" aria-controls="profile" role="tab" data-toggle="tab">教材</a></li>
+              <li role="presentation" class="active"><a href="#peple" aria-controls="peple" role="tab" data-toggle="tab">购买人</a></li>
+              <li role="presentation"><a href="#courses" aria-controls="courses" role="tab" data-toggle="tab">课程</a></li>
+              <li role="presentation"><a href="#books" aria-controls="books" role="tab" data-toggle="tab">教材</a></li>
             </ul>
             <!-- Tab panes -->
             <div class="tab-content">
-              <div role="tabpanel" class="tab-pane active" id="courses">
+              <div role="tabpanel" class="tab-pane active" id="peple">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>姓名</th>
+                      <th>手机号</th>
+                      <th>邮箱</th>
+                      <th>类型</th>
+                      <th>创建时间</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach ($users as $user)
+                    <tr>
+                      <td><label><input type="radio" name="user" value="{{ $user->id }}"/>&nbsp;&nbsp;{{ $user->id }}</label></td>
+                      <td>{{ $user->name }}</td>
+                      <td>{{ $user->phone }}</td>
+                      <td>{{ $user->email }}</td>
+                      <td>{{ $user->role === 'admin' ? '管理员' : '学员' }}</td>
+                      <td>{{ $user->created_at }}</td>
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="courses">
                 <table class="table table-striped">
                   <thead>
                     <tr>
@@ -111,7 +138,7 @@
                   <tbody>
                     @foreach ($courses as $v)
                     <tr>
-                      <td><label><input type="checkbox" name="courses[]" value="{{ $v->id }}"/>{{ $v->id }}</label></td>
+                      <td><label><input type="checkbox" name="courses[]" value="{{ $v->id }}"/>&nbsp;&nbsp;{{ $v->id }}</label></td>
                       <td>{{ $v->name }}</td>
                       <td>@if($v->level == "zhongxue") 中学  @elseif($v->level == "xiaoxue") 小学 @elseif($v->level == "youer") 幼儿  @endif</td>
                       <td>@if($v->kind == "bishi") 笔试  @elseif($v->kind == "mianshi") 面试  @endif</td>
@@ -138,7 +165,7 @@
                   <tbody>
                     @foreach ($books as $v)
                     <tr>
-                      <td><label><input type="checkbox" name="books[]" value="{{ $v->id }}"/>{{ $v->id }}</label></td>
+                      <td><label><input type="checkbox" name="books[]" value="{{ $v->id }}"/>&nbsp;&nbsp;{{ $v->id }}</label></td>
                       <td>{{ $v->name }}</td>
                       <td>@if($v->level == "zhongxue") 中学  @elseif($v->level == "xiaoxue") 小学 @elseif($v->level == "youer") 幼儿  @endif</td>
                       <td>@if($v->kind == "bishi") 笔试  @elseif($v->kind == "mianshi") 面试  @endif</td>
@@ -182,10 +209,11 @@
     $('#stype').change();
 
     $('#btnCreateNew').click(function(){
-      var data = $('#productsForm').serialize();
-      console.log('data : ', data);
-      if (!data || data.length < 1) {
-        alert('请至少选择一门课程或一套教材');
+      var data = $('#productsForm').serializeArray();
+      var keys = $.map(data, function(v){ return v.name; });
+      console.log('data : ', data, ' ; keys : ', keys);
+      if (keys.length < 1 || keys.indexOf('user') < 0 || (keys.indexOf('courses[]')<0 && keys.indexOf('books[]')<0)) {
+        alert('请选择购买人，并至少选择一门课程或一套教材');
       }
       else {
         $('#productsForm').submit();
