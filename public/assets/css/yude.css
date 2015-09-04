@@ -5,6 +5,17 @@ body {
     font-size: 14px;
 }
 
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #eee;
+    height: 0;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
 @media (min-width: 768px) {
     .col-sm-3 {
         width: 25%;
@@ -33,6 +44,7 @@ a {
 
 .orderblock div {
     text-align: left;
+    font-size: 14px;
 }
 
 .clearfix:after, .clearfix:before {
@@ -83,6 +95,7 @@ a {
 }
 
 .stepbar { 
+    margin-top: 20px;
     margin-bottom: 40px;
     text-align: left;
 }
@@ -117,9 +130,10 @@ a {
 .orderblock {
     padding: 15px;
     background-color: white;
+    text-align: left;
 }
 .orderblock .steplabel {
-    color: #808080;
+    color: black;
     font-size: 20px;
     margin-bottom: 10px;
     text-align: left;
@@ -153,6 +167,7 @@ a {
     display: inline-block;
     max-width: 150px;
     max-height: 150px;
+    vertical-align: middle;
 }
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
     vertical-align: middle;

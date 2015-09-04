@@ -11,7 +11,7 @@ a{text-decoration:none;}
 #header li{height:56px;float:left;margin-left:15px;}
 #header a{color:#fff;font-size:14px;font-family:"ËÎÌו";}
 #header #reg{float:right;width:100px;height:56px;line-height:56px;}
-#header #online{float:right;width:250px;height:56px;line-height:56px;}
+#header #online{float:right;width:500px;height:56px;line-height:56px;}
 #header #online span:first-child{background:url(/assets/img/login_ico_online.png) no-repeat center 18px;display:inline-block;width:18px;margin-right:10px;}
 #header #smxz{position:absolute;top:40px;right:508px;}
 #header2{height:56px;}

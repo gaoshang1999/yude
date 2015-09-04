@@ -48,7 +48,7 @@
       <div class="bar"><span>4</span></div>
     </div>
   </div>
-  <form action="/order/topay/{{ $order->orderno }}" method="get">
+  <form id="nextform" action="/order/topay/{{ $order->orderno }}" method="get">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
   <div class="orderblock clearfix">
     <div class="steplabel">订单信息</div>
@@ -76,9 +76,10 @@
         <span class="payfee">支付 {{ number_format($order->totalprice, 2) }}</span>
       </label>
     </div>
-    <input class="pull-right" style="background-color: #f35a01; padding: 10px 20px; border:none; color: white; font-size:16px; margin: 20px auto;" type="submit" value="去付款">
+    <input id="btnSubmit" class="pull-right" style="background-color: #f35a01; padding: 10px 20px; border:none; color: white; font-size:16px; margin: 20px auto;" type="button" value="去付款">
   </div>
   </form>
+  <input type="hidden" id="pmhidden">
 </div>
 @endsection
 
@@ -88,6 +89,14 @@
     $('.payradio').click(function(){
       $('.paymode').removeClass('active');
       $(this).parent().addClass('active');
+
+      $('#pmhidden').val($(this).val());
+    });
+
+    $('#btnSubmit').click(function(){
+      if ($('#pmhidden').val()) {
+        $('#nextform').submit();
+      }
     });
   });
 </script>
