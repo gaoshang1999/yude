@@ -50,15 +50,19 @@ class WxPayController extends Controller
         $wxpay = app('WxPay');
         $url = $wxpay->getPayUrl($orderno, $totalprice, '育德园师课程购买');
         // var_dump($url);
-
-        $qrCode = new QrCode();
-        $content = $qrCode->setSize(300)->setText(urldecode($url['code_url']))
-            ->setPadding(10)
-            ->setErrorCorrection('high')
-            ->setForegroundColor(array('r' => 0, 'g' => 0, 'b' => 0, 'a' => 0))
-            ->setBackgroundColor(array('r' => 255, 'g' => 255, 'b' => 255, 'a' => 0))
-            ->get();
-        return response($content, 200)->header('Content-Type', "image/png");
+        if (array_key_exists('code_url', $url)) {
+            $qrCode = new QrCode();
+            $content = $qrCode->setSize(300)->setText(urldecode($url['code_url']))
+                ->setPadding(10)
+                ->setErrorCorrection('high')
+                ->setForegroundColor(array('r' => 0, 'g' => 0, 'b' => 0, 'a' => 0))
+                ->setBackgroundColor(array('r' => 255, 'g' => 255, 'b' => 255, 'a' => 0))
+                ->get();
+            return response($content, 200)->header('Content-Type', "image/png");
+        }
+        else {
+            return 'error';
+        }
     }
 
     public function pay($orderno, Request $request)
