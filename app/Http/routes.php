@@ -129,11 +129,19 @@ $app->group(['namespace' => 'App\Http\Controllers\Pay', 'prefix' => 'alipay'], f
     $app->post('/notify', 'AlipayController@ali_notify');
 });
 
-// 支付宝
+// 微信支付
 $app->group(['namespace' => 'App\Http\Controllers\Pay', 'prefix' => 'wxpay'], function($app){
     $app->get('/qrcode/{orderno}/{totalprice}', 'WxPayController@payqrcode');
     $app->get('/pay/{orderno}', 'WxPayController@pay');
     $app->get('/checkorder/{orderno}', 'WxPayController@checkorder');
     $app->post('/notify', 'WxPayController@wx_notify');
 });
+
+// 易支付
+$app->group(['namespace' => 'App\Http\Controllers\Pay', 'prefix' => 'yizhifu'], function($app){
+    $app->get('/test', 'YizhifuController@test');
+    $app->post('/notify', 'YizhifuController@yzf_notify');
+    $app->get('/return', 'YizhifuController@yzf_return');
+});
+
 

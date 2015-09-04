@@ -53,15 +53,28 @@ class AppServiceProvider extends ServiceProvider
             $return_url = $app->request->root() . '/wxpay/return';
 
             //建立请求
-            $wxpayWeb = new \App\Providers\WxPay\WxPay();
-            $wxpayWeb->setAppid(config('wxpay.appid'))
+            $wxpay = new \App\Providers\WxPay\WxPay();
+            $wxpay->setAppid(config('wxpay.appid'))
                     ->setMchid(config('wxpay.mch_id'))
                     ->setKey(config('wxpay.key'))
                     ->setAppsecret(config('wxpay.appsecret'))
                     ->setNotifyUrl($notify_url)
                     ->setSpbillCreateIp($app->request->getClientIp());
 
-            return $wxpayWeb;
+            return $wxpay;
+        });
+
+
+        $this->app->bind('Yizhifu', function ($app) {
+            $notify_url = $app->request->root() . '/yizhifu/notify';
+            $return_url = $app->request->root() . '/yizhifu/return';
+
+            //建立请求
+            $yizhifu = new \App\Providers\Yizhifu\YzfPay();
+            $yizhifu->setNotifyUrl($notify_url)->setReturnUrl($return_url)->setKey(config('yizhifu.key'));
+            $yizhifu->v_mid = config('yizhifu.mid');
+
+            return $yizhifu;
         });
     }
 }

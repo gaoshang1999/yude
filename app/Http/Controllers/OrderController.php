@@ -145,6 +145,21 @@ class OrderController extends Controller
         else if (strcasecmp($paymode, 'wxpay') == 0){
             return redirect('/wxpay/pay/' . $orderno);
         }
+        else if (strcasecmp($paymode, 'bank') == 0){
+            $order = Order::where('orderno', $orderno)->first();
+            
+            $yzf = app('Yizhifu');
+            $yzf->v_ymd = date('Ymd');
+            $yzf->v_rcvname = str_pad(substr($order->orderno, -3), 5, '0', STR_PAD_LEFT);
+            $yzf->v_rcvaddr = $order->address;
+            $yzf->v_rcvtel = $order->phone;
+            $yzf->v_rcvpost = $order->postcode;
+            $yzf->v_amount = $order->totalfee;
+            $yzf->v_ordername = $order->receiver;
+            $yzf->v_oid = implode('-', [$yzf->v_ymd, $yzf->v_mid, $yzf->v_rcvname, date('His')]);
+
+            return $yzf->buildRequestForm();
+        }
         else {
             echo 'no support';
             return;

@@ -25,9 +25,9 @@ $app->withFacades();
 
 $app->withEloquent();
 
-$app->configure('app');
 $app->configure('alipay');
 $app->configure('wxpay');
+$app->configure('yizhifu');
 config(['app.debug' => true]);
 
 /*

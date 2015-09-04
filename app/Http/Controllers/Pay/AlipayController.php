@@ -35,14 +35,10 @@ class AlipayController extends Controller
             case 'TRADE_SUCCESS':
             case 'TRADE_FINISHED':
                 // TODO: 支付成功，取得订单号进行其它相关操作。
-                Log::debug('Alipay notify get data verification success.', [
+                Log::debug('Alipay return get data verification success.', [
                     'out_trade_no' => $request->input('out_trade_no'),
                     'trade_no' => $request->input('trade_no')
                 ]);
-                $order->paytime = date('Y-m-d H:i:s');
-                $order->paymode = 'alipay';
-                $order->payload = json_encode($request->all());
-                $order->save();
                 break;
         }
 
@@ -69,6 +65,13 @@ class AlipayController extends Controller
                     'out_trade_no' => $request->input('out_trade_no'),
                     'trade_no' => $request->input('trade_no')
                 ]);
+
+                $order = Order::where('orderno', $request->get('out_trade_no'))->first();
+                $order->paytime = date('Y-m-d H:i:s');
+                $order->paymode = 'alipay';
+                $order->payload = json_encode($request->all());
+                $order->save();
+
                 break;
         }
 
