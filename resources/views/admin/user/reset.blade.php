@@ -30,7 +30,7 @@
                                 </div>
 
                               <div class="form-group">
-                                  <label for="password" class="col-sm-2 control-label">新密码</label>
+                                  <label for="password" class="col-sm-2 control-label"><span style="color: red">*</span>新密码</label>
                                   <div class="col-sm-9">
                                     <input type="password" class="form-control" name="password">
                                   </div>

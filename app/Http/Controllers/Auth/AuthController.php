@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Validator;
 use Illuminate\Http\Request;
@@ -263,5 +264,34 @@ class AuthController extends Controller
          Log::info  ('AuthController-ableskyUserRegister: '.$output);
         //打印获得的数据
          return json_decode($output);
+     }
+     
+     public function resetPassword(Request $request)
+     {
+         $data = $request->all();
+         $vcode = $request->session()->get('p'.$data['phone']);
+         
+         $validator = Validator::make($data, [
+             'phonecode' => 'required|size:6|regex:/^' . $vcode['verifycode'] . '$/',
+         ]);
+         if ($validator->fails()) {
+             return new JsonResponse(['success'=>false, 'message' => '验证码认证失败']);
+         }
+         
+         $validator = Validator::make($data, [
+             'password' => 'required|confirmed|min:6|max:20',
+         ]);
+         if ($validator->fails()) {
+             return new JsonResponse(['success'=>false, 'message' => '密码格式无效']);
+         }
+         
+         $user = Auth::user();
+         $user->password = bcrypt($request->input('password'));
+         $user->save();
+         $request->session()->forget('p' . $user->phone);
+         
+         if ($request->ajax() || $request->wantsJson()) {
+             return new JsonResponse(['success'=>true]);
+         }
      }
 }

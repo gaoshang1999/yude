@@ -72,7 +72,7 @@
 如果您购买了教材，或者有赠送材料，我们工作人员会及时按照您填写的地址发送，请注意查收。
 如有疑问，请拨打4000-607-107</pre>
       </div>
-      <div style="margin: 20px; text-align:center"><a href="#" style="margin-right: 50px; color: black;">前往个人中心查看订单</a><a href="/" style=" color: black;">返回首页</a></div>
+      <div style="margin: 20px;"><a href="{{ url('/my/profile') }}" style="margin-right: 30px; color: black;">前往个人中心查看订单</a><a href="/" style=" color: black;">返回首页</a></div>
     </div>
   </div>
 </div>

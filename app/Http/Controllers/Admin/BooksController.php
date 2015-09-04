@@ -3,6 +3,7 @@
 use App\Http\Controllers\Controller;
 use App\Models\Books;
 use Illuminate\Http\Request;
+use App\Models\Courses;
 
 class BooksController extends Controller
 {
@@ -151,16 +152,27 @@ class BooksController extends Controller
     
     public function lists(Request $request)
     {       
-        $books_1 = Books::where('level', 'zhongxue') ->get();    
-        $books_2 = Books::where('level', 'xiaoxue') ->get() ;        
-        $books_3 = Books::where('level', 'youer') ->get();        
+        $books_1 = Books::where('level', 'zhongxue')->orderBy('buytimes', 'desc') ->get();    
+        $books_2 = Books::where('level', 'xiaoxue')->orderBy('buytimes', 'desc') ->get() ;        
+        $books_3 = Books::where('level', 'youer')->orderBy('buytimes', 'desc') ->get();        
         $data = ['books_1' => $books_1, 'books_2' => $books_2, 'books_3' => $books_3];
         return view('front.books_lists', $data);
     }
     
     public function detail(Request $request, $id)
     {
-        $books = Books::where('id', $id)->first();
-        return view('front.books_detail', ['v' => $books]);
+        $book = Books::where('id', $id)->first();
+        
+        //课程推荐，同级别课程中，随机推荐4个
+        $courses_recommend = Courses::where('level', $book->level) -> where('enable', true)-> get()->all();
+        shuffle($courses_recommend);
+        $courses_recommend = array_slice($courses_recommend, 0, 4);
+        
+        //教材推荐，同级别教材中，随机推荐2个
+        $books_recommend = Books::where('level', $book->level) ->where('id', '<>', $id) -> get()->all();
+        shuffle($books_recommend);
+        $books_recommend = array_slice($books_recommend, 0, 2);
+        
+        return view('front.books_detail', ['book' => $book, 'courses_recommend' => $courses_recommend, 'books_recommend'=>$books_recommend]);
     }
 }
