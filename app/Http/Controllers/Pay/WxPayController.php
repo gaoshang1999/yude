@@ -37,7 +37,7 @@ class WxPayController extends Controller
                 $order->save();
             }
             else {
-                Log::notice('WxPay return query data verification fail.', [
+                Log::notice('WxPay notify query data verification fail.', [
                     'data' => json_encode($ret)
                 ]);
             }
