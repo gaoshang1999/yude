@@ -19,7 +19,7 @@
 			<div class="left">
 					<ul>
 							<a href="{{ url('order') }}"><li><span class="s1"></span>购物车</li></a>
-							<a href="#"><li><span class="s2"></span>学习课程</li></a>
+							<a href="{{ url('/ablesky/redirect') }}"><li><span class="s2"></span>学习课程</li></a>
 							<a href="{{ url("courses/lists") }}"><li><span class="s3"></span>课程购买</li></a>
 							<a href="{{ url("books/lists") }}"><li><span class="s4"></span>教材购买</li></a>
 							<a href="#"><li><span class="s5"></span>在线咨询</li></a>

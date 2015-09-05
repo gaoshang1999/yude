@@ -242,11 +242,12 @@ class AuthController extends Controller
      */
      public function ableskyUserRegister($user)
      {
-         $data = json_encode(['type'=>'register', 'orgId'=>AbleskyController::$OrgId, 'username' => $user['name'] , 
+         $orgId = config('ablesky.OrgId');
+         $data = json_encode(['type'=>'register', 'orgId'=> $orgId, 'username' => $user['name'] , 
              'password' => $user['password'], 'email' => $user['email'] ]);
          $timestamp = time() * 1000;  //毫秒级时间
          
-         $accessToken = md5($data . '|' .$timestamp . '|' . AbleskyController::$api_key);
+         $accessToken = md5($data . '|' .$timestamp . '|' . $orgId);
          
          $post_data = ['data' => $data,'timestamp' => $timestamp, 'accessToken'=>$accessToken ];
          

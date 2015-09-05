@@ -226,9 +226,9 @@
 <script type="text/javascript">
 
 var zx_select_fun = function(){ 
-	$selected_radio = $("input[name='courses_zx_radio']:checked");
-	var id = $selected_radio.val();
-	var name = $selected_radio.parent().parent().parent().children('td').eq(1).html();
+	var selected_radio = $("input[name='courses_zx_radio']:checked");
+	var id = selected_radio.val();
+	var name = selected_radio.parent().parent().parent().children('td').eq(1).html();
 	$('#zx_course_name').val(name);
 	$('#zx_course').val(id);
 	$('#myModal_zx').modal('hide');
@@ -242,9 +242,9 @@ zx_select_fun();
 }
                     
 var xx_select_fun = function(){ 
-	$selected_radio = $("input[name='courses_xx_radio']:checked");
-	var id = $selected_radio.val();
-	var name = $selected_radio.parent().parent().parent().children('td').eq(1).html();
+	var selected_radio = $("input[name='courses_xx_radio']:checked");
+	var id = selected_radio.val();
+	var name = selected_radio.parent().parent().parent().children('td').eq(1).html();
 	$('#xx_course_name').val(name);
 	$('#xx_course').val(id); 
 	$('#myModal_xx').modal('hide');
@@ -258,9 +258,9 @@ function xx_dbclick_tr(id){
 }
 
 var yr_select_fun = function(){ 
-	$selected_radio = $("input[name='courses_yr_radio']:checked");
-	var id = $selected_radio.val();
-	var name = $selected_radio.parent().parent().parent().children('td').eq(1).html();
+	var selected_radio = $("input[name='courses_yr_radio']:checked");
+	var id = selected_radio.val();
+	var name = selected_radio.parent().parent().parent().children('td').eq(1).html();
 	$('#yr_course_name').val(name);
 	$('#yr_course').val(id);
 	$('#myModal_yr').modal('hide');

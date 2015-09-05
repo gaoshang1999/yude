@@ -30,7 +30,7 @@ class OrderController extends Controller
         
         $total = 0;
         foreach ($courses as $c) {            
-            $total +=  $c->totalprice;
+            $total +=  $c->discount_price;
         }
         foreach ($books as $c) {
             $total +=  $c->discount_price;
@@ -61,7 +61,7 @@ class OrderController extends Controller
         $books = Books::whereIn('id', $book_ids)->get();
         foreach ($courses as $c) {
             $c->count = intval($request->input('count_c_' . $c->id));
-            $total += $c->count * $c->totalprice;
+            $total += $c->count * $c->discount_price;
             $items_c[''. $c->id] = $c->count;
             $count += $c->count;
         }
@@ -87,9 +87,9 @@ class OrderController extends Controller
         foreach ($courses as $c) {
             $item['snapshot'] = json_encode($c);
             $c->count = $items_c[''.$c->id];
-            $total += $c->count * $c->totalprice;
+            $total += $c->count * $c->discount_price;
             $item['count'] = $c->count;
-            $item['price'] = $c->totalprice;
+            $item['price'] = $c->discount_price;
             $item['title'] = $c->name;
             $item['type'] = "course";
             $itemData[] = $item;

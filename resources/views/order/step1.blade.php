@@ -152,7 +152,7 @@ button, input, optgroup, select, textarea {
           <tr class="choose">
             <td><label><input type="checkbox" class="video" name="check_c_{{ $v->id }}"><img src="{{ $v->cover }}"></label></td>
             <td>{{ $v->name }}</td>
-            <td><label class="price">{{ number_format($v->totalprice, 2) }}</label></td>
+            <td><label class="price">{{ number_format($v->discount_price, 2) }}</label></td>
             <td style="width:50px;">
               <div class="input-group">
 
@@ -161,7 +161,7 @@ button, input, optgroup, select, textarea {
                 1
               </div>
             </td>
-             <td><label class="price" id="c_{{ $v->id }}">{{ number_format($v->totalprice, 2) }}</label></td>
+             <td><label class="price" id="c_{{ $v->id }}">{{ number_format($v->discount_price, 2) }}</label></td>
             <td><a href="{{ url("cart/courses/remove/$v->id") }}">移除</a></td>         
           </tr>
           @endforeach

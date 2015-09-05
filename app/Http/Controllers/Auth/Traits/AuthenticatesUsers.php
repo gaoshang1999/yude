@@ -22,7 +22,7 @@ trait AuthenticatesUsers
             return view('auth.authenticate');
         }
         $url = $request->input('url');
-        return view('auth.login', ['url'=> $url]);
+        return view('front.login', ['url'=> $url]);
     }
 
     /**

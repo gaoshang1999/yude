@@ -25,6 +25,7 @@ $app->withFacades();
 
 $app->withEloquent();
 
+$app->configure('ablesky');
 $app->configure('alipay');
 $app->configure('wxpay');
 $app->configure('yizhifu');
