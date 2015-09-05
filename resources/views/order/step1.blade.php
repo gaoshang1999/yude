@@ -146,11 +146,11 @@ button, input, optgroup, select, textarea {
         </thead>
         <tbody>
           <tr class="headerbar">
-            <td colspan="6"><label><input type="checkbox" class="checkvideo">视频课程</label></td>
+            <td colspan="6"><label><input type="checkbox" class="checker checkvideo">视频课程</label></td>
           </tr>
           @foreach ($courses ->all() as $v)
           <tr class="choose">
-            <td><label><input type="checkbox" class="video" name="check_c_{{ $v->id }}"><img src="{{ $v->cover }}"></label></td>
+            <td><label><input type="checkbox" class="checker video" name="check_c_{{ $v->id }}"><img src="{{ $v->cover }}"></label></td>
             <td>{{ $v->name }}</td>
             <td><label class="price">{{ number_format($v->discount_price, 2) }}</label></td>
             <td style="width:50px;">
@@ -167,11 +167,11 @@ button, input, optgroup, select, textarea {
           @endforeach
           
           <tr class="headerbar">
-            <td colspan="6"><label><input type="checkbox" class="checkbook">教材</label></td>
+            <td colspan="6"><label><input type="checkbox" class="checker checkbook">教材</label></td>
           </tr>
           @foreach ($books ->all() as $v)
           <tr class="choose">
-            <td><label><input type="checkbox" class="book" name="check_b_{{ $v->id }}"><img src="{{ $v->cover }}"></label></td>
+            <td><label><input type="checkbox" class="checker book" name="check_b_{{ $v->id }}"><img src="{{ $v->cover }}"></label></td>
             <td>{{ $v->name }}</td>
             <td><label class="price">{{ number_format($v->discount_price, 2) }}</label></td>
             <td style="width:50px;">
