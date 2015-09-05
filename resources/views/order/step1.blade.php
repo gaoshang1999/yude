@@ -232,14 +232,23 @@ button, input, optgroup, select, textarea {
       $('#'+input.data('key')).html((input.data('value') * val));
       $('#'+input.data('key')).formatCurrency() 
       
+      calcTotal();
+    });
+
+    $('input.checker').on('change click', calcTotal);
+
+    function calcTotal () {
       var total = 0;
-      $('#orderform .form-control').each(function(){
-    	 total += $(this).data('value') * $(this).val();
+      var boxes = $('input.checker:checked');
+      boxes.each(function(){
+        $(this).parents('tr.choose').find('input.form-control').each(function(){
+          total += $(this).data('value') * $(this).val();
+        });
       });
 
       $('#total').html(total);
-      $('#total').formatCurrency()
-    });
+      $('#total').formatCurrency();
+    }
     
   });
 </script>
