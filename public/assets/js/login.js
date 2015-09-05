@@ -174,7 +174,8 @@
 					    	var span = $(this).parent().find('span');
 					        var value = $(this).val();  
 
-					        var reg=/^(([a-zA-Z]+[0-9]+)|([0-9]+[a-zA-Z]+))$/;  
+					        var letter_reg=/^[a-zA-Z]+$/;  
+					        var digit_reg=/^[0-9]+$/; 
 					        if(value.length ==0){
 					        	span.removeClass("dn");
 					        	span.html("× 请输入用户名");
@@ -183,9 +184,13 @@
 					        	span.removeClass("dn");
 					        	span.html("×请输入6-20位用户名");
 					        	return false;
-					        }else if (!reg.test(value)) {
+					        }else if (letter_reg.test(value)) {
 					        	span.removeClass("dn");
-					        	span.html("× 用户名格式错误");
+					        	span.html("× 格式错误: 不能全部是字母");
+					        	return false;
+					        }else if (digit_reg.test(value)) {
+					        	span.removeClass("dn");
+					        	span.html("× 格式错误: 不能全部是数字");
 					        	return false;
 					        } 
 					        var token =$('_token').val()

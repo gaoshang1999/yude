@@ -196,7 +196,7 @@ class AuthController extends Controller
         $output = $this->ableskyUserRegister($request->all());
 
         if(!$output || $output->result->code != 0){
-            return new JsonResponse(['success'=>false, 'message' => '调用远程注册服务失败']); 
+            return new JsonResponse(['success'=>false, 'message' => '调用远程注册服务失败:'.$output->result->message]); 
         }
         $user = $this->create($request->all());
         $request->session()->forget('p' . $user->phone);
@@ -242,12 +242,14 @@ class AuthController extends Controller
      */
      public function ableskyUserRegister($user)
      {
-         $orgId = config('ablesky.OrgId');
+         $orgId = config('ablesky.OrgId'); 
+         $apiKey = config('ablesky.api_key');
+         
          $data = json_encode(['type'=>'register', 'orgId'=> $orgId, 'username' => $user['name'] , 
              'password' => $user['password'], 'email' => $user['email'] ]);
          $timestamp = time() * 1000;  //毫秒级时间
          
-         $accessToken = md5($data . '|' .$timestamp . '|' . $orgId);
+         $accessToken = md5($data . '|' .$timestamp . '|' . $apiKey);
          
          $post_data = ['data' => $data,'timestamp' => $timestamp, 'accessToken'=>$accessToken ];
          
