@@ -97,12 +97,15 @@ $app->group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', '
     $app->post('/orders/new', 'OrdersController@neworder');
 });
 
-
+//能力天空接口-课程目录树
 $app->group(['namespace' => 'App\Http\Controllers\Ablesky', 'prefix' => 'ablesky', 'middleware' => ['auth.login', 'auth.admin']], function($app){
-
-    //能力天空接口-课程目录树
     $app->post('/category/update', 'AbleskyController@update_ablesky_category');
     $app->get('/category/tree', 'AbleskyController@list_ablesky_category');
+});
+
+//能力天空接口-跳转
+$app->group(['namespace' => 'App\Http\Controllers\Ablesky', 'prefix' => 'ablesky', 'middleware' => ['auth.login']], function($app){    
+   $app->get('/redirect', 'AbleskyController@oneStopRedirect');
 });
 
 // 用户后台

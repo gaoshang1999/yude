@@ -3,8 +3,9 @@
 use App\Http\Controllers\Controller;
 use App\Models\Courses;
 use Illuminate\Http\Request;
-use App\Models\AbleskyCategory;
 use App\Models\Books;
+use App\Models\Groups;
+
 
 class CoursesController extends Controller
 {
@@ -162,11 +163,12 @@ class CoursesController extends Controller
     
     public function lists(Request $request)
     {
-        $courses = Courses::where('enable', true)->orderBy('buytimes', 'desc') ->get();
+//         $courses = Courses::where('enable', true)->orderBy('buytimes', 'desc') ->get();
         $courses_zx = Courses::where('level', 'zhongxue')->where('enable', true)->orderBy('buytimes', 'desc') ->get();
         $courses_xx = Courses::where('level', 'xiaoxue')->where('enable', true)->orderBy('buytimes', 'desc') ->get() ;
         $courses_yr = Courses::where('level', 'youer')->where('enable', true)->orderBy('buytimes', 'desc') ->get();
-        $data = ['courses' => $courses, 'courses_zx' => $courses_zx, 'courses_xx' => $courses_xx, 'courses_yr' => $courses_yr];
+        $groups = Groups::with('zx', 'xx', 'yr')->orderBy('created_at', 'desc') ->get();
+        $data = ['groups' => $groups, 'courses_zx' => $courses_zx, 'courses_xx' => $courses_xx, 'courses_yr' => $courses_yr];
         return view('front.courses_lists', $data);
     }
     

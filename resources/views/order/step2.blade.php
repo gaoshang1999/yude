@@ -98,7 +98,7 @@
             <td>{{ $v->name }}</td>
             <td>课程</td>
             <td>{{ $v->count }}</td>
-            <td>{{ $v->count * $v->totalprice }}</td>
+            <td>{{ $v->count * $v->discount_price }}</td>
             <td></td>
           </tr>
           @endforeach
