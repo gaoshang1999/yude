@@ -56,7 +56,7 @@
 										<li><input type="text" id="phone" name="phone" placeholder="请输入有效的手机号码" class="input"/><span id="phone_span" class="cff3e3e dn">× 已被注册</span></li>
 										<li><input type="text" id="phonecode" name="phonecode" placeholder="请输入手机验证码" class="input"/><span class="cff3e3e dn">× 验证码输入错误</span></li>
 										<li><input type="button" onclick="javascript:sendverifycode()" id="telcode" value="免费获取手机验证码"/>
-										<li><input type="text" id="name" name="name" placeholder="6-20位(字母数字'_''-'的组合)" class="input"/><span class="cff3e3e dn">× 已被注册</span></li>
+										<li><input type="text" id="name" name="name" placeholder="6-20位(字母、数字、'_'的组合)" class="input"/><span class="cff3e3e dn">× 已被注册</span></li>
 										<li><input type="password" id="password" name="password" placeholder="请输入6-20位密码" class="input"/><span class="cff3e3e dn">× 格式错误</span></li>
 										<li><input type="password" id="password_confirmation" name="password_confirmation" placeholder="请再次输入密码" class="input"/><span class="cff3e3e dn">× 两次密码不匹配</span></li>
 										<li><input type="email" id="email" name="email" placeholder="请填写有效邮箱" class="input"/><span class="cff3e3e dn">× 已被注册</span></li>
