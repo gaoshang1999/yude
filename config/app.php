@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'locale' => env('APP_LOCALE', 'en'),
+    'locale' => env('APP_LOCALE', 'zh'),
 
     'timezone' => 'Asia/Shanghai',
 
