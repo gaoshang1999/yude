@@ -3,8 +3,11 @@
 @section('styles')
 <style type="text/css">
   .priceblock {
-    text-align: right;
+    text-align: right !important;
     margin-top: 30px;
+  }
+  .priceblock div {
+    text-align: right !important;
   }
   .priceblock div label {
     min-width: 100px;
@@ -65,10 +68,10 @@
     <label style="margin-left: 20px;">请确保填写信息真实有效，以保证育德园师的工作人员更好的为您服务。</label>
     <div style="margin-left: 20px;">
       <div style="margin-top:10px">
-        <div>收件人：<input name="receiver"></div>
-        <div>手机号：<input name="phone"></div>
-        <div>邮&nbsp;&nbsp;&nbsp;编：<input name="postcode"></div>
-        <div>地&nbsp;&nbsp;&nbsp;址：<input name="address"></div>
+        <div style="margin-bottom: 5px;"><span style="color: red">*</span>收件人：<input name="receiver"></div>
+        <div style="margin-bottom: 5px;"><span style="color: red">*</span>手机号：<input name="phone"></div>
+        <div style="margin-bottom: 5px;"><span style="color: red">*</span>邮&nbsp;&nbsp;&nbsp;编：<input name="postcode"></div>
+        <div style="margin-bottom: 5px;"><span style="color: red">*</span>地&nbsp;&nbsp;&nbsp;址：<input name="address"></div>
       </div>
     </div>
     <input type="hidden" name="items_c" value="{{ $items_c }}"> 
@@ -78,7 +81,7 @@
     <div class="steplabel">购课清单</div>
     <div class="table-responsive">
       <table class="table table-bordered">
-        <thead>
+        <thead><?php $i=1; ?>
           <tr style="background-color: #f6f6f6;">
             <th>序号</th>
             <th>产品名称</th>
@@ -89,9 +92,9 @@
           </tr>
         </thead>
         <tbody>
-          @foreach ($courses as $i=>$v)
+          @foreach ($courses as $v)
           <tr>
-            <td>{{ $i }}</td>
+            <td>{{ $i++ }}</td>
             <td>{{ $v->name }}</td>
             <td>课程</td>
             <td>{{ $v->count }}</td>
@@ -99,9 +102,9 @@
             <td></td>
           </tr>
           @endforeach
-          @foreach ($books as $i=>$v)
+          @foreach ($books as $v)
           <tr>
-            <td>{{ $i }}</td>
+            <td>{{ $i++ }}</td>
             <td>{{ $v->name }}</td>
             <td>教材</td>
             <td>{{ $v->count }}</td>
@@ -113,8 +116,8 @@
       </table>
       <div class="priceblock">
         <div>共{{$count}}件商品，商品总金额：<label>￥{{ number_format($total, 2) }}</label></div>
-        <div>运费：<label>￥20</label></div>
-        <div>应付总额：<label>￥{{ number_format($total+20, 2) }}</label></div>
+        <div><span style="color: red">(满一百可免运费)</span>运费：<label>@if ($total>=100) ￥0 @else ￥20 @endif</label></div>
+        <div>应付总额：<label>￥{{ number_format($total + ($total>=100 ? 0 : 20), 2) }}</label></div>
         <input style="background-color: #f35a01; padding: 10px 20px; border:none; color: white; font-size:16px; margin: 20px auto;" type="submit" value="提交订单">
       </div>
     </div>

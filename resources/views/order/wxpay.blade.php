@@ -56,11 +56,9 @@
       <label style="margin-bottom: 0">订单编号：<span>{{ $order->orderno }}</span></label>
       <label style="margin-bottom: 0" class="pull-right">金额：<span>{{ number_format($order->totalprice, 2) }}</span></label>
     </div>
-    <div class="steplabel">请用微信扫描下方二维码进行支付</div>
-    <hr/>
     <div style="text-align:center">
       <img src="/wxpay/qrcode/{{ $order->orderno }}/{{ $order->totalprice }}"/>
-      <label id="wxscan">微信扫描</label>
+      <div id="wxscan" style="text-align:center; margin-top: 10px;">微信扫描，进行付款</div>
     </div>
   </div>
 </div>

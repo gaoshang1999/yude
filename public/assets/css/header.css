@@ -4,14 +4,14 @@ ul,li{list-style:none;}
 a{text-decoration:none;}
 .clear{clear:both;}
 #header{width:100%;height:56px;background-color:#181818;position:fixed;z-index:99;}
-#header .head{width:1300px;height:56px;margin:0 auto;}
+#header .head{width:100%;height:56px;margin:0 auto;}
 #header #logo{float:left;margin-top:10px;}
 
 #header ul{height:56px;color:#fff;width:630px;margin-left:140px;line-height:56px;display:inline-block;float:left;}
 #header li{height:56px;float:left;margin-left:15px;}
 #header a{color:#fff;font-size:14px;font-family:"ËÎÌו";}
 #header #reg{float:right;width:100px;height:56px;line-height:56px;}
-#header #online{float:right;width:250px;height:56px;line-height:56px;}
+#header #online{float:right;width:300px;height:56px;line-height:56px;}
 #header #online span:first-child{background:url(/assets/img/login_ico_online.png) no-repeat center 18px;display:inline-block;width:18px;margin-right:10px;}
 #header #smxz{position:absolute;top:40px;right:508px;}
 #header2{height:56px;}

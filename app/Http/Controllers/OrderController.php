@@ -107,7 +107,7 @@ class OrderController extends Controller
             $itemData[] = $item;
         }
 
-        $data['totalprice'] = $total;
+        $data['totalprice'] = $total + ($total>=100 ? 0 : 20);
         $data['user_id'] = $request->session()->get('buyer.id', Auth::user()->id);
 
         $order = Order::create($data);
