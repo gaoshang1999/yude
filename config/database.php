@@ -63,7 +63,7 @@ return [
             'port'      => env('DB_PORT', 3306),
             'database'  => env('DB_DATABASE', 'yude'),
             'username'  => env('DB_USERNAME', 'root'),
-            'password'  => env('DB_PASSWORD', 'root'),
+            'password'  => env('DB_PASSWORD', '62053248Ysedu'),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => env('DB_PREFIX', 'yude_'),
