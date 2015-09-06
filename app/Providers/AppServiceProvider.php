@@ -3,6 +3,7 @@
 use Validator;
 use Illuminate\Support\ServiceProvider;
 use SebastianBergmann\Environment\Console;
+use App\Models\Order;
 use DB;
 use Log;
 
@@ -19,9 +20,15 @@ class AppServiceProvider extends ServiceProvider
             return strlen($value) === 11;
         });
 
-        // DB::listen(function($sql, $bindings, $time) {
-        //     Log::info  ($sql);
-        // });
+        DB::listen(function($sql, $bindings, $time) {
+            Log::info  ($sql);
+        });
+        
+        Order::updated(function ($order) {
+            if ( $order->isSuccessfullyPayed() ) {
+                $order -> openCourses();
+            }
+        });
     }
 
     /**
@@ -31,6 +38,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->bind('Ablesky', function ($app) {        
+
+            $ablesky = new \App\Http\Controllers\Ablesky\Ablesky();
+        
+            return $ablesky;
+        });
+        
         $this->app->bind('AlipayWeb', function ($app) {
             $notify_url = $app->request->root() . '/alipay/notify';
             $return_url = $app->request->root() . '/alipay/return';

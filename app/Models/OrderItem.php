@@ -19,4 +19,43 @@ class OrderItem extends Model
     {
         return $this->belongsTo('App\Models\Order');
     }
+    
+    public function isCourse()
+    {
+        if($this->type == 'course')
+        {
+            return true;
+        }
+        return false;
+    }
+    
+    public function isBook()
+    {
+        if($this->type == 'book')
+        {
+            return true;
+        }
+        return false;
+    }
+    
+    public function course()
+    {
+        if($this->isCourse())
+        {
+            $c = json_decode($this->snapshot);
+            return $c;
+        }        
+        return null;
+    }
+    
+    public function book()
+    {
+        if($this->isBook())
+        {
+            $b = json_decode($this->snapshot);
+            return $b;
+        }
+        return null;
+    }
+    
 }
