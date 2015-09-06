@@ -1,7 +1,13 @@
 @extends('front.app')
 
 {{-- Web site Title --}}
-@section('title') 园师课堂-课程详情页 @stop
+@section('title') {{ $course->pagetitle }} @stop
+@section('meta_keywords') 
+    <meta name="keywords" content="{{ $course->pagekeyword }}"/>
+@stop
+@section('meta_description') 
+    <meta name="description" content="{{ $course->pagedescription }}"/>
+@stop
 
 @section('styles') 
         <link href="/assets/css/spxqy.css" rel="stylesheet" type="text/css" /> 

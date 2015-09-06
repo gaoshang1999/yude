@@ -176,12 +176,12 @@ button, input, optgroup, select, textarea {
             <td><label class="price">{{ number_format($v->discount_price, 2) }}</label></td>
             <td style="width:50px;">
               <div class="input-group">
-                <span class="input-group-addon glyphicon glyphicon-minus counter min" aria-hidden="true"></span>
-                <input type="text" class="form-control" style="width:40px; top:1px;" name="count_b_{{ $v->id }}" readonly value="1" data-key="b_{{ $v->id }}" data-value="{{ $v->discount_price }}"/>
+                <span class="input-group-addon glyphicon glyphicon-minus counter min" aria-hidden="true"></span> <?php  $number = $cart_books[$v->id]; ?>
+                <input type="text" class="form-control" style="width:40px; top:1px;" name="count_b_{{ $v->id }}" readonly value="{{ $number }}" data-key="b_{{ $v->id }}" data-value="{{ $v->discount_price }}"/>
                 <span class="input-group-addon glyphicon glyphicon-plus counter plus" aria-hidden="true"></span>
               </div>
             </td>
-             <td><label class="price" id="b_{{ $v->id }}">{{ number_format($v->discount_price, 2) }}</label></td>
+             <td><label class="price" id="b_{{ $v->id }}">{{ number_format($v->discount_price * $number, 2) }}</label></td>
             <td><a href="{{ url("cart/books/remove/$v->id") }}">移除</a></td>    
           </tr>
           @endforeach

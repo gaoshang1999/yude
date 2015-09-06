@@ -1,7 +1,13 @@
 @extends('front.app')
 
 {{-- Web site Title --}}
-@section('title') 园师课堂-教材详情页 @stop
+@section('title') {{ $book->pagetitle }} @stop
+@section('meta_keywords') 
+    <meta name="keywords" content="{{ $book->pagekeyword }}"/>
+@stop
+@section('meta_description') 
+    <meta name="description" content="{{ $book->pagedescription }}"/>
+@stop
 
 @section('styles') 
 <link href="/assets/css/jcxqy.css" rel="stylesheet" type="text/css" />  
@@ -29,7 +35,7 @@
 							<p>{{ $book->summary }}
 
 							</p>
-							<form action="{{ url("cart/books/add/$book->id") }}" method="get">
+							<form action="{{ url("cart/books/add/$book->id") }}" method="post">     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<span>定价 ￥</span><span id="jcxqy_price">{{ $book->discount_price }}</span>
 							&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;    
 							<a>购买数量</a>
