@@ -26,13 +26,28 @@ class MyController extends Controller
 
     public function courses_add(Request $request, $id)
     {
-        $request->session()->push('cart.coureses', $id);
+        $cart_coureses = $request->session()->get('cart.coureses', []);
+        if(! in_array($id, $cart_coureses)){
+            $request->session()->push('cart.coureses', $id);
+        }
         return view('front.cart_added');
     }
     
+    /**
+     * 支持购买多个book
+     * @param Request $request
+     * @param unknown $id
+     * @return \Illuminate\View\View
+     */
     public function books_add(Request $request, $id)
     {
-        $request->session()->push('cart.books', $id);
+        $number = $request->input("number", 1);
+        
+        $cart_books = $request->session()->pull('cart.books', []);
+        unset($cart_books[$id]);
+        $cart_books[$id] = $number;
+        
+        $request->session()->put('cart.books', $cart_books);
         return view('front.cart_added');
     }
     
@@ -49,10 +64,15 @@ class MyController extends Controller
     public function books_remove(Request $request, $id)
     {
         $arr1 = $request->session()->pull('cart.books');
-        $arr2 = array($id);
-        $new_ids =  array_diff($arr1,$arr2);
+//         $arr2 = array($id);
+//         $new_ids =  array_diff($arr1,$arr2);
+        foreach ($arr1 as $k => $v){
+            if($k == $id){
+                unset($arr1[$k]);
+            }
+        }
 
-        $request->session()->put('cart.books', $new_ids);
+        $request->session()->put('cart.books', $arr1);
         return redirect('/order');
     }
     

@@ -39,6 +39,7 @@ $app->get('/courses/lists', 'Admin\CoursesController@lists');
 $app->get('/courses/{id}', 'Admin\CoursesController@detail');
 $app->get('/cart/courses/add/{id}', 'My\MyController@courses_add');
 $app->get('/cart/books/add/{id}', 'My\MyController@books_add');
+$app->post('/cart/books/add/{id}', 'My\MyController@books_add');
 $app->get('/cart/courses/remove/{id}', 'My\MyController@courses_remove');
 $app->get('/cart/books/remove/{id}', 'My\MyController@books_remove');
 $app->post('/ablesky/usercheck/{username}', 'Ablesky\AbleskyController@checkIfUserNameDuplicated');

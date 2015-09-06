@@ -24,19 +24,21 @@ class OrderController extends Controller
     public function step1(Request $request)
     {
         $course_ids = $request->session()->get('cart.coureses');
-        $book_ids = $request->session()->get('cart.books');
+        $cart_books = $request->session()->get('cart.books');
+        $book_ids = array_keys($cart_books);
+        
         $courses = Courses::whereIn('id', $course_ids)->get();
         $books = Books::whereIn('id', $book_ids)->get();
         
         $total = 0;
         foreach ($courses as $c) {            
-            $total +=  $c->discount_price;
+            $total +=  $c->discount_price ;
         }
         foreach ($books as $c) {
-            $total +=  $c->discount_price;
+            $total +=  ($c->discount_price * $cart_books[$c->id] );
         }
 
-        $data = ['courses'=>$courses, 'books'=>$books, 'total'=>$total];
+        $data = ['courses'=>$courses, 'books'=>$books, 'cart_books'=>$cart_books, 'total'=>$total];
         return view('order.step1', $data);
     }
 
