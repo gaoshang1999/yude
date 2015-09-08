@@ -68,7 +68,10 @@ class CoursesController extends Controller
                 'hours_description' => 'required',
                 'teacher' => 'required',
 //                 'video' => 'required',
-                'trialvideo' => 'required|url',      
+                'trialvideo' => 'required|url',   
+                'sub_ablesky_category'=> 'required',
+                'zonghe_ablesky_category'=> 'required',
+                'nengli_ablesky_category'=> 'required_if:level,zhongxue',
             ]);
 
             $input = $request->all();
@@ -128,10 +131,14 @@ class CoursesController extends Controller
                 'hours_description' => 'required',
                 'teacher' => 'required',
 //                 'video' => 'required',
-                'trialvideo' => 'required|url',      
+                'trialvideo' => 'required|url',     
+                'sub_ablesky_category'=> 'required',
+                'zonghe_ablesky_category'=> 'required',
+                'nengli_ablesky_category'=> 'required_if:level,zhongxue',
             ]);
 
             $input = $request->all();
+            dump($input);
             $courses->fill($input);
            
             $imgs = ['cover', 'image'];
@@ -154,7 +161,7 @@ class CoursesController extends Controller
             $courses->save();
 
             $referer = $input['referer'];
-            return redirect(empty($referer)?'/admin/courses':$referer);
+//             return redirect(empty($referer)?'/admin/courses':$referer);
         }
         else {
             return view('admin.courses.create_edit', ['courses' => $courses]);

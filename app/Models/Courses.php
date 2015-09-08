@@ -19,13 +19,28 @@ class Courses extends Model
                             'pagetitle', 'pagekeyword', 'pagedescription', 
                             'ablesky_category' , 'discount_price' , 'image',
                             'description', 'hours_description', 'teacher',
-                            'discount_subprice', 'discount_zongheprice', 'discount_nengliprice'
+                            'discount_subprice', 'discount_zongheprice', 'discount_nengliprice',
+                            'sub_ablesky_category', 'zonghe_ablesky_category', 'nengli_ablesky_category'
     ];
 
     
     public function ablesky_category()
     {
         return $this->hasOne('App\Models\AbleskyCategory', 'id', 'ablesky_category');
+    }
+    
+    public function sub_ablesky_category()
+    {
+        return $this->hasOne('App\Models\AbleskyCategory', 'id', 'sub_ablesky_category');
+    }
+    public function zonghe_ablesky_category()
+    {
+        return $this->hasOne('App\Models\AbleskyCategory', 'id', 'zonghe_ablesky_category');
+    }
+    
+    public function nengli_ablesky_category()
+    {
+        return $this->hasOne('App\Models\AbleskyCategory', 'id', 'nengli_ablesky_category');
     }
         
     
