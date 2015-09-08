@@ -22,26 +22,26 @@ class OrdersController extends Controller
             switch ($input['stype']) {
                 case 'phone':
                 case 'orderno':
-                    $input['orders'] = Order::where($input['stype'], $input['stext'])->simplePaginate(20);
+                    $input['orders'] = Order::where($input['stype'], $input['stext'])->orderBy('created_at', 'desc')->simplePaginate(20);
                     break;
                 case 'paymode':
-                    $input['orders'] = Order::where($input['stype'], $input['svalue'])->simplePaginate(20);
+                    $input['orders'] = Order::where($input['stype'], $input['svalue'])->orderBy('created_at', 'desc')->simplePaginate(20);
                     break;
                 case 'paytime':
                     $cond = $input['svalue'] == 'payed' ? 'whereNotNull' : 'whereNull';
-                    $input['orders'] = Order::$cond('paytime')->simplePaginate(20);
+                    $input['orders'] = Order::$cond('paytime')->orderBy('created_at', 'desc')->simplePaginate(20);
                     break;
                 case 'item_title':
                     $title = $input['stext'];
-                    $input['orders'] = Order::whereHas('orderItems', function($q) use ($title) { $q->where('title', 'like', '%'.$title.'%'); })->simplePaginate(20);
+                    $input['orders'] = Order::whereHas('orderItems', function($q) use ($title) { $q->where('title', 'like', '%'.$title.'%'); })->orderBy('created_at', 'desc')->simplePaginate(20);
                     break;
                 default:
-                    $input['orders'] = Order::simplePaginate(20);
+                    $input['orders'] = Order::orderBy('created_at', 'desc')->simplePaginate(20);
                     break;
             }
         }
         else {
-            $input['orders'] = Order::simplePaginate(20);
+            $input['orders'] = Order::orderBy('created_at', 'desc')->simplePaginate(20);
         }
 
         $input['courses'] = Courses::where('enable', true)->get();
@@ -65,5 +65,12 @@ class OrdersController extends Controller
         $request->session()->put('buyer.id', $request->input('user'));
 
         return redirect('/order');
+    }
+    
+    public function detail(Request $request, $id)
+    {
+        $order = Order::where('id', $id)->first();  
+        
+        return view('admin.orders.orderItems', ['v' => $order]);
     }
 }

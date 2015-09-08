@@ -32,7 +32,7 @@ class CoursesController extends Controller
             else if($q == '下架') { $q = 0;}
         }        
     
-        $courses = Courses::where($field, 'like', '%'.$q.'%')->simplePaginate(20) ;
+        $courses = Courses::where($field, 'like', '%'.$q.'%')->orderBy('created_at', 'desc')->simplePaginate(20)  ;
         $courses ->appends(['q' => $request['q']]);    
         $courses ->appends(['field' => $field]);
 

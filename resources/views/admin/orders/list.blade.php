@@ -42,11 +42,13 @@
         <tr class="odd">
           <th>订单编号</th>
           <th>购买时间</th>
+          <th>产品类别</th>
           <th>产品名称</th>
           <th>产品价格</th>
           <th>订单总价</th>
           <th>付款方式</th>
           <th>订单状态</th>
+          <th>用户名</th>
           <th>手机号</th>
           <th>开通方式</th>
           <th>状态</th>
@@ -55,21 +57,24 @@
       </thead>
       <tbody>
         @foreach ($orders->all() as $rowIndex=>$v) <?php $rows = count($v->orderItems); ?>
-        <tr class="{{ $rowIndex%2 == 0 ? '' : 'odd' }}">
+        <tr class="{{ $rowIndex%2 == 0 ? '' : 'odd' }}" ondblclick="javascript:showDialog({{ $v->id }})">
           <td rowspan="{{ $rows }}">{{ $v->orderno }}</td>
           <td rowspan="{{ $rows }}">{{ $v->created_at }}</td>
+          <td> @if($v->orderItems[0]->isBook()) 教材 @else 课程 @endif </td>
           <td>{{ $v->orderItems[0]->title }}</td>
           <td>{{ $v->orderItems[0]->price }}</td>
           <td rowspan="{{ $rows }}">{{ $v->totalprice }}</td>          
           <td rowspan="{{ $rows }}">{{ $v->paymode }}</td>          
           <td rowspan="{{ $rows }}">{{ $v->paytime ? '已支付' : '未支付' }}</td>
+          <td rowspan="{{ $rows }}">{{ $v->user->name }}</td>
           <td rowspan="{{ $rows }}">{{ $v->phone }}</td>
           <td rowspan="{{ $rows }}"></td>
           <td rowspan="{{ $rows }}"></td>
-          <td rowspan="{{ $rows }}"></td>
+          <td rowspan="{{ $rows }}"> </td>
         </tr>
         @for($i=1; $i<$rows; $i++)
         <tr class="{{ $rowIndex%2 == 0 ? '' : 'odd' }}">
+          <td> @if($v->orderItems[$i]->isBook()) 教材 @else 课程 @endif </td>
           <td>{{ $v->orderItems[$i]->title }}</td>
           <td>{{ $v->orderItems[$i]->price }}</td>
         </tr>
@@ -186,7 +191,27 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> <!-- end of modal -->
+  
+  <!-- Modal -->
+
+
+  <div class="modal fade" id="orderItemModal" tabindex="-1" role="dialog" aria-labelledby="orderItemModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="orderItemModalLabel">订单详情&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label id="selectedLabel"></label></h4>
+        </div>
+        <div class="modal-body">
+            <div class="loading-modal" id ="orderItemModal_body">加载中...</div>
+         </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+        </div>
+      </div>
+    </div>
+  </div> <!-- end of modal -->
 </div>
 @endsection
 
@@ -220,5 +245,15 @@
       }
     });
   });
+
+   function showDialog(id) {
+	    $("#orderItemModal_body").html("加载中...");  // Or use a progress bar...
+	    $("#orderItemModal").modal("show");
+	    $.ajax({
+	        url: "{{ url('/admin/orders')}}/"+ id,
+	    }).success(function(data) {
+	        $("#orderItemModal_body").html(data);
+	    });
+	}
 </script>
 @endsection

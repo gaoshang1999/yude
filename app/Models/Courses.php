@@ -21,7 +21,7 @@ class Courses extends Model
                             'description', 'hours_description', 'teacher',
                             'discount_subprice', 'discount_zongheprice', 'discount_nengliprice'
     ];
-    
+
     
     public function ablesky_category()
     {
@@ -141,5 +141,41 @@ class Courses extends Model
             $total += $this-> discount_nengliprice;
         }
         return $total;
+    }
+    
+    /**
+     * 
+     * @return string 子科目的名称
+     */
+    public function getSubName()
+    {
+        if($this -> isZhongxue() ){
+            return "教育知识与能力";
+        }else if($this -> isXiaoxue() ){
+            return " 教育教学知识与能力";
+        }else {
+            return "保教知识与能力";
+        }
+    }
+
+    
+    /**
+     * 
+     * @param integer $combine
+     * @return Array 
+     */
+    public function listSubitemsName($combine)
+    {
+        $subitemsName = [];
+        if($this -> hasSub($combine)){
+            $subitemsName []= $this->getSubName();
+        }
+        if($this -> hasZonghe($combine)){
+            $subitemsName []=  "综合素质";
+        }
+        if($this -> hasNengli($combine)){
+            $subitemsName []= "学科知识与能力";
+        }
+        return $subitemsName;
     }
 }
