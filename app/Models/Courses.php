@@ -193,4 +193,25 @@ class Courses extends Model
         }
         return $subitemsName;
     }
+    
+    /**
+     *
+     * @param integer $combine
+     * @return Array 
+     */
+    public function getAbleskyCategoryIds($combine)
+    {
+        $category_ids = [];
+        if($this -> hasSub($combine)){
+            $category_ids []= $this->sub_ablesky_category;
+        }
+        if($this -> hasZonghe($combine)){
+            $category_ids []=  $this->zonghe_ablesky_category;
+        }
+        if($this -> hasNengli($combine)){
+            $category_ids []= $this->nengli_ablesky_category;
+        }
+        return $category_ids;
+    }
+
 }

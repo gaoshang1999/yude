@@ -98,6 +98,7 @@ $app->group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', '
     $app->get('/orders', 'OrdersController@orders');
     $app->post('/orders/new', 'OrdersController@neworder');
     $app->get('/orders/{id}', 'OrdersController@detail');
+    $app->post('/orders/open/{id}', 'OrdersController@open');
 });
 
 //能力天空接口-课程目录树

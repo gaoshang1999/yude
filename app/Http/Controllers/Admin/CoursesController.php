@@ -161,7 +161,7 @@ class CoursesController extends Controller
             $courses->save();
 
             $referer = $input['referer'];
-//             return redirect(empty($referer)?'/admin/courses':$referer);
+            return redirect(empty($referer)?'/admin/courses':$referer);
         }
         else {
             return view('admin.courses.create_edit', ['courses' => $courses]);

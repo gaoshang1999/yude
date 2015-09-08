@@ -13,7 +13,8 @@ class Order extends Model
      */
     protected $table = 'orders';
 
-    protected $fillable = ['orderno', 'totalprice', 'receiver', 'phone', 'postcode', 'address', 'paymode', 'paytime', 'payload', 'user_id'];
+    protected $fillable = ['orderno', 'totalprice', 'receiver', 'phone', 'postcode', 'address',
+               'paymode', 'paytime', 'payload', 'user_id', 'open_way'];
 
     public function orderItems()
     {
@@ -22,7 +23,7 @@ class Order extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\User', 'user_id');
     }
     
     /**

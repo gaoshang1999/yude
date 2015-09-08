@@ -7,7 +7,7 @@ use App\Models\Order;
 use App\Models\Courses;
 use App\Models\Books;
 use App\Models\User;
-
+use Illuminate\Http\JsonResponse;
 class OrdersController extends Controller
 {
     public function __construct()
@@ -72,5 +72,19 @@ class OrdersController extends Controller
         $order = Order::where('id', $id)->first();  
         
         return view('admin.orders.orderItems', ['v' => $order]);
+    }
+    
+    public function open(Request $request, $id)
+    {
+        $order = Order::where('id', $id)->first();
+        
+        $ablesky= app('Ablesky');
+        $ret = $ablesky -> openCourses( $order, 'manual' );
+        
+        if($ret){
+            return new JsonResponse(['success'=>true, 'message' => '']);
+        }else{
+            return new JsonResponse(['success'=>false, 'message' => '开通失败']);  
+        }        
     }
 }
