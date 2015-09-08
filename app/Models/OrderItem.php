@@ -13,7 +13,7 @@ class OrderItem extends Model
      */
     protected $table = 'orderitems';
 
-    protected $fillable = ['count', 'price', 'title', 'snapshot', 'order_id', 'type'];
+    protected $fillable = ['count', 'price', 'title', 'snapshot', 'order_id', 'type', 'is_opened'];
 
     public function order()
     {
@@ -22,25 +22,17 @@ class OrderItem extends Model
     
     public function isCourse()
     {
-        if($this->type == 'course')
-        {
-            return true;
-        }
-        return false;
+        return $this->type == 'course';
     }
     
     public function isBook()
     {
-        if($this->type == 'book')
-        {
-            return true;
-        }
-        return false;
+        return $this->type == 'book' ;
     }
     
     public function course()
     {
-        if($this->isCourse())
+        if($this->isCourse() && $this->snapshot)
         {
             $c = json_decode($this->snapshot);
             return $c;
@@ -50,7 +42,7 @@ class OrderItem extends Model
     
     public function book()
     {
-        if($this->isBook())
+        if($this->isBook() && $this->snapshot)
         {
             $b = json_decode($this->snapshot);
             return $b;

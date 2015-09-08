@@ -71,7 +71,7 @@
 										<div class="jibie_1_2">
 												<form action="{{url("cart/courses/add/$v->id") }}" method="get">
 												<p>{{ $v->name }}</p>
-												<p><span class="orange">{{ $v->totalprice }}</span>&nbsp;|&nbsp;<del>￥{{ $v->totalprice }}</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<p><span class="orange">{{ $v->discount_price }}</span>&nbsp;|&nbsp;<del>￥{{ $v->totalprice }}</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												<a href="{{ $v->trialvideo }}" class="gray fs12" target="_blank"><img src="/assets/img/splby_ico1.jpg" />&nbsp;试听</a>&nbsp;
 												<input type="submit" value='购买' class="button fz12"/></p>
 												</form>
@@ -98,7 +98,7 @@
 										<div class="jibie_1_2">
 												<form action="{{url("cart/courses/add/$v->id") }}" method="get">
 												<p>{{ $v->name }}</p>
-												<p><span class="orange">{{ $v->totalprice }}</span>&nbsp;|&nbsp;<del>￥{{ $v->totalprice }}</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<p><span class="orange">{{ $v->discount_price }}</span>&nbsp;|&nbsp;<del>￥{{ $v->totalprice }}</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												<a href="{{ $v->trialvideo }}" class="gray fs12" target="_blank"><img src="/assets/img/splby_ico1.jpg" />&nbsp;试听</a>&nbsp;
 												<input type="submit" value='购买' class="button fz12"/></p>
 												</form>
@@ -147,7 +147,10 @@
 		 function submitOrder(gid){
 			var selected_radio = $("input[name='group_"+gid+"']:checked");
 			var id = selected_radio.val();
-
+		    if(! id){
+		        alert("请先选择课程级别(中学、小学、幼儿)，再点击购买");
+		        return false;
+		    }
 
 		    var form = $('#form_group_'+gid);
 		    form.attr('action', form.attr('action')+"/"+id);

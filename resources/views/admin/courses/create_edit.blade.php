@@ -77,24 +77,49 @@
       <label for="subprice" class="col-sm-2 control-label"><span style="color: red">*</span>子科价格</label>
       <div class="col-sm-3">
         <input type="hidden" name="subname" id="subname">
-        <label class="control-label" id="subnamelabel">教育知识与能力</label>
+        <label class="control-label" id="subnamelabel" >教育知识与能力</label>
       </div>
       <div class="col-sm-6">
         <input type="number" class="form-control" name="subprice" placeholder="子科价格" min="0" step="0.01" value="{{ old('subprice', $courses ? $courses->subprice : 0) }}">
       </div>
     </div>
     <div class="form-group">
+      <label for="discount_subprice" class="col-sm-2 control-label"><span style="color: red">*</span>子科优惠价格</label>
+      <div class="col-sm-3">
+        <label class="control-label" id="discount_subnamelabel">教育知识与能力</label>
+      </div>
+      <div class="col-sm-6">
+        <input type="number" class="form-control" name="discount_subprice" placeholder="子科优惠价格" min="0" step="0.01" value="{{ old('discount_subprice', $courses ? $courses->discount_subprice : 0) }}">
+      </div>
+    </div>
+    
+    <div class="form-group">
       <label for="zongheprice" class="col-sm-2 control-label"><span style="color: red">*</span>综合素质价格</label>
       <div class="col-sm-9">
         <input type="number" class="form-control" name="zongheprice" placeholder="综合素质价格" min="0" step="0.01" value="{{ old('zongheprice', $courses ? $courses->zongheprice : 0) }}">
       </div>
     </div>
+    
+     <div class="form-group">
+      <label for="discount_zongheprice" class="col-sm-2 control-label"><span style="color: red">*</span>综合素质优惠价格</label>
+      <div class="col-sm-9">
+        <input type="number" class="form-control" name="discount_zongheprice" placeholder="综合素质价格" min="0" step="0.01" value="{{ old('discount_zongheprice', $courses ? $courses->discount_zongheprice : 0) }}">
+      </div>
+    </div>
+    
     <div class="form-group" id="nengli">
       <label for="nengliprice" class="col-sm-2 control-label"><span style="color: red">*</span>学科知识与能力价格</label>
       <div class="col-sm-9">
         <input type="number" class="form-control" name="nengliprice" placeholder="学科知识与能力价格" min="0" step="0.01" value="{{ old('nengliprice', $courses ? $courses->nengliprice : 0) }}">
       </div>
     </div>
+    <div class="form-group" id="discount_nengli">
+      <label for="discount_nengliprice" class="col-sm-2 control-label"><span style="color: red">*</span>学科知识与能力优惠价格</label>
+      <div class="col-sm-9">
+        <input type="number" class="form-control" name="discount_nengliprice" placeholder="学科知识与能力价格" min="0" step="0.01" value="{{ old('discount_nengliprice', $courses ? $courses->discount_nengliprice : 0) }}">
+      </div>
+    </div>
+        
 <hr/>
     <div class="form-group">
       <label for="cover" class="col-sm-2 control-label"><span style="color: red">*</span>课程封面图片</label>
@@ -186,9 +211,11 @@
     $('#level').change(function(){
       var v = $(this).val();
       v == 'zhongxue' ? $('#nengli').show() : $('#nengli').hide();
-      if (v == 'zhongxue') { $('#subname').val('教育知识与能力'); $('#subnamelabel').text('教育知识与能力'); }
-      if (v == 'xiaoxue') { $('#subname').val('教育教学知识与能力'); $('#subnamelabel').text('教育教学知识与能力'); }
-      if (v == 'youer') { $('#subname').val('保教知识与能力'); $('#subnamelabel').text('保教知识与能力'); }
+      v == 'zhongxue' ? $('#discount_nengli').show() : $('#discount_nengli').hide();   
+      
+      if (v == 'zhongxue') { $('#subname').val('教育知识与能力'); $('#subnamelabel').text('教育知识与能力');  $('#discount_subnamelabel').text('教育知识与能力');  }
+      if (v == 'xiaoxue') { $('#subname').val('教育教学知识与能力'); $('#subnamelabel').text('教育教学知识与能力'); $('#discount_subnamelabel').text('教育教学知识与能力'); }
+      if (v == 'youer') { $('#subname').val('保教知识与能力'); $('#subnamelabel').text('保教知识与能力'); $('#discount_subnamelabel').text('保教知识与能力'); }
     });
 
     $('#level').change();

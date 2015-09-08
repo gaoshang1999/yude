@@ -53,7 +53,7 @@
       <div class="bar"><span>4</span></div>
     </div>
   </div>
-  <form action="/order/step3" method="post">
+  <form action="/order/step3" method="post" id="order_form">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
   <div class="orderblock">
     <div class="steplabel">支付方式</div>
@@ -68,14 +68,14 @@
     <label style="margin-left: 20px;">请确保填写信息真实有效，以保证育德园师的工作人员更好的为您服务。</label>
     <div style="margin-left: 20px;">
       <div style="margin-top:10px">
-        <div style="margin-bottom: 5px;"><span style="color: red">*</span>收件人：<input name="receiver"></div>
-        <div style="margin-bottom: 5px;"><span style="color: red">*</span>手机号：<input name="phone"></div>
-        <div style="margin-bottom: 5px;"><span style="color: red">*</span>邮&nbsp;&nbsp;&nbsp;编：<input name="postcode"></div>
-        <div style="margin-bottom: 5px;"><span style="color: red">*</span>地&nbsp;&nbsp;&nbsp;址：<input name="address"></div>
+        <div style="margin-bottom: 5px;"><span style="color: red">*</span>收件人：<input name="receiver" id="order_receiver" data-label="收件人"><span id="receiver_hint"  class="dn" style="color: red"></span></div>
+        <div style="margin-bottom: 5px;"><span style="color: red">*</span>手机号：<input name="phone" id="order_phone" data-label="手机号"><span id="phone_hint"  class="dn" style="color: red"></span></div>
+        <div style="margin-bottom: 5px;"><span style="color: red">*</span>邮&nbsp;&nbsp;&nbsp;编：<input name="postcode" id="order_postcode" data-label="邮编"><span id="postcode_hint"  class="dn" style="color: red"></span></div>
+        <div style="margin-bottom: 5px;"><span style="color: red">*</span>地&nbsp;&nbsp;&nbsp;址：<input name="address" id="order_address" data-label="地址"><span id="address_hint"  class="dn" style="color: red"></span></div>
       </div>
     </div>
-    <input type="hidden" name="items_c" value="{{ $items_c }}"> 
-    <input type="hidden" name="items_b" value="{{ $items_b }}">
+    <input type="hidden" name="items_c" value="{{ json_encode($items_c) }}"> 
+    <input type="hidden" name="items_b" value="{{ json_encode($items_b) }}">
   </div>
   <div class="orderblock" style="margin-top: 10px;">
     <div class="steplabel">购课清单</div>
@@ -98,7 +98,7 @@
             <td>{{ $v->name }}</td>
             <td>课程</td>
             <td>{{ $v->count }}</td>
-            <td>{{ $v->count * $v->discount_price }}</td>
+            <td>{{ $v->computePrice( $items_c[$v->id] ) }}</td>
             <td></td>
           </tr>
           @endforeach
@@ -138,5 +138,71 @@
       }
     });
   });
+
+   function check_phone(element_id){
+	 var element = $("#"+element_id);
+  	 var span = element.parent().find('span').eq(1); 
+     var value = element.val();  
+
+      var reg=/^1\d{10}$/;       
+      if(value.length ==0){
+      	span.removeClass("dn");
+      	span.html("× 请输入手机号");
+      	return false;
+      }else if (!reg.test(value)) {
+      	span.removeClass("dn");
+      	span.html("× 手机号格式错误");
+      	return false;
+      }else{
+     	 span.addClass("dn");
+         return true;
+      }
+      return true;
+	};
+
+
+ function check(element_id){
+	 var element = $("#"+element_id);
+	 var value = element.val();  
+	 var span = element.parent().find('span').eq(1);
+	 var label = element.data('label');
+
+	 if(value.length == 0 ){
+         span.html("× 请输入"+label);
+         span.removeClass("dn");
+         return false;
+     }else{
+    	 span.addClass("dn");
+         return true;
+     }
+     return true;
+ }
+  
+  var order_form = $('#order_form');
+  order_form.submit(function (ev) { 
+	  if(!check("order_receiver")){
+          ev.preventDefault();
+	      return false;
+	  }
+
+	  if(!check_phone("order_phone")){
+          ev.preventDefault();
+	      return false;
+	  }
+
+	  if(!check("order_postcode")){
+          ev.preventDefault();
+	      return false;
+	  }
+
+	  if(!check("order_address")){
+          ev.preventDefault();
+	      return false;
+	  }
+  	
+      return true;
+  });
+
+  
 </script>
 @endsection

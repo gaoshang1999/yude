@@ -151,17 +151,25 @@ button, input, optgroup, select, textarea {
           @foreach ($courses ->all() as $v)
           <tr class="choose">
             <td><label><input type="checkbox" class="checker video" name="check_c_{{ $v->id }}"><img src="{{ $v->cover }}"></label></td>
-            <td>{{ $v->name }}</td>
-            <td><label class="price">{{ number_format($v->discount_price, 2) }}</label></td>
+            <td><span style="margin-bottom: 10px;"> {{ $v->name }} </span> <br />
+
+            <label><input type="checkbox" name="" value="1"  @if( $v ->hasSub( $cart_courses[$v->id] )) checked @endif disabled onclick="return false;" />&nbsp;{{$v->subname}}</label>&nbsp;&nbsp;&nbsp;
+			<label><input type="checkbox" name="" value="2"  @if($v ->hasZonghe( $cart_courses[$v->id] )) checked @endif disabled onclick="return false;" />&nbsp;综合素质</label>&nbsp;&nbsp;&nbsp;
+			@if($v->isZhongxue())
+			<label><input type="checkbox" name="" value="4"  @if($v ->hasNengli( $cart_courses[$v->id] )) checked @endif disabled onclick="return false;" />&nbsp;学科知识与能力</label>
+            @endif
+          
+            </td>
+            <td><label class="price">{{ number_format($v->computePrice($cart_courses[$v->id]), 2) }}</label></td>
             <td style="width:50px;">
               <div class="input-group">
 
-                <input type="hidden" class="form-control" style="width:40px; top:1px;" name="count_c_{{ $v->id }}" readonly value="1" data-key="c_{{ $v->id }}" data-value="{{ $v->totalprice }}"/>
+                <input type="hidden"  name="count_c_{{ $v->id }}"  value="{{ $cart_courses[$v->id] }}" data-key="c_{{ $v->id }}" data-value="{{ $v->totalprice }}"/>
      
                 1
               </div>
             </td>
-             <td><label class="price" id="c_{{ $v->id }}">{{ number_format($v->discount_price, 2) }}</label></td>
+             <td><label class="price" id="c_{{ $v->id }}">{{ number_format($v->computePrice($cart_courses[$v->id]), 2) }}</label></td>
             <td><a href="{{ url("cart/courses/remove/$v->id") }}">移除</a></td>         
           </tr>
           @endforeach

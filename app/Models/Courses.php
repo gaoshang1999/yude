@@ -18,12 +18,128 @@ class Courses extends Model
                             'nengliprice', 'cover', 'video', 'trialvideo', 'summary', 
                             'pagetitle', 'pagekeyword', 'pagedescription', 
                             'ablesky_category' , 'discount_price' , 'image',
-                            'description', 'hours_description', 'teacher'
+                            'description', 'hours_description', 'teacher',
+                            'discount_subprice', 'discount_zongheprice', 'discount_nengliprice'
     ];
     
     
     public function ablesky_category()
     {
         return $this->hasOne('App\Models\AbleskyCategory', 'id', 'ablesky_category');
+    }
+        
+    
+    public function isZhongxue(){
+        return $this->level == "zhongxue";
+    }
+    
+    public function isXiaoxue(){
+        return $this->level == "xiaoxue";
+    }
+    
+    public function isYouer(){
+        return $this->level == "youer";
+    }
+    
+    /**
+     * 
+     * 子科名称：文本框，子科名称根据级别变化
+                        中学：教育知识与能力 
+                        小学：教育教学知识与能力 
+                        幼儿：保教知识与能力
+     * @var unknown
+     */
+    const SUB = 1;
+    
+    /**
+     * 综合素质：文本框
+     */
+    
+    const ZONGHE = 2;
+    
+    /**
+     * 学科知识与能力：文本框，只有级别选择“中学”，才会出现该项
+     */
+    const NENGLI = 4;
+    
+    /**
+     * 默认的子科目
+     * 中学有三个子科目
+     * 小学、幼儿有两个子科目
+     * @return boolean
+     */
+    public function defaultSubitem(){
+        if($this -> isZhongxue() ){
+            return [self::SUB , self::ZONGHE , self::NENGLI];
+        }else{
+            return [self::SUB , self::ZONGHE ];
+        }
+    }
+    
+    /**
+     * 通过逻辑与运算求值，把包含的子科目用一个integer表示。
+     * @param Array $subitems
+     */
+    public function encodeSubitems($subitems)
+    {
+        if( count($subitems) == 0){
+            return 0;
+        }
+    
+        $combine = $subitems[0];
+        for($i=1; $i < count($subitems); $i++ ){
+            $combine |= $subitems[$i];
+        }
+        return $combine;
+    }
+    
+    /**
+     * 是否包含 子科一
+     * @param integer $combine
+     * @return boolean
+     */
+    public function hasSub($combine)
+    {
+        return $combine & self::SUB;
+    }
+    
+    /**
+     * 是否包含 综合素质
+     * @param integer $combine
+     * @return boolean
+     */
+    public function hasZonghe($combine)
+    {
+        return $combine & self::ZONGHE;
+    }
+    
+    /**
+     * 是否包含 学科知识与能力
+     * @param integer $combine
+     * @return boolean
+     */
+    public function hasNengli($combine)
+    {
+        return $combine & self::NENGLI;
+    }
+    
+    /**
+     * 根据包含的子科目， 计算价格
+     * @param integer $combine
+     */
+    public function computePrice($combine)
+    {
+        $total = 0;
+        
+        if($this -> hasSub($combine)){
+            $total += $this-> discount_subprice;
+        }
+        if($this -> hasZonghe($combine)){
+            $total += $this-> discount_zongheprice;
+        }
+        if($this -> hasNengli($combine)){
+            $total += $this-> discount_nengliprice;
+        }
+        return $total;
     }
 }

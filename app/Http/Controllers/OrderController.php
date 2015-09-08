@@ -23,8 +23,9 @@ class OrderController extends Controller
 
     public function step1(Request $request)
     {
-        $course_ids = $request->session()->get('cart.coureses');
-        $cart_books = $request->session()->get('cart.books');
+        $cart_courses = $request->session()->get('cart.coureses', []); 
+        $course_ids = array_keys($cart_courses);
+        $cart_books = $request->session()->get('cart.books', []);
         $book_ids = array_keys($cart_books);
         
         $courses = Courses::whereIn('id', $course_ids)->get();
@@ -32,13 +33,13 @@ class OrderController extends Controller
         
         $total = 0;
         foreach ($courses as $c) {            
-            $total +=  $c->discount_price ;
+            $total +=  $c->computePrice($cart_courses[$c->id]);
         }
         foreach ($books as $c) {
             $total +=  ($c->discount_price * $cart_books[$c->id] );
         }
 
-        $data = ['courses'=>$courses, 'books'=>$books, 'cart_books'=>$cart_books, 'total'=>$total];
+        $data = ['courses'=>$courses, 'cart_courses' => $cart_courses, 'books'=>$books, 'cart_books'=>$cart_books, 'total'=>$total];
         return view('order.step1', $data);
     }
 
@@ -63,7 +64,7 @@ class OrderController extends Controller
         $books = Books::whereIn('id', $book_ids)->get();
         foreach ($courses as $c) {
             $c->count = intval($request->input('count_c_' . $c->id));
-            $total += $c->count * $c->discount_price;
+            $total +=  $c->computePrice($c->count);
             $items_c[''. $c->id] = $c->count;
             $count += $c->count;
         }
@@ -73,7 +74,7 @@ class OrderController extends Controller
             $items_b[''. $c->id] = $c->count;
             $count += $c->count;
         }
-        return view('order.step2', ['courses'=>$courses, 'books'=> $books, 'total'=>$total, 'count'=> $count, 'items_c'=>json_encode($items_c), 'items_b'=>json_encode($items_b)]);
+        return view('order.step2', ['courses'=>$courses, 'books'=> $books, 'total'=>$total, 'count'=> $count, 'items_c'=>$items_c, 'items_b'=>$items_b]);
     }
 
     public function step3(Request $request)
@@ -85,13 +86,14 @@ class OrderController extends Controller
         $itemData = array();
         
         $items_c = json_decode($data['items_c'], true);        
+        dump($items_c);
         $courses = Courses::whereIn('id', array_keys($items_c))->get();
         foreach ($courses as $c) {
             $item['snapshot'] = json_encode($c);
             $c->count = $items_c[''.$c->id];
-            $total += $c->count * $c->discount_price;
+            $total += $c->computePrice($c->count);
             $item['count'] = $c->count;
-            $item['price'] = $c->discount_price;
+            $item['price'] = $c->computePrice($c->count);
             $item['title'] = $c->name;
             $item['type'] = "course";
             $itemData[] = $item;

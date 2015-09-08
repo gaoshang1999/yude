@@ -26,10 +26,15 @@ class MyController extends Controller
 
     public function courses_add(Request $request, $id)
     {
+        $c = Courses::where('id', 1)->first();
+                
+        $subitem = $request->input("subitem", $c->defaultSubitem());
+
         $cart_coureses = $request->session()->get('cart.coureses', []);
-        if(! in_array($id, $cart_coureses)){
-            $request->session()->push('cart.coureses', $id);
-        }
+        unset($cart_coureses[$id]);
+        $cart_coureses[$id] = $c-> encodeSubitems($subitem);
+
+        $request->session()->put('cart.coureses', $cart_coureses);
         return view('front.cart_added');
     }
     

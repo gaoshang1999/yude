@@ -26,21 +26,16 @@
 						<div class="wenzi">
 								<h1>{{ $course->name }}</h1>
 								<p>{{ $course->summary }}</p>
-								<form action="{{ url("cart/courses/add/$course->id") }}" method="get">
-								<p><input type="submit" title="立即购买" value="立即购买 ￥{{ $course->discount_price }}"  class="button"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<span class="fz24 gray">原价&nbsp;<del>￥{{ $course->totalprice }}</del></span> </p>
-								<p class="p3">可选单科&nbsp;&nbsp;&nbsp;&nbsp;
-								@if($course->level == "zhongxue")
-										<label><input type="checkbox" name="buy" value="" />&nbsp;教育知识与能力</label>&nbsp;&nbsp;&nbsp;
-										<label><input type="checkbox" name="buy" value="" />&nbsp;综合素质</label>&nbsp;&nbsp;&nbsp;
-										<label><input type="checkbox" name="buy" value=""/>&nbsp;学科知识与能力</label>
-								@elseif($course->level == "xiaoxue")
-										<label><input type="checkbox" name="buy" value="" />&nbsp;教育教学知识与能力</label>&nbsp;&nbsp;&nbsp;
-										<label><input type="checkbox" name="buy" value="" />&nbsp;综合素质</label>&nbsp;&nbsp;&nbsp;
-								@elseif($course->level == "youer")
-										<label><input type="checkbox" name="buy" value="" />&nbsp;保教知识与能力</label>&nbsp;&nbsp;&nbsp;
-										<label><input type="checkbox" name="buy" value="" />&nbsp;综合素质</label>&nbsp;&nbsp;&nbsp;								
+								<form action="{{ url("cart/courses/add/$course->id") }}" method="post" id="order_form">     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+								<p><input type="submit" title="立即购买" id="discount_price" value="立即购买 ￥{{ $course->discount_price }}"  class="button"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<span class="fz24 gray">原价&nbsp;<del id="total_price">￥{{ $course->totalprice }}</del></span> </p>
+								<p class="p3">可选单科&nbsp;&nbsp;&nbsp;&nbsp;		
+										<label><input type="checkbox" name="subitem[]" value="1" data-price="{{ $course->subprice }}" data-discount_price="{{ $course->discount_subprice }}"  checked/>&nbsp;{{$course->subname}}</label>&nbsp;&nbsp;&nbsp;
+										<label><input type="checkbox" name="subitem[]" value="2"  data-price="{{ $course->zongheprice }}" data-discount_price="{{ $course->discount_zongheprice }}"   checked/>&nbsp;综合素质</label>&nbsp;&nbsp;&nbsp;
+								@if($course->isZhongxue())
+										<label><input type="checkbox" name="subitem[]" value="4"  data-price="{{ $course->nengliprice }}" data-discount_price="{{ $course->discount_nengliprice }}"  checked/>&nbsp;学科知识与能力</label>
 								@endif
+									
 								</p>
 								<p class="p4">已有{{ $course->buytimes }}人购买该课程</p>
 								</form>
@@ -120,4 +115,41 @@
 		
 @section('scripts') 
         <script src="/assets/js/spxqy.js"></script>
+        <script type="text/javascript">
+           function change(){
+        	   total_price = 0;
+        	   discount_price  = 0;
+               $('input[name="subitem[]"]').each(function(){ 
+                   if($(this).is(':checked')){
+                	   total_price += $(this).data('price') ;
+                	   discount_price += $(this).data('discount_price') ;
+                   }
+               });
+
+               $('#total_price').html(total_price);
+               $('#discount_price').val("立即购买 ￥"+discount_price);               
+           }
+        
+            $('input[name="subitem[]"]').click(function(){
+            	change();                
+            });
+
+
+		    $('#order_form').submit(function (ev) { 
+			    var select = false;
+			    $('input[name="subitem[]"]').each(function(){ 
+	                   if($(this).is(':checked')){
+	                	   select = true;
+	                   }
+	             });			    
+		    	
+		    	if(!select){
+    		        alert("请先选择单科，再点击购买");
+    		        return false;
+    		    }  	
+		        return true;
+		    });
+            
+            
+        </script>
 @stop

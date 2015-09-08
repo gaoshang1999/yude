@@ -20,13 +20,14 @@ class AppServiceProvider extends ServiceProvider
             return strlen($value) === 11;
         });
 
-        DB::listen(function($sql, $bindings, $time) {
-            Log::info  ($sql);
-        });
+//         DB::listen(function($sql, $bindings, $time) {
+//             Log::info  ($sql);
+//         });
         
-        Order::updated(function ($order) {
-            if ( $order->isSuccessfullyPayed() ) {
-                $order -> openCourses();
+        Order::updated(function ($order) {            
+            if ( $order -> isSuccessfullyPayed() ) {                
+                $ablesky= app('Ablesky');
+                $ablesky -> openCourses( $order );
             }
         });
     }

@@ -210,7 +210,7 @@ class AbleskyController extends Controller
         
         $url = sprintf($this->api_5, $encodedUserInfo, $accessToken, $callbackUrl, $idpDomain);
         
-        dump($url);
+//         dump($url);
 //         $json = json_decode( file_get_contents($url) );
         
 //         if($json != null && $json->success){
