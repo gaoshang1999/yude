@@ -22,15 +22,14 @@ class AppServiceProvider extends ServiceProvider
 
         DB::listen(function($sql, $bindings, $time) {
             Log::info  ($sql);
-//             Log::info  ($bindings);
         });
         
-//         Order::updated(function ($order) {            
-//             if ( $order -> isSuccessfullyPayed() ) {                
-//                 $ablesky= app('Ablesky');
-//                 $ablesky -> openCourses( $order );
-//             }
-//         });
+        Order::updated(function ($order) {            
+            if ( $order -> isSuccessfullyPayed() ) {                
+                $ablesky= app('Ablesky');
+                $ablesky -> openCourses( $order );
+            }
+        });
     }
 
     /**

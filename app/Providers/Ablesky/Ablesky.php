@@ -60,16 +60,15 @@ class Ablesky
     {
         $ablesky_category_ids = []; //课程id, 用于开通课程
         $item_ids = [];  //oderitem is, 用于开通成功后更新状态
-        $items = $order->orderItems();
+        $items = $order->orderItems;
         foreach ($items as $k => $v)
         {
             if($v->isCourse()){
-                $ablesky_category_ids []= $v->course()-> getAbleskyCategoryIds($v->count) ;
+                $ablesky_category_ids = array_merge($ablesky_category_ids, $v->course()-> getAbleskyCategoryIds($v->count) ) ;
                 $item_id []= $v->id ;
             }
         }
         $user = $order->user()->first();    
-//         dump($user);
 
         $retcode = $this->openCategory($user->name, join(",", $ablesky_category_ids));
     

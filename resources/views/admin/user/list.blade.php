@@ -26,6 +26,7 @@
           <th>手机号</th>
           <th>邮箱</th>
           <th>类型</th>
+          <th>是否在ablesky注册</th>
           <th>创建时间</th>
           <th>重置密码</th>
           <th>删除</th>
@@ -39,6 +40,7 @@
           <td>{{ $user->phone }}</td>
           <td>{{ $user->email }}</td>
           <td>{{ $user->role === 'admin' ? '管理员' : '学员' }}</td>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $user->is_reged ? '是': '否' }}</td>
           <td>{{ $user->created_at }}</td>
           <td><a class="btn btn-primary" href="{{ url("/admin/user/reset/{$user->id}") }}">重置密码</a></td>
           <td><form action="{{ url("/admin/user/delete/{$user->id}") }}" method="post"> <input type="hidden" name="_token" value="{{ csrf_token() }}" ><button type="submit" onclick="return del();" class="btn btn-primary" >删除</button> </form>  </td>

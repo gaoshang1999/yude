@@ -68,11 +68,11 @@
           <td rowspan="{{ $rows }}">{{ $v->paytime ? '已支付' : '未支付' }}</td>
           <td rowspan="{{ $rows }}">{{ $v->user->name }}</td>
           <td rowspan="{{ $rows }}">{{ $v->phone }}</td>
-          <td rowspan="{{ $rows }}">{{ $v->open_way }}</td>
+          <td rowspan="{{ $rows }}">{{ $v->open_way_desc() }}</td>
           <td rowspan="{{ $rows }}">-</td>
           <td rowspan="{{ $rows }}">
           
-           <form  method="post" action="{{ url('/admin/orders/open/'.$v->id) }}" >  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+           <form  name="open_form" method="post" action="{{ url('/admin/orders/open/'.$v->id) }}" >  <input type="hidden" name="_token" value="{{ csrf_token() }}">
            <input type="submit" class="btn btn-primary pull-right" id="btnnew"  value="手动开通"/>
            </form>
            </td>
@@ -260,5 +260,29 @@
 	        $("#orderItemModal_body").html(data);
 	    });
 	}
+
+   $('form[name="open_form"]').submit(function (ev) { 
+	   $.ajax({
+           type: $(this).attr('method'),
+           url: $(this).attr('action'),
+           data: $(this).serialize(),
+           dataType: "json",
+           success: function (data) {
+
+           	var ret = eval(data);            	
+               if(ret.success ){
+                    alert("开通成功");
+                   	location.reload();
+               }else{
+            	   alert(ret.message);
+               }
+           },
+           error: function(){
+        	   alert("开通失败，请重试");
+           }
+       });
+
+	   ev.preventDefault();
+   });
 </script>
 @endsection

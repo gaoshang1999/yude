@@ -35,7 +35,7 @@ class OrderItem extends Model
         if($this->isCourse() && $this->snapshot)
         {
             $course = new Courses();            
-            $c = json_decode($this->snapshot);
+            $c = json_decode($this->snapshot, true);
             $course->fill($c);
             return $course;
         }        
@@ -47,7 +47,7 @@ class OrderItem extends Model
         if($this->isBook() && $this->snapshot)
         {
             $book = new Books();
-            $b = json_decode($this->snapshot);
+            $b = json_decode($this->snapshot, true);
             $book->fill($b);
             return $book;
         }

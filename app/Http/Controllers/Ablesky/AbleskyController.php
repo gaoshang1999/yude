@@ -206,20 +206,18 @@ class AbleskyController extends Controller
         $t = utf8_encode ($orgUsername.'|'. $emailAddress .'|'.$this->OrgId.'|'.$optDate .'|'.$this->api_key);
         $accessToken = md5($t);
         
-        $callbackUrl = "/";
+    
+        $callbackUrl = "/ablesky/redirectTo";
         $idpDomain ="http://localhost";
         
         $url = sprintf($this->api_5, $encodedUserInfo, $accessToken, $callbackUrl, $idpDomain);
         
-//         dump($url);
-//         $json = json_decode( file_get_contents($url) );
-        
-//         if($json != null && $json->success){
-//             return true;
-//         }else{
-//             return false;
-//         }
-        return redirect($url);
+        return redirect($url);    
+    }
+    
+    public function redirectTo()
+    {
+        return redirect("http://www.ablesky.com");
     }
 }
 

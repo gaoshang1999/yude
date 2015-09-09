@@ -110,6 +110,7 @@ $app->group(['namespace' => 'App\Http\Controllers\Ablesky', 'prefix' => 'ablesky
 //能力天空接口-跳转
 $app->group(['namespace' => 'App\Http\Controllers\Ablesky', 'prefix' => 'ablesky', 'middleware' => ['auth.login']], function($app){    
    $app->get('/redirect', 'AbleskyController@oneStopRedirect');
+   $app->get('/redirectTo', 'AbleskyController@redirectTo');
 });
 
 // 用户后台

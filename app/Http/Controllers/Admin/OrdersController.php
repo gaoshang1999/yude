@@ -78,13 +78,17 @@ class OrdersController extends Controller
     {
         $order = Order::where('id', $id)->first();
         
+        if(!$order->user->is_reged){
+            return new JsonResponse(['success'=>false, 'message' => '用户'.$order->user->name.'未在能力天空注册！']);
+        }
+
         $ablesky= app('Ablesky');
         $ret = $ablesky -> openCourses( $order, 'manual' );
         
         if($ret){
-            return new JsonResponse(['success'=>true, 'message' => '']);
+            return new JsonResponse(['success'=>true, 'message' => '开通成功']);
         }else{
-            return new JsonResponse(['success'=>false, 'message' => '开通失败']);  
+            return new JsonResponse(['success'=>false, 'message' => '开通失败,请重试']);  
         }        
     }
 }
