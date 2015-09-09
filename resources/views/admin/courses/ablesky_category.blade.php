@@ -56,6 +56,11 @@
 	    }
 	    return dumped_text;
 	}
+
+	function getURLParameter(name) {
+		  return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null
+	}
+	
 	// html demo
 	$('#html').jstree();
 
@@ -69,8 +74,12 @@
 // 	      alert(mydump(datas.instance.get_node(datas.selected[i]) ));
 // 	      alert((datas.instance.get_node(datas.selected[i])).data.id );
 @if($selected)
-          window.opener.document.getElementById("ablesky_category_name").value = datas.instance.get_node(datas.selected[i]).text; 
-          window.opener.document.getElementById("ablesky_category").value = datas.instance.get_node(datas.selected[i]).data.id; 
+          var name_id = getURLParameter('name_id');
+	      var value_id = getURLParameter('value_id');
+// 	      alert(name_id + " " + value_id);
+	      
+          window.opener.document.getElementById(name_id).value = datas.instance.get_node(datas.selected[i]).text; 
+          window.opener.document.getElementById(value_id).value = datas.instance.get_node(datas.selected[i]).data.id; 
 @endif
 	    }
 	    $('#event_result').html('当前选中: ' + r.join(', '));

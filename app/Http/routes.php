@@ -38,6 +38,7 @@ $app->get('/books/{id}', 'Admin\BooksController@detail');
 $app->get('/courses/lists', 'Admin\CoursesController@lists');
 $app->get('/courses/{id}', 'Admin\CoursesController@detail');
 $app->get('/cart/courses/add/{id}', 'My\MyController@courses_add');
+$app->post('/cart/courses/add/{id}', 'My\MyController@courses_add');
 $app->get('/cart/books/add/{id}', 'My\MyController@books_add');
 $app->post('/cart/books/add/{id}', 'My\MyController@books_add');
 $app->get('/cart/courses/remove/{id}', 'My\MyController@courses_remove');
@@ -96,6 +97,8 @@ $app->group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', '
     // 订单管理
     $app->get('/orders', 'OrdersController@orders');
     $app->post('/orders/new', 'OrdersController@neworder');
+    $app->get('/orders/{id}', 'OrdersController@detail');
+    $app->post('/orders/open/{id}', 'OrdersController@open');
 });
 
 //能力天空接口-课程目录树
@@ -107,6 +110,7 @@ $app->group(['namespace' => 'App\Http\Controllers\Ablesky', 'prefix' => 'ablesky
 //能力天空接口-跳转
 $app->group(['namespace' => 'App\Http\Controllers\Ablesky', 'prefix' => 'ablesky', 'middleware' => ['auth.login']], function($app){    
    $app->get('/redirect', 'AbleskyController@oneStopRedirect');
+   $app->get('/redirectTo', 'AbleskyController@redirectTo');
 });
 
 // 用户后台

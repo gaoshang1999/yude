@@ -32,7 +32,7 @@ class CoursesController extends Controller
             else if($q == '下架') { $q = 0;}
         }        
     
-        $courses = Courses::where($field, 'like', '%'.$q.'%')->simplePaginate(20) ;
+        $courses = Courses::where($field, 'like', '%'.$q.'%')->orderBy('created_at', 'desc')->simplePaginate(20)  ;
         $courses ->appends(['q' => $request['q']]);    
         $courses ->appends(['field' => $field]);
 
@@ -56,8 +56,11 @@ class CoursesController extends Controller
                 'discount_price' => 'required|numeric|min:0',
                 'subname' => 'required',
                 'subprice' => 'required|numeric|min:0',
+                'discount_subprice' => 'required|numeric|min:0',
                 'zongheprice' => 'required|numeric|min:0',
-                'nengliprice' => 'numeric|min:0',                
+                'discount_zongheprice' => 'required|numeric|min:0',
+                'nengliprice' => 'numeric|min:0',   
+                'discount_nengliprice' => 'required|numeric|min:0',
                 'cover' => 'required|image',
                 'image' => 'required|image',
                 'summary' => 'required',
@@ -65,7 +68,10 @@ class CoursesController extends Controller
                 'hours_description' => 'required',
                 'teacher' => 'required',
 //                 'video' => 'required',
-                'trialvideo' => 'required|url',      
+                'trialvideo' => 'required|url',   
+                'sub_ablesky_category'=> 'required',
+                'zonghe_ablesky_category'=> 'required',
+                'nengli_ablesky_category'=> 'required_if:level,zhongxue',
             ]);
 
             $input = $request->all();
@@ -113,8 +119,11 @@ class CoursesController extends Controller
                 'discount_price' => 'required|numeric|min:0',
                 'subname' => 'required',
                 'subprice' => 'required|numeric|min:0',
+                'discount_subprice' => 'required|numeric|min:0',
                 'zongheprice' => 'required|numeric|min:0',
-                'nengliprice' => 'numeric|min:0',                
+                'discount_zongheprice' => 'required|numeric|min:0',
+                'nengliprice' => 'numeric|min:0',   
+                'discount_nengliprice' => 'required|numeric|min:0',           
 //                 'cover' => 'required|image',
 //                 'image' => 'required|image',
                 'summary' => 'required',
@@ -122,10 +131,14 @@ class CoursesController extends Controller
                 'hours_description' => 'required',
                 'teacher' => 'required',
 //                 'video' => 'required',
-                'trialvideo' => 'required|url',      
+                'trialvideo' => 'required|url',     
+                'sub_ablesky_category'=> 'required',
+                'zonghe_ablesky_category'=> 'required',
+                'nengli_ablesky_category'=> 'required_if:level,zhongxue',
             ]);
 
             $input = $request->all();
+            dump($input);
             $courses->fill($input);
            
             $imgs = ['cover', 'image'];

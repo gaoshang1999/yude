@@ -1,7 +1,8 @@
 <?php
-namespace  App\Http\Controllers\Ablesky;
+namespace  App\Providers\Ablesky;
 
-use Illuminate\Support\Facades\Auth;
+use App\Models\Order;
+use App\Models\OrderItem;
 
 class Ablesky
 {
@@ -48,6 +49,37 @@ class Ablesky
         }else{
             return false;
         }
+    }
+    
+
+    /**
+     * 支付成功后，调用该方法，调能力天空接口，开通订单中的课程
+     * @param Order $order
+     */    
+    public function openCourses($order, $open_way ="auto")
+    {
+        $ablesky_category_ids = []; //课程id, 用于开通课程
+        $item_ids = [];  //oderitem is, 用于开通成功后更新状态
+        $items = $order->orderItems;
+        foreach ($items as $k => $v)
+        {
+            if($v->isCourse()){
+                $ablesky_category_ids = array_merge($ablesky_category_ids, $v->course()-> getAbleskyCategoryIds($v->count) ) ;
+                $item_id []= $v->id ;
+            }
+        }
+        $user = $order->user()->first();    
+
+        $retcode = $this->openCategory($user->name, join(",", $ablesky_category_ids));
+    
+        if($retcode)
+        {
+            OrderItem::whereIn('id', $item_ids) ->update(['is_opened' => true]);
+            Order::where('id', $order->id)->first() ->update(['open_way' => $open_way]);;
+            return true;
+        }
+        
+        return false;
     }
 }
 

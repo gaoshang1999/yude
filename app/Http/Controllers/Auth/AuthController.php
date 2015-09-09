@@ -198,7 +198,10 @@ class AuthController extends Controller
         if(!$output || $output->result->code != 0){
             return new JsonResponse(['success'=>false, 'message' => '调用远程注册服务失败:'.$output->result->message]); 
         }
-        $user = $this->create($request->all());
+        $input = $request->all();
+        $input['is_reged'] = true;
+        $user = $this->create($input);        
+        
         $request->session()->forget('p' . $user->phone);
     
         if ($request->ajax() || $request->wantsJson()) {

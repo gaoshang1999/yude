@@ -27,7 +27,7 @@ class BooksController extends Controller
             else if($q == '面试') { $q = 'mianshi';}
         }
         
-        $books = Books::where($field, 'like', '%'.$q.'%')->simplePaginate(20) ;
+        $books = Books::where($field, 'like', '%'.$q.'%')->orderBy('created_at', 'desc')->simplePaginate(20) ;
         $books ->appends(['q' => $request['q']]);
         $books ->appends(['field' => $field]);
     

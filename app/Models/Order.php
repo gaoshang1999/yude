@@ -13,16 +13,17 @@ class Order extends Model
      */
     protected $table = 'orders';
 
-    protected $fillable = ['orderno', 'totalprice', 'receiver', 'phone', 'postcode', 'address', 'paymode', 'paytime', 'payload', 'user_id'];
+    protected $fillable = ['orderno', 'totalprice', 'receiver', 'phone', 'postcode', 'address',
+               'paymode', 'paytime', 'payload', 'user_id', 'open_way'];
 
     public function orderItems()
     {
-        return $this->hasMany('App\Models\OrderItem');
+        return $this->hasMany('App\Models\OrderItem', 'order_id');
     }
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\User', 'user_id');
     }
     
     /**
@@ -33,30 +34,24 @@ class Order extends Model
         return $this->paytime != null;
     }
     
-   
-    /**
-     * 支付成功后，调用该方法，调能力天空接口，开通课程
-     */
-    public function openCourses()
-    {  
-        $course_ids = []; //课程id, 用于开通课程
-        $item_ids = [];  //oderitem is, 用于开通成功后更新状态
-        $items = $this->orderItems();        
-        foreach ($items as $k => $v)
-        {
-            if($v->isCourse()){
-                $course_ids []= $v->course()->id ;
-                $item_id []= $v->id ;
-            }
-        }
-        $user = $this->user();
-        
-        $ablesky= app('Ablesky');
-        $retcode = $ablesky->openCategory($user->name, join(",", $course_ids));
-        
-        if($retcode)
-        {
-            OrderItem::whereIn('id', $item_ids) ->update(['is_opened' => true]);
+    public function isManualOpened()
+    {
+        return $this->open_way == 'manual';
+    }
+
+    public function isAutoOpened()
+    {
+        return $this->open_way == 'auto';
+    }
+    
+    public function open_way_desc()
+    {
+        if($this->isManualOpened()){
+            return "手工";
+        }else if($this->isAutoOpened()){
+            return "自动";
+        }else{
+            return "未开通";
         }
     }
 }
