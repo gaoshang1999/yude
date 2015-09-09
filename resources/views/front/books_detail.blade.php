@@ -55,12 +55,12 @@
 				<div class="part_two">
 						<div class="left">
 								<h3>章节目录</h3>
-								<div class="neirong">
-										<p>
+								<div class="neirong"  id="neirong">
+										<p id="book_description">
                                             {!! $book->description !!}
 										</p>
-										<div class="button dn">
-											显示全部信息&nbsp;<img src="/assets/img/jcxqy_ico_2.png"/>
+										<div class="button dn" id="detail_botton">
+											显示全部信息&nbsp;<img  src="/assets/img/jcxqy_ico_2.png"/>
 										</div>
 								</div>
 
@@ -113,27 +113,29 @@
  
 
 @section('scripts') 
-<script>
+	<script>
 		$("#content_jianjie .left p img").click(function(){
 			$(this).parent().addClass("active").siblings().removeClass("active");
 			$("#content_jianjie .left .pic img").attr("src",this.src);
 		});
 	</script>
 	<script>
-		if($("#content_xiangqing .part_two .left p").height() >= 575){
-				$("#content_xiangqing .part_two .left .button").removeClass('dn');
+		if($("#book_description").height() >= 575){
+				$("#detail_botton").removeClass('dn'); $("#detail_botton").toggle();
 		}
 
-		$("#content_xiangqing .part_two .left .button").toggle(function(){
-				$(this).html("显示部分信息&nbsp;<img src='/assets/img/jcxqy_ico_1.png'/>");
-				$("#content_xiangqing .part_two .left .neirong").height("auto");
+		$("#detail_botton").toggle(
+				function(){  
+        				$(this).html("显示部分信息&nbsp;<img src='/assets/img/jcxqy_ico_1.png'/>");
+        				$("#neirong").height("auto"); 
+//         				alert(1);
 				},
-				function(){
+				
+				function(){					 
 						$(this).html("显示全部信息&nbsp;<img src='/assets/img/jcxqy_ico_2.png'/>");
-						$("#content_xiangqing .part_two .left .neirong").height(569);
-
+						$("#neirong").height(569);  
+// 						alert(2);
 				}
-
 		);
 	</script>
 	<script type=text/javascript>

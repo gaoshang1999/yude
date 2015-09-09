@@ -30,10 +30,10 @@
 								<p><input type="submit" title="立即购买" id="discount_price" value="立即购买 ￥{{ $course->discount_price }}"  class="button"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<span class="fz24 gray">原价&nbsp;<del id="total_price">￥{{ $course->totalprice }}</del></span> </p>
 								<p class="p3">可选单科&nbsp;&nbsp;&nbsp;&nbsp;		
-										<label><input type="checkbox" name="subitem[]" value="1" data-price="{{ $course->subprice }}" data-discount_price="{{ $course->discount_subprice }}"  checked/>&nbsp;{{$course->subname}}</label>&nbsp;&nbsp;&nbsp;
-										<label><input type="checkbox" name="subitem[]" value="2"  data-price="{{ $course->zongheprice }}" data-discount_price="{{ $course->discount_zongheprice }}"   checked/>&nbsp;综合素质</label>&nbsp;&nbsp;&nbsp;
+								    @if($course->discount_subprice) <label><input type="checkbox" name="subitem[]" value="1" data-price="{{ $course->subprice }}" data-discount_price="{{ $course->discount_subprice }}"  checked/>&nbsp;{{$course->subname}}</label>&nbsp;&nbsp;&nbsp; @endif
+									@if($course->discount_zongheprice) 	<label><input type="checkbox" name="subitem[]" value="2"  data-price="{{ $course->zongheprice }}" data-discount_price="{{ $course->discount_zongheprice }}"   checked/>&nbsp;综合素质</label>&nbsp;&nbsp;&nbsp; @endif
 								@if($course->isZhongxue())
-										<label><input type="checkbox" name="subitem[]" value="4"  data-price="{{ $course->nengliprice }}" data-discount_price="{{ $course->discount_nengliprice }}"  checked/>&nbsp;学科知识与能力</label>
+									@if($course->discount_nengliprice) 	<label><input type="checkbox" name="subitem[]" value="4"  data-price="{{ $course->nengliprice }}" data-discount_price="{{ $course->discount_nengliprice }}"  checked/>&nbsp;学科知识与能力</label> @endif
 								@endif
 									
 								</p>
@@ -66,7 +66,8 @@
 						<div class="content_mfst dn">
 								<div>
 										<h3>中学协议金牌保过班</h3>
-										<video src="{{ $course->trialvideo }}" alt="课程试听" ></video>
+										<!--  <video src="{{ $course->trialvideo }}" alt="课程试听" ></video> -->
+										<iframe height=450 width=770 src="{{ $course->trialvideo }}" frameborder=0 allowfullscreen></iframe>
 								</div>
 						</div>
 						<!--课程简介  内容部分-->

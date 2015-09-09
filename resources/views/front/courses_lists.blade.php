@@ -27,7 +27,7 @@
 					<div class="kelei_1">
 							<a href="{{ url("courses/$v->id") }}"><img src="{{ url("$v->cover") }} " alt="课程图片"/></a>
 							<div>
-									<h2>{{ $v->name }}<br/>@if($v->kind == "bishi")笔试@elseif($v->kind == "mianshi")面试@endif课程</h2>
+									<h2><a href="{{ url("courses/$v->id") }}" style="color:#fff;">{{ $v->name }}<br/>@if($v->kind == "bishi")笔试@elseif($v->kind == "mianshi")面试@endif课程 </a></h2>
 									<p class="gray">{{ $v->summary }}</p>
 							</div>
 					</div>
@@ -70,7 +70,7 @@
 										</div>
 										<div class="jibie_1_2">
 												<form action="{{url("cart/courses/add/$v->id") }}" method="get">
-												<p>{{ $v->name }}</p>
+												<p><a href="{{ url("courses/$v->id") }}">{{ $v->name }}</a></p>
 												<p><span class="orange">{{ $v->discount_price }}</span>&nbsp;|&nbsp;<del>￥{{ $v->totalprice }}</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												<a href="{{ $v->trialvideo }}" class="gray fs12" target="_blank"><img src="/assets/img/splby_ico1.jpg" />&nbsp;试听</a>&nbsp;
 												<input type="submit" value='购买' class="button fz12"/></p>
@@ -97,7 +97,7 @@
 										</div>
 										<div class="jibie_1_2">
 												<form action="{{url("cart/courses/add/$v->id") }}" method="get">
-												<p>{{ $v->name }}</p>
+												<p><a href="{{ url("courses/$v->id") }}">{{ $v->name }}</a></p>
 												<p><span class="orange">{{ $v->discount_price }}</span>&nbsp;|&nbsp;<del>￥{{ $v->totalprice }}</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												<a href="{{ $v->trialvideo }}" class="gray fs12" target="_blank"><img src="/assets/img/splby_ico1.jpg" />&nbsp;试听</a>&nbsp;
 												<input type="submit" value='购买' class="button fz12"/></p>
@@ -123,7 +123,7 @@
 										</div>
 										<div class="jibie_1_2">
 												<form action="{{url("cart/courses/add/$v->id") }}" method="get">
-												<p>{{ $v->name }}</p>
+												<p><a href="{{ url("courses/$v->id") }}">{{ $v->name }}</a></p>
 												<p><span class="orange">{{ $v->discount_price }}</span>&nbsp;|&nbsp;<del>￥{{ $v->totalprice }}</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												<a href="{{ $v->trialvideo }}" class="gray fs12" target="_blank"><img src="/assets/img/splby_ico1.jpg" />&nbsp;试听</a>&nbsp;
 												<input type="submit" value='购买' class="button fz12"/></p>
