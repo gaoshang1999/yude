@@ -117,18 +117,29 @@
 @section('scripts') 
         <script src="/assets/js/spxqy.js"></script>
         <script type="text/javascript">
+           var total = {{ $course->totalprice }};
+           var discount =  {{ $course->discount_price }}; 
+           //选择全部子科时， 使用总价格和总优惠价格
            function change(){
         	   total_price = 0;
         	   discount_price  = 0;
+        	   var isAllSelect = true;
                $('input[name="subitem[]"]').each(function(){ 
                    if($(this).is(':checked')){
                 	   total_price += $(this).data('price') ;
-                	   discount_price += $(this).data('discount_price') ;
+                	   discount_price += $(this).data('discount_price') ;                	   
+                   }else{
+                	   isAllSelect = false;
                    }
                });
 
-               $('#total_price').html(total_price);
-               $('#discount_price').val("立即购买 ￥"+discount_price);               
+               if(isAllSelect){
+            	   $('#total_price').html(total);
+                   $('#discount_price').val("立即购买 ￥"+discount);  
+               }else{
+                   $('#total_price').html(total_price);
+                   $('#discount_price').val("立即购买 ￥"+discount_price);  
+               }             
            }
         
             $('input[name="subitem[]"]').click(function(){

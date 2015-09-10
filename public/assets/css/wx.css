@@ -1,0 +1,74 @@
+body,html,ul,li,img,p,h5,h6,span,input,form,button,h1,h2{margin:0;padding:0;border:0;}
+html body{overflow-x:hidden;}
+img{border:0;}
+ul,li{list-style:none;}
+div{margin:0 auto;padding:0;}
+.clear{clear:both;}
+.fs40{font-size:40px;}
+.fs30{font-size:30px;}
+.fs18{font-size:18px;}
+.fs14{font-size:14px;}
+.fs12{font-size:12px;}
+.c940000{color:#940000;}
+.c757575{color:#757575;}
+.cc50000{color:#c50000;}
+a,a:hover,a:link,a:visited,a:active{text-decoration:none;}
+
+
+#header{height:58px;background-color:#383b45;}
+#header .header_logo{width:1000px;height:58px;margin:0 auto;}
+#header img{float:right;}
+#header img:first-child{width:132px;height:58px;float:left;}
+#header ul{width:600px;height:40px;float:left;list-style:none;margin-left:60px;}
+#header li{float:left;width:50px;margin-left:28px;color:#fff;line-height:58px;}
+#header li:first-child{margin-left:0px;}
+.ad_2b{background-color:#383b45;}
+.ad_4b{background-color:#c5d7e0;}
+.ad_5b{background-color:#363636;}
+.ad_laoshib{background-color:#1f180f;}
+.ad_6b{background-color:#f0eeee;height: 159px;margin-bottom: 60px;}
+.ad_1{text-align:center;margin-top:30px;height:415px;background:url(../images/ad_1.png) center no-repeat;}
+.ad_2{text-align:center;background:url(../images/ad_2.png) center no-repeat;height:278px;}
+.ad_3{text-align:center;background:url(../images/ad_3.png) center no-repeat;height:256px;}
+.ad_4{text-align:center;background:url("../images/ad_4.png") center no-repeat;width:1400px;height:576px;}
+.ad_4 ul{width:974px;height:244px;padding-top:164px;margin:0 auto;}
+.ad_4 #ad_4_1{width:244px;height:242px;background:url("../images/ad_4_1.png") no-repeat;float:left;cursor:pointer;}
+.ad_4 #ad_4_2{width:244px;height:242px;background:url("../images/ad_4_1.png") no-repeat -362px 0;float:left;margin-left:120px;cursor:pointer;}
+.ad_4 #ad_4_3{width:244px;height:242px;background:url("../images/ad_4_1.png") no-repeat -724px 0;float:left;margin-left:120px;cursor:pointer;}
+.ad_4 #ad_4_1:hover{background:url("../images/ad_4_2.png") no-repeat;}
+.ad_4 #ad_4_2:hover{background:url("../images/ad_4_2.png") no-repeat -362px 0;}
+.ad_4 #ad_4_3:hover{background:url("../images/ad_4_2.png") no-repeat -724px 0;}
+.ad_4 .xxlj{margin-top:84px;}
+.ad_5{text-align:center;background:url("../images/ad_5.png") center no-repeat;height:506px;}
+.ad_laoshi{text-align:center;background:url(../images/ad_laoshi.gif) center no-repeat;height:377px;}
+.ad_6{text-align:center;background:url(../images/ad_6.png) center no-repeat;height:203px;}
+
+#course{width:1400px;}
+#course .course_h1{height:158px;text-align:center;}
+#course .course_h1 img{margin-top:58px;}
+#course ul{text-align:center;width:1000px;height:448px;margin:0 auto;}
+#course li{border:1px solid #d7d7d7;width:227px;height:365px;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;float:left;margin-right:28px;}
+#course li:hover{border:1px solid #4accbb;}
+#course li:last-child{margin-right:0;}
+#course ul h1{width:225px;height:63px;font-family:"微软雅黑";font-size:26px;color:#000;margin:0;padding:0;line-height:63px;}
+#course ul h2{width:225px;height:88px;background-color:#f8f8f8;font-family:"微软雅黑";margin:0;padding:0;border-top:1px solid #ebebeb;border-bottom:1px solid #ebebeb;}
+#course ul p{width:224px;height:138px;font-family:"微软雅黑";color:#222;font-size:12px;margin:0;padding:0;line-height:30px;margin-top:25px;}
+#course ul .p3{margin-top:10px;height:153px;line-height:28px;}
+#course ul .p4{margin-top:5px;line-height:21px;height:158px;width:214px;margin-left:5px;}
+#course ul li div{width:225px;height:49px;background-color:#fcfcfc;margin:0;padding:0;font-family:"宋体";font-size:12px;color:#999;line-height:49px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;}
+#course ul li a:hover,#course ul li a:link,#course ul li a:visited,#course ul li a:active,#course ul li a{text-decoration:none;}
+#course ul li div .submit{width:45px;height:18px;background-color:#2fddc6;color:#fff;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;display:inline-block;line-height:18px;}
+#course ul label{margin:0;padding:0;border:0;}
+#course ul .radio_click{position:relative;top:3px;}
+
+
+.ad_laoshi{width:1400px;height:377px;text-align:center;}
+.ad_6{text-align:center;}
+.zxbm{text-align:center;height:106px;}
+.zxbm a{display:inline-block;}
+.zxbm .mfkf{width:378px;height:56px;background-image:url("../images/button_zx.gif");}
+.zxbm .dzzx{width:378px;height:56px;background-image:url("../images/button_zx.gif");background-position:-378px 0;}
+.zxbm .zxbm_1{margin-top:10px;}
+.zxbm .zxbm_2{margin-right:120px;}
+#footer{height:100px;background-color:#000;text-align:center;}
+#footer p{color:#fff;font-family:"微软雅黑";font-size:18px;line-height:100px;}

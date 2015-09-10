@@ -86,7 +86,7 @@ class OrderController extends Controller
         $itemData = array();
         
         $items_c = json_decode($data['items_c'], true);        
-        dump($items_c);
+
         $courses = Courses::whereIn('id', array_keys($items_c))->get();
         foreach ($courses as $c) {
             $item['snapshot'] = json_encode($c);
@@ -120,6 +120,20 @@ class OrderController extends Controller
             $item['order_id'] = $order->id;
             OrderItem::create($item);
         }
+        //从session 中去除已经生成订单课程
+        $arr1 = $request->session()->pull('cart.coureses');
+        foreach(array_keys($items_c) as $id){
+            unset($arr1[$id]);        
+        }
+        $request->session()->put('cart.coureses', $arr1);
+        
+        //从session 中去除已经生成订单教材
+        $arr1 = $request->session()->pull('cart.books');
+        foreach(array_keys($items_b) as $id){
+            unset($arr1[$id]);        
+        }        
+        $request->session()->put('cart.books', $arr1);
+        
         return redirect('/order/payonline/'.$data['orderno']);
     }
 

@@ -32,7 +32,7 @@ $app->post('auth/reset', 'Auth\AuthController@resetPassword');
 // $app->get('password/reset/{token}', 'Auth\PasswordController@getReset');
 // $app->post('password/reset', 'Auth\PasswordController@postReset');
 
-$app->get('/', 'Front\HomeController@home');
+$app->get('/index', 'Front\HomeController@home');
 $app->get('/books/lists', 'Admin\BooksController@lists');
 $app->get('/books/{id}', 'Admin\BooksController@detail');
 $app->get('/courses/lists', 'Admin\CoursesController@lists');
@@ -45,9 +45,9 @@ $app->get('/cart/courses/remove/{id}', 'My\MyController@courses_remove');
 $app->get('/cart/books/remove/{id}', 'My\MyController@books_remove');
 $app->post('/ablesky/usercheck/{username}', 'Ablesky\AbleskyController@checkIfUserNameDuplicated');
 $app->post('/ablesky/emailcheck/{email}', 'Ablesky\AbleskyController@checkIfEmailDuplicated');
-// $app->get('/', function() use ($app) {
-//     return view('front.wxjz');
-// });
+$app->get('/', function() use ($app) {
+    return view('front.wx');
+});
 
 
 // 管理员后台
@@ -99,6 +99,7 @@ $app->group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', '
     $app->post('/orders/new', 'OrdersController@neworder');
     $app->get('/orders/{id}', 'OrdersController@detail');
     $app->post('/orders/open/{id}', 'OrdersController@open');
+    $app->post('/orders/delete/{id}', 'OrdersController@delete');
 });
 
 //能力天空接口-课程目录树
@@ -113,10 +114,11 @@ $app->group(['namespace' => 'App\Http\Controllers\Ablesky', 'prefix' => 'ablesky
    $app->get('/redirectTo', 'AbleskyController@redirectTo');
 });
 
-// 用户后台
+// 用户个人中心
 $app->group(['namespace' => 'App\Http\Controllers\My', 'prefix' => 'my', 'middleware' => 'auth.login'], function($app){
     $app->get('/', 'MyController@order');
     $app->get('/profile', 'MyController@personal');
+    $app->post('/orders/delete/{id}', 'MyController@delete');
 });
 
 // 订单
@@ -127,7 +129,8 @@ $app->group(['namespace' => 'App\Http\Controllers', 'prefix' => 'order', 'middle
     $app->post('/step3', 'OrderController@step3');
     $app->get('/payonline/{orderno}', 'OrderController@payonline');
     $app->get('/topay/{orderno}', 'OrderController@topay');
-    $app->get('/step4', 'OrderController@step4');
+    $app->get('/step4', 'OrderController@step4');   
+
 });
 
 // 支付宝

@@ -65,7 +65,7 @@
 @section('scripts')
 <script type="text/javascript">
 function del() {  
-    if(window.confirm('你确定要删除该记录！')){
+    if(window.confirm('你确定要删除该记录吗？')){
         //alert("确定");
         return true;
      }else{
@@ -73,7 +73,6 @@ function del() {
         return false;
     }
  }//del end
-
 
 </script>
 @endsection

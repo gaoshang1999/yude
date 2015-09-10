@@ -121,20 +121,20 @@
 	</script>
 	<script>
 		if($("#book_description").height() >= 575){
-				$("#detail_botton").removeClass('dn'); $("#detail_botton").toggle();
+				$("#detail_botton").removeClass('dn'); 
 		}
 
 		$("#detail_botton").toggle(
 				function(){  
         				$(this).html("显示部分信息&nbsp;<img src='/assets/img/jcxqy_ico_1.png'/>");
         				$("#neirong").height("auto"); 
-//         				alert(1);
+        				alert(1);
 				},
 				
 				function(){					 
 						$(this).html("显示全部信息&nbsp;<img src='/assets/img/jcxqy_ico_2.png'/>");
 						$("#neirong").height(569);  
-// 						alert(2);
+						alert(2);
 				}
 		);
 	</script>

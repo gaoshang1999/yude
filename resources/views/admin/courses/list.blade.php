@@ -62,9 +62,9 @@
 
 @section('scripts')
 
-<script type="text/javascript">       
+<script type="text/javascript">
 function del() {  
-    if(window.confirm('你确定要删除该记录！')){
+    if(window.confirm('你确定要删除该记录吗？')){
         //alert("确定");
         return true;
      }else{
@@ -72,6 +72,7 @@ function del() {
         return false;
     }
  }//del end
+
 
  function openCategoryWindow(){
 	  window.open("{{ url('/ablesky/category/tree') }}","_blank", 'height=800, width=400, top=100, left=800, toolbar=no, menubar=no, scrollbars=no, resizable=yes,location=no, status=no');

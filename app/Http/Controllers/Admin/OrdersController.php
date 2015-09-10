@@ -91,4 +91,11 @@ class OrdersController extends Controller
             return new JsonResponse(['success'=>false, 'message' => '开通失败,请重试']);  
         }        
     }
+    
+    public function delete(Request $request, $id)
+    {
+        $order = Order::where('id', $id)->delete();
+        return redirect('/admin/orders');
+    }
+    
 }

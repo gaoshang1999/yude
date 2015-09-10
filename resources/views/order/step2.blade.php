@@ -97,7 +97,7 @@
             <td>{{ $i++ }}</td>
             <td>{{ $v->name }}</td>
             <td>课程</td>
-            <td>{{ $v->count }}</td>
+            <td>1</td>
             <td>{{ $v->computePrice( $items_c[$v->id] ) }}</td>
             <td></td>
           </tr>

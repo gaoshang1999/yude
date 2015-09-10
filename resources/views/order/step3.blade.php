@@ -48,7 +48,7 @@
       <div class="bar"><span>4</span></div>
     </div>
   </div>
-  <form id="nextform" action="/order/topay/{{ $order->orderno }}" method="get">
+  <form id="nextform" action="/order/topay/{{ $order->orderno }}" method="get" target="_blank">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
   <div class="orderblock clearfix">
     <div class="steplabel">订单信息</div>

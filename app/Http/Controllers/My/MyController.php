@@ -58,24 +58,17 @@ class MyController extends Controller
     
     public function courses_remove(Request $request, $id)
     {
-        $arr1 = $request->session()->pull('cart.coureses');
-        $arr2 = array($id);
-        $new_ids =  array_diff($arr1,$arr2);
+        $arr1 = $request->session()->pull('cart.coureses');        
+        unset($arr1[$id]);
 
-        $request->session()->put('cart.coureses', $new_ids);
+        $request->session()->put('cart.coureses', $arr1);
         return redirect('/order');
     }
     
     public function books_remove(Request $request, $id)
     {
         $arr1 = $request->session()->pull('cart.books');
-//         $arr2 = array($id);
-//         $new_ids =  array_diff($arr1,$arr2);
-        foreach ($arr1 as $k => $v){
-            if($k == $id){
-                unset($arr1[$k]);
-            }
-        }
+        unset($arr1[$id]);
 
         $request->session()->put('cart.books', $arr1);
         return redirect('/order');
@@ -85,5 +78,11 @@ class MyController extends Controller
     {
         $orders = Order::where('phone',  Auth::user()->phone) ->orderBy('created_at', 'desc')-> get();
         return view('front.personal', ['orders' => $orders]);
+    }
+    
+    public function delete(Request $request, $id)
+    {
+        Order::where('id', $id)->where('user_id', Auth::user()->id)->delete();
+        return redirect('/my/profile');
     }
 }

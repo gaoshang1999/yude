@@ -146,17 +146,17 @@ button, input, optgroup, select, textarea {
         </thead>
         <tbody>
           <tr class="headerbar">
-            <td colspan="6"><label><input type="checkbox" class="checker checkvideo">视频课程</label></td>
+            <td colspan="6"><label><input type="checkbox" class=" checkvideo">视频课程</label></td>
           </tr>
           @foreach ($courses ->all() as $v)
           <tr class="choose">
             <td><label><input type="checkbox" class="checker video" name="check_c_{{ $v->id }}"><img src="{{ $v->cover }}"></label></td>
             <td><span style="margin-bottom: 10px;"> {{ $v->name }} </span> <br />
 
-            <label><input type="checkbox" name="" value="1"  @if( $v ->hasSub( $cart_courses[$v->id] )) checked @endif disabled onclick="return false;" />&nbsp;{{$v->subname}}</label>&nbsp;&nbsp;&nbsp;
-			<label><input type="checkbox" name="" value="2"  @if($v ->hasZonghe( $cart_courses[$v->id] )) checked @endif disabled onclick="return false;" />&nbsp;综合素质</label>&nbsp;&nbsp;&nbsp;
+                 @if($v->discount_subprice)<label><input type="checkbox" name="" value="1"  @if( $v ->hasSub( $cart_courses[$v->id] )) checked @endif disabled onclick="return false;" />&nbsp;{{$v->subname}}</label>&nbsp;&nbsp;&nbsp; @endif
+			     @if($v->discount_zongheprice)<label><input type="checkbox" name="" value="2"  @if($v ->hasZonghe( $cart_courses[$v->id] )) checked @endif disabled onclick="return false;" />&nbsp;综合素质</label>&nbsp;&nbsp;&nbsp; @endif
 			@if($v->isZhongxue())
-			<label><input type="checkbox" name="" value="4"  @if($v ->hasNengli( $cart_courses[$v->id] )) checked @endif disabled onclick="return false;" />&nbsp;学科知识与能力</label>
+			     @if($v->discount_nengliprice) <label><input type="checkbox" name="" value="4"  @if($v ->hasNengli( $cart_courses[$v->id] )) checked @endif disabled onclick="return false;" />&nbsp;学科知识与能力</label> @endif
             @endif
           
             </td>
@@ -164,7 +164,7 @@ button, input, optgroup, select, textarea {
             <td style="width:50px;">
               <div class="input-group">
 
-                <input type="hidden"  name="count_c_{{ $v->id }}"  value="{{ $cart_courses[$v->id] }}" data-key="c_{{ $v->id }}" data-value="{{ $v->totalprice }}"/>
+                <input type="hidden"  name="count_c_{{ $v->id }}"  value="{{ $cart_courses[$v->id] }}" data-key="c_{{ $v->id }}" data-value="{{ $v->computePrice($cart_courses[$v->id]) }}"/>
      
                 1
               </div>
@@ -175,7 +175,7 @@ button, input, optgroup, select, textarea {
           @endforeach
           
           <tr class="headerbar">
-            <td colspan="6"><label><input type="checkbox" class="checker checkbook">教材</label></td>
+            <td colspan="6"><label><input type="checkbox" class=" checkbook">教材</label></td>
           </tr>
           @foreach ($books ->all() as $v)
           <tr class="choose">
@@ -247,9 +247,14 @@ button, input, optgroup, select, textarea {
 
     function calcTotal () {
       var total = 0;
-      var boxes = $('input.checker:checked');
+      var boxes = $('input.checker:checked'); 
       boxes.each(function(){
-        $(this).parents('tr.choose').find('input.form-control').each(function(){
+    	 //课程价格
+         $(this).parents('tr').find('input[type="hidden"]').each(function(){             
+              total += $(this).data('value') * 1;
+            });  
+        //教材价格
+        $(this).parents('tr').find('input.form-control').each(function(){             
           total += $(this).data('value') * $(this).val();
         });
       });

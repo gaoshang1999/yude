@@ -115,7 +115,7 @@ class Courses extends Model
      */
     public function hasSub($combine)
     {
-        return $combine & self::SUB;
+        return $combine & self::SUB !=0 ;
     }
     
     /**
@@ -125,7 +125,7 @@ class Courses extends Model
      */
     public function hasZonghe($combine)
     {
-        return $combine & self::ZONGHE;
+        return $combine & self::ZONGHE !=0 ;
     }
     
     /**
@@ -135,7 +135,7 @@ class Courses extends Model
      */
     public function hasNengli($combine)
     {
-        return $combine & self::NENGLI;
+        return $combine & self::NENGLI !=0 ;
     }
     
     /**
@@ -145,8 +145,14 @@ class Courses extends Model
     public function computePrice($combine)
     {
         $total = 0;
+
+        //选择全部子科时， 使用总价格和总优惠价格
+        if( $combine == $this->getNotZeroSub() ){
+            $total = $this-> discount_price;
+            return $total;
+        }
         
-        if($this -> hasSub($combine)){
+        if($this -> hasSub($combine) ){
             $total += $this-> discount_subprice;
         }
         if($this -> hasZonghe($combine)){
@@ -155,7 +161,27 @@ class Courses extends Model
         if($this -> hasNengli($combine)){
             $total += $this-> discount_nengliprice;
         }
+        
         return $total;
+    }
+    
+    
+    public function getNotZeroSub(){
+        $combine = 0;
+      
+         if($this-> discount_subprice){
+             $combine |= self::SUB;             
+         }
+         
+         if($this-> discount_zongheprice){
+             $combine |= self::ZONGHE;
+         }
+         
+         if($this-> discount_nengliprice){
+             $combine |= self::NENGLI;
+         }
+        
+         return $combine;
     }
     
     /**

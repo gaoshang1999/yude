@@ -67,7 +67,14 @@
 											</td>
 											<td rowspan="{{ $rows }}" class="border_r"><a>{{ $v->paytime ? '已支付' : '待付款' }}</a></td>
 											<td rowspan="{{ $rows }}">
-											<span> @if($v->paytime) 如需修改订单信息或收件人信息<br/>请拨打4000-607-107 @else  <a href="{{ url("order/payonline/$v->orderno") }}">去付款</a> @endif</span>
+											<span> @if($v->paytime) 如需修改订单信息或收件人信息<br/>请拨打4000-607-107 @else  <a href="{{ url("order/payonline/$v->orderno") }}">去付款</a> @endif  <!--  | <a href="#">修改订单</a> --> |
+											 <form  name="delete_form" style="float: right; margin-right:80px" method="post" action="{{ url("my/orders/delete/$v->id") }}" >  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                <input type="submit" style="background:#fff; border-color:#fff; border:0px; color:#009be3;cursor:pointer" onclick="return del();"  id=""  value="删除"/>
+                                             </form> 
+											 
+											 </span>
+
+											 </span>
 											</td>
 									</tr> 
 @for($i=1; $i<$rows; $i++)   <?php $p = json_decode($v->orderItems[$i]->snapshot); ?>
@@ -229,4 +236,18 @@
 	        ev.preventDefault();
 	    });
 	</script>	
+	
+<script type="text/javascript">
+function del() {  
+    if(window.confirm('你确定要删除该记录吗？')){
+        //alert("确定");
+        return true;
+     }else{
+        //alert("取消");
+        return false;
+    }
+ }//del end
+</script>
 @endsection
+
+ 

@@ -71,10 +71,13 @@
           <td rowspan="{{ $rows }}">{{ $v->open_way_desc() }}</td>
           <td rowspan="{{ $rows }}">-</td>
           <td rowspan="{{ $rows }}">
-          
-           <form  name="open_form" method="post" action="{{ url('/admin/orders/open/'.$v->id) }}" >  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <!--  <form  name="open_form" method="post" action="{{ url('/admin/orders/open/'.$v->id) }}" >  <input type="hidden" name="_token" value="{{ csrf_token() }}">
            <input type="submit" class="btn btn-primary pull-right" id="btnnew"  value="手动开通"/>
-           </form>
+           </form> -->
+           
+         <form  name="delete_form" method="post" action="{{ url('/admin/orders/delete/'.$v->id) }}" >  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+           <input type="submit" class="btn btn-primary pull-right"  onclick="return del();"  id=""  value="删除"/>
+           </form> 
            </td>
         </tr>
         @for($i=1; $i<$rows; $i++)
@@ -284,5 +287,17 @@
 
 	   ev.preventDefault();
    });
+</script>
+<script type="text/javascript">
+function del() {  
+    if(window.confirm('你确定要删除该记录吗？')){
+        //alert("确定");
+        return true;
+     }else{
+        //alert("取消");
+        return false;
+    }
+ }//del end
+
 </script>
 @endsection

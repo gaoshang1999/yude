@@ -75,7 +75,7 @@
     </div>
 <hr/>
    <div class="form-group">
-      <label for="sub_ablesky_category" class="col-sm-2 control-label"><span style="color: red">*</span>子科 Ablesky课程目录</label>
+      <label for="sub_ablesky_category" class="col-sm-2 control-label">子科 Ablesky课程目录</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" name="sub_ablesky_category_name" id="sub_ablesky_category_name" placeholder="子科 Ablesky课程目录选择" value="{{  $courses && $courses->sub_ablesky_category()->first() ? $courses->sub_ablesky_category()->first()->categoryName : '' }}" readonly=true>
         <input type="hidden" name="sub_ablesky_category" id="sub_ablesky_category" value="{{ old('sub_ablesky_category', $courses ? $courses->sub_ablesky_category : '') }}">
@@ -83,7 +83,7 @@
       <a class="btn btn-primary" href="javascript:openCategoryWindow('sub_ablesky_category', 'sub_ablesky_category_name')" style="margin-right: 5px;">选择</a>
     </div>
     <div class="form-group">
-      <label for="subprice" class="col-sm-2 control-label"><span style="color: red">*</span>子科价格</label>
+      <label for="subprice" class="col-sm-2 control-label">子科价格</label>
       <div class="col-sm-3">
         <input type="hidden" name="subname" id="subname">
         <label class="control-label" id="subnamelabel" >教育知识与能力</label>
@@ -93,7 +93,7 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="discount_subprice" class="col-sm-2 control-label"><span style="color: red">*</span>子科优惠价格</label>
+      <label for="discount_subprice" class="col-sm-2 control-label">子科优惠价格</label>
       <div class="col-sm-3">
         <label class="control-label" id="discount_subnamelabel">教育知识与能力</label>
       </div>
@@ -104,7 +104,7 @@
 
 <hr/>    
    <div class="form-group">
-      <label for="zonghe_ablesky_category" class="col-sm-2 control-label"><span style="color: red">*</span>综合素质 Ablesky课程目录</label>
+      <label for="zonghe_ablesky_category" class="col-sm-2 control-label">综合素质 Ablesky课程目录</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" name="zonghe_ablesky_category_name" id="zonghe_ablesky_category_name" placeholder="综合素质Ablesky课程目录选择" value="{{  $courses && $courses->zonghe_ablesky_category()->first() ? $courses->zonghe_ablesky_category()->first()->categoryName : '' }}" readonly=true>
         <input type="hidden" name="zonghe_ablesky_category" id="zonghe_ablesky_category" value="{{ old('zonghe_ablesky_category', $courses ? $courses->zonghe_ablesky_category : '') }}">
@@ -112,21 +112,21 @@
       <a class="btn btn-primary" href="javascript:openCategoryWindow('zonghe_ablesky_category', 'zonghe_ablesky_category_name')" style="margin-right: 5px;">选择</a>
     </div>
     <div class="form-group">
-      <label for="zongheprice" class="col-sm-2 control-label"><span style="color: red">*</span>综合素质价格</label>
+      <label for="zongheprice" class="col-sm-2 control-label">综合素质价格</label>
       <div class="col-sm-9">
         <input type="number" class="form-control" name="zongheprice" placeholder="综合素质价格" min="0" step="0.01" value="{{ old('zongheprice', $courses ? $courses->zongheprice : 0) }}">
       </div>
     </div>
     
      <div class="form-group">
-      <label for="discount_zongheprice" class="col-sm-2 control-label"><span style="color: red">*</span>综合素质优惠价格</label>
+      <label for="discount_zongheprice" class="col-sm-2 control-label">综合素质优惠价格</label>
       <div class="col-sm-9">
         <input type="number" class="form-control" name="discount_zongheprice" placeholder="综合素质价格" min="0" step="0.01" value="{{ old('discount_zongheprice', $courses ? $courses->discount_zongheprice : 0) }}">
       </div>
     </div>
 <hr/>
    <div class="form-group" id="nengli_category">
-      <label for="nengli_ablesky_category" class="col-sm-2 control-label"><span style="color: red">*</span>学科知识与能力 Ablesky课程目录</label>
+      <label for="nengli_ablesky_category" class="col-sm-2 control-label">学科知识与能力 Ablesky课程目录</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" name="nengli_ablesky_category_name" id="nengli_ablesky_category_name" placeholder="学科知识与能力 Ablesky课程目录选择" value="{{  $courses && $courses->nengli_ablesky_category()->first() ? $courses->nengli_ablesky_category()->first()->categoryName : '' }}" readonly=true>
         <input type="hidden" name="nengli_ablesky_category" id="nengli_ablesky_category" value="{{ old('nengli_ablesky_category', $courses ? $courses->nengli_ablesky_category : '') }}">
@@ -134,13 +134,13 @@
       <a class="btn btn-primary" href="javascript:openCategoryWindow('nengli_ablesky_category', 'nengli_ablesky_category_name')" style="margin-right: 5px;">选择</a>
     </div>    
     <div class="form-group" id="nengli">
-      <label for="nengliprice" class="col-sm-2 control-label"><span style="color: red">*</span>学科知识与能力价格</label>
+      <label for="nengliprice" class="col-sm-2 control-label">学科知识与能力价格</label>
       <div class="col-sm-9">
         <input type="number" class="form-control" name="nengliprice" placeholder="学科知识与能力价格" min="0" step="0.01" value="{{ old('nengliprice', $courses ? $courses->nengliprice : 0) }}">
       </div>
     </div>
     <div class="form-group" id="nengli_discount">
-      <label for="discount_nengliprice" class="col-sm-2 control-label"><span style="color: red">*</span>学科知识与能力优惠价格</label>
+      <label for="discount_nengliprice" class="col-sm-2 control-label">学科知识与能力优惠价格</label>
       <div class="col-sm-9">
         <input type="number" class="form-control" name="discount_nengliprice" placeholder="学科知识与能力价格" min="0" step="0.01" value="{{ old('discount_nengliprice', $courses ? $courses->discount_nengliprice : 0) }}">
       </div>
