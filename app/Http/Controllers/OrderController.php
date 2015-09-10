@@ -68,13 +68,15 @@ class OrderController extends Controller
             $items_c[''. $c->id] = $c->count;
             $count += $c->count;
         }
+        $books_total = 0;
         foreach ($books as $c) {
             $c->count = intval($request->input('count_b_' . $c->id));
-            $total += $c->count * $c->discount_price;
+            $total += $c->count * $c->discount_price; 
+            $books_total  += $c->count * $c->discount_price; 
             $items_b[''. $c->id] = $c->count;
             $count += $c->count;
         }
-        return view('order.step2', ['courses'=>$courses, 'books'=> $books, 'total'=>$total, 'count'=> $count, 'items_c'=>$items_c, 'items_b'=>$items_b]);
+        return view('order.step2', ['courses'=>$courses, 'books'=> $books, 'total'=>$total, 'books_total' =>$books_total, 'count'=> $count, 'items_c'=>$items_c, 'items_b'=>$items_b]);
     }
 
     public function step3(Request $request)
@@ -100,18 +102,20 @@ class OrderController extends Controller
         }
         $items_b = json_decode($data['items_b'], true);
         $books = Books::whereIn('id', array_keys($items_b))->get();
+        $books_total = 0;
         foreach ($books as $c) {
             $item['snapshot'] = json_encode($c);
             $c->count = $items_b[''.$c->id];
             $total += $c->count * $c->discount_price;
+            $books_total  += $c->count * $c->discount_price;
             $item['count'] = $c->count;
             $item['price'] = $c->discount_price;
             $item['title'] = $c->name;
             $item['type'] = "book";
             $itemData[] = $item;
         }
-
-        $data['totalprice'] = $total + ($total>=100 ? 0 : 20);
+        //免运费的逻辑，只考虑教材的价格 
+        $data['totalprice'] = $total + ($books_total >=100 ? 0 : 20);
         $data['user_id'] = $request->session()->get('buyer.id', Auth::user()->id);
 
         $order = Order::create($data);
