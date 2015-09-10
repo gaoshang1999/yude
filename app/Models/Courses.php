@@ -78,17 +78,29 @@ class Courses extends Model
     const NENGLI = 4;
     
     /**
-     * 默认的子科目
-     * 中学有三个子科目
-     * 小学、幼儿有两个子科目
-     * @return boolean
+     * 默认的子科目优惠价格不为零，则应该加入列表中。
+     * 用于判断，是否优惠
+     * 购买全部子科时，使用课程的总优惠价格；
+     * 否则，使用各个单科的优惠价格之和
+     *
+     * @return array
      */
     public function defaultSubitem(){
-        if($this -> isZhongxue() ){
-            return [self::SUB , self::ZONGHE , self::NENGLI];
-        }else{
-            return [self::SUB , self::ZONGHE ];
+        $combine = [];
+        
+        if($this-> discount_subprice){
+            $combine []= self::SUB;
         }
+         
+        if($this-> discount_zongheprice){
+            $combine []= self::ZONGHE;
+        }
+         
+        if($this-> discount_nengliprice){
+            $combine []= self::NENGLI;
+        }
+        
+        return $combine;
     }
     
     /**

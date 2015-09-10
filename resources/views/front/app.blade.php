@@ -15,8 +15,7 @@
     @show
     <link href="/assets/css/yude.css" rel="stylesheet">
     <link href="/assets/css/header.css" rel="stylesheet">
-    <link href="/assets/css/login.css" rel="stylesheet" type="text/css" /> 
-
+    
     @yield('styles')
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -39,8 +38,9 @@
 <!--尾部公共 引用开始-->
 @include('front.footer')
 <!--尾部公共 引用结束-->
-<script src="/assets/js/jquery-2.1.4.min.js"></script>
-<script src="/assets/js/bootstrap.min.js"></script>
+
+<script src="/assets/js/jquery.js"></script>
+
 <!-- Scripts -->
 <script type="text/javascript" src="/assets/js/footer.js"></script>
 <script type="text/javascript" src="/assets/js/login.js"></script>
