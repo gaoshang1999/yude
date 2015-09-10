@@ -97,9 +97,10 @@ $app->group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', '
     // 订单管理
     $app->get('/orders', 'OrdersController@orders');
     $app->post('/orders/new', 'OrdersController@neworder');
-    $app->get('/orders/{id}', 'OrdersController@detail');
+    $app->get('/orders/detail/{id}', 'OrdersController@detail');
     $app->post('/orders/open/{id}', 'OrdersController@open');
     $app->post('/orders/delete/{id}', 'OrdersController@delete');
+    $app->get('/orders/user_search', 'OrdersController@user_search');
 });
 
 //能力天空接口-课程目录树

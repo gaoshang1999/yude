@@ -44,10 +44,12 @@ class OrdersController extends Controller
             $input['orders'] = Order::orderBy('created_at', 'desc')->simplePaginate(20);
         }
 
-        $input['courses'] = Courses::where('enable', true)->get();
+        $input['courses_zx'] = Courses::where('level', 'zhongxue')->where('enable', true)->get();
+        $input['courses_xx'] = Courses::where('level', 'xiaoxue')->where('enable', true)->get();
+        $input['courses_yr'] = Courses::where('level', 'youer')->where('enable', true)->get();
         $input['books'] = Books::all();
         $input['users'] = User::where('role', 'user')->get();
-
+// dump($input);
         return view('admin.orders.list', $input);
     }
 
@@ -98,4 +100,10 @@ class OrdersController extends Controller
         return redirect('/admin/orders');
     }
     
+    public function user_search(Request $request)
+    {
+         $q = $request['q'];
+         $users = User::where('name', 'like', '%'.$q.'%') -> orWhere('phone', 'like', '%'.$q.'%') -> get();
+         return view('admin.orders.users', ['users' => $users]);
+    }
 }

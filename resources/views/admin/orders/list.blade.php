@@ -12,7 +12,7 @@
   }
 
   #btnnew { width: auto; margin-left: 20px; }
-  .tab-content { max-height: 400px; overflow: scroll; }
+  .tab-content { max-height: 400px; max-width: 600px; overflow: scroll; }
 </style>
 @endsection
 
@@ -57,7 +57,7 @@
       </thead>
       <tbody>
         @foreach ($orders->all() as $rowIndex=>$v) <?php $rows = count($v->orderItems); ?>
-        <tr class="{{ $rowIndex%2 == 0 ? '' : 'odd' }}" ondblclick="javascript:showDialog({{ $v->id }})">
+        <tr class="{{ $rowIndex%2 == 0 ? '' : 'odd' }}" ondblclick="javascript:showOrderItemDialog({{ $v->id }})">
           <td rowspan="{{ $rows }}">{{ $v->orderno }}</td>
           <td rowspan="{{ $rows }}">{{ $v->created_at }}</td>
           <td> @if($v->orderItems[0]->isBook()) 教材 @else 课程 @endif </td>
@@ -91,7 +91,7 @@
       </tbody>
     </table>
     <div>{!! $orders->render() !!}</div>
-  </div>
+  </div> 
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -105,12 +105,16 @@
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
               <li role="presentation" class="active"><a href="#peple" aria-controls="peple" role="tab" data-toggle="tab">购买人</a></li>
-              <li role="presentation"><a href="#courses" aria-controls="courses" role="tab" data-toggle="tab">课程</a></li>
+              <li role="presentation"><a href="#courses_zx" aria-controls="courses_zx" role="tab" data-toggle="tab">课程(中学)</a></li>
+              <li role="presentation"><a href="#courses_xx" aria-controls="courses_xx" role="tab" data-toggle="tab">课程(小学)</a></li>
+              <li role="presentation"><a href="#courses_yr" aria-controls="courses_yr" role="tab" data-toggle="tab">课程(幼儿)</a></li>
               <li role="presentation"><a href="#books" aria-controls="books" role="tab" data-toggle="tab">教材</a></li>
             </ul>
             <!-- Tab panes -->
-            <div class="tab-content">
-              <div role="tabpanel" class="tab-pane active" id="peple">
+            <div class="tab-content">              
+              <div role="tabpanel" class="tab-pane active" id="peple"> 
+                 <input class="pull-left form-control" type="search" placeholder="用户名或手机号" name="name_phone" id="name_phone"  value="" style="width:400px;"/>
+                 <button class="btn btn-primary pull-left" type="button"  id="user_search" onclick="javasctipt:userSearch()" >搜索</button>  
                 <table class="table table-striped">
                   <thead>
                     <tr>
@@ -136,7 +140,8 @@
                   </tbody>
                 </table>
               </div>
-              <div role="tabpanel" class="tab-pane" id="courses">
+
+              <div role="tabpanel" class="tab-pane" id="courses_zx">
                 <table class="table table-striped">
                   <thead>
                     <tr>
@@ -149,7 +154,59 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach ($courses as $v)
+                    @foreach ($courses_zx as $v)
+                    <tr>
+                      <td><label><input type="checkbox" name="courses[]" value="{{ $v->id }}"/>&nbsp;&nbsp;{{ $v->id }}</label></td>
+                      <td>{{ $v->name }}</td>
+                      <td>@if($v->level == "zhongxue") 中学  @elseif($v->level == "xiaoxue") 小学 @elseif($v->level == "youer") 幼儿  @endif</td>
+                      <td>@if($v->kind == "bishi") 笔试  @elseif($v->kind == "mianshi") 面试  @endif</td>
+                      <td>{{ $v->totalprice }}</td>
+                      <td>{{ $v->discount_price }}</td>
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="courses_xx">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>课程名称</th>
+                      <th>级别</th>
+                      <th>类别</th>
+                      <th>总价格</th>
+                      <th>折扣价</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach ($courses_xx as $v)
+                    <tr>
+                      <td><label><input type="checkbox" name="courses[]" value="{{ $v->id }}"/>&nbsp;&nbsp;{{ $v->id }}</label></td>
+                      <td>{{ $v->name }}</td>
+                      <td>@if($v->level == "zhongxue") 中学  @elseif($v->level == "xiaoxue") 小学 @elseif($v->level == "youer") 幼儿  @endif</td>
+                      <td>@if($v->kind == "bishi") 笔试  @elseif($v->kind == "mianshi") 面试  @endif</td>
+                      <td>{{ $v->totalprice }}</td>
+                      <td>{{ $v->discount_price }}</td>
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="courses_yr">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>课程名称</th>
+                      <th>级别</th>
+                      <th>类别</th>
+                      <th>总价格</th>
+                      <th>折扣价</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach ($courses_yr as $v)
                     <tr>
                       <td><label><input type="checkbox" name="courses[]" value="{{ $v->id }}"/>&nbsp;&nbsp;{{ $v->id }}</label></td>
                       <td>{{ $v->name }}</td>
@@ -254,16 +311,53 @@
     });
   });
 
-   function showDialog(id) {
+	function mydump(arr,level) {
+	    var dumped_text = "";
+	    if(!level) level = 0;
+
+	    var level_padding = "";
+	    for(var j=0;j<level+1;j++) level_padding += "    ";
+
+	    if(typeof(arr) == 'object') {  
+	        for(var item in arr) {
+	            var value = arr[item];
+
+	            if(typeof(value) == 'object') { 
+	                dumped_text += level_padding + "'" + item + "' ...\n";
+	                dumped_text += mydump(value,level+1);
+	            } else {
+	                dumped_text += level_padding + "'" + item + "' => \"" + value + "\"\n";
+	            }
+	        }
+	    } else { 
+	        dumped_text = "===>"+arr+"<===("+typeof(arr)+")";
+	    }
+	    return dumped_text;
+	}
+  
+   function userSearch() {
+	    var val = $('#name_phone').val()  ;
+	    $("#peple").html("加载中..."); 	   
+	    	    
+	    $.ajax({
+	        url: "{{ url('/admin/orders/user_search')}}/?q=" + val,
+	    }).success(function(data) {
+	        $("#peple").html(data);
+	    });
+	}
+
+   function  showOrderItemDialog(id) {
 	    $("#orderItemModal_body").html("加载中...");  // Or use a progress bar...
 	    $("#orderItemModal").modal("show");
 	    $.ajax({
-	        url: "{{ url('/admin/orders')}}/"+ id,
+	        url: "{{ url('/admin/orders/detail')}}/"+ id,
 	    }).success(function(data) {
 	        $("#orderItemModal_body").html(data);
 	    });
 	}
 
+ 
+   
    $('form[name="open_form"]').submit(function (ev) { 
 	   $.ajax({
            type: $(this).attr('method'),
