@@ -116,8 +116,8 @@
       </table>
       <div class="priceblock"> <!-- 免运费的逻辑，只考虑教材的价格  -->
         <div>共{{$count}}件商品，商品总金额：<label>￥{{ number_format($total, 2) }}</label></div> 
-        <div><span style="color: red">(满一百可免运费)</span>运费：<label>@if ($$books_total >= 100) ￥0 @else ￥20 @endif</label></div>
-        <div>应付总额：<label>￥{{ number_format($total + ($ $books_total >=100 ? 0 : 20), 2) }}</label></div>  
+        <div><span style="color: red">(满一百可免运费)</span>运费：<label>@if ($books_total >= 100) ￥0 @else ￥20 @endif</label></div>
+        <div>应付总额：<label>￥{{ number_format($total + ($books_total >=100 ? 0 : 20), 2) }}</label></div>  
         <input style="background-color: #f35a01; padding: 10px 20px; border:none; color: white; font-size:16px; margin: 20px auto;" type="submit" value="提交订单">
       </div>
     </div>

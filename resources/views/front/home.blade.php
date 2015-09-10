@@ -165,7 +165,7 @@
 										<div class="jibie_1_2">
 										   <form action="{{url("cart/courses/add/$v->id") }}" method="get">
 												<p>{{ $v->name }}</p>
-												<p><span class="orange">{{ $v->discount_price }}</span>&nbsp;|&nbsp;<del>￥{{ $v->totalprice }}</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<p><span class="orange">￥{{ $v->discount_price }}</span>&nbsp;|&nbsp;<del>￥{{ $v->totalprice }}</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												<a href="#" class="gray fs12"><img src="/assets/img/splby_ico1.jpg" />&nbsp;试听</a>&nbsp;
 												<input type="submit" value='购买' class="button fz12"/></p>
 										  </form>
@@ -191,7 +191,7 @@
 										<div class="jibie_1_2">
 										   <form action="{{url("cart/courses/add/$v->id") }}" method="get">											
 												<p>{{ $v->name }}</p>
-												<p><span class="orange">{{ $v->discount_price }}</span>&nbsp;|&nbsp;<del>￥{{ $v->totalprice }}</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<p><span class="orange">￥{{ $v->discount_price }}</span>&nbsp;|&nbsp;<del>￥{{ $v->totalprice }}</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												<a href="#" class="gray fs12"><img src="/assets/img/splby_ico1.jpg" />&nbsp;试听</a>&nbsp;
 												<input type="submit" value='购买' class="button fz12"/></p>
 										  </form>										
@@ -216,7 +216,7 @@
 										<div class="jibie_1_2">
 										 <form action="{{url("cart/courses/add/$v->id") }}" method="get">					
 												<p>{{ $v->name }}</p>
-												<p><span class="orange">{{ $v->discount_price }}</span>&nbsp;|&nbsp;<del>￥{{ $v->totalprice }}</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<p><span class="orange">￥{{ $v->discount_price }}</span>&nbsp;|&nbsp;<del>￥{{ $v->totalprice }}</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												<a href="#" class="gray fs12"><img src="/assets/img/splby_ico1.jpg" />&nbsp;试听</a>&nbsp;
 												<input type="submit" value='购买' class="button fz12"/></p>
 										 </form>		
@@ -243,7 +243,7 @@
                 @foreach ($books ->all() as $v)
                     <li>
                     <div><a href="{{ url("books/$v->id") }}"><img src="{{ url("$v->cover") }} " width="132" height="205" /></a></div>
-                        <p>{{ $v->name }}<br><span style="color:#f60;">{{  $v->discount_price }}</span><span style="color:#000;">&nbsp;|&nbsp;<del>￥{{ $v->price }}</del></span>&nbsp;<a href="{{ url("books/$v->id") }}" style="color:#a1a1a1;">详情</a> <a href="{{  url("cart/books/add/$v->id") }}"><img src="/assets/img/button_gm.png"></a></p>
+                        <p>{{ $v->name }}<br><span style="color:#f60;">￥{{  $v->discount_price }}</span><span style="color:#000;">&nbsp;|&nbsp;<del>￥{{ $v->price }}</del></span>&nbsp;<a href="{{ url("books/$v->id") }}" style="color:#a1a1a1;">详情</a> <a href="{{  url("cart/books/add/$v->id") }}"><img src="/assets/img/button_gm.png"></a></p>
                     </li>
                 @endforeach
                 </ul>

@@ -1,28 +1,25 @@
 *{margin:0;padding:0;}
 html,body,div,ul,li,img{margin:0;padding:0;border:0;text-align:center;}
 ul,li{list-style:none;}
-a{text-decoration:none;}
+a,a:link,a:hover,a:visited{text-decoration:none;color:#000;}
 .clear{clear:both;}
-#header{width:100%;height:56px;background-color:#181818;position:fixed;z-index:99;}
-#header .head{width:100%;height:56px;margin:0 auto;}
+#header{width:100%;height:56px;background-color:#181818;position:fixed;z-index:99;font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;font-size: 14px;line-height: 1;}
+#header .head{width:1200px;height:56px;margin:0 auto;}
 #header #logo{float:left;margin-top:10px;}
-
 #header ul{height:56px;color:#fff;width:630px;margin-left:140px;line-height:56px;display:inline-block;float:left;}
 #header li{height:56px;float:left;margin-left:15px;}
 #header a{color:#fff;font-size:14px;font-family:"ËÎÌå";}
 #header #reg{float:right;width:100px;height:56px;line-height:56px;}
-#header #online{float:right;width:300px;height:56px;line-height:56px;}
+#header #online{float:right;width:250px;height:56px;line-height:56px;}
 #header #online span:first-child{background:url(/assets/img/login_ico_online.png) no-repeat center 18px;display:inline-block;width:18px;margin-right:10px;}
-#header #smxz{position:absolute;top:40px;right:508px;}
+#header #smxz{position:absolute;top:40px;right:627px;}
 #header2{height:56px;}
-
 #footer{height:211px;background-color:#353535;}
 #footer .content{width:1200px;height:140px;margin:0px auto;padding-top:40px;}
 #footer .content h4{color:#fff;font-size:20px;font-family:"Î¢ÈíÑÅºÚ";}
 #footer .content h5{color:#8c8c8c;font-size:16px;font-family:"ËÎÌå";line-height:34px;}
 #footer .content p{color:#8c8c8c;font-size:12px;font-family:"ËÎÌå";line-height:24px;}
 #footer .content a{color:#8c8c8c;}
-
 #footer .ysw{width:316px;height:140px;float:left;}
 #footer .ysw p{margin-top:10px;}
 #footer .lxwm{width:298px;height:140px;float:left;border-left:1px solid #8c8c8c;text-align:center;}
@@ -38,52 +35,59 @@ a{text-decoration:none;}
 #footer .yssq p span:first-child{color:#fff;}
 #footer .ewm{width:156px;height:140px;float:left;}
 #footer .ewm img{margin-top:8px;}
-
-#register .reg .left label{
-    display: inline;
-    max-width: 100%;
-    margin-bottom: 0px;
-    font-weight: normal;
-}
-
-#register .login .banner {
-    width: 368px;
-    height: 325px;
-    text-align: center;
-    background: transparent url("../Images/login_banner.png") no-repeat scroll center center;
-    float: left;
-}
-
-#register .login .message .checkbox {
-    position: relative;
-    bottom: -2.5px;
-    display: inline;
-}
-
-
-#footer .content h4 {
-    color: #FFF;
-    font-size: 20px;
-    font-family: "Î¢ÈíÑÅºÚ";
-	font-weight: 700;
-	line-height: 1;
-	margin-top: 0px;
-	margin-bottom: 0px;
-	line-height:28px;
-}
-#footer h5{
-	font-weight:600;
-}
+#register .reg .left label{display: inline;max-width: 100%;margin-bottom: 0px;font-weight: normal;}
+#register .login .banner {width: 368px;height: 325px; text-align: center;background: transparent url("/assets/img/login_banner.png") no-repeat scroll center center;float: left;}
+#register .login .message .checkbox {position: relative;bottom: -2.5px;display: inline;}
+#footer .content h4 {color: #FFF;font-size: 20px;font-family: "Î¢ÈíÑÅºÚ";font-weight: 700;line-height: 1;margin-top: 0px;margin-bottom: 0px;line-height:28px;}
+#footer h5{font-weight:600;}
 ::-moz-placeholder{font-size:12px;color:#a3a3a3;}
 ::-webkit-placeholder{font-size:12px;color:#a3a3a3;}
 ::placeholder{font-size:12px;color:#a3a3a3;}
 
-#header a:link, #header a:visited{
-	text-decoration: none;
-	color: #FFF;
-}
-
-#header a:hover, #header a:active{
-	text-decoration:none;
-	color: #F00;
-}
+/*written by CC 20150825*/
+.font_st{font-family:"ËÎÌå";}
+.fs14{font-size:14px;}
+.fs12{font-size:12px;}
+.c666{color:#666;}
+.c999{color:#999;}
+.c0790fe{color:#0790fe;}
+.center{text-align:center;}
+.ml37{margin-left:37px;}
+.ca3a3a3a{color:#a3a3a3;}
+.cff3e3e{color:#ff3e3e;}
+.c2693ff{color:#2693ff;}
+.c8c8c8c{color:#8c8c8c;}
+.ccc0202{color:#cc0202;}
+.hand{cursor:pointer;}
+.dn{display:none;}
+#background{background-color:#000;opacity:0.8;position:fixed;z-index:100;}
+#register{overflow:hidden;}
+#register .reg{width:600px;height:382px;border:1px solid #a3a3a3;background:#fff url(/assets/img/reg_bg.png) no-repeat 330px 8px;position:fixed;left:50%;top:50%;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;-moz-box-shadow:2px 3px 1px #e0e2e3;-webkit-box-shadow:2px 3px 1px #e0e2e3;box-shadow:2px 3px 1px #e0e2e3;z-index:150;margin-left:-300px;margin-top:-191px;font-size:12px;font-family:"ËÎÌå";}
+#register .reg .left{width:402px;height:382px;float:left;}
+#register .reg .left ul{float:left;height:278px;margin-bottom:12px;}
+#register .reg .left li{margin-top:18px;height:22px;line-height:22px;}
+#register .reg .left .ul_one{width:82px;}
+#register .reg .left .ul_one li{text-align:right;}
+#register .reg .left .ul_two{width:306px;}
+#register .reg .left .ul_two li{margin-left:16px;text-align:left;}
+#register .reg .left .input{width:165px;height:19px;border:1px solid #d2d2d2;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;}
+#register .reg .left #telcode{width:136px;height:20px;display:inline-block;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;background-color:#48a842;color:#fff;text-align:center;line-height:20px;}
+#register .reg .left #iagree{position:relative;top:2px;}
+#register .reg .left p{width:330px;margin:16px 0 0;text-align:center;}
+#register .reg .left .submit{width:234px;height:30px;background-color:#48a842;color:#fff;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;line-height:30px;text-align:center;font-size:16px;font-family:"ËÎÌå";border:0;cursor:pointer;}
+#register .reg .right{width:196px;height:382px;float:left;}
+#register .reg .right h4{font-size:24px;line-height:24px;color:#acacac;font-family:"Î¢ÈíÑÅºÚ";margin:55px 0 24px -30px;font-weight:normal;width:216px;}
+#register .reg .right a div{width:124px;height:30px;background-color:#f2f2f2;font-size:16px;line-height:30px;color:#868686;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;text-align:center;}
+#register .reg .right .in{background-color:#48a842;color:#fff;margin-bottom:11px;}
+#register .remember{width:293px;height:268px;border:1px solid #a3a3a3;background-color:#fff;position:fixed;left:50%;top:50%;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;-moz-box-shadow:2px 3px 1px #e0e2e3;-webkit-box-shadow:2px 3px 1px #e0e2e3;box-shadow:2px 3px 1px #e0e2e3;z-index:150;margin-left:-174px;margin-top:-134px;text-align:center;}
+#register .remember p{color:#434343;font-size:14px;font-family:"ËÎÌå";line-height:20px;text-align:center;margin-top:94px;}
+#register .remember div{width:210px;height:32px;line-height:32px;font-size:14px;font-family:"ËÎÌå";color:#fff;background-color:#e4393c;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;margin-left:42px;margin-top:60px;}
+#register img{position:absolute;top:5px;right:5px;cursor:pointer;}
+#register .login{width:600px;height:325px;border:1px solid #a3a3a3;background-color:#fff;text-align:center;position:fixed;left:50%;top:50%;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;-moz-box-shadow:2px 3px 1px #e0e2e3;-webkit-box-shadow:2px 3px 1px #e0e2e3;box-shadow:2px 3px 1px #e0e2e3;z-index:150;margin-left:-300px;margin-top:-153px;}
+#register .login .banner{width:370px;height:325px;text-align:center;background:url(/assets/img/login_banner.png) center no-repeat;float:left;}
+#register .login .message{width:230px;height:325px;float:left;}
+#register .login .message h3{font-size:18px;font-family:"Î¢ÈíÑÅºÚ";margin-top:50px;line-height:18px;width:230px;text-align:center;color:#858593;font-weight:normal;margin-bottom:30px;}
+#register .login .message p{text-align:left;margin-bottom:20px;}
+#register .login .message .checkbox{position:relative;bottom:-2.5px;}
+#register .login .message .submit{width:170px;height:24px;background-color:#e4393c;color:#fff;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;border:0;}
+#register .login .message .username,#register .login .message .password{width:170px;height:22px;border:1px solid #dcdcdc;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;}

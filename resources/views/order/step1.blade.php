@@ -183,9 +183,9 @@ button, input, optgroup, select, textarea {
             <td>{{ $v->name }}</td>
             <td><label class="price">{{ number_format($v->discount_price, 2) }}</label></td>
             <td style="width:50px;">
-              <div class="input-group">
+              <div class="input-group">  
                 <span class="input-group-addon glyphicon glyphicon-minus counter min" aria-hidden="true"></span> <?php  $number = $cart_books[$v->id]; ?>
-                <input type="text" class="form-control" style="width:40px; top:1px;" name="count_b_{{ $v->id }}" readonly value="{{ $number }}" data-key="b_{{ $v->id }}" data-value="{{ $v->discount_price }}"/>
+                <input type="text" class="form-control" style="width:40px; top:1px;" name="count_b_{{ $v->id }}" readonly min="1" value="{{ $number }}" data-key="b_{{ $v->id }}" data-value="{{ $v->discount_price }}"/>
                 <span class="input-group-addon glyphicon glyphicon-plus counter plus" aria-hidden="true"></span>
               </div>
             </td>
@@ -234,7 +234,7 @@ button, input, optgroup, select, textarea {
       var val = parseInt(input.val());
       if ($(this).hasClass('min')) { val -= 1; }
       if ($(this).hasClass('plus')) { val += 1; }
-      if (val < 0) { val = 0; };
+      if (val < 1) { val = 1; };
       input.val(val);
 
       $('#'+input.data('key')).html((input.data('value') * val));

@@ -65,7 +65,7 @@
 						<!--免费试听  内容部分-->
 						<div class="content_mfst dn">
 								<div>
-										<h3>中学协议金牌保过班</h3>
+										<h3>{{ $course->name }}</h3>
 										<!--  <video src="{{ $course->trialvideo }}" alt="课程试听" ></video> -->
 										<iframe height=450 width=770 src="{{ $course->trialvideo }}" frameborder=0 allowfullscreen></iframe>
 								</div>
@@ -90,9 +90,9 @@
 											<div>
 												<a href="{{ url("books/$v->id") }}"><img src="{{ url("$v->cover") }}" alt="教材" width="132" height="204"/></a>
 											</div>
-											<p>{{ $v->name }}</p>
+											<p><a href="{{ url("books/$v->id") }}">{{ $v->name }}</a></p>
 											<p>
-												<span class="orange">{{ $v->discount_price }}</span>|<del class="gray2">￥{{ $v->price }}</del>&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ url("books/$v->id") }}"><span class="gray3">详情</span></a>&nbsp;<a href="{{ url("cart/books/add/$v->id") }}"><span class="button">购买</span></a>
+												<span class="orange">￥{{ $v->discount_price }}</span>|<del class="gray2">￥{{ $v->price }}</del>&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ url("books/$v->id") }}"><span class="gray3">详情</span></a>&nbsp;<a href="{{ url("cart/books/add/$v->id") }}"><span class="button">购买</span></a>
 											</p>
 										</li>
 									@endforeach										

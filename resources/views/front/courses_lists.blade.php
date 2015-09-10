@@ -71,7 +71,7 @@
 										<div class="jibie_1_2">
 												<form action="{{url("cart/courses/add/$v->id") }}" method="get">
 												<p><a href="{{ url("courses/$v->id") }}">{{ $v->name }}</a></p>
-												<p><span class="orange">{{ $v->discount_price }}</span>&nbsp;|&nbsp;<del>￥{{ $v->totalprice }}</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<p><span class="orange">￥{{ $v->discount_price }}</span>&nbsp;|&nbsp;<del>￥{{ $v->totalprice }}</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												<a href="{{ $v->trialvideo }}" class="gray fs12" target="_blank"><img src="/assets/img/splby_ico1.jpg" />&nbsp;试听</a>&nbsp;
 												<input type="submit" value='购买' class="button fz12"/></p>
 												</form>
@@ -98,7 +98,7 @@
 										<div class="jibie_1_2">
 												<form action="{{url("cart/courses/add/$v->id") }}" method="get">
 												<p><a href="{{ url("courses/$v->id") }}">{{ $v->name }}</a></p>
-												<p><span class="orange">{{ $v->discount_price }}</span>&nbsp;|&nbsp;<del>￥{{ $v->totalprice }}</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<p><span class="orange">￥{{ $v->discount_price }}</span>&nbsp;|&nbsp;<del>￥{{ $v->totalprice }}</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												<a href="{{ $v->trialvideo }}" class="gray fs12" target="_blank"><img src="/assets/img/splby_ico1.jpg" />&nbsp;试听</a>&nbsp;
 												<input type="submit" value='购买' class="button fz12"/></p>
 												</form>
@@ -124,7 +124,7 @@
 										<div class="jibie_1_2">
 												<form action="{{url("cart/courses/add/$v->id") }}" method="get">
 												<p><a href="{{ url("courses/$v->id") }}">{{ $v->name }}</a></p>
-												<p><span class="orange">{{ $v->discount_price }}</span>&nbsp;|&nbsp;<del>￥{{ $v->totalprice }}</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<p><span class="orange">￥{{ $v->discount_price }}</span>&nbsp;|&nbsp;<del>￥{{ $v->totalprice }}</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												<a href="{{ $v->trialvideo }}" class="gray fs12" target="_blank"><img src="/assets/img/splby_ico1.jpg" />&nbsp;试听</a>&nbsp;
 												<input type="submit" value='购买' class="button fz12"/></p>
 												</form>

@@ -74,8 +74,8 @@
 										<li>
 											<div><a href="{{ url("books/$v->id") }}"><img src="{{ url("$v->cover") }}" width="132" height="204"/></a></div>
 											<p>
-												{{ $v->name }}<br/>
-												<span class="orange">{{ $v->discount_price }}</span>|<del>￥{{ $v->price }}</del>
+												<a href="{{ url("books/$v->id") }}">{{ $v->name }}</a><br/>
+												<span class="orange">￥{{ $v->discount_price }}</span>|<del>￥{{ $v->price }}</del>
 												&nbsp;
 												<a href="{{ url("books/$v->id") }}">详情</a>
 												<a href="{{ url("cart/books/add/$v->id") }}" class="goumai">购买</a>
@@ -113,13 +113,14 @@
  
 
 @section('scripts') 
-	<script>
+     <script src="/assets/js/jcxqy.js"></script>
+     
+	<script type=text/javascript>
 		$("#content_jianjie .left p img").click(function(){
 			$(this).parent().addClass("active").siblings().removeClass("active");
 			$("#content_jianjie .left .pic img").attr("src",this.src);
 		});
-	</script>
-	<script>
+ 
 		if($("#book_description").height() >= 575){
 				$("#detail_botton").removeClass('dn'); 
 		}
@@ -128,13 +129,13 @@
 				function(){  
         				$(this).html("显示部分信息&nbsp;<img src='/assets/img/jcxqy_ico_1.png'/>");
         				$("#neirong").height("auto"); 
-        				alert(1);
+//         				alert(1);
 				},
 				
 				function(){					 
 						$(this).html("显示全部信息&nbsp;<img src='/assets/img/jcxqy_ico_2.png'/>");
 						$("#neirong").height(569);  
-						alert(2);
+// 						alert(2);
 				}
 		);
 	</script>
@@ -158,5 +159,5 @@
 					$("#jcxqy_buy").attr("value",v);
 		});	
 	</script>
-        <script src="/assets/js/jcxqy.js"></script>
+   
 @endsection
