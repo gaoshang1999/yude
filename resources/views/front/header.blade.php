@@ -2,9 +2,9 @@
         <!--头部公共 引用开始-->
         <div id="header">
             <div class="head"> 
-                <div><a href="/"><img src="/assets/img/logo.png"  id="logo"></a></div>
+                <div><a href="/index"><img src="/assets/img/logo.png"  id="logo"></a></div>
                 <ul>
-                    <li><a href="/">首页</a></li>
+                    <li><a href="/index">首页</a></li>
                     <li>|</li>
                     <li><a href="{{ url("courses/lists") }} ">视频课</a></li>
                     <li>|</li>

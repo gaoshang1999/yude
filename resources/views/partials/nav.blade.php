@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url('') }}">{{ config('app.title', 'AppTitle') }}</a>
+            <a class="navbar-brand" href="{{ url('index') }}">{{ config('app.title', 'AppTitle') }}</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             @if(Auth::check())
