@@ -26,11 +26,11 @@ class MyController extends Controller
 
     public function courses_add(Request $request, $id)
     {
-        $c = Courses::where('id', 1)->first();
+        $c = Courses::where('id', $id)->first();
                 
         $subitem = $request->input("subitem", $c->defaultSubitem());
 
-        $cart_coureses = $request->session()->get('cart.coureses', []);
+        $cart_coureses = $request->session()->pull('cart.coureses', []);
         unset($cart_coureses[$id]);
         $cart_coureses[$id] = $c-> encodeSubitems($subitem);
 

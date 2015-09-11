@@ -29,6 +29,7 @@ $app->configure('ablesky');
 $app->configure('alipay');
 $app->configure('wxpay');
 $app->configure('yizhifu');
+$app->configure('order');
 config(['app.debug' => true]);
 
 /*

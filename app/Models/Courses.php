@@ -56,6 +56,14 @@ class Courses extends Model
         return $this->level == "youer";
     }
     
+    public function isBishi(){
+        return $this->kind == "bishi";
+    }
+    
+    public function isMianshi(){
+        return $this->kind == "mianshi";
+    }
+    
     /**
      * 
      * 子科名称：文本框，子科名称根据级别变化
@@ -158,8 +166,9 @@ class Courses extends Model
     {
         $total = 0;
 
-        //选择全部子科时， 使用总价格和总优惠价格
-        if( $combine == $this->getNotZeroSub() ){
+        //面试课程， 使用总价格和总优惠价格
+        //笔试课程， 选择全部子科时， 使用总价格和总优惠价格
+        if($this -> isMianshi() || $combine == $this->getNotZeroSub() ){
             $total = $this-> discount_price;
             return $total;
         }

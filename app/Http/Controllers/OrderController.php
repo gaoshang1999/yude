@@ -26,6 +26,7 @@ class OrderController extends Controller
         $cart_courses = $request->session()->get('cart.coureses', []); 
         $course_ids = array_keys($cart_courses);
         $cart_books = $request->session()->get('cart.books', []);
+
         $book_ids = array_keys($cart_books);
         
         $courses = Courses::whereIn('id', $course_ids)->get();
@@ -115,7 +116,7 @@ class OrderController extends Controller
             $itemData[] = $item;
         }
         //免运费的逻辑，只考虑教材的价格 
-        $data['totalprice'] = $total + ($books_total >=100 ? 0 : 20);
+        $data['totalprice'] = $total + ( count($books) >0 ?($books_total >=100 ? 0 : config('order.shipping_fee')) : 0);
         $data['user_id'] = $request->session()->get('buyer.id', Auth::user()->id);
 
         $order = Order::create($data);

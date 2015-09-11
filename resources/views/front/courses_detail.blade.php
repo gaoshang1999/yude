@@ -29,7 +29,7 @@
 								<form action="{{ url("cart/courses/add/$course->id") }}" method="post" id="order_form">     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 								<p><input type="submit" title="立即购买" id="discount_price" value="立即购买 ￥{{ $course->discount_price }}"  class="button"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<span class="fz24 gray">原价&nbsp;<del id="total_price">￥{{ $course->totalprice }}</del></span> </p>
-								<p class="p3">可选单科&nbsp;&nbsp;&nbsp;&nbsp;		
+								<p class="p3">@if($course->isBishi())可选单科&nbsp;&nbsp;&nbsp;&nbsp;	@endif	
 								    @if($course->discount_subprice) <label><input type="checkbox" name="subitem[]" value="1" data-price="{{ $course->subprice }}" data-discount_price="{{ $course->discount_subprice }}"  checked/>&nbsp;{{$course->subname}}</label>&nbsp;&nbsp;&nbsp; @endif
 									@if($course->discount_zongheprice) 	<label><input type="checkbox" name="subitem[]" value="2"  data-price="{{ $course->zongheprice }}" data-discount_price="{{ $course->discount_zongheprice }}"   checked/>&nbsp;综合素质</label>&nbsp;&nbsp;&nbsp; @endif
 								@if($course->isZhongxue())
@@ -117,6 +117,7 @@
 @section('scripts') 
         <script src="/assets/js/spxqy.js"></script>
         <script type="text/javascript">
+           var isBishi = {{ $course->isBishi() }} ;
            var total = {{ $course->totalprice }};
            var discount =  {{ $course->discount_price }}; 
            //选择全部子科时， 使用总价格和总优惠价格
@@ -155,7 +156,7 @@
 	                   }
 	             });			    
 		    	
-		    	if(!select){
+		    	if(isBishi && !select){
     		        alert("请先选择单科，再点击购买");
     		        return false;
     		    }  	

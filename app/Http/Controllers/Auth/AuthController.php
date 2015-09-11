@@ -74,8 +74,9 @@ class AuthController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
-            'role' => 'user',
+            'role' => 'user',            
             'password' => bcrypt($data['password']),
+            'is_reged' => $data['is_reged'],
         ]);
     }
 
@@ -200,8 +201,8 @@ class AuthController extends Controller
         }
         $input = $request->all();
         $input['is_reged'] = true;
-        $user = $this->create($input);        
         
+        $user = $this->create($input);        
         $request->session()->forget('p' . $user->phone);
     
         if ($request->ajax() || $request->wantsJson()) {
