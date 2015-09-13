@@ -63,8 +63,8 @@ class YizhifuController extends Controller
                 if ($order != null) {
                     $order->paytime = date('Y-m-d H:i:s');
                     $order->paymode = 'Yizhifu';
-                    $order->payload = json_encode({'v_oid':$a_oid[$i], 'v_pmode': $a_pmode[$i], 'v_pstatus': $a_pstatus[$i], 'v_pstring': $a_pstring[$i], 
-                        'v_amount': $a_amount[$i], 'v_amount': $a_amount[$i], 'v_moneytype': $a_moneytype[$i]});
+                    $order->payload = json_encode("{'v_oid':$a_oid[$i], 'v_pmode': $a_pmode[$i], 'v_pstatus': $a_pstatus[$i], 'v_pstring': $a_pstring[$i], 
+                        'v_amount': $a_amount[$i], 'v_amount': $a_amount[$i], 'v_moneytype': $a_moneytype[$i]}");
                     $order->save();
                 }
             }
