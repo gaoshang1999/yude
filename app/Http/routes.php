@@ -33,6 +33,8 @@ $app->post('auth/reset', 'Auth\AuthController@resetPassword');
 // $app->post('password/reset', 'Auth\PasswordController@postReset');
 
 $app->get('/index', 'Front\HomeController@home');
+$app->get('/admin/home/edit', 'Front\HomeController@html_edit');
+$app->post('/admin/home/edit', 'Front\HomeController@html_edit');
 $app->get('/books/lists', 'Admin\BooksController@lists');
 $app->get('/books/{id}', 'Admin\BooksController@detail');
 $app->get('/courses/lists', 'Admin\CoursesController@lists');
