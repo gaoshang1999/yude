@@ -104,13 +104,43 @@ class YzfPay
                 }
                 else {
                     // $str = $str . iconv('UTF-8', 'GBK', $data[$val]);
-                    $str = $str . $data[$val];
+                    $str = $str . urldecode($data[$val]);
                 }
             }
         }
         if ($ok) {
             $sign = hash_hmac('md5', $str, $this->key);
             $ok = $sign == $data['v_md5info'];
+        }
+        return $ok;
+    }
+
+    public function verify_notify($data)
+    {
+        $str = '';
+        $sorter = ['v_oid', 'v_pmode', 'v_pstatus', 'v_pstring', 'v_count'];
+        $ok = array_key_exists('v_mac', $data);
+        if ($ok) {
+            foreach ($sorter as $val) {
+                if (!array_key_exists($val, $data)) {
+                    // echo $val . '------------not exists<br/>';
+                    $ok = false;
+                }
+                else {
+                    $str = $str . urldecode($data[$val]);
+                }
+            }
+        }
+        if ($ok) {
+            $sign = hash_hmac('md5', $str, $this->key);
+            $ok = $sign == $data['v_mac'];
+        }
+        if (!$ok) {
+            if (array_key_exists('v_amount', $data) && array_key_exists('v_moneytype', $data) && array_key_exists('v_md5money', $data)) {
+                $str = $data['v_amount'] . $data['v_moneytype'];
+                $sign = hash_hmac('md5', $str, $this->key);
+                $ok = $sign == $data['v_md5money'];
+            }
         }
         return $ok;
     }
