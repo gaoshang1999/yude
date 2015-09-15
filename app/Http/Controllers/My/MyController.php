@@ -30,11 +30,11 @@ class MyController extends Controller
                 
         $subitem = $request->input("subitem", $c->defaultSubitem());
 
-        $cart_coureses = $request->session()->pull('cart.coureses', []);
+        $cart_coureses = $request->session()->pull('cart_coureses', []);
         unset($cart_coureses[$id]);
         $cart_coureses[$id] = $c-> encodeSubitems($subitem);
 
-        $request->session()->put('cart.coureses', $cart_coureses);
+        $request->session()->put('cart_coureses', $cart_coureses);
         return view('front.cart_added');
     }
     
@@ -48,29 +48,29 @@ class MyController extends Controller
     {
         $number = $request->input("number", 1);
         
-        $cart_books = $request->session()->pull('cart.books', []);
+        $cart_books = $request->session()->pull('cart_books', []);
         unset($cart_books[$id]);
         $cart_books[$id] = $number;
         
-        $request->session()->put('cart.books', $cart_books);
+        $request->session()->put('cart_books', $cart_books);
         return view('front.cart_added');
     }
     
     public function courses_remove(Request $request, $id)
     {
-        $arr1 = $request->session()->pull('cart.coureses');        
+        $arr1 = $request->session()->pull('cart_coureses');        
         unset($arr1[$id]);
 
-        $request->session()->put('cart.coureses', $arr1);
+        $request->session()->put('cart_coureses', $arr1);
         return redirect('/order');
     }
     
     public function books_remove(Request $request, $id)
     {
-        $arr1 = $request->session()->pull('cart.books');
+        $arr1 = $request->session()->pull('cart_books');
         unset($arr1[$id]);
 
-        $request->session()->put('cart.books', $arr1);
+        $request->session()->put('cart_books', $arr1);
         return redirect('/order');
     }
     

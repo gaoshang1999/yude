@@ -23,9 +23,9 @@ class OrderController extends Controller
 
     public function step1(Request $request)
     {
-        $cart_courses = $request->session()->get('cart.coureses', []); 
+        $cart_courses = $request->session()->get('cart_coureses', []); 
         $course_ids = array_keys($cart_courses);
-        $cart_books = $request->session()->get('cart.books', []);
+        $cart_books = $request->session()->get('cart_books', []);
 
         $book_ids = array_keys($cart_books);
         
@@ -70,13 +70,18 @@ class OrderController extends Controller
             $count += $c->count;
         }
         $books_total = 0;
+        $cart_books = $request->session()->pull('cart_books', []);
         foreach ($books as $c) {
             $c->count = intval($request->input('count_b_' . $c->id));
             $total += $c->count * $c->discount_price; 
             $books_total  += $c->count * $c->discount_price; 
             $items_b[''. $c->id] = $c->count;
-            $count += $c->count;
+            $count += $c->count;         
+
+            unset($cart_books[$c->id]);
+            $cart_books[$c->id] = $c->count;         
         }
+        $request->session()->put('cart_books', $cart_books);
         return view('order.step2', ['courses'=>$courses, 'books'=> $books, 'total'=>$total, 'books_total' =>$books_total, 'count'=> $count, 'items_c'=>$items_c, 'items_b'=>$items_b]);
     }
 
@@ -126,18 +131,18 @@ class OrderController extends Controller
             OrderItem::create($item);
         }
         //从session 中去除已经生成订单课程
-        $arr1 = $request->session()->pull('cart.coureses');
+        $arr1 = $request->session()->pull('cart_coureses');
         foreach(array_keys($items_c) as $id){
             unset($arr1[$id]);        
         }
-        $request->session()->put('cart.coureses', $arr1);
+        $request->session()->put('cart_coureses', $arr1);
         
         //从session 中去除已经生成订单教材
-        $arr1 = $request->session()->pull('cart.books');
+        $arr1 = $request->session()->pull('cart_books');
         foreach(array_keys($items_b) as $id){
             unset($arr1[$id]);        
         }        
-        $request->session()->put('cart.books', $arr1);
+        $request->session()->put('cart_books', $arr1);
         
         return redirect('/order/payonline/'.$data['orderno']);
     }
