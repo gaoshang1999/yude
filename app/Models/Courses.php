@@ -20,7 +20,8 @@ class Courses extends Model
                             'ablesky_category' , 'discount_price' , 'image',
                             'description', 'hours_description', 'teacher',
                             'discount_subprice', 'discount_zongheprice', 'discount_nengliprice',
-                            'sub_ablesky_category', 'zonghe_ablesky_category', 'nengli_ablesky_category'
+                            'sub_ablesky_category', 'zonghe_ablesky_category', 'nengli_ablesky_category',
+                            'has_sub'
     ];
 
     
@@ -96,6 +97,14 @@ class Courses extends Model
     public function defaultSubitem(){
         $combine = [];
         
+        if($this-> hasNoSub()){
+            if($this-> isZhongxue){
+                return [self::SUB,  self::ZONGHE, self::NENGLI];
+            }else{
+                return [self::SUB,  self::ZONGHE];
+            }
+        }
+        
         if($this-> discount_subprice){
             $combine []= self::SUB;
         }
@@ -135,7 +144,7 @@ class Courses extends Model
      */
     public function hasSub($combine)
     {
-        return $combine & self::SUB !=0 ;
+        return $combine & self::SUB  ;
     }
     
     /**
@@ -145,7 +154,7 @@ class Courses extends Model
      */
     public function hasZonghe($combine)
     {
-        return $combine & self::ZONGHE !=0 ;
+        return $combine & self::ZONGHE  ;
     }
     
     /**
@@ -155,7 +164,7 @@ class Courses extends Model
      */
     public function hasNengli($combine)
     {
-        return $combine & self::NENGLI !=0 ;
+        return $combine & self::NENGLI ;
     }
     
     /**
@@ -165,14 +174,14 @@ class Courses extends Model
     public function computePrice($combine)
     {
         $total = 0;
-
-        //面试课程， 使用总价格和总优惠价格
+        
+        //没有子科， 使用总价格和总优惠价格
         //笔试课程， 选择全部子科时， 使用总价格和总优惠价格
-        if($this -> isMianshi() || $combine == $this->getNotZeroSub() ){
-            $total = $this-> discount_price;
+        if($this -> hasNoSub() || $combine == $this->getNotZeroSub() ){
+            $total = $this-> discount_price; 
             return $total;
         }
-        
+
         if($this -> hasSub($combine) ){
             $total += $this-> discount_subprice;
         }
@@ -249,6 +258,12 @@ class Courses extends Model
     public function getAbleskyCategoryIds($combine)
     {
         $category_ids = [];
+        
+        if($this -> hasNoSub()){
+            $category_ids []= $this-> ablesky_category;
+            return $category_ids;
+        }
+        
         if($this -> hasSub($combine)){
             $category_ids []= $this->sub_ablesky_category;
         }
@@ -261,4 +276,12 @@ class Courses extends Model
         return $category_ids;
     }
 
+    /**
+     * 是否没有子科
+     * @return boolean
+     */
+    public function hasNoSub()
+    {
+        return  $this -> has_sub == false ;
+    }
 }

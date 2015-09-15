@@ -73,6 +73,13 @@
         <input type="number" class="form-control" name="discount_price" placeholder="优惠价" min="0" step="0.01" value="{{ old('discount_price', $courses ? $courses->discount_price : 0) }}">
       </div>
     </div>
+    <div class="form-group">
+      <label for="has_sub" class="col-sm-2 control-label"><span style="color: red">*</span>是否有子科目</label>
+      <div class="col-sm-9"><?php $has_sub = old('has_sub', $courses ? $courses->has_sub : true); ?>
+        <label class="radio-inline"><input type="radio" name="has_sub" value="1" {{ $has_sub ? 'checked' : '' }}> 是</label>
+        <label class="radio-inline"><input type="radio" name="has_sub" value="0" {{ $has_sub ? '' : 'checked' }}> 否</label>
+      </div>
+    </div>
 <hr/>
    <div class="form-group">
       <label for="sub_ablesky_category" class="col-sm-2 control-label">子科 Ablesky课程目录</label>

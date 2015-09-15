@@ -72,6 +72,7 @@ class CoursesController extends Controller
 //                 'sub_ablesky_category'=> 'required',
 //                 'zonghe_ablesky_category'=> 'required',
 //                 'nengli_ablesky_category'=> 'required_if:level,zhongxue',
+                'has_sub' => 'required|boolean',
             ]);
 
             $input = $request->all();
@@ -135,6 +136,7 @@ class CoursesController extends Controller
 //                 'sub_ablesky_category'=> 'required',
 //                 'zonghe_ablesky_category'=> 'required',
 //                 'nengli_ablesky_category'=> 'required_if:level,zhongxue',
+                'has_sub' => 'required|boolean',
             ]);
 
             $input = $request->all();

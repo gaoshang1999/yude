@@ -218,14 +218,17 @@ button, input, optgroup, select, textarea {
   $(function(){
     $('.checkvideo').on('change', function(){
       $('.video').prop('checked', $(this).prop('checked'));
+      calcTotal();
     });
     $('.checkbook').on('change', function(){
         $('.book').prop('checked', $(this).prop('checked'));
+        calcTotal();
       });
     $('.checkall').on('change', function(){
       $('.checkvideo').prop('checked', $(this).prop('checked')).change();
       $('.checkbook').prop('checked', $(this).prop('checked')).change();
       $('.checkall').prop('checked', $(this).prop('checked'));
+      calcTotal();
     });
     $('.checkall').prop('checked', true).change();
 

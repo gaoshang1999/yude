@@ -31,9 +31,9 @@ class OrderController extends Controller
         
         $courses = Courses::whereIn('id', $course_ids)->get();
         $books = Books::whereIn('id', $book_ids)->get();
-        
+
         $total = 0;
-        foreach ($courses as $c) {            
+        foreach ($courses as $c) {                        
             $total +=  $c->computePrice($cart_courses[$c->id]);
         }
         foreach ($books as $c) {

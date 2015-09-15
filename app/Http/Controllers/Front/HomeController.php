@@ -25,7 +25,7 @@ class HomeController extends Controller
             return redirect('/admin/home/edit');
         }
         
-        $books = Books::orderBy('buytimes', 'desc')->take(8) ->get();
+        $books = Books::orderBy('buytimes', 'desc')->take(6) ->get();
         
         $courses_zx = Courses::where('level', 'zhongxue')->where('enable', true)->orderBy('buytimes', 'desc')->take(8) ->get();
         $courses_xx = Courses::where('level', 'xiaoxue')->where('enable', true)->orderBy('buytimes', 'desc')->take(8) ->get() ;
