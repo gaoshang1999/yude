@@ -103,6 +103,12 @@ $app->group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', '
     $app->post('/orders/open/{id}', 'OrdersController@open');
     $app->post('/orders/delete/{id}', 'OrdersController@delete');
     $app->get('/orders/user_search', 'OrdersController@user_search');
+    
+    //图片上传
+    $app->get('/images', 'ImagesController@lists');
+    $app->get('/images/upload', 'ImagesController@upload');
+    $app->post('/images/upload', 'ImagesController@upload');
+    $app->post('/images/remove', 'ImagesController@remove');
 });
 
 //能力天空接口-课程目录树

@@ -50,7 +50,11 @@ class GroupsController extends Controller
             return redirect('/admin/groups');
         }
         else {
-            $data = ['groups' => NULL];
+            $courses_zx = Courses::where('level', 'zhongxue')->where('enable', true)->orderBy('buytimes', 'desc') ->get();
+            $courses_xx = Courses::where('level', 'xiaoxue')->where('enable', true)->orderBy('buytimes', 'desc') ->get() ;
+            $courses_yr = Courses::where('level', 'youer')->where('enable', true)->orderBy('buytimes', 'desc') ->get();
+            $data = ['groups' => NULL, 'courses_zx' => $courses_zx, 'courses_xx' => $courses_xx, 'courses_yr' => $courses_yr];
+            
             return view('admin.groups.create_edit', $data);
         }
     }

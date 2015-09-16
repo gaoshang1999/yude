@@ -39,27 +39,20 @@ class HomeController extends Controller
     public function html_edit(Request $request)
     {
         $dir = __DIR__.'/../../../../';
-        $open_path = $dir."resources/views/front/home/open.blade.php";
-        $live_path = $dir."resources/views/front/home/live.blade.php";
-        $forecast_path = $dir."resources/views/front/home/forecast.blade.php";
-        $teacher_path = $dir."resources/views/front/home/teacher.blade.php";
-        
+        $free_path = $dir."resources/views/front/home/free.blade.php";
+        $teacher_path = $dir."resources/views/front/home/teacher.blade.php";        
 
-        if ($request->isMethod('post')) {
-            $open = $request['open'];
-            $live = $request['live'];
-            $forecast = $request['forecast'];
+        if ($request->isMethod('post')) {            
+            $free = $request['free'];
             $teacher = $request['teacher'];
-            
-            file_put_contents($open_path, $open);
-            file_put_contents($live_path, $live);
-            file_put_contents($forecast_path, $forecast);
+
+            file_put_contents($free_path, $free);
             file_put_contents($teacher_path, $teacher);
             
             return redirect('/index');
             
         }else{      
-            return view('admin.home.html_edit', ['open' => file_get_contents($open_path), 'live' => file_get_contents($live_path), 'forecast' => file_get_contents($forecast_path), 'teacher' => file_get_contents($teacher_path)]);
+            return view('admin.home.html_edit', ['free' => file_get_contents($free_path),  'teacher' => file_get_contents($teacher_path)]);
         }
         
     }

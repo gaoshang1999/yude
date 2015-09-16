@@ -1,5 +1,12 @@
 @extends('admin/admin')
 
+@section('styles')
+<style type="text/css">
+
+  .tab-content { max-height: 400px; max-width: 600px; overflow: scroll; }
+</style>
+@endsection
+
 {{-- Content --}}
 @section('content')
 <div class="col-sm-10 col-sm-offset-1 main">
@@ -18,7 +25,7 @@
     <div class="form-group">
       <label for="rank" class="col-sm-2 control-label"><span style="color: red">*</span>显示顺序</label>
       <div class="col-sm-9">
-        <input type="number" class="form-control" name="rank" placeholder="显示顺序" min="1"  step="1" value="{{ old('rank', $groups ? $groups->rank : 0) }}">
+        <input type="number" class="form-control" name="rank" placeholder="显示顺序" min="1"  step="1" value="{{ old('rank', $groups ? $groups->rank : 1) }}">
       </div>
     </div>
 

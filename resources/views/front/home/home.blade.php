@@ -40,32 +40,10 @@
 <div class="clearfloat"></div>
 <div class="clear h20"></div>
 <!--免费畅学课程-->
-<div id="mfcxkc">
-	<div class="title">
-			<div class="title1"></div>
-			<ul>
-					<li class="lihover">公开课</li>
-					<li>直播课</li>
-			</ul>
-			<a class="more" href="">更多>></a>
-	</div>
+
+@include('front.home.free')		
 
 
-		<div class="content">
-			<!--公开课-->
-			<div class="content_one">
-                 @include('front.home.open')			
-			</div>
-			<!--直播课-->
-			<div class="content_two dn">
-			      @include('front.home.live')	
-				<!--直播预告-->
-				<div class="zbyg">
-				  @include('front.home.forecast')	
-				</div>
-			</div>
-      </div>
-</div>
 		<div class="clear"></div>
 <!--精彩视频课程-->
 <div id="jcspkc">
