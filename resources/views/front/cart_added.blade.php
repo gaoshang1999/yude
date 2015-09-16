@@ -24,7 +24,7 @@
                 <a id="GotoShoppingCart" class="btn-1" href="{{ url("order") }}?url=order">去购物车结算</a>
                 <span id="next" class="next">
                 您还可以
-                <a id="jxgw" class="jxgw" href="javascript:history.back();">继续购物</a>
+                <a id="jxgw" class="jxgw" href="@if($from=='books') {{ url('/books/lists') }} @else  {{ url('/courses/lists') }} @endif">继续购物</a>
                 </span>
                 </span>
 

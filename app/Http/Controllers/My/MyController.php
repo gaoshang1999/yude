@@ -35,7 +35,7 @@ class MyController extends Controller
         $cart_coureses[$id] = $c-> encodeSubitems($subitem);
 
         $request->session()->put('cart_coureses', $cart_coureses);
-        return view('front.cart_added');
+        return view('front.cart_added', ["from"=>"courses"]);
     }
     
     /**
@@ -53,7 +53,7 @@ class MyController extends Controller
         $cart_books[$id] = $number;
         
         $request->session()->put('cart_books', $cart_books);
-        return view('front.cart_added');
+        return view('front.cart_added', ["from"=>"books"]);
     }
     
     public function courses_remove(Request $request, $id)
