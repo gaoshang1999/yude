@@ -76,6 +76,9 @@ $app->group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', '
     $app->post('/courses/edit/{id}', 'CoursesController@coursesedit');
     $app->post('/courses/delete/{id}', 'CoursesController@delete');
     $app->get('/courses/search', 'CoursesController@search');
+    $app->get('/courses/html_edit', 'CoursesController@html_edit');
+    $app->post('/courses/html_edit', 'CoursesController@html_edit');
+    
     
     // 课程组管理
     $app->get('/groups', 'GroupsController@groups');

@@ -5,7 +5,7 @@ use App\Models\Courses;
 use Illuminate\Http\Request;
 use App\Models\Books;
 use App\Models\Groups;
-
+use Illuminate\Support\Facades\Auth;
 
 class CoursesController extends Controller
 {
@@ -189,6 +189,11 @@ class CoursesController extends Controller
     
     public function detail(Request $request, $id)
     {
+        if($request->has("e") && Auth::user() && Auth::user() -> isAdmin())
+        {
+            return redirect('/admin/courses/html_edit');
+        }
+        
         $course = Courses::where('id', $id)->first();
         
         //课程推荐，同级别课程中，随机推荐3个
@@ -202,5 +207,22 @@ class CoursesController extends Controller
         $books_recommend = array_slice($books_recommend, 0, 4);
         
         return view('front.courses_detail', ['course' => $course, 'courses_recommend' => $courses_recommend, 'books_recommend'=>$books_recommend]);
+    }
+    
+    public function html_edit(Request $request)
+    {
+        $dir = __DIR__.'/../../../../';
+        $rightImage_path = $dir."resources/views/front/courses/rightImage.blade.php";      
+        
+        if ($request->isMethod('post')) {
+            $rightImage = $request['rightImage'];
+        
+            file_put_contents($rightImage_path, $rightImage);
+        
+            return redirect('/courses/lists');
+        
+        }else{
+            return view('admin.courses.html_edit', ['rightImage' => file_get_contents($rightImage_path) ]);
+        }
     }
 }

@@ -17,9 +17,6 @@ class HomeController extends Controller
 
     public function home(Request $request)
     {
-        
-//         dump(  $request->has("e") );
-
         if($request->has("e") && Auth::user() && Auth::user() -> isAdmin())
         {
             return redirect('/admin/home/edit');
@@ -39,20 +36,23 @@ class HomeController extends Controller
     public function html_edit(Request $request)
     {
         $dir = __DIR__.'/../../../../';
+        $banner_path = $dir."resources/views/front/home/banner.blade.php";
         $free_path = $dir."resources/views/front/home/free.blade.php";
         $teacher_path = $dir."resources/views/front/home/teacher.blade.php";        
 
-        if ($request->isMethod('post')) {            
+        if ($request->isMethod('post')) {  
+            $banner = $request['banner'];
             $free = $request['free'];
             $teacher = $request['teacher'];
 
+            file_put_contents($banner_path, $banner);
             file_put_contents($free_path, $free);
             file_put_contents($teacher_path, $teacher);
             
             return redirect('/index');
             
         }else{      
-            return view('admin.home.html_edit', ['free' => file_get_contents($free_path),  'teacher' => file_get_contents($teacher_path)]);
+            return view('admin.home.html_edit', ['banner' => file_get_contents($banner_path), 'free' => file_get_contents($free_path),  'teacher' => file_get_contents($teacher_path)]);
         }
         
     }

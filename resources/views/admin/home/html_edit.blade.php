@@ -8,17 +8,23 @@
   <form class="form-horizontal" role="form" method="post" action="{{ url('/admin/home/edit' ) }}" enctype="multipart/form-data">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     
-
+  <div class="form-group">
+      <label for="banner" class="col-sm-2 control-label">banner 轮播图</label>
+      <div class="col-sm-9">
+        <textarea id="banner_editor" type="text/plain" name="banner" style="width:650px;height:400px;">{{ old("banner", $banner ) }}</textarea>
+      </div>
+    </div>    
+<hr/>
     <div class="form-group">
-      <label for="open" class="col-sm-2 control-label">免费畅学课程</label>
+      <label for="free" class="col-sm-2 control-label">免费畅学课程</label>
       <div class="col-sm-9">
         <textarea id="free_editor" type="text/plain" name="free" style="width:650px;height:400px;">{{ old("free", $free ) }}</textarea>
       </div>
     </div>
       
-    
+ <hr/>   
     <div class="form-group">
-      <label for="hours_description_editor" class="col-sm-2 control-label">权威名师团队</label>
+      <label for="teacher" class="col-sm-2 control-label">权威名师团队</label>
       <div class="col-sm-9">
         <textarea id="teacher_editor" type="text/plain" name="teacher" style="width:650px;height:400px;">{{ old("teacher", $teacher ) }}</textarea>
       </div>
