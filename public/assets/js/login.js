@@ -68,7 +68,32 @@
 					            ev.preventDefault();
 					            return ;
 					        }    	
-					        return true;
+
+
+					        $("#login_submit").val("正在登录...");
+					        $.ajax({
+					            type: login_form_2.attr('method'),
+					            url: login_form_2.attr('action'),
+					            data: login_form_2.serialize(),
+					            dataType: "json",
+					            success: function (data) {
+					            	$("#login_submit").val("登录");
+					            	var ret = eval(data);            	
+					                if(ret['success'] ){
+					                	window.location.href = $("#url").val();
+					                }else{
+					                    span.html("× 用户名或密码错误");
+					                    span.removeClass("dn");
+					                }
+					            },
+					            error: function(){
+					            	$("#login_submit").val("登录");
+					            	span.removeClass("dn");
+					            	span.html("后台服务忙，请稍后重试");
+					            }
+					        });
+					        
+					        ev.preventDefault();
 					    });
 
 					    var fun1 = function(){
@@ -86,7 +111,7 @@
 					        	return false;
 					        }        
 					        var token =$('_token').val()
-							$.post('auth/phonecheck/'+value, {'_token': token}, function(data, textStatus){
+							$.post('/auth/phonecheck/'+value, {'_token': token}, function(data, textStatus){
 					            var ret = eval(data);
 					            if(ret && ret['success'] ){
 					                span.addClass("dn");
@@ -248,6 +273,8 @@
 
 						var register_form = $('#register_form');
 					    register_form.submit( function (ev) {
+					    	$('#phone').blur();
+					    	
 					        var validate = true;
 					        $("#ul_two").find("span").each(function(){
 					       	     if(!$(this).hasClass("dn")){
@@ -258,7 +285,7 @@
 					            ev.preventDefault();
 					            return;
 					        }
-//					         $('#phone').blur();
+					         
 //					         $('#phonecode').blur();
 //					         $('#name').blur();
 //					         $('#password').blur();
@@ -289,7 +316,9 @@
 					                if(ret['success'] ){                	
 										$(".reg").addClass("dn");
 										$(".login").removeClass("dn");
-										$("#background").removeClass("dn");
+										if($("#login_from_header").val()){
+											$("#background").removeClass("dn");
+										}
 					                }else{
 					                	$("#register_form_hint").removeClass("dn");
 					                	$("#register_form_hint").html( ret['message'] );

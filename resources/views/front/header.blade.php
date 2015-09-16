@@ -76,7 +76,7 @@
 				</div>
 				<div class="login dn">
 						<div class="banner"></div>
-						<div class="message">
+						<div class="message"> 
 								<form id="login_form" action="{{ url("auth/login") }}" method="post"> 
 								<input type="hidden" name="_token" value="{{ csrf_token() }}"/> 
 								<input type="hidden" class="form-control" name="url" value="{{ Request::url() }}"/>
@@ -105,5 +105,5 @@
 
 		
 		</div>
-
+<input type="hidden" class="form-control" id="login_from_header" value="1"/>
 		

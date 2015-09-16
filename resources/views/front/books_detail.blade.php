@@ -50,7 +50,7 @@
 		<!--教材详情-->
 		<div id="content_xiangqing">
 				<div class="part_one">
-						<img src="{{ $book->image }}" alt="教材特色" width="1186px" height="607px"/>
+						<img src="{{ $book->image }}" alt="教材特色" width="1184px" height="604px"/>
 				</div>
 				<div class="part_two">
 						<div class="left">

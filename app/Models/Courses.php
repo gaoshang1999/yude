@@ -98,7 +98,7 @@ class Courses extends Model
         $combine = [];
         
         if($this-> hasNoSub()){
-            if($this-> isZhongxue){
+            if($this-> isZhongxue()){
                 return [self::SUB,  self::ZONGHE, self::NENGLI];
             }else{
                 return [self::SUB,  self::ZONGHE];
@@ -283,5 +283,10 @@ class Courses extends Model
     public function hasNoSub()
     {
         return  $this -> has_sub == false ;
+    }
+    
+    public function isHasSub()
+    {
+        return  $this -> has_sub  ;
     }
 }
