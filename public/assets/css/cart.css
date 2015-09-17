@@ -22,14 +22,14 @@ ul,li{list-style:none;}
 }
  .success-b h3 {
     color: #7abd54;
-    font: 24px/40px Î¢ÈíÑÅºÚ;
+    font: 24px/40px \5FAE\8F6F\96C5\9ED1;
     float:left;
     padding:5px 0px;
     margin:0px 0px;
 }
 
 #initCart_next_go, #GotoShoppingCart, #next{
-    font: 24px/40px Î¢ÈíÑÅºÚ;
+    font: 24px/40px \5FAE\8F6F\96C5\9ED1;
     float:left;
 }
 
@@ -37,14 +37,14 @@ ul,li{list-style:none;}
 
 
 #next{
-	font: 12px/150% Arial,Verdana,"ËÎÌå";
+	font: 12px/150% Arial,Verdana,"\5B8B\4F53";
 	color: #005ea7;
 	margin:12px 5px
 }
 
 #jxgw
 {
-    font: 12px/150% Arial,Verdana,"ËÎÌå";
+    font: 12px/150% Arial,Verdana,"\5B8B\4F53";
 	text-decoration: underline;
 }
 .btn-1:link, .btn-1:visited {
@@ -62,7 +62,7 @@ ul,li{list-style:none;}
     border-radius: 3px;
     color: #fff;
     display: inline-block;
-    font-family: "Î¢ÈíÑÅºÚ";
+    font-family: "\5FAE\8F6F\96C5\9ED1";
     font-size: 15px;
     font-weight: bold;
     height: 40px;

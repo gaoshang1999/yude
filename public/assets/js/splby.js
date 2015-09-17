@@ -85,3 +85,11 @@ $(".kelei:eq(26)").removeClass("mr30");
 $(".kelei:eq(29)").removeClass("mr30");
 $(".kelei:eq(32)").removeClass("mr30");
 $(".kelei:eq(35)").removeClass("mr30");
+
+/*变换选项卡*/
+$(".kelei .kelei_2 label").click(
+function(){
+		var b=$(this).attr("for");
+		b="#"+b+"_content";
+		$(b).removeClass("dn").siblings("div").addClass("dn");
+})

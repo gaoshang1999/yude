@@ -1,7 +1,14 @@
 @extends('front.app')
 
 {{-- Web site Title --}}
-@section('title') 园师课堂-教材列表页 @stop
+@section('title') 教师资格证考试用书|教材-园师课堂  @stop
+@section('meta_keywords') 
+    <meta name="keywords" content="教师资格证考试用书,教师资格证教材,考试用书,教材"/>
+@stop
+@section('meta_description') 
+    <meta name="description" content="教师资格证考试用书页包含园师课堂编辑出版的所有中学、小学、幼儿园的教师资格证考试备考教材及资料，以供学员挑选购买。"/>
+@stop
+
 
 @section('styles') 
 <link href="/assets/css/jclby.css" rel="stylesheet" type="text/css" />  
@@ -12,7 +19,7 @@
 @section('content')
 
         <div id="banner">
-            <div class="content"><a href="#"><img src="/assets/img/jclby_djck.jpg" alt="查看视频课程" /></a></div>
+            <div class="content"><a href="{{ url("courses/lists") }}"><img src="/assets/img/jclby_djck.jpg" alt="查看视频课程" /></a></div>
         </div>
         <div id="content">
             <div class="jclby_zx">

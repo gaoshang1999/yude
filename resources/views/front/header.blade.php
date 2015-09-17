@@ -10,8 +10,6 @@
                     <li>|</li>
                     <li><a href="{{ url("courses/lists") }}">直播课</a></li>
                     <li>|</li>
-                    <li><a href="{{ url("courses/lists") }}">公开课</a></li>
-                    <li>|</li>
                     <li><a href="{{ url("books/lists") }} ">教材</a></li>
                     <li>|</li>
                     <li><a href="{{ url("books/lists") }}">题库</a></li>
@@ -19,7 +17,7 @@
                     <li><a href="{{ url("books/lists") }}">考讯</a></li>
                     <li>|</li>
                     <li><a href="{{ url("books/lists") }}">师资</a></li>
-                    <li>|</li>
+                    <li>|</li>                    
                     <li><a onmouseover="ydd()" onmouseout="ydd_out()" class="hand">移动端</a></li>
                 </ul>
                 <img src="/assets/img/header_pic_smxz.png" id="smxz" alt="扫码下载" class="dn"/>
@@ -29,7 +27,7 @@
                     <a class="hand" onclick="login()">登录</a><span style="color:#fff;"> &nbsp;|&nbsp; </span><a class="hand" onclick="reg()">注册</a>
                   @else
                     
-				    <div id="online"><span> &nbsp;&nbsp; </span><a class="hand" href="{{ url('/my/profile') }}">{{ Auth::user()->name }}</a><span style="color:#fff;"> &nbsp;|@if( Auth::user()->is_reged) &nbsp; </span><a href="{{ url('/ablesky/redirect') }}" target="_blank">学习课程</a><span style="color:#fff;"> &nbsp;|@endif&nbsp; </span><a href="{{ url('order') }}">购物车</a><span style="color:#fff;"> &nbsp;|&nbsp; </span><a class="hand" href="{{ url('auth/logout') }}">退出</a></div>
+				    <div id="online"><span> &nbsp;&nbsp; </span><a class="hand" href="{{ url('/my/profile') }}">{{ substr(Auth::user()->name,0 ,6) }}</a><span style="color:#fff;"> &nbsp;|@if( Auth::user()->is_reged) &nbsp; </span><a href="{{ url('/ablesky/redirect') }}" target="_blank">学习课程</a><span style="color:#fff;"> &nbsp;|@endif&nbsp; </span><a href="{{ url('order') }}">购物车</a><span style="color:#fff;"> &nbsp;|&nbsp; </span><a class="hand" href="{{ url('auth/logout') }}">退出</a></div>
                 @endif
                  </div>
             </div>

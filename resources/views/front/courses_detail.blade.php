@@ -72,7 +72,7 @@
 						</div>
 						<!--课程简介  内容部分-->
 						<div class="content_kcjj dn">
-								{!! $course->description !!}
+							<div>	{!! $course->description !!} </div>
 						</div>
 						<!--相关推荐  内容部分-->
 						<div class="content_xgtj dn">

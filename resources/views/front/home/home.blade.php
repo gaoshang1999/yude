@@ -1,7 +1,14 @@
 @extends('front.app')
 
 {{-- Web site Title --}}
-@section('title') 园师课堂  @stop
+@section('title') 园师课堂-首家教师资格证培训在线教育品牌  @stop
+@section('meta_keywords') 
+    <meta name="keywords" content="园师课堂,教师资格证培训,教师资格证,在线教育"/>
+@stop
+@section('meta_description') 
+    <meta name="description" content="园师课堂-全国首家专业教师资格证培训在线教育平台，致力为想成为教师的人士提供最优质的在线教育产品和服务，包含教师资格考试和教师招聘考试培训项目，并配有与课程匹配的独家专业教材。"/>
+@stop
+
 
 @section('styles') 
         <link href="/assets/css/home.css" rel="stylesheet" type="text/css" /> 
@@ -50,9 +57,9 @@
 										</div>
 										<div class="jibie_1_2">
 										   <form action="{{url("cart/courses/add/$v->id") }}" method="get">
-												<p>{{ $v->name }}</p>
-												<p><span class="orange">￥{{ $v->discount_price }}</span>&nbsp;|&nbsp;<del>￥{{ $v->totalprice }}</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												<a href="#" class="gray fs12"><img src="/assets/img/splby_ico1.jpg" />&nbsp;试听</a>&nbsp;
+												<p><a href="{{ url("courses/$v->id") }}"> {{ $v->name }} </a></p>
+												<p><span class="orange bold">￥{{ $v->discount_price }}</span>&nbsp;|&nbsp;<del>￥{{ $v->totalprice }}</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<a href="{{ url("courses/$v->id") }}" class="gray fs12"><img src="/assets/img/splby_ico1.jpg" />&nbsp;试听</a>&nbsp;
 												<input type="submit" value='购买' class="button fz12"/></p>
 										  </form>
 										</div>
@@ -76,9 +83,9 @@
 										</div>
 										<div class="jibie_1_2">
 										   <form action="{{url("cart/courses/add/$v->id") }}" method="get">											
-												<p>{{ $v->name }}</p>
-												<p><span class="orange">￥{{ $v->discount_price }}</span>&nbsp;|&nbsp;<del>￥{{ $v->totalprice }}</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												<a href="#" class="gray fs12"><img src="/assets/img/splby_ico1.jpg" />&nbsp;试听</a>&nbsp;
+												<p><a href="{{ url("courses/$v->id") }}"> {{ $v->name }} </a></p>
+												<p><span class="orange bold">￥{{ $v->discount_price }}</span>&nbsp;|&nbsp;<del>￥{{ $v->totalprice }}</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<a href="{{ url("courses/$v->id") }}" class="gray fs12"><img src="/assets/img/splby_ico1.jpg" />&nbsp;试听</a>&nbsp;
 												<input type="submit" value='购买' class="button fz12"/></p>
 										  </form>										
 										</div>
@@ -101,9 +108,9 @@
 										</div>
 										<div class="jibie_1_2">
 										 <form action="{{url("cart/courses/add/$v->id") }}" method="get">					
-												<p>{{ $v->name }}</p>
-												<p><span class="orange">￥{{ $v->discount_price }}</span>&nbsp;|&nbsp;<del>￥{{ $v->totalprice }}</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												<a href="#" class="gray fs12"><img src="/assets/img/splby_ico1.jpg" />&nbsp;试听</a>&nbsp;
+												<p><a href="{{ url("courses/$v->id") }}"> {{ $v->name }} </a></p>
+												<p><span class="orange bold">￥{{ $v->discount_price }}</span>&nbsp;|&nbsp;<del>￥{{ $v->totalprice }}</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<a href="{{ url("courses/$v->id") }}" class="gray fs12"><img src="/assets/img/splby_ico1.jpg" />&nbsp;试听</a>&nbsp;
 												<input type="submit" value='购买' class="button fz12"/></p>
 										 </form>		
 										</div>
@@ -128,8 +135,8 @@
                 <ul>
                 @foreach ($books ->all() as $v)
                     <li>
-                    <div><a href="{{ url("books/$v->id") }}"><img src="{{ url("$v->cover") }} " width="132" height="205" /></a></div>
-                        <p>{{ $v->name }}<br><span style="color:#f60;">￥{{  $v->discount_price }}</span><span style="color:#000;">&nbsp;|&nbsp;<del>￥{{ $v->price }}</del></span>&nbsp;<a href="{{ url("books/$v->id") }}" style="color:#a1a1a1;">详情</a> <a href="{{  url("cart/books/add/$v->id") }}"><img src="/assets/img/button_gm.png"></a></p>
+                    <div><a href="{{ url("books/$v->id") }}"><img src="{{ url("$v->cover") }} " width="132" height="205" /></a></div>                        
+                        <p><a href="{{ url("books/$v->id") }}" class="bold">{{ $v->name }}</a><br><span style="color:#f60;">{{  $v->discount_price }}</span><span style="color:#000;">&nbsp;|&nbsp;<del>￥{{ $v->price }}</del></span>&nbsp;&nbsp;&nbsp;<a href="{{ url("books/$v->id") }}" style="color:#a1a1a1;">详情</a> <a href="{{  url("cart/books/add/$v->id") }}"><img src="/assets/img/button_gm.png"></a></p>
                     </li>
                 @endforeach
                 </ul>
