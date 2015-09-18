@@ -60,7 +60,9 @@
 									<input type="radio" name="group_{{$g->id}}" value="{{ $g->xx->id }}" class="radio" id="course_{{ $g->xx->id }}" /><label for="course_{{ $g->xx->id }}" class="gray">&nbsp;&nbsp;小学</label>&nbsp;
 									<input type="radio" name="group_{{$g->id}}" value="{{ $g->yr->id }}" class="radio" id="course_{{ $g->yr->id }}" /><label for="course_{{ $g->yr->id }}" class="gray">&nbsp;&nbsp;幼儿</label>&nbsp;
 									<span class="orange fs12">￥</span><span class="orange fs21">{{ $v->discount_price }}</span>&nbsp;&nbsp;&nbsp;
-									<a href="{{ url("courses/$v->id") }}?video=1" class="orange fz12" ><img src="/assets/img/splby_ico.jpg" alt="试听"/>&nbsp;试听</a>&nbsp;&nbsp;&nbsp;
+									<span class="listen" id="course_{{ $g->zx->id }}_listen"><a href="{{ url("courses/") }}/{{$g->zx->id}}?video=1" class="orange fz12" ><img src="/assets/img/splby_ico.jpg" alt="试听"/>&nbsp;试听</a>&nbsp;&nbsp;&nbsp;</span>
+									<span class="listen dn" id="course_{{ $g->xx->id }}_listen"><a href="{{ url("courses/") }}/{{$g->xx->id}}?video=1" class="orange fz12" ><img src="/assets/img/splby_ico.jpg" alt="试听"/>&nbsp;试听</a>&nbsp;&nbsp;&nbsp;</span>
+									<span class="listen dn" id="course_{{ $g->yr->id }}_listen"><a href="{{ url("courses/") }}/{{$g->yr->id}}?video=1" class="orange fz12" ><img src="/assets/img/splby_ico.jpg" alt="试听"/>&nbsp;试听</a>&nbsp;&nbsp;&nbsp;</span>
 									<input type="button" id="group_{{$g->id}}" value='购买' class="button fz12" onclick="javasrcipt:submitOrder({{$g->id}})"/>
 							</p>
 					</form>

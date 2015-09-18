@@ -86,10 +86,13 @@ $(".kelei:eq(29)").removeClass("mr30");
 $(".kelei:eq(32)").removeClass("mr30");
 $(".kelei:eq(35)").removeClass("mr30");
 
-/*变换选项卡*/
+/*变换选项卡  变换展示內容and试听链接*/
 $(".kelei .kelei_2 label").click(
 function(){
 		var b=$(this).attr("for");
-		b="#"+b+"_content";
-		$(b).removeClass("dn").siblings("div").addClass("dn");
+		var div="#"+b+"_content";
+		$(div).removeClass("dn").siblings("div").addClass("dn");
+		
+		var span="#"+b+"_listen";
+		$(span).removeClass("dn").siblings('span[class="listen"]').addClass("dn");
 })
