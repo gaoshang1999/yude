@@ -31,7 +31,7 @@ $app->post('auth/reset', 'Auth\AuthController@resetPassword');
 // // Password reset routes...
 // $app->get('password/reset/{token}', 'Auth\PasswordController@getReset');
 // $app->post('password/reset', 'Auth\PasswordController@postReset');
-
+$app->get('/', 'Front\HomeController@home');
 $app->get('/index', 'Front\HomeController@home');
 $app->get('/admin/home/edit', 'Front\HomeController@html_edit');
 $app->post('/admin/home/edit', 'Front\HomeController@html_edit');
@@ -47,9 +47,6 @@ $app->get('/cart/courses/remove/{id}', 'My\MyController@courses_remove');
 $app->get('/cart/books/remove/{id}', 'My\MyController@books_remove');
 $app->post('/ablesky/usercheck/{username}', 'Ablesky\AbleskyController@checkIfUserNameDuplicated');
 $app->post('/ablesky/emailcheck/{email}', 'Ablesky\AbleskyController@checkIfEmailDuplicated');
-$app->get('/', function() use ($app) {
-    return view('front.wx');
-});
 
 
 // 管理员后台

@@ -49,7 +49,7 @@
 						<div class="title">
 							<ul>
 									<li class="title1 active">课程优势</li>
-									<li class="title2">免费试听</li>
+									<li class="title2" id="video">免费试听</li>
 									<li class="title3">课程简介</li>
 									<li class="title4">相关推荐</li>
 							</ul>
@@ -164,4 +164,20 @@
             
             
         </script>
+        
+        <script type="text/javascript">
+		/*视频试听课 跳转*/
+		var url = unescape(window.location.href);
+		var video = url.split("?")[1];
+		var video = video.split("#")[0];
+		if(video == "video=1"){
+			$("#content_xiangqing .title2").addClass("active").siblings().removeClass("active");
+			$("#content_xiangqing .content_kcys").addClass("dn");
+			$("#content_xiangqing .content_mfst").removeClass("dn");
+			$("#content_xiangqing .content_kcjj").addClass("dn");
+			$("#content_xiangqing .content_xgtj").addClass("dn");
+			window.location.hash="video";
+		};
+	</script>
+        
 @stop

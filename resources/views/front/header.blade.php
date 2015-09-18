@@ -2,9 +2,9 @@
         <!--头部公共 引用开始-->
         <div id="header">
             <div class="head"> 
-                <div><a href="/index"><img src="/assets/img/logo.png"  id="logo"></a></div>
+                <div><a href="/"><img src="/assets/img/logo.png"  id="logo"></a></div>
                 <ul>
-                    <li><a href="/index">首页</a></li>
+                    <li><a href="/">首页</a></li>
                     <li>|</li>
                     <li><a href="{{ url("courses/lists") }} ">视频课</a></li>
                     <li>|</li>
@@ -18,9 +18,9 @@
                     <li>|</li>
                     <li><a href="{{ url("books/lists") }}">师资</a></li>
                     <li>|</li>                    
-                    <li><a onmouseover="ydd()" onmouseout="ydd_out()" class="hand">移动端</a></li>
+                    <li><a onmouseover="ydd()" onmouseout="ydd_out()" class="hand">移动端</a><img src="/assets/img/header_pic_smxz.png" id="smxz" alt="扫码下载" class="dn"/></li>
                 </ul>
-                <img src="/assets/img/header_pic_smxz.png" id="smxz" alt="扫码下载" class="dn"/>
+                
                 <!--  <div id="reg"><a href="{{ url("auth/login") }}">登陆</a><span style="color:#fff;"> &nbsp;|&nbsp; </span><a href="{{ url("auth/register") }}">注册</a></div> -->
                 <div id="reg">
                  @if (Auth::guest())

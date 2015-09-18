@@ -8,8 +8,8 @@
 #content .jclby_zx li:hover{background-color:#eee;}
 #content .jclby_zx li div{width:196px;height:209px;text-align:center;}
 #content .jclby_zx li div img{margin-top:6px;}
-#content .jclby_zx li p{text-align:center;width:196px;font-size:13.2px;color:#8d8d8d;line-height:23px;background-color:#fff;height:51px;}
-#content .jclby_zx li p img{float:right;margin:4px 14px 0 0;}
+#content .jclby_zx li p{text-align:center;width:195px;font-size:13.2px;color:#8d8d8d;line-height:21px;background-color:#fff;height:50px;padding-top: 5px;}
+#content .jclby_zx li p img{float:right;margin:1px 14px 0 0;}
 
 #content .jclby_xx{width:1200px;height:auto;border:1px solid #eaeaea;margin:0 auto;margin-top:12px;overflow:hidden;}
 #content .jclby_xx h3{background-image:url(/assets/img/title_xiaoxue.png);background-position:center;background-repeat:no-repeat;width:241px;height:26px;margin-top:10px;}
@@ -17,8 +17,8 @@
 #content .jclby_xx li div{width:196px;height:209px;text-align:center;}
 #content .jclby_xx li:hover{background-color:#eee;}
 #content .jclby_xx li div img{margin-top:6px;}
-#content .jclby_xx li p{text-align:center;width:196px;font-size:13.2px;color:#8d8d8d;line-height:23px;background-color:#fff;height:51px;}
-#content .jclby_xx li p img{float:right;margin:4px 14px 0 0;}
+#content .jclby_xx li p{text-align:center;width:196px;font-size:13.2px;color:#8d8d8d;line-height:21px;background-color:#fff;height:50px;padding-top: 5px;}
+#content .jclby_xx li p img{float:right;margin:1px 14px 0 0;}
 
 #content .jclby_ye{width:1200px;height:auto;border:1px solid #eaeaea;margin:0 auto;margin-top:12px;margin-bottom:12px;overflow:hidden;}
 #content .jclby_ye h3{background-image:url(/assets/img/title_youer.png);background-position:center;background-repeat:no-repeat;width:241px;height:26px;margin-top:10px;}
@@ -26,7 +26,7 @@
 #content .jclby_ye li div{width:196px;height:209px;text-align:center;}
 #content .jclby_ye li:hover{background-color:#eee;}
 #content .jclby_ye li div img{margin-top:6px;}
-#content .jclby_ye li p{text-align:center;width:196px;font-size:13.2px;color:#8d8d8d;line-height:23px;background-color:#fff;height:51px;}
-#content .jclby_ye li p img{float:right;margin:4px 14px 0 0;}
+#content .jclby_ye li p{text-align:center;width:196px;font-size:13.2px;color:#8d8d8d;line-height:21px;background-color:#fff;height:50px;padding-top: 5px;}
+#content .jclby_ye li p img{float:right;margin:1px 14px 0 0;}
 
 

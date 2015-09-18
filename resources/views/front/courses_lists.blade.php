@@ -60,7 +60,7 @@
 									<input type="radio" name="group_{{$g->id}}" value="{{ $g->xx->id }}" class="radio" id="course_{{ $g->xx->id }}" /><label for="course_{{ $g->xx->id }}" class="gray">&nbsp;&nbsp;小学</label>&nbsp;
 									<input type="radio" name="group_{{$g->id}}" value="{{ $g->yr->id }}" class="radio" id="course_{{ $g->yr->id }}" /><label for="course_{{ $g->yr->id }}" class="gray">&nbsp;&nbsp;幼儿</label>&nbsp;
 									<span class="orange fs12">￥</span><span class="orange fs21">{{ $v->discount_price }}</span>&nbsp;&nbsp;&nbsp;
-									<a href="{{ url("courses/$v->id") }}" class="orange fz12" ><img src="/assets/img/splby_ico.jpg" alt="试听"/>&nbsp;试听</a>&nbsp;&nbsp;&nbsp;
+									<a href="{{ url("courses/$v->id") }}?video=1" class="orange fz12" ><img src="/assets/img/splby_ico.jpg" alt="试听"/>&nbsp;试听</a>&nbsp;&nbsp;&nbsp;
 									<input type="button" id="group_{{$g->id}}" value='购买' class="button fz12" onclick="javasrcipt:submitOrder({{$g->id}})"/>
 							</p>
 					</form>
@@ -95,7 +95,7 @@
 												<form action="{{url("cart/courses/add/$v->id") }}" method="get">
 												<p><a href="{{ url("courses/$v->id") }}">{{ $v->name }}</a></p>
 												<p><span class="orange">￥{{ $v->discount_price }}</span>&nbsp;|&nbsp;<del>￥{{ $v->totalprice }}</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												<a href="{{ url("courses/$v->id") }}" class="gray fs12" ><img src="/assets/img/splby_ico1.jpg" />&nbsp;试听</a>&nbsp;
+												<a href="{{ url("courses/$v->id") }}?video=1" class="gray fs12" ><img src="/assets/img/splby_ico1.jpg" />&nbsp;试听</a>&nbsp;
 												<input type="submit" value='购买' class="button fz12"/></p>
 												</form>
 										</div>
@@ -122,7 +122,7 @@
 												<form action="{{url("cart/courses/add/$v->id") }}" method="get">
 												<p><a href="{{ url("courses/$v->id") }}">{{ $v->name }}</a></p>
 												<p><span class="orange">￥{{ $v->discount_price }}</span>&nbsp;|&nbsp;<del>￥{{ $v->totalprice }}</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												<a href="{{ url("courses/$v->id") }}" class="gray fs12" ><img src="/assets/img/splby_ico1.jpg" />&nbsp;试听</a>&nbsp;
+												<a href="{{ url("courses/$v->id") }}?video=1" class="gray fs12" ><img src="/assets/img/splby_ico1.jpg" />&nbsp;试听</a>&nbsp;
 												<input type="submit" value='购买' class="button fz12"/></p>
 												</form>
 										</div>
@@ -148,7 +148,7 @@
 												<form action="{{url("cart/courses/add/$v->id") }}" method="get">
 												<p><a href="{{ url("courses/$v->id") }}">{{ $v->name }}</a></p>
 												<p><span class="orange">￥{{ $v->discount_price }}</span>&nbsp;|&nbsp;<del>￥{{ $v->totalprice }}</del>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												<a href="{{ url("courses/$v->id") }}" class="gray fs12" ><img src="/assets/img/splby_ico1.jpg" />&nbsp;试听</a>&nbsp;
+												<a href="{{ url("courses/$v->id") }}?video=1" class="gray fs12" ><img src="/assets/img/splby_ico1.jpg" />&nbsp;试听</a>&nbsp;
 												<input type="submit" value='购买' class="button fz12"/></p>
 												</form>
 										</div>

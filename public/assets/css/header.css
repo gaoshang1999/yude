@@ -8,7 +8,7 @@ p{text-align:left;margin:0 auto;}
 #header .head{width:1200px;height:56px;margin:0 auto;}
 #header #logo{float:left;margin-top:10px;}
 #header ul{height:56px;color:#fff;width:630px;margin-left:140px;line-height:56px;display:inline-block;float:left;}
-#header li{height:56px;float:left;margin-left:15px;}
+#header li{height:56px;float:left;margin-left:15px;position:relative;}
 #header a{color:#fff;font-size:14px;font-family:"\5B8B\4F53";}
 #header #reg{float:right;width:100px;height:56px;line-height:56px;}
 #header #online{float:right;width:310px;height:56px;line-height:56px;}
@@ -85,7 +85,7 @@ p{text-align:left;margin:0 auto;}
 #register .remember div{width:210px;height:32px;line-height:32px;font-size:14px;font-family:"\5B8B\4F53";color:#fff;background-color:#e4393c;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;margin-left:42px;margin-top:60px;}
 #register img{position:absolute;top:5px;right:5px;cursor:pointer;}
 #register .login{width:600px;height:325px;border:1px solid #a3a3a3;background-color:#fff;text-align:center;position:fixed;left:50%;top:50%;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;-moz-box-shadow:2px 3px 1px #e0e2e3;-webkit-box-shadow:2px 3px 1px #e0e2e3;box-shadow:2px 3px 1px #e0e2e3;z-index:150;margin-left:-300px;margin-top:-153px;}
-#register .login .banner{width:370px;height:325px;text-align:center;background:url(/assets/img/login_banner.png) center no-repeat;float:left;}
+#register .login .banner{width:368px;height:325px;text-align:center;background:url(/assets/img/login_banner.png) center no-repeat;float:left;}
 #register .login .message{width:230px;height:325px;float:left;}
 #register .login .message h3{font-size:18px;font-family:"\5FAE\8F6F\96C5\9ED1";margin-top:50px;line-height:18px;width:230px;text-align:center;color:#858593;font-weight:normal;margin-bottom:30px;}
 #register .login .message p{text-align:left;margin-bottom:20px;}
