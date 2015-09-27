@@ -21,6 +21,7 @@
 					            return ;
 					        }    	
 					        $("#login_submit").val("正在登录...");
+					        $("#login_submit").prop('disabled', true);
 					        $.ajax({
 					            type: login_form.attr('method'),
 					            url: login_form.attr('action'),
@@ -28,6 +29,7 @@
 					            dataType: "json",
 					            success: function (data) {
 					            	$("#login_submit").val("登录");
+					            	$("#login_submit").prop('disabled', false);
 					            	var ret = eval(data);            	
 					                if(ret['success'] ){
 					                	location.reload();
@@ -38,6 +40,7 @@
 					            },
 					            error: function(){
 					            	$("#login_submit").val("登录");
+					            	$("#login_submit").prop('disabled', false);
 					            	span.removeClass("dn");
 					            	span.html("后台服务忙，请稍后重试");
 					            }
@@ -71,13 +74,15 @@
 
 
 					        $("#login_submit").val("正在登录...");
+					        $("#login_submit").prop('disabled', true);
 					        $.ajax({
 					            type: login_form_2.attr('method'),
 					            url: login_form_2.attr('action'),
 					            data: login_form_2.serialize(),
 					            dataType: "json",
-					            success: function (data) {
+					            success: function (data) {					            	
 					            	$("#login_submit").val("登录");
+					            	$("#login_submit").prop('disabled', false);
 					            	var ret = eval(data);            	
 					                if(ret['success'] ){
 					                	window.location.href = $("#url").val();
@@ -88,6 +93,7 @@
 					            },
 					            error: function(){
 					            	$("#login_submit").val("登录");
+					            	$("#login_submit").prop('disabled', false);
 					            	span.removeClass("dn");
 					            	span.html("后台服务忙，请稍后重试");
 					            }
@@ -304,6 +310,7 @@
 //					         }
 					        
 					    	$("#register_submit").val("正在注册...");
+					    	$("#register_submit").prop('disabled', true);
 					        $.ajax({
 					            type: register_form.attr('method'),
 					            url: register_form.attr('action'),
@@ -312,6 +319,7 @@
 					            success: function (data) {
 					            	var ret = eval(data);
 					            	$("#register_submit").val("确认注册");
+					            	$("#register_submit").prop('disabled', false);
 					            	
 					                if(ret['success'] ){                	
 										$(".reg").addClass("dn");
@@ -326,6 +334,7 @@
 					            },
 					            error: function(){
 					            	$("#register_submit").val("确认注册");
+					            	$("#register_submit").prop('disabled', false);
 					            	$("#register_form_hint").removeClass("dn");
 					            	$("#register_form_hint").html("后台服务忙，请稍后重试");
 					            }
