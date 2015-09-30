@@ -2,6 +2,6 @@
 
 return [    
     
-    'shipping_fee' => 8,  //运费    
+    'shipping_fee' => 10,  //运费    
 
 ];

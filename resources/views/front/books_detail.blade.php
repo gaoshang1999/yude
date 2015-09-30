@@ -31,7 +31,7 @@
 								</p>
 						</div>
 						<div class="right">
-							<h1>{{ $book->name }}<span>&nbsp;单独购书包含邮费（到付）<b>报班赠送教材</b></span></h1>
+							<h1>{{ $book->name }}<span>&nbsp;单独购买教材满<b>100免运费</b></span></h1>
 							<p>{{ $book->summary }}
 
 							</p>
