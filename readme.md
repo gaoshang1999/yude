@@ -1,3 +1,3 @@
-## 育德网校
+private project
 
 私人项目
