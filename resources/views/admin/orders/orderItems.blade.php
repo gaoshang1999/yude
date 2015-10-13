@@ -25,10 +25,10 @@
           <tr class="even"><td>邮编</td>  <td>{{ $v->postcode }}</td></tr>
           
           <tr class="odd"><td>订单总价</td>  <td>{{ $v->totalprice }}</td></tr>
-          <tr class="even"><td>付款方式</td> <td>{{ $v->paymode }}</td></tr>
-          <tr class="odd"><td>订单状态</td> <td></td> </tr>
-          <tr><td></td></tr>
-        </tr>
+          <tr class="even"><td>付款方式</td> <td>{{ $v->paymodeDesc() }}</td></tr>
+          <tr class="odd"><td>订单状态</td> <td>{{ $v->statusDesc() }}</td> </tr>
+          <tr><td></td><td></td></tr>
+        
       </tbody>
     </table>
 

@@ -60,7 +60,7 @@
     <hr/>
     <div>
       <div class="checkbutton checked" data-value="online">在线支付</div>
-      <div class="checkbutton" data-value="bank">银行汇款</div>
+      <div class="checkbutton" data-value="offline">银行汇款</div>
       <input type="hidden" id="paymode" name="paymode" value="online">
     </div>
     <div class="steplabel" style="margin-top: 50px">教材邮寄地址</div>

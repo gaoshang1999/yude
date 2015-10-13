@@ -30,6 +30,7 @@
       <div class="col-sm-9"><?php $role = old('role', $user ? $user->role : 'user'); ?>
         <select class="form-control" id="userrole" name="userrole">
           <option value="user" {{ $role==='user' ? 'selected' : '' }}>学员</option>
+          <option value="kefu" {{ $role==='kefu' ? 'selected' : '' }}>客服</option>
           <option value="admin" {{ $role==='admin' ? 'selected' : '' }}>管理员</option>
         </select>
       </div>

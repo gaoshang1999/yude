@@ -39,7 +39,7 @@
           <td><a href="{{ url("/admin/user/edit/{$user->id}") }}">{{ $user->name }}</a></td>
           <td>{{ $user->phone }}</td>
           <td>{{ $user->email }}</td>
-          <td>{{ $user->role === 'admin' ? '管理员' : '学员' }}</td>
+          <td>{{ $user->roleDesc() }}</td>
           <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $user->is_reged ? '是': '否' }}</td>
           <td>{{ $user->created_at }}</td>
           <td><a class="btn btn-primary" href="{{ url("/admin/user/reset/{$user->id}") }}">重置密码</a></td>

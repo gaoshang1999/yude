@@ -12,7 +12,7 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             @if(Auth::check())
-                @if(Auth::user()->role === 'admin')
+                @if(Auth::user()->isAdmin())
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/admin/user') }}">用户管理</a></li>
                     <li><a href="{{ url('/admin/courses') }}">课程管理</a></li>
@@ -20,6 +20,10 @@
                     <li><a href="{{ url('/admin/books') }}">教材管理</a></li>
                     <li><a href="{{ url('/admin/orders') }}">订单管理</a></li>
                     <li><a href="{{ url('/admin/images') }}">图片管理</a></li>
+                </ul>
+               @elseif(Auth::user()->iskefu())
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url('/admin/orders') }}">订单管理</a></li>
                 </ul>
                 @endif
             @endif

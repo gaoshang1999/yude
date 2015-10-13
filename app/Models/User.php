@@ -42,4 +42,34 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this-> role == 'admin';
     }
+    
+    //客服
+    public function iskefu()
+    {
+        return $this-> role == 'kefu';
+    }
+    
+    public function isUser()
+    {
+        return $this-> role == 'user';
+    }
+    
+    public function isNotUser()
+    {
+        return $this-> role != 'user';
+    }    
+    
+    public function roleDesc()
+    {
+        switch ($this->role)
+        {
+            case "user":
+                return "学员";
+            case "kefu":
+                return "客服";
+            case "admin":
+                return "管理员";
+            
+        }
+    }
 }

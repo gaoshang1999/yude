@@ -62,17 +62,17 @@
     <div>
       <label class="paymode">
         <input type="radio" class="payradio" name="paymode" value="bank">
-        <span>网银在线支付</span>
+        <img alt="" src="/assets/img/bank_online.png"><span>&nbsp;&nbsp;网银在线支付</span>
         <span class="payfee">支付 {{ number_format($order->totalprice, 2) }}</span>
       </label>
       <label class="paymode">
         <input type="radio" class="payradio" name="paymode" value="alipay">
-        <span>支付宝支付</span>
+        <img alt="" src="/assets/img/alipay.png"><span>&nbsp;&nbsp;支付宝支付</span>
         <span class="payfee">支付 {{ number_format($order->totalprice, 2) }}</span>
       </label>
       <label class="paymode">
         <input type="radio" class="payradio" name="paymode" value="wxpay">
-        <span>微信支付</span>
+        <img alt="" src="/assets/img/wxpay.png"><span>&nbsp;&nbsp;微信支付</span>
         <span class="payfee">支付 {{ number_format($order->totalprice, 2) }}</span>
       </label>
     </div>

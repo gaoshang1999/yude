@@ -112,4 +112,15 @@ class UserController extends Controller
         }
         
     }
+    
+    public function home()
+    {
+        if(Auth::user()->isAdmin()){
+            return redirect('/admin/user');
+        }else{
+            return redirect('/admin/orders');
+        }
+            
+        
+    }
 }

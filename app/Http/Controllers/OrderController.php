@@ -144,12 +144,21 @@ class OrderController extends Controller
         }        
         $request->session()->put('cart_books', $arr1);
         
-        return redirect('/order/payonline/'.$data['orderno']);
+        if($order->isPayedOffline()){
+            return redirect('/order/payoffline/');
+        }else{
+            return redirect('/order/payonline/'.$data['orderno']);
+        }
     }
 
     public function step4()
     {
         return view('order.step4');
+    }
+    
+    public function payoffline()
+    {
+        return view('order.step4-2');
     }
 
     public function payonline($orderno)

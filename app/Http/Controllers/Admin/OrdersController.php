@@ -25,6 +25,7 @@ class OrdersController extends Controller
                     $input['orders'] = Order::where($input['stype'], $input['stext'])->orderBy('created_at', 'desc')->simplePaginate(20);
                     break;
                 case 'paymode':
+                case 'status':
                     $input['orders'] = Order::where($input['stype'], $input['svalue'])->orderBy('created_at', 'desc')->simplePaginate(20);
                     break;
                 case 'paytime':
@@ -34,7 +35,7 @@ class OrdersController extends Controller
                 case 'item_title':
                     $title = $input['stext'];
                     $input['orders'] = Order::whereHas('orderItems', function($q) use ($title) { $q->where('title', 'like', '%'.$title.'%'); })->orderBy('created_at', 'desc')->simplePaginate(20);
-                    break;
+                    break;                
                 default:
                     $input['orders'] = Order::orderBy('created_at', 'desc')->simplePaginate(20);
                     break;
@@ -97,7 +98,16 @@ class OrdersController extends Controller
     public function delete(Request $request, $id)
     {
         $order = Order::where('id', $id)->delete();
-        return redirect('/admin/orders');
+        return redirect($request->header('referer'));
+    }
+    
+    public function confirm(Request $request, $id)
+    {
+        $order = Order::where('id', $id)->first() ;
+        $order->status = 1; // 1 - 已处理
+        $order->save();
+        
+        return redirect($request->header('referer'));
     }
     
     public function user_search(Request $request)

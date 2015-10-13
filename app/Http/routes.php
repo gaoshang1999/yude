@@ -51,7 +51,7 @@ $app->post('/ablesky/emailcheck/{email}', 'Ablesky\AbleskyController@checkIfEmai
 
 // 管理员后台
 $app->group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', 'middleware' => ['auth.login', 'auth.admin']], function($app){
-    $app->get('/', 'UserController@userlist');
+    $app->get('/', 'UserController@home');
 
     // 用户管理
     $app->get('/user', 'UserController@userlist');
@@ -102,6 +102,7 @@ $app->group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', '
     $app->get('/orders/detail/{id}', 'OrdersController@detail');
     $app->post('/orders/open/{id}', 'OrdersController@open');
     $app->post('/orders/delete/{id}', 'OrdersController@delete');
+    $app->post('/orders/confirm/{id}', 'OrdersController@confirm');
     $app->get('/orders/user_search', 'OrdersController@user_search');
     
     //图片上传
@@ -137,6 +138,7 @@ $app->group(['namespace' => 'App\Http\Controllers', 'prefix' => 'order', 'middle
     $app->get('/step2', 'OrderController@step2');
     $app->post('/step3', 'OrderController@step3');
     $app->get('/payonline/{orderno}', 'OrderController@payonline');
+    $app->get('/payoffline', 'OrderController@payoffline');
     $app->get('/topay/{orderno}', 'OrderController@topay');
     $app->get('/step4', 'OrderController@step4');   
 

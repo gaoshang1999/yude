@@ -44,7 +44,7 @@ class Order extends Model
         return $this->open_way == 'auto';
     }
     
-    public function open_way_desc()
+    public function open_wayDesc()
     {
         if($this->isManualOpened()){
             return "手工";
@@ -53,5 +53,36 @@ class Order extends Model
         }else{
             return "未开通";
         }
+    }
+    
+    public function statusDesc()
+    {
+        if($this->status == 0){
+            return "未处理";
+        }else{
+            return "已处理";
+        }
+    }  
+
+    public function paymodeDesc()
+    {        
+        switch ($this->paymode)
+        {
+            case "online":
+                return "在线支付";
+            case "alipay":
+                return "支付宝";
+            case "wxpay":
+                 return "微信";
+            case "bank":
+                return "网银";               
+            case "offline":
+                return "银行汇款";  
+        }
+    }
+       
+    public function isPayedOffline()
+    {
+        return $this->paymode == "offline";
     }
 }

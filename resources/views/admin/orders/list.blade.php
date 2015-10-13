@@ -18,7 +18,7 @@
 
 {{-- Content --}}
 @section('content')
-<div class="col-sm-12 main">
+<div class="" style="width:100%">
   @include('errors.list')
   
   <h2 class="sub-header">订单列表 
@@ -29,15 +29,16 @@
     <select class="form-control pull-right" name="svalue" id="svalue"></select>
     <select class="form-control pull-right" name="stype" id="stype">
       <option value="phone" {{ isset($stype) && $stype=='phone' ? 'selected' : '' }}>手机号</option>
-      <option value="item_title" {{ isset($stype) && $stype=='item_title' ? 'selected' : '' }}>课程名称</option>
+      <option value="item_title" {{ isset($stype) && $stype=='item_title' ? 'selected' : '' }}>产品名称</option>
       <option value="orderno" {{ isset($stype) && $stype=='orderno' ? 'selected' : '' }}>订单号</option>
-      <option value="paytime" {{ isset($stype) && $stype=='paytime' ? 'selected' : '' }}>订单状态</option>
+      <option value="paytime" {{ isset($stype) && $stype=='paytime' ? 'selected' : '' }}>付款状态</option>
       <option value="paymode" {{ isset($stype) && $stype=='paymode' ? 'selected' : '' }}>付款方式</option>
+      <option value="status" {{ isset($stype) && $stype=='status' ? 'selected' : '' }}>处理状态</option>
     </select>
   </form>
  </h2>
-  <div class="table-responsive">
-    <table class="table table-striped">
+  <div class="" style="width:100%">
+    <table class="table table-striped" >
       <thead>
         <tr class="odd">
           <th>订单编号</th>
@@ -47,12 +48,13 @@
           <th>产品价格</th>
           <th>订单总价</th>
           <th>付款方式</th>
-          <th>订单状态</th>
+          <th>付款状态</th>
           <th>用户名</th>
           <th>手机号</th>
           <th>开通方式</th>
-          <th>状态</th>
-          <th>操  作</th>
+          <th>处理状态</th>
+          <th>确认</th>
+          @if( Auth::user()->isAdmin()) <th>删除</th> @endif
         </tr>
       </thead>
       <tbody>
@@ -64,13 +66,19 @@
           <td>{{ $v->orderItems[0]->title }}</td>
           <td>{{ $v->orderItems[0]->price }}</td>
           <td rowspan="{{ $rows }}">{{ $v->totalprice }}</td>          
-          <td rowspan="{{ $rows }}">{{ $v->paymode }}</td>          
+          <td rowspan="{{ $rows }}">{{ $v->paymodeDesc() }}</td>          
           <td rowspan="{{ $rows }}">{{ $v->paytime ? '已支付' : '未支付' }}</td>
           <td rowspan="{{ $rows }}">{{ $v->user->name }}</td>
           <td rowspan="{{ $rows }}">{{ $v->phone }}</td>
-          <td rowspan="{{ $rows }}">{{ $v->open_way_desc() }}</td>
-          <td rowspan="{{ $rows }}">-</td>
-          <td rowspan="{{ $rows }}">
+          <td rowspan="{{ $rows }}">{{ $v->open_wayDesc() }}</td>
+          <td rowspan="{{ $rows }}">{{ $v->statusDesc() }}</td>
+           <td rowspan="{{ $rows }}">
+              <form  name="confirm_form" method="post" action="{{ url('/admin/orders/confirm/'.$v->id) }}" >  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+               <input type="submit" class="btn btn-primary pull-right"  onclick="return conf();"  id=""  value="确认"/>
+               </form> 
+           </td>
+           
+         @if( Auth::user()->isAdmin())  <td rowspan="{{ $rows }}">
           <!--  <form  name="open_form" method="post" action="{{ url('/admin/orders/open/'.$v->id) }}" >  <input type="hidden" name="_token" value="{{ csrf_token() }}">
            <input type="submit" class="btn btn-primary pull-right" id="btnnew"  value="手动开通"/>
            </form> -->
@@ -78,7 +86,7 @@
          <form  name="delete_form" method="post" action="{{ url('/admin/orders/delete/'.$v->id) }}" >  <input type="hidden" name="_token" value="{{ csrf_token() }}">
            <input type="submit" class="btn btn-primary pull-right"  onclick="return del();"  id=""  value="删除"/>
            </form> 
-           </td>
+           </td>  @endif
         </tr>
         @for($i=1; $i<$rows; $i++)
         <tr class="{{ $rowIndex%2 == 0 ? '' : 'odd' }}">
@@ -286,14 +294,18 @@
   $(function(){
     $('#stype').change(function(){
       var type = $(this).val();
-      $('#stext').toggle(!(type == 'paymode' || type == 'paytime'));
-      $('#svalue').toggle(type == 'paymode' || type == 'paytime');
+      $('#stext').toggle(!(type == 'paymode' || type == 'paytime'|| type == 'status'));
+      $('#svalue').toggle(type == 'paymode' || type == 'paytime'|| type == 'status');
       if (type == 'paymode') {
-        $('#svalue').html('<option value="alipay">支付宝</option><option value="wxpay">微信</option><option value="bank">网银</option><option value="default">缺省</option>');
+        $('#svalue').html('<option value="alipay">支付宝</option><option value="wxpay">微信</option><option value="bank">网银</option><option value="online">在线支付</option><option value="offline">银行汇款</option>');
       }
       else if (type == 'paytime') {
         $('#svalue').html('<option value="payed">已支付</option><option value="nopay">未支付</option>');
       }
+      else if (type == 'status') {
+          $('#svalue').html('<option value="0">未处理</option><option value="1">已处理</option>');
+      }
+      
       $('#svalue').val(cbsvalue);
     });
     $('#stype').change();
@@ -393,5 +405,14 @@ function del() {
     }
  }//del end
 
+ function conf() {  
+	    if(window.confirm('该订单已完成处理？')){
+	        //alert("确定");
+	        return true;
+	     }else{
+	        //alert("取消");
+	        return false;
+	    }
+  }//del end
 </script>
 @endsection

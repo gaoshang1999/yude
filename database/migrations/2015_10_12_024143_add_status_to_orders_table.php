@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddUseridToOrdersTable extends Migration
+class AddStatusToOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,9 @@ class AddUseridToOrdersTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasColumn('orders', 'user_id')) {
+        if (!Schema::hasColumn('orders', 'status')) {
             Schema::table('orders', function (Blueprint $table) {
-                $table->unsignedInteger('user_id')->nullable();
-                $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+                $table->integer('status')->default(0);  // 0 - 未处理， 1 - 已处理
             });
         }
     }
@@ -27,8 +26,6 @@ class AddUseridToOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::table('orders', function (Blueprint $table) {
-            //
-        });
+        //
     }
 }
