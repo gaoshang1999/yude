@@ -22,16 +22,6 @@
         </tr>
       </thead>
       <tbody>
-<?php 
-
-function my_sort($a, $b)
-{
-    return $a->ctime - $b->ctime ;
-}
-
-usort($files, "my_sort");
-
-?>
 
         @foreach ($files  as $v)
         <tr>

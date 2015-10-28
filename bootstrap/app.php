@@ -1,7 +1,5 @@
 <?php
 
-date_default_timezone_set('Asia/Shanghai');
-
 require_once __DIR__.'/../vendor/autoload.php';
 
 // Dotenv::load(__DIR__.'/../');
@@ -21,16 +19,18 @@ $app = new Laravel\Lumen\Application(
 	realpath(__DIR__.'/../')
 );
 
+date_default_timezone_set('Asia/Shanghai');
+
 $app->withFacades();
 
 $app->withEloquent();
 
+$app->configure('app');
 $app->configure('ablesky');
 $app->configure('alipay');
 $app->configure('wxpay');
 $app->configure('yizhifu');
 $app->configure('order');
-config(['app.debug' => true]);
 
 /*
 |--------------------------------------------------------------------------

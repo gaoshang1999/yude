@@ -30,6 +30,10 @@ class ImagesController extends Controller
         }
         
         closedir($dir);
+        
+        usort($files, function($a, $b){
+                return strtotime($b->ctime) - strtotime($a->ctime) ;
+        });       
 
         return view("admin.image.list", ["files" => $files ]);
     }
