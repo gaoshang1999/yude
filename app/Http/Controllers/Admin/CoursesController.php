@@ -5,6 +5,7 @@ use App\Models\Courses;
 use Illuminate\Http\Request;
 use App\Models\Books;
 use App\Models\Groups;
+use App\Models\Html;
 use Illuminate\Support\Facades\Auth;
 
 class CoursesController extends Controller
@@ -208,21 +209,39 @@ class CoursesController extends Controller
         
         return view('front.courses_detail', ['course' => $course, 'courses_recommend' => $courses_recommend, 'books_recommend'=>$books_recommend]);
     }
+
+    const HTML_KEY = 'courses_detail.rightImage';
     
     public function html_edit(Request $request)
     {
-        $dir = __DIR__.'/../../../../';
-        $rightImage_path = $dir."resources/views/front/courses/rightImage.blade.php";      
+//         $dir = __DIR__.'/../../../../';
+//         $rightImage_path = $dir."resources/views/front/courses/rightImage.blade.php";      
+        
+//         if ($request->isMethod('post')) {
+//             $rightImage = $request['rightImage'];
+        
+//             file_put_contents($rightImage_path, $rightImage);
+        
+//             return redirect('/courses/lists');
+        
+//         }else{
+//             return view('admin.courses.html_edit', ['rightImage' => file_get_contents($rightImage_path) ]);
+//         }
+        
+        $html = Html::where('key', self::HTML_KEY) -> first();
         
         if ($request->isMethod('post')) {
             $rightImage = $request['rightImage'];
         
-            file_put_contents($rightImage_path, $rightImage);
+            $html->html = $rightImage ;
+            $html->save();
         
             return redirect('/courses/lists');
         
         }else{
-            return view('admin.courses.html_edit', ['rightImage' => file_get_contents($rightImage_path) ]);
+            return view('admin.courses.html_edit', ['rightImage' => $html->html]);
         }
     }
+    
+
 }
