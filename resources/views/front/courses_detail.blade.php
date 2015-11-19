@@ -27,7 +27,10 @@
 								<h1>{{ $course->name }}</h1>
 								<p>{{ $course->summary }}</p>
 								<form action="{{ url("cart/courses/add/$course->id") }}" method="post" id="order_form">     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-								<p><input type="submit" title="立即购买" id="discount_price" value="立即购买 ￥{{ $course->discount_price }}"  class="button"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<p>
+								@if( $course->enable)<input type="submit" title="立即购买" id="discount_price" value="立即购买 ￥{{ $course->discount_price }}"  class="button"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								@else <input type="button" title="已下架" id="discount_price_2" value="已下架"  class="button"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								@endif
 								<span class="fz24 gray">原价&nbsp;<del id="total_price">￥{{ $course->totalprice }}</del></span> </p>
 								<p class="p3">@if($course->isHasSub())可选单科&nbsp;&nbsp;&nbsp;&nbsp;	@endif	
 								    @if($course->discount_subprice) <label><input type="checkbox" name="subitem[]" value="1" data-price="{{ $course->subprice }}" data-discount_price="{{ $course->discount_subprice }}"  checked/>&nbsp;{{$course->subname}}</label>&nbsp;&nbsp;&nbsp; @endif

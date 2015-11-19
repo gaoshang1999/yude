@@ -152,9 +152,9 @@ class BooksController extends Controller
     
     public function lists(Request $request)
     {       
-        $books_1 = Books::where('level', 'zhongxue')->orderBy('buytimes', 'desc') ->get();    
-        $books_2 = Books::where('level', 'xiaoxue')->orderBy('buytimes', 'desc') ->get() ;        
-        $books_3 = Books::where('level', 'youer')->orderBy('buytimes', 'desc') ->get();        
+        $books_1 = Books::where('level', 'zhongxue')->where('inventory', 1)->orderBy('buytimes', 'desc') ->get();    
+        $books_2 = Books::where('level', 'xiaoxue')->where('inventory', 1)->orderBy('buytimes', 'desc') ->get() ;        
+        $books_3 = Books::where('level', 'youer')->where('inventory', 1)->orderBy('buytimes', 'desc') ->get();        
         $data = ['books_1' => $books_1, 'books_2' => $books_2, 'books_3' => $books_3];
         return view('front.books_lists', $data);
     }

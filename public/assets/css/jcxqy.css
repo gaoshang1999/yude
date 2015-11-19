@@ -32,7 +32,7 @@ body{background-color:#f4f4f4;}
 #content_jianjie .right a{color:#90500e;font-size:14px;font-family:"\5FAE\8F6F\96C5\9ED1";}
 #content_jianjie .right #minus,#content_jianjie .right #plus{width:20px;height:26px;border:1px solid #ddd;background-color:#fafafa;font-size:14px;font-family:"黑体";display:inline-block;color:#000;text-align:center;line-height:26px;cursor:pointer;margin:0 4px;}
 #content_jianjie .right .number{width:28px;height:26px;border:1px solid #ddd;background-color:#fafafa;text-align:center;font-size:14px;font-family:"\5B8B\4F53";}
-#content_jianjie .right #jcxqy_buy{background:url(/assets/img/spxqy_ico_button.png) no-repeat 0 4px;width:233px;height:57px;border:0;color:#7e4000;font-size:24px;line-height:57px;font-family:"\5FAE\8F6F\96C5\9ED1";vertical-align:center;cursor:pointer;margin:40px 0 0;}
+#content_jianjie .right .button{background:url(/assets/img/spxqy_ico_button.png) no-repeat 0 4px;width:233px;height:57px;border:0;color:#7e4000;font-size:24px;line-height:57px;font-family:"\5FAE\8F6F\96C5\9ED1";vertical-align:center;cursor:pointer;margin:40px 0 0;}
 /*内容详情*/
 #content_xiangqing{margin-bottom:16px;overflow:hidden;}
 /*内容详情 第一部分 */

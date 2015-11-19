@@ -41,7 +41,9 @@
 							<a>购买数量</a>
 							<span id="minus">-</span><input type="text" name="number" class="number" value="1" readonly="readonly" /><span id="plus">+</span><br/>
 							<!--不要在前台提交价钱-->
-							<input type="submit" id="jcxqy_buy" value="立即购买 ￥{{ $book->discount_price }}" />
+							@if( $book->inventory)<input type="submit" id="jcxqy_buy" value="立即购买 ￥{{ $book->discount_price }}"   class="button" />
+							@else <input type="button" id="jcxqy_buy_2" value="暂时售罄"   class="button" />
+							@endif
 							</form>
 
 						</div>

@@ -38,9 +38,9 @@
 				<div class="jibie_title" >
 						<img src="/assets/img/splby_jcspkc.png" />
 						<ul>
-								<li id="jb_zhongxue" class="hbb"><a href="#">中学</a></li>
-								<li id="jb_xiaoxue"><a href="#">小学</a></li>
-								<li id="jb_youer"><a href="#">幼儿</a></li>
+								<li id="jb_zhongxue" class="hbb">中学</li>
+								<li id="jb_xiaoxue">小学</li>
+								<li id="jb_youer">幼儿</li>
 						</ul>
 						<a class="more" href="{{ url("courses/lists") }}">更多课程</a>
 				</div>

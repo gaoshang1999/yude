@@ -19,7 +19,7 @@
         <!--------------------------------------顶部banner开始------------------------------------------>		
 		<div id="banner">
 			<div>
-				<a href="#"><img src="/assets/img/splby_banner1.jpg" /></a>
+				<img src="/assets/img/splby_banner1.jpg" />
 				<div id="splby_button_1"><div id="splby_button_11"></div><div id="splby_button_12"></div></div>
 			</div>
 		</div>
@@ -77,9 +77,9 @@
 				<div class="jibie_title" >
 						<img src="/assets/img/splby_jcspkc.png" />
 						<ul>
-								<li id="jb_zhongxue" class="hbb"><a href="#">中学</a></li>
-								<li id="jb_xiaoxue"><a href="#">小学</a></li>
-								<li id="jb_youer"><a href="#">幼儿</a></li>
+								<li id="jb_zhongxue" class="hbb">中学</li>
+								<li id="jb_xiaoxue">小学</li>
+								<li id="jb_youer">幼儿</li>
 						</ul>
 				</div>
 				<div class="clear"></div>

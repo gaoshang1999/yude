@@ -39,7 +39,8 @@ class GroupsController extends Controller
                 'rank' => 'required|integer|min:0',
                 'zx_course' => 'required|integer',
                 'xx_course' => 'required|integer',
-                'yr_course' => 'required|integer',               
+                'yr_course' => 'required|integer',  
+                'enable' => 'required|boolean',
             ]);
 
             $input = $request->all();
@@ -68,7 +69,8 @@ class GroupsController extends Controller
                 'rank' => 'required|integer|min:0',
                 'zx_course' => 'required|integer',
                 'xx_course' => 'required|integer',
-                'yr_course' => 'required|integer',               
+                'yr_course' => 'required|integer',
+                'enable' => 'required|boolean',
             ]);
 
             $input = $request->all();
@@ -97,9 +99,9 @@ class GroupsController extends Controller
     
     public function lists(Request $request)
     {       
-        $groups_1 = Groups::where('level', 'zhongxue') ->get();    
-        $groups_2 = Groups::where('level', 'xiaoxue') ->get() ;        
-        $groups_3 = Groups::where('level', 'youer') ->get();        
+        $groups_1 = Groups::where('level', 'zhongxue')->where('enable', true) ->get();    
+        $groups_2 = Groups::where('level', 'xiaoxue')->where('enable', true) ->get() ;        
+        $groups_3 = Groups::where('level', 'youer')->where('enable', true) ->get();        
         $data = ['groups_1' => $groups_1, 'groups_2' => $groups_2, 'groups_3' => $groups_3];
         return view('front.groups_lists', $data);
     }

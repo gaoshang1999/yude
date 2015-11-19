@@ -29,6 +29,14 @@
       </div>
     </div>
 
+     <div class="form-group">
+      <label for="enable" class="col-sm-2 control-label"><span style="color: red">*</span>状态</label>
+      <div class="col-sm-9"><?php $enable = old('enable', $groups ? $groups->enable : true); ?>
+        <label class="radio-inline"><input type="radio" name="enable" value="1" {{ $enable ? 'checked' : '' }}> 上架</label>
+        <label class="radio-inline"><input type="radio" name="enable" value="0" {{ $enable ? '' : 'checked' }}> 下架</label>
+      </div>
+    </div>
+    
     <div class="form-group">
       <label for="summary" class="col-sm-2 control-label">课程组简介</label>
       <div class="col-sm-9">

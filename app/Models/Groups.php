@@ -13,7 +13,7 @@ class Groups extends Model
      */
     protected $table = 'groups';
 
-    protected $fillable = ['name', 'summary', 'rank'  , 'zx_course', 'xx_course', 'yr_course'];
+    protected $fillable = ['name', 'summary', 'rank'  , 'zx_course', 'xx_course', 'yr_course', 'enable'];
     
     public function zx()
     {

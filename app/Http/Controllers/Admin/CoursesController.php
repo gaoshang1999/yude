@@ -182,7 +182,7 @@ class CoursesController extends Controller
         $courses_zx = Courses::where('level', 'zhongxue')->where('enable', true)->orderBy('buytimes', 'desc') ->get();
         $courses_xx = Courses::where('level', 'xiaoxue')->where('enable', true)->orderBy('buytimes', 'desc') ->get() ;
         $courses_yr = Courses::where('level', 'youer')->where('enable', true)->orderBy('buytimes', 'desc') ->get();
-        $groups = Groups::with('zx', 'xx', 'yr')->orderBy('rank') ->get();
+        $groups = Groups::with('zx', 'xx', 'yr')->where('enable', true)->orderBy('rank') ->get();
         $data = ['groups' => $groups, 'courses_zx' => $courses_zx, 'courses_xx' => $courses_xx, 'courses_yr' => $courses_yr];
         return view('front.courses_lists', $data);
     }
