@@ -12,11 +12,11 @@
                     <li>|</li>
                     <li><a href="{{ url("books/lists") }} ">教材</a></li>
                     <li>|</li>
-                    <li><a href="{{ url("books/lists") }}">题库</a></li>
+                    <li><a href="http://www.ysedu.com/lnzt/">题库</a></li>
                     <li>|</li>
-                    <li><a href="{{ url("books/lists") }}">考讯</a></li>
+                    <li><a href="http://www.ysedu.com/">考讯</a></li>
                     <li>|</li>
-                    <li><a href="{{ url("books/lists") }}">师资</a></li>
+                    <li><a href="http://w.ysedu.com/static/mstd.html">师资</a></li>
                     <li>|</li>                    
                     <li><a onmouseover="ydd()" onmouseout="ydd_out()" class="hand">移动端</a><img src="/assets/img/header_pic_smxz.png" id="smxz" alt="扫码下载" class="dn"/></li>
                 </ul>

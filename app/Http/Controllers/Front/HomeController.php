@@ -1,7 +1,7 @@
 <?php
 namespace  App\Http\Controllers\Front;
 
-use Laravel\Lumen\Routing\Controller;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Courses;
 use App\Models\Books;
@@ -18,7 +18,7 @@ class HomeController extends Controller
 
     public function home(Request $request)
     {
-        if($request->has("e") && Auth::user() && Auth::user() -> isAdmin())
+        if($request->exists("e") && Auth::user() && Auth::user() -> isAdmin())
         {
             return redirect('/admin/home/edit');
         }
@@ -77,13 +77,14 @@ class HomeController extends Controller
             
             $teacher_html->html = $teacher ;
             $teacher_html->save();
+            
+            $this->unCacheView();
         
             return redirect('/index');
         
         }else{
             return view('admin.home.html_edit', ['banner' => $banner_html->html, 'free' => $free_html->html,  'teacher' =>$teacher_html->html ]);
-        }
-        
+        }        
     }
 
 }

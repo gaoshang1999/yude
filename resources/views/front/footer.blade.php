@@ -13,11 +13,11 @@
                 </div>
                 <div class="gyys">
                     <h5>关于园师</h5>
-                    <p><a href="#">园师简介</a><br/><a href="#">名师阵容</a><br/><a href="#">园师荣誉</a><br/><a href="#">诚聘英才</a></p>
+                    <p><a href="http://w.ysedu.com/static/about.html">园师简介</a><br/><a href="http://w.ysedu.com/static/mstd.html">名师阵容</a><br/><a href="http://w.ysedu.com/static/ysry.html">园师荣誉</a><br/><a href="http://w.ysedu.com/static/cpyc.html">诚聘英才</a></p>
                 </div>
                 <div class="yszx">
                     <h5>园师在线</h5>
-                    <p><a href="#">在线咨询</a><br/><a href="#">购买流程</a><br/><a href="#">看课流程</a><br/><a href="#">网站地图</a></p>
+                    <p><a href="http://webim.qiao.baidu.com//im/index?siteid=5905718&ucid=575119">在线咨询</a><br/><a href="#">购买流程</a><br/><a href="#">看课流程</a><br/><a href="http://w.ysedu.com/static/lxwm.html">联系我们</a></p>
                 </div>
                 <div class="yssq">
                     <h5>园师社区</h5>

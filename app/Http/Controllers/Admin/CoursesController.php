@@ -190,7 +190,7 @@ class CoursesController extends Controller
     
     public function detail(Request $request, $id)
     {
-        if($request->has("e") && Auth::user() && Auth::user() -> isAdmin())
+        if($request->exists("e") && Auth::user() && Auth::user() -> isAdmin())
         {
             return redirect('/admin/courses/html_edit');
         }
@@ -236,6 +236,8 @@ class CoursesController extends Controller
             $html->html = $rightImage ;
             $html->save();
         
+            $this->unCacheView();
+            
             return redirect('/courses/lists');
         
         }else{
