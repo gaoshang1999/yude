@@ -207,8 +207,8 @@ class AbleskyController extends Controller
         $accessToken = md5($t);
         
     
-        $callbackUrl = "/ablesky/redirectTo";
-        $idpDomain ="http://localhost";
+        $callbackUrl = "";
+        $idpDomain ="wx.ysedu.com";
         
         $url = sprintf($this->api_5, $encodedUserInfo, $accessToken, $callbackUrl, $idpDomain);
         
