@@ -102,7 +102,7 @@
 												<a class="hand"><span class="font_st fs12 c0790fe" id="forget2">忘记密码？</span></a>
 										</p>
 										<p class="ml37"><input id="login_submit" type="submit" value="登录" class="submit"/></p>	
-										<p class="ml37"><a href="#"><span class="font_st fs12 c999">没有园师课堂账号？</span></a>&nbsp;&nbsp;<a class="hand"><span id="quickreg" class="font_st fs12 c0790fe">快速注册</span></a></p>
+										<p class="ml37"><a href="#"><span class="font_st fs12 c999">没有园师课堂账号？</span></a>&nbsp;&nbsp;<a class="hand" href="http://www.ysedu.com/user/reg/"  target="_blank" ><span id="" class="font_st fs12 c0790fe">快速注册</span></a></p>
 																			
 								</form>
 						</div>

@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'model' => env('AUTH_MODEL', 'App\Models\User'),
+    'model' => env('AUTH_MODEL', 'App\Models\AllUser'),
 
     /*
     |--------------------------------------------------------------------------
@@ -41,7 +41,7 @@ return [
     |
     */
 
-    'table' => env('AUTH_TABLE', 'users'),
+    'table' => env('AUTH_TABLE', 'all_users'),
 
     /*
     |--------------------------------------------------------------------------

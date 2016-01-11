@@ -22,27 +22,27 @@ class OrdersController extends Controller
             switch ($input['stype']) {
                 case 'phone':
                 case 'orderno':
-                    $input['orders'] = Order::where($input['stype'], $input['stext'])->orderBy('created_at', 'desc')->simplePaginate(20);
+                    $input['orders'] = Order::where($input['stype'], $input['stext'])->orderBy('created_at', 'desc')->paginate(20);
                     break;
                 case 'paymode':
                 case 'status':
-                    $input['orders'] = Order::where($input['stype'], $input['svalue'])->orderBy('created_at', 'desc')->simplePaginate(20);
+                    $input['orders'] = Order::where($input['stype'], $input['svalue'])->orderBy('created_at', 'desc')->paginate(20);
                     break;
                 case 'paytime':
                     $cond = $input['svalue'] == 'payed' ? 'whereNotNull' : 'whereNull';
-                    $input['orders'] = Order::$cond('paytime')->orderBy('created_at', 'desc')->simplePaginate(20);
+                    $input['orders'] = Order::$cond('paytime')->orderBy('created_at', 'desc')->paginate(20);
                     break;
                 case 'item_title':
                     $title = $input['stext'];
-                    $input['orders'] = Order::whereHas('orderItems', function($q) use ($title) { $q->where('title', 'like', '%'.$title.'%'); })->orderBy('created_at', 'desc')->simplePaginate(20);
+                    $input['orders'] = Order::whereHas('orderItems', function($q) use ($title) { $q->where('title', 'like', '%'.$title.'%'); })->orderBy('created_at', 'desc')->paginate(20);
                     break;                
                 default:
-                    $input['orders'] = Order::orderBy('created_at', 'desc')->simplePaginate(20);
+                    $input['orders'] = Order::orderBy('created_at', 'desc')->paginate(20);
                     break;
             }
         }
         else {
-            $input['orders'] = Order::orderBy('created_at', 'desc')->simplePaginate(20);
+            $input['orders'] = Order::orderBy('created_at', 'desc')->paginate(20);
         }
 
         $input['courses_zx'] = Courses::where('level', 'zhongxue')->where('enable', true)->get();

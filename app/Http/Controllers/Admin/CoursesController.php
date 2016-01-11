@@ -12,7 +12,7 @@ class CoursesController extends Controller
 {
     public function courses()
     {        
-        $data = ['courses' => Courses::orderBy('created_at', 'desc')->simplePaginate(20)];
+        $data = ['courses' => Courses::orderBy('created_at', 'desc')->paginate(20)];
         return view('admin.courses.list', $data);
     }
     
@@ -33,7 +33,7 @@ class CoursesController extends Controller
             else if($q == '下架') { $q = 0;}
         }        
     
-        $courses = Courses::where($field, 'like', '%'.$q.'%')->orderBy('created_at', 'desc')->simplePaginate(20)  ;
+        $courses = Courses::where($field, 'like', '%'.$q.'%')->orderBy('created_at', 'desc')->paginate(20)  ;
         $courses ->appends(['q' => $request['q']]);    
         $courses ->appends(['field' => $field]);
 

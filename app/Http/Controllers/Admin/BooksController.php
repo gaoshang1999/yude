@@ -9,7 +9,7 @@ class BooksController extends Controller
 {
     public function books()
     {
-        $data = ['books' => Books::orderBy('created_at', 'desc')->simplePaginate(20) ];
+        $data = ['books' => Books::orderBy('created_at', 'desc')->paginate(20) ];
         return view('admin.books.list', $data);
     }
     
@@ -27,7 +27,7 @@ class BooksController extends Controller
             else if($q == '面试') { $q = 'mianshi';}
         }
         
-        $books = Books::where($field, 'like', '%'.$q.'%')->orderBy('created_at', 'desc')->simplePaginate(20) ;
+        $books = Books::where($field, 'like', '%'.$q.'%')->orderBy('created_at', 'desc')->paginate(20) ;
         $books ->appends(['q' => $request['q']]);
         $books ->appends(['field' => $field]);
     

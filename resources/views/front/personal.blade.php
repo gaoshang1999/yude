@@ -37,7 +37,7 @@
 					<!--我的订单  有订单--> <?php $count = count($orders->all()); ?>
 					<div class="order @if($count==0) dn @endif"> 
 							<table>
-						@foreach ($orders->all() as $k=>$v)   <?php $rows = count($v->orderItems); ?>
+						@foreach ($orders->all() as $k=>$v)  <?php $rows = count($v->orderItems); ?>
 									<tr class="tr_o_h">
 											<td class="wddd">{{ $v->created_at }}</td>
 											<td class="ddxq border_r">订单编号：{{ $v->orderno }}</td>
@@ -45,7 +45,7 @@
 											<td class="ddzt border_r">&nbsp;</td>
 											<td class="cz">&nbsp;</td>
 									</tr>
-									<tr class="tr_c_h"> <?php $p = json_decode($v->orderItems[0]->snapshot); ?>
+									<tr class="tr_c_h"> <?php $p = json_decode($v->orderItems[0]->snapshot);   ?>
 											<td><div><img src="{{ $p -> cover }}" width="138" height="80"/></div></td>
 											<td class="border_r">
 													<p>

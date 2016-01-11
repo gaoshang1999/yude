@@ -9,7 +9,7 @@ class GroupsController extends Controller
 {
     public function groups()
     {
-        $data = ['groups' => Groups::with('zx', 'xx', 'yr')->orderBy('created_at', 'desc')->simplePaginate(20) ];
+        $data = ['groups' => Groups::with('zx', 'xx', 'yr')->orderBy('created_at', 'desc')->paginate(20) ];
         return view('admin.groups.list', $data);
     }
     
@@ -23,7 +23,7 @@ class GroupsController extends Controller
             $q = $courses->id;
         }
    
-        $groups = Groups::where($field, 'like', '%'.$q.'%')->simplePaginate(20) ;
+        $groups = Groups::where($field, 'like', '%'.$q.'%')->paginate(20) ;
         $groups ->appends(['q' => $request['q']]);
         $groups ->appends(['field' => $field]);
         

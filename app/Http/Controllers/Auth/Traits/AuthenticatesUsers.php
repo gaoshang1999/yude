@@ -56,6 +56,12 @@ trait AuthenticatesUsers
             unset($credentials[$this->loginUsername()]);
             if (Auth::attempt($credentials, $request->has('remember'))) {
                 return $this->handleUserWasAuthenticated($request, $throttles);
+            }else{
+                $credentials['email'] = $credentials['name'];
+                unset($credentials['name']);
+                if (Auth::attempt($credentials, $request->has('remember'))) {
+                    return $this->handleUserWasAuthenticated($request, $throttles);
+                }
             }
         }
 

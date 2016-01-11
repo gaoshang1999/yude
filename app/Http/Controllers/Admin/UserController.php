@@ -24,7 +24,7 @@ class UserController extends Controller
 
     public function userlist()
     {
-        $data = ['users' => User::simplePaginate(20) ];
+        $data = ['users' => User::orderBy('created_at', 'desc')->paginate(20) ];
         return view('admin.user.list', $data);
     }
     
@@ -32,7 +32,7 @@ class UserController extends Controller
     {
         $q = $request['q'];
         $field = $request['field'];
-        $users = User::where($field, 'like', '%'.$q.'%')->simplePaginate(20) ;
+        $users = User::where($field, 'like', '%'.$q.'%')->orderBy('created_at', 'desc')->paginate(20) ;
         $users ->appends(['q' => $q]);
         $users ->appends(['field' => $field]);
         
@@ -44,9 +44,9 @@ class UserController extends Controller
     {
         if ($request->isMethod('post')) {
             $this->validate($request, [
-                'username' => 'required|unique:users,name|max:255',
-                'userphone' => 'required|digits:11|unique:users,phone',
-                'useremail' => 'required|email|unique:users,email',
+                'username' => 'required|unique:all_users,name|max:255',
+                'userphone' => 'required|digits:11|unique:all_users,phone',
+                'useremail' => 'required|email|unique:all_users,email',
                 'userrole' => 'required',
                 'password' => 'required|confirmed|min:6|max:20',
             ]);
@@ -72,9 +72,9 @@ class UserController extends Controller
         $user = User::where('id', $id)->first();
         if ($request->isMethod('post')) {
             $this->validate($request, [
-                'username' => 'required|max:255|unique:users,name,'.$user->id,
-                'userphone' => 'required|digits:11|unique:users,phone,'.$user->id,
-                'useremail' => 'required|email|unique:users,email,'.$user->id,
+                'username' => 'required|max:255|unique:all_users,name,'.$user->id,
+                'userphone' => 'required|digits:11|unique:all_users,phone,'.$user->id,
+                'useremail' => 'required|email|unique:all_users,email,'.$user->id,
                 'userrole' => 'required',
             ]);
             $user->name = $request->input('username');
